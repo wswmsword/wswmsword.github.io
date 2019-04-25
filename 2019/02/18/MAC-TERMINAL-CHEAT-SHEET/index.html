@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <title>MAC TERMINAL CHEAT SHEET - strawberryfields</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="strawberry">
+<meta name="description" content="SHORTCUTS
+
+
+key/command
+description
+
+
+
+
+tab
+auto-complete files and folder names
+
+
+ctrl+a
+go to the beginning of the line you are currently typing on
+
+
+ctrl...">
+<meta name="keywords" content>
+
+<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?39807994">
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons">
+</noscript>
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer" v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://wswmsword.github.io">
+                首页
+            </a>
+            <a class="a-block drawer-menu-item false" href="/archives">
+                归档
+            </a>
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/strawberry/index.html">
+                Z&amp;G
+            </a>
+            
+
+            
+            <a class="a-block drawer-menu-item" href="/atom.xml">
+                RSS
+            </a>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            strawberryfields
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead" v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">strawberryfields</div>
+        <div class="single-column-header-subtitle">Pain is temporary Pride is forever</div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            strawberry.
+        </div>
+        <div class="nav-subtitle">
+            精进不休<br>风起林舞
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            归档
+        </a>
+
+        
+        
+        <a class="a-block nav-link-item false" href="/strawberry/index.html">
+            Z&amp;G
+        </a>
+        
+
+        
+        <a class="a-block no-tint nav-link-item" href="/atom.xml">
+            RSS
+        </a>
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2019 <a href="https://wswmsword.github.io">strawberryfields</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only" style="background-image: url('')">
+                <div class="post-title">
+                    MAC TERMINAL CHEAT SHEET
+                    <div class="post-meta">
+                        <time datetime="2019-02-17T16:53:32.000Z" itemprop="datePublished">
+                            2019-02-18 00:53
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style>folder</i>
+                        
+                        <a href="/categories/笔记本/">笔记本</a>, 
+                        
+                        <a href="/categories/笔记本/理解计算机/">理解计算机</a>
+                        
+                        
+    
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h3 id="SHORTCUTS"><a href="#SHORTCUTS" class="headerlink" title="SHORTCUTS"></a>SHORTCUTS</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">key/command</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">tab</td>
+<td style="text-align:left">auto-complete files and folder names</td>
+</tr>
+<tr>
+<td style="text-align:left">ctrl+a</td>
+<td style="text-align:left">go to the beginning of the line you are currently typing on</td>
+</tr>
+<tr>
+<td style="text-align:left">ctrl+e</td>
+<td style="text-align:left">go to the end of the line you are currently typing on</td>
+</tr>
+<tr>
+<td style="text-align:left">ctrl+u</td>
+<td style="text-align:left">clear the line before the cursor</td>
+</tr>
+<tr>
+<td style="text-align:left">ctrl+k</td>
+<td style="text-align:left">clear the line after the cursor</td>
+</tr>
+<tr>
+<td style="text-align:left">ctrl+w</td>
+<td style="text-align:left">delete the word before the cursor</td>
+</tr>
+<tr>
+<td style="text-align:left">ctrl+t</td>
+<td style="text-align:left">swap the last two characters before the cursor</td>
+</tr>
+<tr>
+<td style="text-align:left">esc+t</td>
+<td style="text-align:left">swap the last two words before the cursor</td>
+</tr>
+<tr>
+<td style="text-align:left">ctrl+r</td>
+<td style="text-align:left">lets you search through previously used commands</td>
+</tr>
+<tr>
+<td style="text-align:left">ctrl+l or command+k</td>
+<td style="text-align:left">clears the screen</td>
+</tr>
+<tr>
+<td style="text-align:left">ctrl+c</td>
+<td style="text-align:left">kill whatever you are running</td>
+</tr>
+<tr>
+<td style="text-align:left">ctrl+d</td>
+<td style="text-align:left">exit the current shell</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CORE-COMMANDS"><a href="#CORE-COMMANDS" class="headerlink" title="CORE COMMANDS"></a>CORE COMMANDS</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">key/command</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">cd</td>
+<td style="text-align:left">home directory</td>
+</tr>
+<tr>
+<td style="text-align:left">cd [folder]</td>
+<td style="text-align:left">change directory</td>
+</tr>
+<tr>
+<td style="text-align:left">cd ~</td>
+<td style="text-align:left">home directory,e.g.’cd ~/folder/‘</td>
+</tr>
+<tr>
+<td style="text-align:left">cd /</td>
+<td style="text-align:left">root of drive</td>
+</tr>
+<tr>
+<td style="text-align:left">ls</td>
+<td style="text-align:left">short listing</td>
+</tr>
+<tr>
+<td style="text-align:left">ls -l</td>
+<td style="text-align:left">long listing</td>
+</tr>
+<tr>
+<td style="text-align:left">ls -a</td>
+<td style="text-align:left">listing incl. hidden files</td>
+</tr>
+<tr>
+<td style="text-align:left">ls -lh</td>
+<td style="text-align:left">long listing with human readable file sizes</td>
+</tr>
+<tr>
+<td style="text-align:left">ls -R</td>
+<td style="text-align:left">entire content of folder recursively</td>
+</tr>
+<tr>
+<td style="text-align:left">sudo [command]</td>
+<td style="text-align:left">run command with the security privileges of the superuser(super user do)</td>
+</tr>
+<tr>
+<td style="text-align:left">open [file]</td>
+<td style="text-align:left">opens a file</td>
+</tr>
+<tr>
+<td style="text-align:left">open .</td>
+<td style="text-align:left">opens the directory</td>
+</tr>
+<tr>
+<td style="text-align:left">top</td>
+<td style="text-align:left">displays active processes,press q to quit</td>
+</tr>
+<tr>
+<td style="text-align:left">nano [file]</td>
+<td style="text-align:left">opens the terminal it’s editor</td>
+</tr>
+<tr>
+<td style="text-align:left">pico [file]</td>
+<td style="text-align:left">opens the terminal it’s editor</td>
+</tr>
+<tr>
+<td style="text-align:left">clear</td>
+<td style="text-align:left">clear screen</td>
+</tr>
+<tr>
+<td style="text-align:left">q</td>
+<td style="text-align:left">exit</td>
+</tr>
+</tbody>
+</table>
+<h3 id="COMMAND-HISTORY"><a href="#COMMAND-HISTORY" class="headerlink" title="COMMAND HISTORY"></a>COMMAND HISTORY</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">key/command</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">history z</td>
+<td style="text-align:left">shows the staff typed - add a number to limit the last z items</td>
+</tr>
+<tr>
+<td style="text-align:left">!!</td>
+<td style="text-align:left">excute the last command typed</td>
+</tr>
+<tr>
+<td style="text-align:left">ctrl+r</td>
+<td style="text-align:left">lets you search through previously used commands</td>
+</tr>
+</tbody>
+</table>
+<h3 id="FILE-MANAGEMENT"><a href="#FILE-MANAGEMENT" class="headerlink" title="FILE MANAGEMENT"></a>FILE MANAGEMENT</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">key/command</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">touch [file]</td>
+<td style="text-align:left">create new file</td>
+</tr>
+<tr>
+<td style="text-align:left">pwd</td>
+<td style="text-align:left">full path to working directory</td>
+</tr>
+<tr>
+<td style="text-align:left">ls -l ..</td>
+<td style="text-align:left">long listing of parent directory</td>
+</tr>
+<tr>
+<td style="text-align:left">cd .</td>
+<td style="text-align:left">current directory</td>
+</tr>
+<tr>
+<td style="text-align:left">cd ..</td>
+<td style="text-align:left">parent directory</td>
+</tr>
+<tr>
+<td style="text-align:left">cd ../../</td>
+<td style="text-align:left">move 2 levels up</td>
+</tr>
+<tr>
+<td style="text-align:left">cat [file]</td>
+<td style="text-align:left">concatenate files and print on the standard output</td>
+</tr>
+<tr>
+<td style="text-align:left">rm -i [file]</td>
+<td style="text-align:left">remove with confirmation</td>
+</tr>
+<tr>
+<td style="text-align:left">rm -r [directory]</td>
+<td style="text-align:left">remove a directory and contents</td>
+</tr>
+<tr>
+<td style="text-align:left">cp [file] [newfile]</td>
+<td style="text-align:left">copy file to file</td>
+</tr>
+<tr>
+<td style="text-align:left">cp [file] [directory]</td>
+<td style="text-align:left">copy file to directory</td>
+</tr>
+<tr>
+<td style="text-align:left">mv [file] [newfile]</td>
+<td style="text-align:left">move/rename</td>
+</tr>
+</tbody>
+</table>
+<h3 id="DIRECTORY-MANAGEMENT"><a href="#DIRECTORY-MANAGEMENT" class="headerlink" title="DIRECTORY MANAGEMENT"></a>DIRECTORY MANAGEMENT</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">key/command</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">mkdir [directory]</td>
+<td style="text-align:left">create new directory</td>
+</tr>
+<tr>
+<td style="text-align:left">mkdir -p [directory]/[directory]</td>
+<td style="text-align:left">create nested directories</td>
+</tr>
+<tr>
+<td style="text-align:left">rm -r [directory]</td>
+<td style="text-align:left">remove directory and contents</td>
+</tr>
+</tbody>
+</table>
+<h3 id="HELP"><a href="#HELP" class="headerlink" title="HELP"></a>HELP</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">key/command</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">[command] -h</td>
+<td style="text-align:left">offers help</td>
+</tr>
+<tr>
+<td style="text-align:left">[command] –help</td>
+<td style="text-align:left">offers help</td>
+</tr>
+<tr>
+<td style="text-align:left">[command] help</td>
+<td style="text-align:left">offers help</td>
+</tr>
+<tr>
+<td style="text-align:left">man [command]</td>
+<td style="text-align:left">show the help for command</td>
+</tr>
+<tr>
+<td style="text-align:left">whatis [command]</td>
+<td style="text-align:left">gives a one-line description of command</td>
+</tr>
+</tbody>
+</table>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2019/02/18/红黑树/">
+        上一篇<br>红黑树
+    </a>
+    
+    <span class="page-number"></span>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2018 <a href="https://wswmsword.github.io">strawberryfields</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js" integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?57757562"></script>
+
+
+
+</body>
+</html>

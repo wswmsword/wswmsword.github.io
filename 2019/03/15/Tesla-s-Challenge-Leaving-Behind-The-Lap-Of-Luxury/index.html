@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <title>Tesla&#39;s Challenge: Leaving Behind The Lap Of Luxury - strawberryfields</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="strawberry">
+<meta name="description" content="
+
+Even after massively increasing production of the Model 3, Tesla still hasn’t managed to offer the car at its touted price of $35,000.
+David Zalubowski/AP...">
+<meta name="keywords" content>
+
+<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?63469258">
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons">
+</noscript>
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer" v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://wswmsword.github.io">
+                首页
+            </a>
+            <a class="a-block drawer-menu-item false" href="/archives">
+                归档
+            </a>
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/strawberry/index.html">
+                Z&amp;G
+            </a>
+            
+
+            
+            <a class="a-block drawer-menu-item" href="/atom.xml">
+                RSS
+            </a>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            strawberryfields
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead" v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">strawberryfields</div>
+        <div class="single-column-header-subtitle">Pain is temporary Pride is forever</div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            strawberry.
+        </div>
+        <div class="nav-subtitle">
+            精进不休<br>风起林舞
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            归档
+        </a>
+
+        
+        
+        <a class="a-block nav-link-item false" href="/strawberry/index.html">
+            Z&amp;G
+        </a>
+        
+
+        
+        <a class="a-block no-tint nav-link-item" href="/atom.xml">
+            RSS
+        </a>
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2019 <a href="https://wswmsword.github.io">strawberryfields</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper" style="background-image: url('/2019/03/15/Tesla-s-Challenge-Leaving-Behind-The-Lap-Of-Luxury/ap_18190129699317_wide-11477f2b34a46af8b5e856b10445da5a78406ba0-s1600-c85.jpg')">
+                <div class="post-title">
+                    Tesla&#39;s Challenge: Leaving Behind The Lap Of Luxury
+                    <div class="post-meta">
+                        <time datetime="2019-03-14T17:37:20.000Z" itemprop="datePublished">
+                            2019-03-15 01:37
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style>folder</i>
+                        
+                        <a href="/categories/剪贴板/">剪贴板</a>
+                        
+                        
+    
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- <span class="decorative"><span class="g"></span><span class="z"></span><span class="x"></span><span class="y"></span></span><img src="ap_18190129699317_wide-11477f2b34a46af8b5e856b10445da5a78406ba0-s1600-c85.jpg" style="max-width:100%;z-index:1;" title=""/> -->
+<blockquote>
+<p>Even after massively increasing production of the Model 3, Tesla still hasn’t managed to offer the car at its touted price of $35,000.</p>
+<p><small>David Zalubowski/AP</small></p>
+</blockquote>
+<p>Tesla is finally making a profit. For the first time, the California-based electric carmaker has posted two quarterly profits in a row.</p>
+<p>Those profits were driven by pricey cars — higher-priced variants of Tesla’s new Model 3, which sell for $50,000 and up.</p>
+<p>But instead of doubling down on the strategy that proved profitable, Tesla is laying off thousands of people to slash costs, reducing production of the Model S and Model X and building a new factory in Shanghai. It’s all part of an aggressive push to make cars for the mass market that sell for $35,000.</p>
+<p>That’s because Tesla CEO Elon Musk doesn’t want to just sell expensive cars to the world’s elite. He never did.</p>
+<p>Musk called it his “Secret Master Plan.” The “secret” part was a joke — he talked about it all the time. But the “master plan” bit was very serious.</p>
+<p>Step 1: Make a high-performance, extremely expensive electric sports car, something people would be willing to plunk down $100,000 for: the Roadster.</p>
+<p>Step 2: Use that money to make a cheaper vehicle — and use that money to make an even cheaper one. Eventually, Musk said, the company would mass-produce a truly affordable electric vehicle.</p>
+<p>The underlying goal was nothing short of saving the world. A few rich people driving electric sports cars wouldn’t shift the needle on climate change. But an electric car for everyone? That could do it.</p>
+<p>Musk has been remarkably consistent on this vision. In 2006, he wrote that the company’s “overarching purpose … is to help expedite the move from a mine-and-burn hydrocarbon economy towards a solar electric economy.”</p>
+<p>At the end of 2018, he told 60 Minutes, “The whole point of Tesla is to accelerate the advent of electric vehicles and sustainable transport and trying to help the environment. We think it’s the most serious problem that humanity faces.”</p>
+<p>Mass-market cars, like Tesla’s Model 3, were key to this vision. But scaling up production is notoriously difficult. The last year and a half has been painful for Tesla, as the company coped with production challenges and delivery woes.</p>
+<p>Tesla has massively increased production of the Model 3: The company sold nearly 140,000 Model 3s last year. But it still hasn’t managed to offer the car at its touted price of $35,000.</p>
+<p>It’s still trying, despite the challenges: “The road ahead is very difficult,” Musk told employees on Jan. 18.</p>
+<p>In the meantime, Tesla is competing successfully with conventional luxury brands.</p>
+<p>Brian Moody, the executive editor for Autotrader, says Tesla should walk away from the master plan and just admit that it’s a premium carmaker.</p>
+<p>“We can just be honest and call them luxury cars,” he says. “And I don’t think there’s anything wrong with that. … They’ve created something great that people love. Good. Congratulations. You should enjoy your success and keep doing more of that.”</p>
+<p>It’s only Tesla’s “philosophy” that is pushing the company in a different direction, Moody says.</p>
+<p>Still, it’s not like Musk’s master plan is entirely at odds with business interests.</p>
+<p>“At the end of the day, Tesla is a for-profit company — it’s not a nonprofit,” says Jessica Caldwell, the executive director of industry analysis at Edmunds. “It’s going to have to make money.”</p>
+<p>“Elon Musk and Tesla having this grander vision for humanity and civilization is certainly different than the way that other auto companies run their business day to day,” she says. But building a car for the masses also opens up new markets that could help the bottom line.</p>
+<p>“Tesla’s up against the wall,” she says. “It feels like there are some real business pressures on them.”</p>
+<p>The company has already blown multiple self-imposed deadlines for the Model 3. Meanwhile, traditional carmakers are investing serious money in bringing new electric cars to market. That, of course, was always part of Musk’s plan — but it means new competitive pressure, too.</p>
+<p>Investors and analysts are waiting to see whether Tesla can pull off the long-planned transition to high-volume, low-cost vehicles.</p>
+<p>And would-be buyers are waiting, too.</p>
+<p>Mark Vidaurri of San Antonio test-drove a Model 3 a few weeks ago. He loved it — but was let down by the price tag. At well above $35,000, it’s out of his reach.</p>
+<p>“I believe advancements in technology shouldn’t be a luxury,” he says. “It should be something that is discovered and … able to distribute across every class of citizen.”</p>
+<p>He still dreams of a Model 3 in his driveway. Someday — when it’s more affordable.</p>
+<blockquote>
+<p><a href="https://www.npr.org/2019/01/31/688180319/teslas-challenge-leaving-behind-the-lap-of-luxury" target="_blank" rel="noopener">Tesla’s Challenge: Leaving Behind The Lap Of Luxury</a></p>
+</blockquote>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2019/03/18/If-you-don’t-finish-then-you’re-just-busy-not-productive/">
+        上一篇<br>If you don’t finish then you’re just busy, not productive
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2019/02/27/实用色彩/">
+        下一篇<br>实用色彩
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2018 <a href="https://wswmsword.github.io">strawberryfields</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js" integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?89748131"></script>
+
+
+
+</body>
+</html>

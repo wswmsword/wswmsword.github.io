@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <title>葫芦岛23点 - strawberryfields</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="strawberry">
+<meta name="description" content="钢条切割给定一段长度为n英寸的钢条和一个价格表p_i，求切割钢条方案，使得销售收益r_s最大。如果长度为n英寸的钢条的价格p_n足够大，最优解可能就是完全不需要切割。长度为n英寸的钢条共有 2¯(n-1)种不同的切割方案，因为在距离钢条左端i英寸处总是可以选择切不切，如果要求按切割数量非递减的顺序切割，切割方案...">
+<meta name="keywords" content>
+
+<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?85906983">
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons">
+</noscript>
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer" v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://wswmsword.github.io">
+                首页
+            </a>
+            <a class="a-block drawer-menu-item false" href="/archives">
+                归档
+            </a>
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/strawberry/index.html">
+                Z&amp;G
+            </a>
+            
+
+            
+            <a class="a-block drawer-menu-item" href="/atom.xml">
+                RSS
+            </a>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            strawberryfields
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead" v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">strawberryfields</div>
+        <div class="single-column-header-subtitle">Pain is temporary Pride is forever</div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            strawberry.
+        </div>
+        <div class="nav-subtitle">
+            精进不休<br>风起林舞
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            归档
+        </a>
+
+        
+        
+        <a class="a-block nav-link-item false" href="/strawberry/index.html">
+            Z&amp;G
+        </a>
+        
+
+        
+        <a class="a-block no-tint nav-link-item" href="/atom.xml">
+            RSS
+        </a>
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2019 <a href="https://wswmsword.github.io">strawberryfields</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only" style="background-image: url('')">
+                <div class="post-title">
+                    葫芦岛23点
+                    <div class="post-meta">
+                        <time datetime="2019-04-18T15:14:57.000Z" itemprop="datePublished">
+                            2019-04-18 23:14
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style>folder</i>
+                        
+                        <a href="/categories/笔记本/">笔记本</a>, 
+                        
+                        <a href="/categories/笔记本/理解计算机/">理解计算机</a>
+                        
+                        
+    
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h3 id="钢条切割"><a href="#钢条切割" class="headerlink" title="钢条切割"></a>钢条切割</h3><p>给定一段长度为n英寸的钢条和一个价格表p_i，求切割钢条方案，使得销售收益r_s最大。如果长度为n英寸的钢条的价格p_n足够大，最优解可能就是完全不需要切割。<br>长度为n英寸的钢条共有 <code>2¯(n-1)</code>种不同的切割方案，因为在距离钢条左端i英寸处总是可以选择切不切，如果要求按切割数量非递减的顺序切割，切割方案会少很多，近似等于<code>e¯(x√(2n/3))/4n√3</code>，但仍远远大于任何n的多项式。<br>应用递归式<code>r[n]=max(1&lt;=i&lt;=n)-&gt;(p[i]+r[n-i])</code>将一个指数时间的解转化为一个多项式时间的解，时空权衡【time-memory trade-off】。</p>
+<h3 id="矩阵链乘法"><a href="#矩阵链乘法" class="headerlink" title="矩阵链乘法"></a>矩阵链乘法</h3><pre><code>MATRIX-MULTIPLY(A,B)
+   if A.columns!=B.rows
+      error &quot;incompatible dimensions&quot;
+   else let C be a new A.rows*B.columns matrix
+      for i=1 to A.rows
+         for j=1 to B.columns
+            C[i,j]=0
+            for k=1 to A.columns
+               C[i,j]=C[i,j]+A[i,k]*B[k,j]
+   return C
+</code></pre><p>给定n个矩阵的链，矩阵A_i的规模为p_i-1*p_i(1&lt;=i&lt;=n)，求完全括号化方案，使得计算A_1A_2…A_n所需标量乘法次数最少。完全括号化【fully parenthesized】指的是单一矩阵或者是两个完全括号化的矩阵乘积链的积，且已外加括号。<br>穷举所有括号化方案会得到递归式<code>P(n)={1若n=1|∑k=1to(n-1)-&gt;P(k)P(k-n)若n&gt;=2}</code>，<code>Ω(2¯n)</code>相似的递归公式产生的序列为卡特兰数【catalan numbers】，这个序列的增长速度为Ω(4¯n/n¯(3/2))。<br>应用递归式<code>m[i,j]={0若i=j|min(i&lt;=k&lt;j)-&gt;(m[i,k]+m[k+1,j]+p_(i-1)p_kp_i)若i&lt;j}</code>完成<code>Ω(n¯2)</code>的算法。</p>
+<h4 id="构造最优解"><a href="#构造最优解" class="headerlink" title="构造最优解"></a>构造最优解</h4><pre><code>PRINT-OPTIMAL-PARENS(s,i,j)
+   if i==j
+      print &#39;A&#39;_i
+   else print &#39;(&#39;
+      PRINT-OPTIMAL-PARENS(s,i,s[i,j])
+      PRINT-OPTIMAL-PARENS(s,s[i,j]+1,j)
+      print &#39;)&#39;
+</code></pre><h3 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h3><p>给定两个序列X和Y，如果Z既是X的子序列，也是Y的子序列，那么称Z是X和Y的公共子序列【common subsequence】。以Z的长度作为X和Y的相似度，那么相似度最高的序列被认为是最长公共子序列【longest common subsequence】。<br>应用递归式<code>c[i,j]={0若i=0或j=0|c[i-1,j-1]+1若i,j&gt;0且x_i=y_j|max(c[i,j-1],c[i-1,j])若i,j&gt;0且x_i≠y_i}</code>。</p>
+<h4 id="构造最优解-1"><a href="#构造最优解-1" class="headerlink" title="构造最优解"></a>构造最优解</h4><pre><code>PRINT-LCS(c,X,i,j)
+   if i==0 or j==0
+      return
+   if c[i,j]==c[i-1,j-1]
+      PRINT-LCS(c,X,i,j)
+      print x[i]
+   elseif c[i,j]==c[i-1,j]
+      PRINT-LCS(c,X,i-1,j)
+   else PRINT-LCS(c,X,i,j-1)
+</code></pre><h3 id="最长上升子序列"><a href="#最长上升子序列" class="headerlink" title="最长上升子序列"></a>最长上升子序列</h3><p>应用递归式<code>c[i]={max(1&lt;=j&lt;i)-&gt;(c[j]+1)若x[i]&gt;x[j]}</code>完成<code>O(n¯2)</code>的算法。<br>一个长度为i的候选子序列的尾元素至少不比一个长度为i-1候选子序列的尾元素小。可得<code>O(nlgn)</code>算法。</p>
+<pre><code>l[1]=x[1]
+for i=2 to m
+   if x[i]&lt;l[1]
+      l[1]=x[i]
+   elseif x[i]&gt;l[j]
+      l[j+1]=x[i]
+      sz++
+   else
+      k=binary_search(l,sz,x[i])
+      l[k]=x[i]
+</code></pre><h3 id="最优二叉搜索树"><a href="#最优二叉搜索树" class="headerlink" title="最优二叉搜索树"></a>最优二叉搜索树</h3><p>假定我们正在设计一个程序，实现英语文本到法语的翻译。对英语文本中出现的每个单词，我们需要查找对应的法语单词。为了实现这些查找操作，可以创建一棵二叉搜索树，将n个英语单词作为关键字，对应的法语单词作为关联数据。由于文本中的每个单词都要进行搜索，我们希望花费在搜索上的总时间尽量少。<br>通过红黑树或其他平衡搜索树结构，我们可以假定每次搜索时间为O(lgn) 。但由于单词出现的频率是不同的，像“the”这种频繁使用的单词有可能位于搜索树中远离根的位置上，而像“machicolation”这种很少使用的单词可能位于靠近根的位置上。这样的结构会减慢翻译的速度，因为二叉树搜索树中搜索一个关键字的权重是深度+1。我们希望文本中频繁出现的单词被置于靠近根的位置。在给定单词出现频率的前提下，我们应该如何组织一棵二叉搜索树，使得所有搜索操作访问的结点总数最少呢？<br>递归式<code>e[i,j]={q_(i-1)若j=i-1|min(i&lt;=r&lt;=j)-&gt;(e[i,r-1]+e[r+1,j]+w[i,j])若i&lt;=j}</code>。</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2019/03/21/LOvE/">
+        下一篇<br>LOvE
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2018 <a href="https://wswmsword.github.io">strawberryfields</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js" integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?23931122"></script>
+
+
+
+</body>
+</html>
