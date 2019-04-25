@@ -4,11 +4,15 @@
 <html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head><meta name="generator" content="Hexo 3.8.0">
-    <title>归档: 2019/3 - strawberryfields</title>
+    <title>A boyer-moore - strawberryfields</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="strawberry">
-<meta name="description" content="Pain is temporary Pride is forever">
+<meta name="description" content="BM(X,X.SIZE,Y,Y.SIZE)initialize tables bc[1057],gs[1057]
+initialize integer variable j=0,xl=x.size,yl=y.size
+GETBC(y,y.size,bc);
+GETGS(y,y.size,gs);
+while j...">
 <meta name="keywords" content>
 
 <link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
@@ -20,7 +24,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?98960547">
+<link rel="stylesheet" href="/css/journal.css?22660981">
 <script src="/js/loadCSS.js"></script>
 <script>
     loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
@@ -63,7 +67,7 @@
             <a class="a-block drawer-menu-item false" href="https://wswmsword.github.io">
                 首页
             </a>
-            <a class="a-block drawer-menu-item active" href="/archives">
+            <a class="a-block drawer-menu-item false" href="/archives">
                 归档
             </a>
 
@@ -115,7 +119,7 @@
     </a>
 
     <div class="nav-link-list">
-        <a class="a-block no-tint nav-link-item active" href="/archives">
+        <a class="a-block no-tint nav-link-item false" href="/archives">
             归档
         </a>
 
@@ -151,86 +155,98 @@
         </a>
 
         
-        
-
-        
-
-        
-        
     </div>
 </div>
 
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-shadow">
-        
-        
-        <div class="post-item-wrapper post-item-wrapper-no-hover">
-            <div class="post-item post-item-no-gaps">
-                <div class="post-item-info-wrapper">
-                    <div class="post-item-title  post-item-title-small">
+        <div class="post">
+            <div class="post-head-wrapper-text-only" style="background-image: url('')">
+                <div class="post-title">
+                    A boyer-moore
+                    <div class="post-meta">
+                        <time datetime="2019-04-25T10:36:27.000Z" itemprop="datePublished">
+                            2019-04-25 18:36
+                        </time>&nbsp;
                         
-                        <a href="/archives/2019">2019</a> / 03
+                        
+                        <i class="material-icons" style>folder</i>
+                        
+                        <a href="/categories/笔记本/">笔记本</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style>label</i>
+                        
+                        <a href="/tags/bm/">bm</a>, 
+                        
+                        <a href="/tags/A/">A</a>
+                        
                         
                     </div>
                 </div>
             </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h3 id="BM-X-X-SIZE-Y-Y-SIZE"><a href="#BM-X-X-SIZE-Y-Y-SIZE" class="headerlink" title="BM(X,X.SIZE,Y,Y.SIZE)"></a>BM(X,X.SIZE,Y,Y.SIZE)</h3><pre><code>initialize tables bc[1057],gs[1057]
+initialize integer variable j=0,xl=x.size,yl=y.size
+GETBC(y,y.size,bc);
+GETGS(y,y.size,gs);
+while j&lt;xl-yl
+   for i=yl-1 downto 0 and y[i]==x[i+j]
+      if i&lt;0 j=j+gs[0]
+      else j=j+max(bc[x[i+j]]-yl+1+i,gs[i])
+</code></pre><h3 id="GETBC-Y-s-bc"><a href="#GETBC-Y-s-bc" class="headerlink" title="GETBC(Y,s,bc)"></a>GETBC(Y,s,bc)</h3><pre><code>for i=0 to 255
+   bc[i]=s
+for i=0 to s
+   bc[y[i]]=s-1-i
+</code></pre><h3 id="GETGS-Y-s-gs"><a href="#GETGS-Y-s-gs" class="headerlink" title="GETGS(Y,s,gs)"></a>GETGS(Y,s,gs)</h3><pre><code>initialize table suf[1057]
+suffixes(y,s,suf)
+for i=0 to s-1
+   gs[i]=s;
+j=0
+for i=s-1 downto 0
+   if suf[i]==i+1
+      for j to s-2-i
+         if gs[j]=s
+            gs[j]=s-1-i
+for i=0 to m-2
+   gs[s-1-suf[i]]=s-1-i
+</code></pre><h3 id="SUFFIXES-Y-s-suf"><a href="#SUFFIXES-Y-s-suf" class="headerlink" title="SUFFIXES(Y,s,suf)"></a>SUFFIXES(Y,s,suf)</h3><pre><code>initialize integer variables f,g=s-1
+suf[s-1]=s;
+for i=s-2 downto 0
+   if i&gt;g and suf[i+s-1-f]&lt;i-g
+      suf[i]=suf[i+s-1-f]
+   else
+      if i&lt;g
+         g=i
+      f=i
+      while g&gt;-1 and y[g]==y[g+s-1-f]
+         g=g-1
+      suf[i]=f-g
+</code></pre>
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2019/04/25/A-knuth-morris-pratt/">
+        下一篇<br>A knuth-morris-pratt
+    </a>
+    
+</nav>
+
+    
+            
+
+
         </div>
-        
-
-        <a href="/2019/03/21/LOvE/" class="a-block">
-            <div class="post-item-wrapper">
-                <div class="post-item post-item-no-gaps">
-                    <div class="post-item-info-wrapper">
-                        <div class="post-item-title">
-                            LOvE
-                        </div>
-                        <div class="post-item-meta">
-                            2019-03-21
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        
-        
-
-        <a href="/2019/03/18/If-you-don’t-finish-then-you’re-just-busy-not-productive/" class="a-block">
-            <div class="post-item-wrapper">
-                <div class="post-item post-item-no-gaps">
-                    <div class="post-item-info-wrapper">
-                        <div class="post-item-title">
-                            If you don’t finish then you’re just busy, not productive
-                        </div>
-                        <div class="post-item-meta">
-                            2019-03-18
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        
-        
-
-        <a href="/2019/03/15/Tesla-s-Challenge-Leaving-Behind-The-Lap-Of-Luxury/" class="a-block">
-            <div class="post-item-wrapper">
-                <div class="post-item post-item-no-gaps">
-                    <div class="post-item-info-wrapper">
-                        <div class="post-item-title">
-                            Tesla&#39;s Challenge: Leaving Behind The Lap Of Luxury
-                        </div>
-                        <div class="post-item-meta">
-                            2019-03-15
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        
     </div>
-
     <div class="single-column-footer">
     Proudly published with Hexo<br>
     
@@ -246,7 +262,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?3773726"></script>
+<script src="/js/journal.js?27067956"></script>
+
+
 
 </body>
 </html>
