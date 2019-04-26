@@ -8,11 +8,11 @@
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="strawberry">
-<meta name="description" content="BM(X,X.SIZE,Y,Y.SIZE)initialize tables bc[1057],gs[1057]
-initialize integer variable j=0,xl=x.size,yl=y.size
+<meta name="description" content="BM(X,X.SIZE,Y,Y.SIZE)初始化整形数组bc[1057]，gs[1057] //bad character,good suffix
+初始化整形变量j=0，xl=x.size，yl=y.size
 GETBC(y,y.size,bc);
 GETGS(y,y.size,gs);
-while j...">
+while j&amp;lt;...">
 <meta name="keywords" content>
 
 <link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
@@ -24,7 +24,7 @@ while j...">
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?43359366">
+<link rel="stylesheet" href="/css/journal.css?20933263">
 <script src="/js/loadCSS.js"></script>
 <script>
     loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
@@ -191,8 +191,8 @@ while j...">
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <h3 id="BM-X-X-SIZE-Y-Y-SIZE"><a href="#BM-X-X-SIZE-Y-Y-SIZE" class="headerlink" title="BM(X,X.SIZE,Y,Y.SIZE)"></a>BM(X,X.SIZE,Y,Y.SIZE)</h3><pre><code>initialize tables bc[1057],gs[1057]
-initialize integer variable j=0,xl=x.size,yl=y.size
+                    <h3 id="BM-X-X-SIZE-Y-Y-SIZE"><a href="#BM-X-X-SIZE-Y-Y-SIZE" class="headerlink" title="BM(X,X.SIZE,Y,Y.SIZE)"></a>BM(X,X.SIZE,Y,Y.SIZE)</h3><pre><code>初始化整形数组bc[1057]，gs[1057] //bad character,good suffix
+初始化整形变量j=0，xl=x.size，yl=y.size
 GETBC(y,y.size,bc);
 GETGS(y,y.size,gs);
 while j&lt;xl-yl
@@ -203,7 +203,7 @@ while j&lt;xl-yl
    bc[i]=s
 for i=0 to s
    bc[y[i]]=s-1-i
-</code></pre><h3 id="GETGS-Y-s-gs"><a href="#GETGS-Y-s-gs" class="headerlink" title="GETGS(Y,s,gs)"></a>GETGS(Y,s,gs)</h3><pre><code>initialize table suf[1057]
+</code></pre><h3 id="GETGS-Y-s-gs"><a href="#GETGS-Y-s-gs" class="headerlink" title="GETGS(Y,s,gs)"></a>GETGS(Y,s,gs)</h3><pre><code>初始化整形数组suf[1057]
 suffixes(y,s,suf)
 for i=0 to s-1
    gs[i]=s;
@@ -215,7 +215,7 @@ for i=s-1 downto 0
             gs[j]=s-1-i
 for i=0 to m-2
    gs[s-1-suf[i]]=s-1-i
-</code></pre><h3 id="SUFFIXES-Y-s-suf"><a href="#SUFFIXES-Y-s-suf" class="headerlink" title="SUFFIXES(Y,s,suf)"></a>SUFFIXES(Y,s,suf)</h3><pre><code>initialize integer variables f,g=s-1
+</code></pre><h3 id="SUFFIXES-Y-s-suf"><a href="#SUFFIXES-Y-s-suf" class="headerlink" title="SUFFIXES(Y,s,suf)"></a>SUFFIXES(Y,s,suf)</h3><pre><code>初始化整形变量f，g=s-1
 suf[s-1]=s;
 for i=s-2 downto 0
    if i&gt;g and suf[i+s-1-f]&lt;i-g
@@ -232,6 +232,10 @@ for i=s-2 downto 0
             </div>
     
             <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2019/04/26/A-manacher/">
+        上一篇<br>A manacher
+    </a>
     
     <span class="page-number"></span>
     
@@ -262,7 +266,7 @@ for i=s-2 downto 0
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?93654458"></script>
+<script src="/js/journal.js?36937835"></script>
 
 
 
