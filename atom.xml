@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>strawberryfields</title>
+  
+  <subtitle>月光水面 阳光脸庞 面包蜂蜜 自由和谐</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://wswmsword.github.io/"/>
+  <updated>2019-04-26T14:53:33.000Z</updated>
+  <id>https://wswmsword.github.io/</id>
+  
+  <author>
+    <name>strawberry</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>A manacher</title>
+    <link href="https://wswmsword.github.io/2019/04/26/A-manacher/"/>
+    <id>https://wswmsword.github.io/2019/04/26/A-manacher/</id>
+    <published>2019-04-26T05:14:19.000Z</published>
+    <updated>2019-04-26T14:53:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="M-S-VS"><a href="#M-S-VS" class="headerlink" title="M(S,VS)"></a>M(S,VS)</h3><pre><code>初始化整形数组p[1057]，整形变量ci，rei=0 //palindrome,central,right endpointlen=initialize(s,vs);for i=1 to len-1   if i&lt;rei      p[i]=min(p[2*ci-i],rei-i)   else p[i]=1   while vs[i-p[i]]==vs[i+p[i]]      p[i]=p[i]+1   if rei&lt;i+p[i]      ci=i      rei=i+p[i]   maxlen=max(maxlen,p[i-1])return maxlen</code></pre><h3 id="INITIALIZE-S-VS"><a href="#INITIALIZE-S-VS" class="headerlink" title="INITIALIZE(S,VS)"></a>INITIALIZE(S,VS)</h3><pre><code>len=s.lengthvs[0]=&#39;@&#39;vs[1]=&#39;!&#39;for j=2 i=0 to len-1   vs[j]=s[i]   j=j+1   vs[j]=&#39;!&#39;   j=j+1return j</code></pre><blockquote><p><a href="https://blog.csdn.net/apigisyou/article/details/89578049" target="_blank" rel="noopener">P1659 [国家集训队]拉拉队排练</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;M-S-VS&quot;&gt;&lt;a href=&quot;#M-S-VS&quot; class=&quot;headerlink&quot; title=&quot;M(S,VS)&quot;&gt;&lt;/a&gt;M(S,VS)&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;初始化整形数组p[1057]，整形变量ci，rei=0 //palindrome,cen
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+    
+      <category term="A" scheme="https://wswmsword.github.io/tags/A/"/>
+    
+      <category term="manacher" scheme="https://wswmsword.github.io/tags/manacher/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>A boyer-moore</title>
+    <link href="https://wswmsword.github.io/2019/04/25/A-boyer-moore/"/>
+    <id>https://wswmsword.github.io/2019/04/25/A-boyer-moore/</id>
+    <published>2019-04-25T10:36:27.000Z</published>
+    <updated>2019-04-26T06:38:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="BM-X-X-SIZE-Y-Y-SIZE"><a href="#BM-X-X-SIZE-Y-Y-SIZE" class="headerlink" title="BM(X,X.SIZE,Y,Y.SIZE)"></a>BM(X,X.SIZE,Y,Y.SIZE)</h3><pre><code>初始化整形数组bc[1057]，gs[1057] //bad character,good suffix初始化整形变量j=0，xl=x.size，yl=y.sizeGETBC(y,y.size,bc);GETGS(y,y.size,gs);while j&lt;xl-yl   for i=yl-1 downto 0 and y[i]==x[i+j]      if i&lt;0 j=j+gs[0]      else j=j+max(bc[x[i+j]]-yl+1+i,gs[i])</code></pre><h3 id="GETBC-Y-s-bc"><a href="#GETBC-Y-s-bc" class="headerlink" title="GETBC(Y,s,bc)"></a>GETBC(Y,s,bc)</h3><pre><code>for i=0 to 255   bc[i]=sfor i=0 to s   bc[y[i]]=s-1-i</code></pre><h3 id="GETGS-Y-s-gs"><a href="#GETGS-Y-s-gs" class="headerlink" title="GETGS(Y,s,gs)"></a>GETGS(Y,s,gs)</h3><pre><code>初始化整形数组suf[1057]suffixes(y,s,suf)for i=0 to s-1   gs[i]=s;j=0for i=s-1 downto 0   if suf[i]==i+1      for j to s-2-i         if gs[j]=s            gs[j]=s-1-ifor i=0 to m-2   gs[s-1-suf[i]]=s-1-i</code></pre><h3 id="SUFFIXES-Y-s-suf"><a href="#SUFFIXES-Y-s-suf" class="headerlink" title="SUFFIXES(Y,s,suf)"></a>SUFFIXES(Y,s,suf)</h3><pre><code>初始化整形变量f，g=s-1suf[s-1]=s;for i=s-2 downto 0   if i&gt;g and suf[i+s-1-f]&lt;i-g      suf[i]=suf[i+s-1-f]   else      if i&lt;g         g=i      f=i      while g&gt;-1 and y[g]==y[g+s-1-f]         g=g-1      suf[i]=f-g</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;BM-X-X-SIZE-Y-Y-SIZE&quot;&gt;&lt;a href=&quot;#BM-X-X-SIZE-Y-Y-SIZE&quot; class=&quot;headerlink&quot; title=&quot;BM(X,X.SIZE,Y,Y.SIZE)&quot;&gt;&lt;/a&gt;BM(X,X.SIZE,Y,Y.SIZE)&lt;/h3
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+    
+      <category term="bm" scheme="https://wswmsword.github.io/tags/bm/"/>
+    
+      <category term="A" scheme="https://wswmsword.github.io/tags/A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>A knuth-morris-pratt</title>
+    <link href="https://wswmsword.github.io/2019/04/25/A-knuth-morris-pratt/"/>
+    <id>https://wswmsword.github.io/2019/04/25/A-knuth-morris-pratt/</id>
+    <published>2019-04-25T06:56:43.000Z</published>
+    <updated>2019-04-26T06:36:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="FIND-X-Y"><a href="#FIND-X-Y" class="headerlink" title="FIND(X,Y)"></a>FIND(X,Y)</h3><pre><code>初始化数组f全部置0用于部分匹配表MARRY(X)for i=0 to y.size   while j&gt;0 and x[j]!=y[i]      j=f[j]   if x[j]==y[i]      j=j+1   if j==x.size      sum=sum+1return sum</code></pre><h3 id="MARRY-X"><a href="#MARRY-X" class="headerlink" title="MARRY(X)"></a>MARRY(X)</h3><pre><code>for i=1 to x.size   j=f[i]   while j&gt;0 and x[j]!=x[i]      j=f[j]   if x[j]==x[i]      f[i+1]=j+1   else f[i+1]=0</code></pre><blockquote><p><a href="https://blog.csdn.net/apigisyou/article/details/89540490" target="_blank" rel="noopener">P2375 [NOI2014]动物园</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;FIND-X-Y&quot;&gt;&lt;a href=&quot;#FIND-X-Y&quot; class=&quot;headerlink&quot; title=&quot;FIND(X,Y)&quot;&gt;&lt;/a&gt;FIND(X,Y)&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;初始化数组f全部置0用于部分匹配表
+MARRY(X)
+for i=0 t
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+    
+      <category term="A" scheme="https://wswmsword.github.io/tags/A/"/>
+    
+      <category term="kmp" scheme="https://wswmsword.github.io/tags/kmp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>葫芦岛23点</title>
+    <link href="https://wswmsword.github.io/2019/04/18/%E8%91%AB%E8%8A%A6%E5%B2%9B23%E7%82%B9/"/>
+    <id>https://wswmsword.github.io/2019/04/18/葫芦岛23点/</id>
+    <published>2019-04-18T15:14:57.000Z</published>
+    <updated>2019-04-18T17:40:47.940Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="钢条切割"><a href="#钢条切割" class="headerlink" title="钢条切割"></a>钢条切割</h3><p>给定一段长度为n英寸的钢条和一个价格表p_i，求切割钢条方案，使得销售收益r_s最大。如果长度为n英寸的钢条的价格p_n足够大，最优解可能就是完全不需要切割。<br>长度为n英寸的钢条共有 <code>2¯(n-1)</code>种不同的切割方案，因为在距离钢条左端i英寸处总是可以选择切不切，如果要求按切割数量非递减的顺序切割，切割方案会少很多，近似等于<code>e¯(x√(2n/3))/4n√3</code>，但仍远远大于任何n的多项式。<br>应用递归式<code>r[n]=max(1&lt;=i&lt;=n)-&gt;(p[i]+r[n-i])</code>将一个指数时间的解转化为一个多项式时间的解，时空权衡【time-memory trade-off】。</p><h3 id="矩阵链乘法"><a href="#矩阵链乘法" class="headerlink" title="矩阵链乘法"></a>矩阵链乘法</h3><pre><code>MATRIX-MULTIPLY(A,B)   if A.columns!=B.rows      error &quot;incompatible dimensions&quot;   else let C be a new A.rows*B.columns matrix      for i=1 to A.rows         for j=1 to B.columns            C[i,j]=0            for k=1 to A.columns               C[i,j]=C[i,j]+A[i,k]*B[k,j]   return C</code></pre><p>给定n个矩阵的链，矩阵A_i的规模为p_i-1*p_i(1&lt;=i&lt;=n)，求完全括号化方案，使得计算A_1A_2…A_n所需标量乘法次数最少。完全括号化【fully parenthesized】指的是单一矩阵或者是两个完全括号化的矩阵乘积链的积，且已外加括号。<br>穷举所有括号化方案会得到递归式<code>P(n)={1若n=1|∑k=1to(n-1)-&gt;P(k)P(k-n)若n&gt;=2}</code>，<code>Ω(2¯n)</code>相似的递归公式产生的序列为卡特兰数【catalan numbers】，这个序列的增长速度为Ω(4¯n/n¯(3/2))。<br>应用递归式<code>m[i,j]={0若i=j|min(i&lt;=k&lt;j)-&gt;(m[i,k]+m[k+1,j]+p_(i-1)p_kp_i)若i&lt;j}</code>完成<code>Ω(n¯2)</code>的算法。</p><h4 id="构造最优解"><a href="#构造最优解" class="headerlink" title="构造最优解"></a>构造最优解</h4><pre><code>PRINT-OPTIMAL-PARENS(s,i,j)   if i==j      print &#39;A&#39;_i   else print &#39;(&#39;      PRINT-OPTIMAL-PARENS(s,i,s[i,j])      PRINT-OPTIMAL-PARENS(s,s[i,j]+1,j)      print &#39;)&#39;</code></pre><h3 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h3><p>给定两个序列X和Y，如果Z既是X的子序列，也是Y的子序列，那么称Z是X和Y的公共子序列【common subsequence】。以Z的长度作为X和Y的相似度，那么相似度最高的序列被认为是最长公共子序列【longest common subsequence】。<br>应用递归式<code>c[i,j]={0若i=0或j=0|c[i-1,j-1]+1若i,j&gt;0且x_i=y_j|max(c[i,j-1],c[i-1,j])若i,j&gt;0且x_i≠y_i}</code>。</p><h4 id="构造最优解-1"><a href="#构造最优解-1" class="headerlink" title="构造最优解"></a>构造最优解</h4><pre><code>PRINT-LCS(c,X,i,j)   if i==0 or j==0      return   if c[i,j]==c[i-1,j-1]      PRINT-LCS(c,X,i,j)      print x[i]   elseif c[i,j]==c[i-1,j]      PRINT-LCS(c,X,i-1,j)   else PRINT-LCS(c,X,i,j-1)</code></pre><h3 id="最长上升子序列"><a href="#最长上升子序列" class="headerlink" title="最长上升子序列"></a>最长上升子序列</h3><p>应用递归式<code>c[i]={max(1&lt;=j&lt;i)-&gt;(c[j]+1)若x[i]&gt;x[j]}</code>完成<code>O(n¯2)</code>的算法。<br>一个长度为i的候选子序列的尾元素至少不比一个长度为i-1候选子序列的尾元素小。可得<code>O(nlgn)</code>算法。</p><pre><code>l[1]=x[1]for i=2 to m   if x[i]&lt;l[1]      l[1]=x[i]   elseif x[i]&gt;l[j]      l[j+1]=x[i]      sz++   else      k=binary_search(l,sz,x[i])      l[k]=x[i]</code></pre><h3 id="最优二叉搜索树"><a href="#最优二叉搜索树" class="headerlink" title="最优二叉搜索树"></a>最优二叉搜索树</h3><p>假定我们正在设计一个程序，实现英语文本到法语的翻译。对英语文本中出现的每个单词，我们需要查找对应的法语单词。为了实现这些查找操作，可以创建一棵二叉搜索树，将n个英语单词作为关键字，对应的法语单词作为关联数据。由于文本中的每个单词都要进行搜索，我们希望花费在搜索上的总时间尽量少。<br>通过红黑树或其他平衡搜索树结构，我们可以假定每次搜索时间为O(lgn) 。但由于单词出现的频率是不同的，像“the”这种频繁使用的单词有可能位于搜索树中远离根的位置上，而像“machicolation”这种很少使用的单词可能位于靠近根的位置上。这样的结构会减慢翻译的速度，因为二叉树搜索树中搜索一个关键字的权重是深度+1。我们希望文本中频繁出现的单词被置于靠近根的位置。在给定单词出现频率的前提下，我们应该如何组织一棵二叉搜索树，使得所有搜索操作访问的结点总数最少呢？<br>递归式<code>e[i,j]={q_(i-1)若j=i-1|min(i&lt;=r&lt;=j)-&gt;(e[i,r-1]+e[r+1,j]+w[i,j])若i&lt;=j}</code>。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;钢条切割&quot;&gt;&lt;a href=&quot;#钢条切割&quot; class=&quot;headerlink&quot; title=&quot;钢条切割&quot;&gt;&lt;/a&gt;钢条切割&lt;/h3&gt;&lt;p&gt;给定一段长度为n英寸的钢条和一个价格表p_i，求切割钢条方案，使得销售收益r_s最大。如果长度为n英寸的钢条的价格p_n足够
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+      <category term="理解计算机" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LOvE</title>
+    <link href="https://wswmsword.github.io/2019/03/21/LOvE/"/>
+    <id>https://wswmsword.github.io/2019/03/21/LOvE/</id>
+    <published>2019-03-20T16:29:29.000Z</published>
+    <updated>2019-04-17T02:18:03.961Z</updated>
+    
+    <content type="html"><![CDATA[<p>时间流逝的非常快，不明白的事没有消失却越来越多。我在所有地方看着人们不停重复，像看到人踩死了虫子平淡表情的惊奇，虫子没有坐以守株，地上的蚯蚓被指引到宽阔可越道路另一头的绝妙世界，那儿不只有新泥新草甚至新蚯蚓，即使遍地被压瘪的躯体和漫天的膨胀灵魂。趁着夜黑风高风起林舞，越过前后不定错落无序的脚印坚定方向找到你，我想如果末日的尽头是你，我也只是饮下了末日止渴。我看见你，我很高兴，也很紧张，我喜欢你笑，这就是从来没为难困扰过我的明白的事。我多想我的世界尽是明镜，吹来微风，翠绿大树，柔软白云，湛蓝天空，透彻却不见伤心，最后任你驰骋。</p><!-- <span class="decorative"><span class="g"></span><span class="z"></span><span class="x"></span><span class="y"></span></span><img src="love.jpg" style="max-width:100%;" title="球球球球"/> -->]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;时间流逝的非常快，不明白的事没有消失却越来越多。我在所有地方看着人们不停重复，像看到人踩死了虫子平淡表情的惊奇，虫子没有坐以守株，地上的蚯蚓被指引到宽阔可越道路另一头的绝妙世界，那儿不只有新泥新草甚至新蚯蚓，即使遍地被压瘪的躯体和漫天的膨胀灵魂。趁着夜黑风高风起林舞，越过前
+      
+    
+    </summary>
+    
+      <category term="风起林舞" scheme="https://wswmsword.github.io/categories/%E9%A3%8E%E8%B5%B7%E6%9E%97%E8%88%9E/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>If you don’t finish then you’re just busy, not productive</title>
+    <link href="https://wswmsword.github.io/2019/03/18/If-you-don%E2%80%99t-finish-then-you%E2%80%99re-just-busy-not-productive/"/>
+    <id>https://wswmsword.github.io/2019/03/18/If-you-don’t-finish-then-you’re-just-busy-not-productive/</id>
+    <published>2019-03-18T06:29:05.000Z</published>
+    <updated>2019-04-17T02:23:40.364Z</updated>
+    
+    <content type="html"><![CDATA[<p>One of the biggest realisations I’ve come to as part of my PhD, is how little people care about how I spend my time, they only care about what I am able to deliver. Yet in order to deliver, you need to finish. I was recently reading an article on this topic, and I think the advice can be best summed up as:</p><blockquote><p>If you’re always starting interesting projects and not finishing, then no matter how hard you work, you’re just busy, not productive.</p></blockquote><p>I find this message extremely compelling, because I frequently find myself starting new programming projects in my spare time. In a lot of ways they are not a waste – I definitely learn a lot from these projects and gain a new skill. Yet at the same time, because I move on to something else that interests me before I can finish my current side-projects, when I tell people about these projects, all I can say is:</p><blockquote><p>This was an interesting project that I learned a lot from.</p></blockquote><p>Instead of:</p><blockquote><p>This was something really awesome I spent my spare time building. I learned a lot along the way, and you can see the tangible results of my project right now.</p></blockquote><p>Which is more impressive?</p><p>I used to try and use the Pomodoro Technique to track my time working on different projects, but it just resulted in me focusing on how much time I was working, not on getting things done. Under that system, things like polishing and refactoring my code (which can be a valuable use of your time, but I would frequently use them to procrastinate), counted equally towards my goals for the day, even if I wasn’t actually making any real progress.</p><p>Think about it – do you actually care if it took me an hour or a year to write this post? No! You only care about the fact that you are (hopefully) finding this an interesting read. Yet if I wrote 99% of this article, then allowed it to remain an unpublished draft, then I might as well have never written it in the first place. The same applies to the projects we work on: even if you dedicate many hours to a task and it’s 80% of the way there, if you never finish then no-one will care.</p><p>Now I have written out a list of every one of my projects, and broken them down into steps I can attack piece-by-piece, and I focus on making sure that every day I cross-off at least one item, so I’m getting closer to moving a project from my ‘to-do’ list, and into my ‘finished’ list.</p><p>I am terrible at saying “no” to people when they suggest new projects (especially when that person is myself). I get genuinely excited about new ideas and opportunities, and it can be flattering when someone approaches you to be involved in a new project. I’m slowly starting to realise that the best strategy to deal with these situations is to ask yourself:</p><blockquote><p>What is the minimal state of completion this project needs to reach for me to consider it a success and having been worth my time? If I cannot realistically commit to the amount of time required to bring the project to that state, am I better off putting my energy into finishing projects that I am currently working on?</p></blockquote><p>Taking on a project that you do not have the time to finish is going to burn more bridges than telling people you don’t have the time to contribute.</p><blockquote><p>Worst of all, you’ll gain a reputation for being someone who can’t deliver.</p></blockquote><p>For me, my plan for 2017 is to finish. I have a list of projects that every day I am whittling down, and I intend to follow up this post at the end of the year with a list of my projects that are finally complete.</p><blockquote><p><a href="http://jacksimpson.co/finishing-being-productive-busy/" target="_blank" rel="noopener">If you don’t finish then you’re just busy, not productive</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;One of the biggest realisations I’ve come to as part of my PhD, is how little people care about how I spend my time, they only care about
+      
+    
+    </summary>
+    
+      <category term="剪贴板" scheme="https://wswmsword.github.io/categories/%E5%89%AA%E8%B4%B4%E6%9D%BF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Tesla&#39;s Challenge: Leaving Behind The Lap Of Luxury</title>
+    <link href="https://wswmsword.github.io/2019/03/15/Tesla-s-Challenge-Leaving-Behind-The-Lap-Of-Luxury/"/>
+    <id>https://wswmsword.github.io/2019/03/15/Tesla-s-Challenge-Leaving-Behind-The-Lap-Of-Luxury/</id>
+    <published>2019-03-14T17:37:20.000Z</published>
+    <updated>2019-04-17T02:27:02.775Z</updated>
+    
+    <content type="html"><![CDATA[<!-- <span class="decorative"><span class="g"></span><span class="z"></span><span class="x"></span><span class="y"></span></span><img src="ap_18190129699317_wide-11477f2b34a46af8b5e856b10445da5a78406ba0-s1600-c85.jpg" style="max-width:100%;z-index:1;" title=""/> --><blockquote><p>Even after massively increasing production of the Model 3, Tesla still hasn’t managed to offer the car at its touted price of $35,000.</p><p><small>David Zalubowski/AP</small></p></blockquote><p>Tesla is finally making a profit. For the first time, the California-based electric carmaker has posted two quarterly profits in a row.</p><p>Those profits were driven by pricey cars — higher-priced variants of Tesla’s new Model 3, which sell for $50,000 and up.</p><p>But instead of doubling down on the strategy that proved profitable, Tesla is laying off thousands of people to slash costs, reducing production of the Model S and Model X and building a new factory in Shanghai. It’s all part of an aggressive push to make cars for the mass market that sell for $35,000.</p><p>That’s because Tesla CEO Elon Musk doesn’t want to just sell expensive cars to the world’s elite. He never did.</p><p>Musk called it his “Secret Master Plan.” The “secret” part was a joke — he talked about it all the time. But the “master plan” bit was very serious.</p><p>Step 1: Make a high-performance, extremely expensive electric sports car, something people would be willing to plunk down $100,000 for: the Roadster.</p><p>Step 2: Use that money to make a cheaper vehicle — and use that money to make an even cheaper one. Eventually, Musk said, the company would mass-produce a truly affordable electric vehicle.</p><p>The underlying goal was nothing short of saving the world. A few rich people driving electric sports cars wouldn’t shift the needle on climate change. But an electric car for everyone? That could do it.</p><p>Musk has been remarkably consistent on this vision. In 2006, he wrote that the company’s “overarching purpose … is to help expedite the move from a mine-and-burn hydrocarbon economy towards a solar electric economy.”</p><p>At the end of 2018, he told 60 Minutes, “The whole point of Tesla is to accelerate the advent of electric vehicles and sustainable transport and trying to help the environment. We think it’s the most serious problem that humanity faces.”</p><p>Mass-market cars, like Tesla’s Model 3, were key to this vision. But scaling up production is notoriously difficult. The last year and a half has been painful for Tesla, as the company coped with production challenges and delivery woes.</p><p>Tesla has massively increased production of the Model 3: The company sold nearly 140,000 Model 3s last year. But it still hasn’t managed to offer the car at its touted price of $35,000.</p><p>It’s still trying, despite the challenges: “The road ahead is very difficult,” Musk told employees on Jan. 18.</p><p>In the meantime, Tesla is competing successfully with conventional luxury brands.</p><p>Brian Moody, the executive editor for Autotrader, says Tesla should walk away from the master plan and just admit that it’s a premium carmaker.</p><p>“We can just be honest and call them luxury cars,” he says. “And I don’t think there’s anything wrong with that. … They’ve created something great that people love. Good. Congratulations. You should enjoy your success and keep doing more of that.”</p><p>It’s only Tesla’s “philosophy” that is pushing the company in a different direction, Moody says.</p><p>Still, it’s not like Musk’s master plan is entirely at odds with business interests.</p><p>“At the end of the day, Tesla is a for-profit company — it’s not a nonprofit,” says Jessica Caldwell, the executive director of industry analysis at Edmunds. “It’s going to have to make money.”</p><p>“Elon Musk and Tesla having this grander vision for humanity and civilization is certainly different than the way that other auto companies run their business day to day,” she says. But building a car for the masses also opens up new markets that could help the bottom line.</p><p>“Tesla’s up against the wall,” she says. “It feels like there are some real business pressures on them.”</p><p>The company has already blown multiple self-imposed deadlines for the Model 3. Meanwhile, traditional carmakers are investing serious money in bringing new electric cars to market. That, of course, was always part of Musk’s plan — but it means new competitive pressure, too.</p><p>Investors and analysts are waiting to see whether Tesla can pull off the long-planned transition to high-volume, low-cost vehicles.</p><p>And would-be buyers are waiting, too.</p><p>Mark Vidaurri of San Antonio test-drove a Model 3 a few weeks ago. He loved it — but was let down by the price tag. At well above $35,000, it’s out of his reach.</p><p>“I believe advancements in technology shouldn’t be a luxury,” he says. “It should be something that is discovered and … able to distribute across every class of citizen.”</p><p>He still dreams of a Model 3 in his driveway. Someday — when it’s more affordable.</p><blockquote><p><a href="https://www.npr.org/2019/01/31/688180319/teslas-challenge-leaving-behind-the-lap-of-luxury" target="_blank" rel="noopener">Tesla’s Challenge: Leaving Behind The Lap Of Luxury</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;!-- &lt;span class=&quot;decorative&quot;&gt;&lt;span class=&quot;g&quot;&gt;&lt;/span&gt;&lt;span class=&quot;z&quot;&gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;&lt;span class=&quot;y&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;img src=&quot;a
+      
+    
+    </summary>
+    
+      <category term="剪贴板" scheme="https://wswmsword.github.io/categories/%E5%89%AA%E8%B4%B4%E6%9D%BF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>实用色彩</title>
+    <link href="https://wswmsword.github.io/2019/02/27/%E5%AE%9E%E7%94%A8%E8%89%B2%E5%BD%A9/"/>
+    <id>https://wswmsword.github.io/2019/02/27/实用色彩/</id>
+    <published>2019-02-26T17:59:47.000Z</published>
+    <updated>2019-02-27T09:19:19.740Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Let’s forget about the tectonical details,and this is nice to talk about practical.</p></blockquote><h3 id="灯光基础LIGHT-BASICS"><a href="#灯光基础LIGHT-BASICS" class="headerlink" title="灯光基础LIGHT BASICS"></a>灯光基础LIGHT BASICS</h3><p>光遇到一个表面会发生三种情况，光可能被反射「reflection」，或被吸收「absorbtion」，或被折射「refraction」。</p><h3 id="反射光BOUNCED-LIGHT"><a href="#反射光BOUNCED-LIGHT" class="headerlink" title="反射光BOUNCED LIGHT"></a>反射光BOUNCED LIGHT</h3><h4 id="镜面反射SPECULAR-REFLECTION"><a href="#镜面反射SPECULAR-REFLECTION" class="headerlink" title="镜面反射SPECULAR REFLECTION"></a>镜面反射SPECULAR REFLECTION</h4><p>光在光滑表面上反射形成镜面反射。反射角等于入射角「oi=or」。</p><h5 id="镜面高光SPECULAR-HIGHLIGHT"><a href="#镜面高光SPECULAR-HIGHLIGHT" class="headerlink" title="镜面高光SPECULAR HIGHLIGHT"></a>镜面高光SPECULAR HIGHLIGHT</h5><p>镜面反射的最亮点。</p><h4 id="漫反射DIFFUSE-REFLECTION"><a href="#漫反射DIFFUSE-REFLECTION" class="headerlink" title="漫反射DIFFUSE REFLECTION"></a>漫反射DIFFUSE REFLECTION</h4><p>光向不同方向传播形成柔光的一种现象。最常见的反射是线性光撞击到微观上具有粗糙表面的物体使光向四面八方反射，就形成了漫反射。</p><h3 id="阴影SHADOWS"><a href="#阴影SHADOWS" class="headerlink" title="阴影SHADOWS"></a>阴影SHADOWS</h3><p>背光的一面形成阴影。足够多的灯光射入所产生的阴影重叠然后变得模糊，四面八方的光线漫反射产生的阴影会非常柔和。模糊阴影，扩散阴影，融合起来的衰减效果形成动态闭塞「dynamic occlusion」。</p><h3 id="色彩COLOR"><a href="#色彩COLOR" class="headerlink" title="色彩COLOR"></a>色彩COLOR</h3><h4 id="色温COLOR-TEMPERATURE"><a href="#色温COLOR-TEMPERATURE" class="headerlink" title="色温COLOR TEMPERATURE"></a>色温COLOR TEMPERATURE</h4><h5 id="开氏温标DEGREES-KELVIN"><a href="#开氏温标DEGREES-KELVIN" class="headerlink" title="开氏温标DEGREES KELVIN"></a>开氏温标DEGREES KELVIN</h5><ul><li>蜡烛candle</li><li>日落sunset</li><li>晴天sunny daylight</li><li>阴天overcast sky</li><li>蓝天blue sky</li></ul><h5 id="现实色彩"><a href="#现实色彩" class="headerlink" title="现实色彩"></a>现实色彩</h5><p>物体表面光线越暗，饱和度越高，光线越强「明度越高」，饱和度越低。</p><h4 id="色彩论COLOR-RELATIVITY"><a href="#色彩论COLOR-RELATIVITY" class="headerlink" title="色彩论COLOR RELATIVITY"></a>色彩论COLOR RELATIVITY</h4><p>多数情况下光有不同的颜色衰减，不同的入射方式，所以见到的颜色不尽相同。</p><h3 id="表面反应-SURFACE-RESPONSE"><a href="#表面反应-SURFACE-RESPONSE" class="headerlink" title="表面反应 SURFACE RESPONSE"></a>表面反应 SURFACE RESPONSE</h3><h4 id="灯光原理"><a href="#灯光原理" class="headerlink" title="灯光原理"></a>灯光原理</h4><h5 id="主灯光"><a href="#主灯光" class="headerlink" title="主灯光"></a>主灯光</h5><p>了解形体的基本外形。</p><h5 id="反向灯光KICK-LIGHT"><a href="#反向灯光KICK-LIGHT" class="headerlink" title="反向灯光KICK LIGHT"></a>反向灯光KICK LIGHT</h5><p>在主光源的反面形成微光扩散的效果。因为漫反射反弹光在表面衰减，形成柔和的阴影。天穹光的漫射光从一个方向照射同样可以形成柔和的氛围。</p><h5 id="轮廓灯光"><a href="#轮廓灯光" class="headerlink" title="轮廓灯光"></a>轮廓灯光</h5><p>形成形体轮廓。</p><h4 id="折射"><a href="#折射" class="headerlink" title="折射"></a>折射</h4><p>光穿过透明物体后发生的弯曲现象光线一部分反射到视线中，一部分在内部折射。</p><h5 id="焦散"><a href="#焦散" class="headerlink" title="焦散"></a>焦散</h5><p>被弯曲的光集中到一点。</p><h5 id="子面散射SUBSURFACE-SCATTERING"><a href="#子面散射SUBSURFACE-SCATTERING" class="headerlink" title="子面散射SUBSURFACE SCATTERING"></a>子面散射SUBSURFACE SCATTERING</h5><p>光线穿过半透明介质后产生子面散射。</p><h5 id="面料比率效应FACING-RATIO-EFFECTS"><a href="#面料比率效应FACING-RATIO-EFFECTS" class="headerlink" title="面料比率效应FACING RATIO EFFECTS"></a>面料比率效应FACING RATIO EFFECTS</h5><h6 id="菲涅耳效应FRESNEL"><a href="#菲涅耳效应FRESNEL" class="headerlink" title="菲涅耳效应FRESNEL"></a>菲涅耳效应FRESNEL</h6><h6 id="乳光OPALESCANCE"><a href="#乳光OPALESCANCE" class="headerlink" title="乳光OPALESCANCE"></a>乳光OPALESCANCE</h6><p>像光照射到虫子背壳后的反射光。</p><h6 id="柔软的绒毛FUZZY-SOFTNESS"><a href="#柔软的绒毛FUZZY-SOFTNESS" class="headerlink" title="柔软的绒毛FUZZY SOFTNESS"></a>柔软的绒毛FUZZY SOFTNESS</h6><p>物体与视线形成的角度越大，绒毛效果越明显。</p><h3 id="深度与相机DEPTH-AND-CAMERA"><a href="#深度与相机DEPTH-AND-CAMERA" class="headerlink" title="深度与相机DEPTH AND CAMERA"></a>深度与相机DEPTH AND CAMERA</h3><h4 id="深度"><a href="#深度" class="headerlink" title="深度"></a>深度</h4><p>光线随深度的增加而衰减。</p><h4 id="大气效应"><a href="#大气效应" class="headerlink" title="大气效应"></a>大气效应</h4><p>光在大气反复反弹，对比度越来越低，产生出景距和景深感。雾气同样适合创作饱含情感的作品，形成的纵深感空间感让图片更活跃。</p><h4 id="光照"><a href="#光照" class="headerlink" title="光照"></a>光照</h4><p>光照激发效果。体积光产生出真实的景距和景深感。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;Let’s forget about the tectonical details,and this is nice to talk about practical.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;灯光基础LIGHT-BASI
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+      <category term="认识色彩" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/%E8%AE%A4%E8%AF%86%E8%89%B2%E5%BD%A9/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>算法在计算中的作用</title>
+    <link href="https://wswmsword.github.io/2019/02/26/%E7%AE%97%E6%B3%95%E5%9C%A8%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8/"/>
+    <id>https://wswmsword.github.io/2019/02/26/算法在计算中的作用/</id>
+    <published>2019-02-26T15:03:12.000Z</published>
+    <updated>2019-02-26T16:15:39.535Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>计算机也许是快的，但不是无限快。存储器也许是廉价的，但不是免费的。所以计算时间是一种有限资源，存储器中的空间也一样。</p></blockquote><p>让运行插入排序的一台较快的计算机「计算机A」与运行归并排序的一台较慢的计算机「计算机B」竞争。<br>每台计算机必须排序一个具有1000万个数的数组「如果这些数是8字节的整数，那么输入将占用大致80MB。」。假设计算机A每秒执行百亿条指令，而计算机B每秒仅执行1000万条指令，结果计算机A就纯计算能力来说比计算机B快1000倍。为了使差别更具戏剧性，假设史上最巧妙的程序员为计算机A用机器语言编码插入排序，并且为了排序n个数，结果代码需要2n^2条指令。进一步假设仅由一位水平一般的程序员使用某种带有一个低效编译器的高级语言来实现归并排序，结果代码需要50nlgn条指令。<br>为了排序1000万个数，计算机A需要20000秒「(2*(10^7)^2条指令)/(10^10条指令/秒)「多于5.5小时」」，而计算机B需要约1163秒「(50*10^7lg10^7条指令)/(10^7条指令/秒)「少于20分钟」」。<br>为了排序1亿个数，计算机A需要2000000秒「(2*(10^8)^2条指令)/(10^10条指令/秒)「多于23天」」，而计算机B需要约13287秒「(50*10^8lg10^8条指令)/(10^7条指令/秒)「少于4小时」」。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;计算机也许是快的，但不是无限快。存储器也许是廉价的，但不是免费的。所以计算时间是一种有限资源，存储器中的空间也一样。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;让运行插入排序的一台较快的计算机「计算机A」与运行归并排序的一台较慢的计算机「计算机B」
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+      <category term="理解计算机" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>红黑树</title>
+    <link href="https://wswmsword.github.io/2019/02/18/%E7%BA%A2%E9%BB%91%E6%A0%91/"/>
+    <id>https://wswmsword.github.io/2019/02/18/红黑树/</id>
+    <published>2019-02-18T05:07:35.000Z</published>
+    <updated>2019-03-10T06:38:27.986Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>一颗有n个内部节点的红黑树的高度至多为2lg(n+1)。</p></blockquote><h3 id="满足红黑性质的二叉搜索树"><a href="#满足红黑性质的二叉搜索树" class="headerlink" title="满足红黑性质的二叉搜索树"></a>满足红黑性质的二叉搜索树</h3><ul><li>每个节点或是红，或是黑</li><li>根结点是黑色的</li><li>每个叶节点[NIL]是黑色的</li><li>一个红节点不能有红孩子</li><li>每个节点的黑高[black-height]相同</li></ul><h3 id="伪代码左旋LEFT-ROTATE-T-x"><a href="#伪代码左旋LEFT-ROTATE-T-x" class="headerlink" title="伪代码左旋LEFT-ROTATE(T,x)"></a>伪代码左旋LEFT-ROTATE(T,x)</h3><pre><code>y=x.rightx.right=y.leftif y.left!=T.nil   y.left.p=xy.p=x.pif x.p==T.nil   T.root=uelseif x==x.p.left   x.p.left=yelse x.p.right=yy.left=xx.p=y</code></pre><h3 id="伪代码插入RB-INSERT-T-z"><a href="#伪代码插入RB-INSERT-T-z" class="headerlink" title="伪代码插入RB-INSERT(T,z)"></a>伪代码插入RB-INSERT(T,z)</h3><pre><code>y=T.nilx=T.rootwhile x!=T.nil   y=x   if z.key&lt;x.key      x=x.left   else x=x.rightz.p=yif y==T.nil   T.root=zelseif z.key&lt;y.key   y.left=zelse y.right=zz.left=T.nilz.right=T.nilz.color=REDRB-INSERT-FIXUP(T,z)</code></pre><h3 id="伪代码着色旋转RB-INSERT-FIXUP-T-z"><a href="#伪代码着色旋转RB-INSERT-FIXUP-T-z" class="headerlink" title="伪代码着色旋转RB-INSERT-FIXUP(T,z)"></a>伪代码着色旋转RB-INSERT-FIXUP(T,z)</h3><pre><code>while z.p.color==RED   if z.p==z.p.p.left      y=z.p.p.p.right      if y.color==RED         z.p.color=BLACK         y.color=BLACK         z.p.p.color=RED         z=z.p.p      elseif z==z.p.right         z=z.p         LEFT-ROTATE(T,z)         z.p.color=BLACK         z.p.p.color=RED         RIGHT-ROTATE(T,z.p.p)      else (same as then clause with &quot;right&quot; and &quot;left&quot; exchanged)   T.root.color=BLACK</code></pre><h4 id="情况"><a href="#情况" class="headerlink" title="情况"></a>情况</h4><ul><li>z的叔节点y是红色的</li><li>z的叔节点y是黑色的<ul><li>z是一个右孩子</li><li>z是一个左孩子</li></ul></li></ul><h3 id="伪代码替换RB-TRANSPLANT-T-u-v"><a href="#伪代码替换RB-TRANSPLANT-T-u-v" class="headerlink" title="伪代码替换RB-TRANSPLANT(T,u,v)"></a>伪代码替换RB-TRANSPLANT(T,u,v)</h3><pre><code>if u.p==T.nil   T.root=velseif u==u.p.left   u.p.left=velse u.p.right=vv.p=u.p</code></pre><h3 id="伪代码删除RB-DELETE-T-z"><a href="#伪代码删除RB-DELETE-T-z" class="headerlink" title="伪代码删除RB-DELETE(T,z)"></a>伪代码删除RB-DELETE(T,z)</h3><pre><code>y=zy-original-color=y.colorif z.left==T.nil   x=z.right   RB-TRANSPLANT(T,z,z.right)elseif z.right==T.nil   x=z.left   RB-TRANSPLANT(T,z,z.left)else   y=TREE-MINIMUM(z.right)   y-original-color=y.color   x=y.right   if y.p==z      x.p=y   else      RB-TRANSPLANT(T,y,y.right)      y.right=z.right      y.right.p=y   RB-TRANSPLANT(T,z,y)   y.left=z.left   y.left.p=y   y.color=z.colorif y-original-color==BLACK   RB-DELETE-FIXUP(T,x)</code></pre><h3 id="伪代码着色旋转RB-DELETE-FIXUP-T-x"><a href="#伪代码着色旋转RB-DELETE-FIXUP-T-x" class="headerlink" title="伪代码着色旋转RB-DELETE-FIXUP(T,x)"></a>伪代码着色旋转RB-DELETE-FIXUP(T,x)</h3><pre><code>while x!=T.root and x.color==BLACK   if(x==x.p.left)      w=x.p.right      if w.color==RED         w.color=BLACK         x.p.color=RED         LEFT-ROTATE(T,x.p)         w=x.p.right      if w.left.color==BLACK and w.right.color==BLACK         w.color=RED         x=x.p      else         if w.right.color==BLACK            w.left.color=BLACK            w.color=RED            RIGHT-ROTATE(T,w)            w=x.p.right         w.color=x.p.color         x.p.color=BLACK         w.right.color=BLACK         LEFT-ROTATE(T,x.p)         x=T.root   else (same as then clause with &quot;right&quot; and &quot;left&quot; exchanged)x.color=BLACK</code></pre><h4 id="情况-1"><a href="#情况-1" class="headerlink" title="情况"></a>情况</h4><ul><li>x的兄弟节点是w是红色的</li><li>x的兄弟节点w是黑色的<ul><li>w的两个子节点都是黑色的</li><li>w的左孩子是红色的，w的右孩子是黑色的</li><li>w的右孩子是红色的</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;一颗有n个内部节点的红黑树的高度至多为2lg(n+1)。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;满足红黑性质的二叉搜索树&quot;&gt;&lt;a href=&quot;#满足红黑性质的二叉搜索树&quot; class=&quot;headerlink&quot; title=&quot;满足红黑性
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+      <category term="理解计算机" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MAC TERMINAL CHEAT SHEET</title>
+    <link href="https://wswmsword.github.io/2019/02/18/MAC-TERMINAL-CHEAT-SHEET/"/>
+    <id>https://wswmsword.github.io/2019/02/18/MAC-TERMINAL-CHEAT-SHEET/</id>
+    <published>2019-02-17T16:53:32.000Z</published>
+    <updated>2019-03-05T14:26:25.043Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="SHORTCUTS"><a href="#SHORTCUTS" class="headerlink" title="SHORTCUTS"></a>SHORTCUTS</h3><table><thead><tr><th style="text-align:left">key/command</th><th style="text-align:left">description</th></tr></thead><tbody><tr><td style="text-align:left">tab</td><td style="text-align:left">auto-complete files and folder names</td></tr><tr><td style="text-align:left">ctrl+a</td><td style="text-align:left">go to the beginning of the line you are currently typing on</td></tr><tr><td style="text-align:left">ctrl+e</td><td style="text-align:left">go to the end of the line you are currently typing on</td></tr><tr><td style="text-align:left">ctrl+u</td><td style="text-align:left">clear the line before the cursor</td></tr><tr><td style="text-align:left">ctrl+k</td><td style="text-align:left">clear the line after the cursor</td></tr><tr><td style="text-align:left">ctrl+w</td><td style="text-align:left">delete the word before the cursor</td></tr><tr><td style="text-align:left">ctrl+t</td><td style="text-align:left">swap the last two characters before the cursor</td></tr><tr><td style="text-align:left">esc+t</td><td style="text-align:left">swap the last two words before the cursor</td></tr><tr><td style="text-align:left">ctrl+r</td><td style="text-align:left">lets you search through previously used commands</td></tr><tr><td style="text-align:left">ctrl+l or command+k</td><td style="text-align:left">clears the screen</td></tr><tr><td style="text-align:left">ctrl+c</td><td style="text-align:left">kill whatever you are running</td></tr><tr><td style="text-align:left">ctrl+d</td><td style="text-align:left">exit the current shell</td></tr></tbody></table><h3 id="CORE-COMMANDS"><a href="#CORE-COMMANDS" class="headerlink" title="CORE COMMANDS"></a>CORE COMMANDS</h3><table><thead><tr><th style="text-align:left">key/command</th><th style="text-align:left">description</th></tr></thead><tbody><tr><td style="text-align:left">cd</td><td style="text-align:left">home directory</td></tr><tr><td style="text-align:left">cd [folder]</td><td style="text-align:left">change directory</td></tr><tr><td style="text-align:left">cd ~</td><td style="text-align:left">home directory,e.g.’cd ~/folder/‘</td></tr><tr><td style="text-align:left">cd /</td><td style="text-align:left">root of drive</td></tr><tr><td style="text-align:left">ls</td><td style="text-align:left">short listing</td></tr><tr><td style="text-align:left">ls -l</td><td style="text-align:left">long listing</td></tr><tr><td style="text-align:left">ls -a</td><td style="text-align:left">listing incl. hidden files</td></tr><tr><td style="text-align:left">ls -lh</td><td style="text-align:left">long listing with human readable file sizes</td></tr><tr><td style="text-align:left">ls -R</td><td style="text-align:left">entire content of folder recursively</td></tr><tr><td style="text-align:left">sudo [command]</td><td style="text-align:left">run command with the security privileges of the superuser(super user do)</td></tr><tr><td style="text-align:left">open [file]</td><td style="text-align:left">opens a file</td></tr><tr><td style="text-align:left">open .</td><td style="text-align:left">opens the directory</td></tr><tr><td style="text-align:left">top</td><td style="text-align:left">displays active processes,press q to quit</td></tr><tr><td style="text-align:left">nano [file]</td><td style="text-align:left">opens the terminal it’s editor</td></tr><tr><td style="text-align:left">pico [file]</td><td style="text-align:left">opens the terminal it’s editor</td></tr><tr><td style="text-align:left">clear</td><td style="text-align:left">clear screen</td></tr><tr><td style="text-align:left">q</td><td style="text-align:left">exit</td></tr></tbody></table><h3 id="COMMAND-HISTORY"><a href="#COMMAND-HISTORY" class="headerlink" title="COMMAND HISTORY"></a>COMMAND HISTORY</h3><table><thead><tr><th style="text-align:left">key/command</th><th style="text-align:left">description</th></tr></thead><tbody><tr><td style="text-align:left">history z</td><td style="text-align:left">shows the staff typed - add a number to limit the last z items</td></tr><tr><td style="text-align:left">!!</td><td style="text-align:left">excute the last command typed</td></tr><tr><td style="text-align:left">ctrl+r</td><td style="text-align:left">lets you search through previously used commands</td></tr></tbody></table><h3 id="FILE-MANAGEMENT"><a href="#FILE-MANAGEMENT" class="headerlink" title="FILE MANAGEMENT"></a>FILE MANAGEMENT</h3><table><thead><tr><th style="text-align:left">key/command</th><th style="text-align:left">description</th></tr></thead><tbody><tr><td style="text-align:left">touch [file]</td><td style="text-align:left">create new file</td></tr><tr><td style="text-align:left">pwd</td><td style="text-align:left">full path to working directory</td></tr><tr><td style="text-align:left">ls -l ..</td><td style="text-align:left">long listing of parent directory</td></tr><tr><td style="text-align:left">cd .</td><td style="text-align:left">current directory</td></tr><tr><td style="text-align:left">cd ..</td><td style="text-align:left">parent directory</td></tr><tr><td style="text-align:left">cd ../../</td><td style="text-align:left">move 2 levels up</td></tr><tr><td style="text-align:left">cat [file]</td><td style="text-align:left">concatenate files and print on the standard output</td></tr><tr><td style="text-align:left">rm -i [file]</td><td style="text-align:left">remove with confirmation</td></tr><tr><td style="text-align:left">rm -r [directory]</td><td style="text-align:left">remove a directory and contents</td></tr><tr><td style="text-align:left">cp [file] [newfile]</td><td style="text-align:left">copy file to file</td></tr><tr><td style="text-align:left">cp [file] [directory]</td><td style="text-align:left">copy file to directory</td></tr><tr><td style="text-align:left">mv [file] [newfile]</td><td style="text-align:left">move/rename</td></tr></tbody></table><h3 id="DIRECTORY-MANAGEMENT"><a href="#DIRECTORY-MANAGEMENT" class="headerlink" title="DIRECTORY MANAGEMENT"></a>DIRECTORY MANAGEMENT</h3><table><thead><tr><th style="text-align:left">key/command</th><th style="text-align:left">description</th></tr></thead><tbody><tr><td style="text-align:left">mkdir [directory]</td><td style="text-align:left">create new directory</td></tr><tr><td style="text-align:left">mkdir -p [directory]/[directory]</td><td style="text-align:left">create nested directories</td></tr><tr><td style="text-align:left">rm -r [directory]</td><td style="text-align:left">remove directory and contents</td></tr></tbody></table><h3 id="HELP"><a href="#HELP" class="headerlink" title="HELP"></a>HELP</h3><table><thead><tr><th style="text-align:left">key/command</th><th style="text-align:left">description</th></tr></thead><tbody><tr><td style="text-align:left">[command] -h</td><td style="text-align:left">offers help</td></tr><tr><td style="text-align:left">[command] –help</td><td style="text-align:left">offers help</td></tr><tr><td style="text-align:left">[command] help</td><td style="text-align:left">offers help</td></tr><tr><td style="text-align:left">man [command]</td><td style="text-align:left">show the help for command</td></tr><tr><td style="text-align:left">whatis [command]</td><td style="text-align:left">gives a one-line description of command</td></tr></tbody></table>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;SHORTCUTS&quot;&gt;&lt;a href=&quot;#SHORTCUTS&quot; class=&quot;headerlink&quot; title=&quot;SHORTCUTS&quot;&gt;&lt;/a&gt;SHORTCUTS&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:le
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+      <category term="理解计算机" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    
+  </entry>
+  
+</feed>
