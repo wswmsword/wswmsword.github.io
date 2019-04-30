@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wswmsword.github.io/"/>
-  <updated>2019-04-30T02:49:32.000Z</updated>
+  <updated>2019-04-30T04:25:04.304Z</updated>
   <id>https://wswmsword.github.io/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>A 康托展开</title>
+    <link href="https://wswmsword.github.io/2019/04/30/A-%E5%BA%B7%E6%89%98%E5%B1%95%E5%BC%80/"/>
+    <id>https://wswmsword.github.io/2019/04/30/A-康托展开/</id>
+    <published>2019-04-30T03:26:00.000Z</published>
+    <updated>2019-04-30T04:25:04.304Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="多用"><a href="#多用" class="headerlink" title="多用"></a>多用</h2><h3 id="FAC-n"><a href="#FAC-n" class="headerlink" title="FAC(n)"></a>FAC(n)</h3><pre><code>初始化数组f用于存放阶乘f[0]=1for i=1 to n-1   f[i]=f[i-1]*ireturn f</code></pre><h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><h3 id="CT-Z"><a href="#CT-Z" class="headerlink" title="CT(Z)"></a>CT(Z)</h3><pre><code>l=z.lenFAC(l)初始化res=0for i=0 to l-1   count=0   for j=i+1 to l-1      if z[j]&lt;z[i]         count=count+1   res=res+f[n-i-1]*countreturn res</code></pre><h2 id="解码"><a href="#解码" class="headerlink" title="解码"></a>解码</h2><h3 id="CT-Z-1"><a href="#CT-Z-1" class="headerlink" title="CT(Z)"></a>CT(Z)</h3><pre><code>初始化数组res用于存放第n个z初始化数组book全部置0用于标记l=z.len;FAC(l)sort(z);for i=0 to l-1   t=n/f[l-i-1]   for j=0 to l-1      if !book[j]         if t==0            break         t=t-1   res[i]=z[j]   book[j]=1   n=n%f(l-i-1)return res</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;多用&quot;&gt;&lt;a href=&quot;#多用&quot; class=&quot;headerlink&quot; title=&quot;多用&quot;&gt;&lt;/a&gt;多用&lt;/h2&gt;&lt;h3 id=&quot;FAC-n&quot;&gt;&lt;a href=&quot;#FAC-n&quot; class=&quot;headerlink&quot; title=&quot;FAC(n)&quot;&gt;&lt;/a&gt;FAC
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+    
+      <category term="A" scheme="https://wswmsword.github.io/tags/A/"/>
+    
+      <category term="康托展开" scheme="https://wswmsword.github.io/tags/%E5%BA%B7%E6%89%98%E5%B1%95%E5%BC%80/"/>
+    
+  </entry>
+  
+  <entry>
     <title>A 快速幂</title>
     <link href="https://wswmsword.github.io/2019/04/30/A-%E5%BF%AB%E9%80%9F%E5%B9%82/"/>
     <id>https://wswmsword.github.io/2019/04/30/A-快速幂/</id>
     <published>2019-04-30T02:36:06.000Z</published>
-    <updated>2019-04-30T02:49:32.000Z</updated>
+    <updated>2019-04-30T02:49:54.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="POWERMOD-X-Y-Z"><a href="#POWERMOD-X-Y-Z" class="headerlink" title="POWERMOD(X,Y,Z)"></a>POWERMOD(X,Y,Z)</h3><pre><code>初始化res=1x=x%zwhile y!=0   if y是奇数      res=(res*x)%z   y=y/2   x=(x*x)%zreturn res</code></pre><blockquote><p><a href="https://blog.csdn.net/apigisyou/article/details/89578049" target="_blank" rel="noopener">P1659 [国家集训队]拉拉队排练</a></p></blockquote>]]></content>
     
@@ -49,7 +76,7 @@ x=x
     <link href="https://wswmsword.github.io/2019/04/26/A-manacher/"/>
     <id>https://wswmsword.github.io/2019/04/26/A-manacher/</id>
     <published>2019-04-26T05:14:19.000Z</published>
-    <updated>2019-04-30T02:49:31.000Z</updated>
+    <updated>2019-04-30T02:49:56.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="M-S-VS"><a href="#M-S-VS" class="headerlink" title="M(S,VS)"></a>M(S,VS)</h3><pre><code>初始化整形数组p[1057]，整形变量ci，rei=0 //palindrome,central,right endpointlen=initialize(s,vs);for i=1 to len-1   if i&lt;rei      p[i]=min(p[2*ci-i],rei-i)   else p[i]=1   while vs[i-p[i]]==vs[i+p[i]]      p[i]=p[i]+1   if rei&lt;i+p[i]      ci=i      rei=i+p[i]   maxlen=max(maxlen,p[i-1])return maxlen</code></pre><h3 id="INITIALIZE-S-VS"><a href="#INITIALIZE-S-VS" class="headerlink" title="INITIALIZE(S,VS)"></a>INITIALIZE(S,VS)</h3><pre><code>len=s.lengthvs[0]=&#39;@&#39;vs[1]=&#39;!&#39;for j=2 i=0 to len-1   vs[j]=s[i]   j=j+1   vs[j]=&#39;!&#39;   j=j+1return j</code></pre><blockquote><p><a href="https://blog.csdn.net/apigisyou/article/details/89578049" target="_blank" rel="noopener">P1659 [国家集训队]拉拉队排练</a></p></blockquote>]]></content>
     
