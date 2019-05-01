@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wswmsword.github.io/"/>
-  <updated>2019-05-01T04:39:48.000Z</updated>
+  <updated>2019-05-01T05:54:43.000Z</updated>
   <id>https://wswmsword.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://wswmsword.github.io/2019/05/01/A-%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
     <id>https://wswmsword.github.io/2019/05/01/A-并查集/</id>
     <published>2019-04-30T19:06:36.000Z</published>
-    <updated>2019-05-01T04:39:48.000Z</updated>
+    <updated>2019-05-01T05:54:43.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="UFIND"><a href="#UFIND" class="headerlink" title="UFIND()"></a>UFIND()</h3><pre><code>初始化dir数组使值和自身下标相等初始化结构体数组G存放连通边for i=0 to g.len-1   MERGE(g.x,g,y)for i=0 to 点数   if(dir[i]==i)      count=count+1return count</code></pre><h3 id="MERGE-x-y"><a href="#MERGE-x-y" class="headerlink" title="MERGE(x,y)"></a>MERGE(x,y)</h3><pre><code>fx=FFIND(x)fy=FFIND(y)if fx!=fy   dir[fy]=fx</code></pre><h3 id="FFIND-n"><a href="#FFIND-n" class="headerlink" title="FFIND(n)"></a>FFIND(n)</h3><pre><code>i=nwhile dir[i]!=i   i=dir[i]while dir[n]!=i   t=dir[n]   dir[n]=i   n=treturn n</code></pre>]]></content>
+    <content type="html"><![CDATA[<h3 id="UFIND"><a href="#UFIND" class="headerlink" title="UFIND()"></a>UFIND()</h3><pre><code>初始化dir数组使值和自身下标相等初始化结构体数组G存放连通边for i=0 to g.len-1   MERGE(g.x,g,y)for i=0 to 顶点数   if(dir[i]==i)      count=count+1return count</code></pre><h3 id="MERGE-x-y"><a href="#MERGE-x-y" class="headerlink" title="MERGE(x,y)"></a>MERGE(x,y)</h3><pre><code>fx=FFIND(x)fy=FFIND(y)if fx!=fy   dir[fy]=fx</code></pre><h3 id="FFIND-n"><a href="#FFIND-n" class="headerlink" title="FFIND(n)"></a>FFIND(n)</h3><pre><code>i=nwhile dir[i]!=i   i=dir[i]while dir[n]!=i   t=dir[n]   dir[n]=i   n=treturn n</code></pre>]]></content>
     
     <summary type="html">
     
@@ -50,12 +50,25 @@ for i=0 to g.
     <link href="https://wswmsword.github.io/2019/05/01/A-sort/"/>
     <id>https://wswmsword.github.io/2019/05/01/A-sort/</id>
     <published>2019-04-30T19:04:55.000Z</published>
-    <updated>2019-04-30T19:04:55.099Z</updated>
+    <updated>2019-05-01T07:13:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><h3 id="QSORT"><a href="#QSORT" class="headerlink" title="QSORT()"></a>QSORT()</h3><pre><code>初始化数组z存放准备排序的序列n=z.lenINI(0,n-1)</code></pre><h3 id="INI-int-left-int-right"><a href="#INI-int-left-int-right" class="headerlink" title="INI(int left,int right)"></a>INI(int left,int right)</h3><pre><code>if(left&lt;right){   parti=par(left,right);   INI(left,parti-1);   INI(parti+1,right);}</code></pre><h3 id="PAR-int-left-int-right"><a href="#PAR-int-left-int-right" class="headerlink" title="PAR(int left,int right)"></a>PAR(int left,int right)</h3><pre><code>i=leftj=right+1while 1   do   {      j=j-1   }while z[j]&gt;z[left]   do   {      i=i+1   }while z[i]&lt;z[left] and i&lt;right   if j&gt;i      SWAP(z[i],z[j])   else      SWAP(z[j],z[left])      breakreturn j</code></pre><h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><h3 id="MSORT"><a href="#MSORT" class="headerlink" title="MSORT()"></a>MSORT()</h3><pre><code>初始化数组z存放准备排序的序列n=z.lenINI(0,n-1)</code></pre><h3 id="INI-int-left-int-right-1"><a href="#INI-int-left-int-right-1" class="headerlink" title="INI(int left,int right)"></a>INI(int left,int right)</h3><pre><code>if(left&lt;right){   mid=(left+right)/2   INI(left,mid)   INI(mid+1,right)   MER(left,mid,right)}</code></pre><h3 id="MER-int-left-int-mid-int-right"><a href="#MER-int-left-int-mid-int-right" class="headerlink" title="MER(int left,int mid,int right)"></a>MER(int left,int mid,int right)</h3><pre><code>i=leftj=mid+1k=rightwhile i!=mid+1 and j!=right+1{   if z[i]&gt;z[j]   {      prez[k]=z[j]      k=k+1      j=j+1   }else   {      prez[k]=z[i]      k=k+1      i=i+1   }}while i!=mid+1{   prez[k]=z[i]   k=k+1   i=i+1}while j!=right+1{   prez[k]=z[j]   k=k+1   j=j+1}for i=left to right   z[i]=prez[i]</code></pre>]]></content>
     
     <summary type="html">
     
+      
+      
+        &lt;h2 id=&quot;快速排序&quot;&gt;&lt;a href=&quot;#快速排序&quot; class=&quot;headerlink&quot; title=&quot;快速排序&quot;&gt;&lt;/a&gt;快速排序&lt;/h2&gt;&lt;h3 id=&quot;QSORT&quot;&gt;&lt;a href=&quot;#QSORT&quot; class=&quot;headerlink&quot; title=&quot;QSORT()
+      
+    
     </summary>
     
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+    
+      <category term="A" scheme="https://wswmsword.github.io/tags/A/"/>
+    
+      <category term="排序" scheme="https://wswmsword.github.io/tags/%E6%8E%92%E5%BA%8F/"/>
     
   </entry>
   
