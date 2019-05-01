@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wswmsword.github.io/"/>
-  <updated>2019-04-30T04:25:04.304Z</updated>
+  <updated>2019-05-01T04:39:48.000Z</updated>
   <id>https://wswmsword.github.io/</id>
   
   <author>
@@ -15,6 +15,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>A 并查集</title>
+    <link href="https://wswmsword.github.io/2019/05/01/A-%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
+    <id>https://wswmsword.github.io/2019/05/01/A-并查集/</id>
+    <published>2019-04-30T19:06:36.000Z</published>
+    <updated>2019-05-01T04:39:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="UFIND"><a href="#UFIND" class="headerlink" title="UFIND()"></a>UFIND()</h3><pre><code>初始化dir数组使值和自身下标相等初始化结构体数组G存放连通边for i=0 to g.len-1   MERGE(g.x,g,y)for i=0 to 点数   if(dir[i]==i)      count=count+1return count</code></pre><h3 id="MERGE-x-y"><a href="#MERGE-x-y" class="headerlink" title="MERGE(x,y)"></a>MERGE(x,y)</h3><pre><code>fx=FFIND(x)fy=FFIND(y)if fx!=fy   dir[fy]=fx</code></pre><h3 id="FFIND-n"><a href="#FFIND-n" class="headerlink" title="FFIND(n)"></a>FFIND(n)</h3><pre><code>i=nwhile dir[i]!=i   i=dir[i]while dir[n]!=i   t=dir[n]   dir[n]=i   n=treturn n</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;UFIND&quot;&gt;&lt;a href=&quot;#UFIND&quot; class=&quot;headerlink&quot; title=&quot;UFIND()&quot;&gt;&lt;/a&gt;UFIND()&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;初始化dir数组使值和自身下标相等
+初始化结构体数组G存放连通边
+for i=0 to g.
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+    
+      <category term="A" scheme="https://wswmsword.github.io/tags/A/"/>
+    
+      <category term="并查集" scheme="https://wswmsword.github.io/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>A sort</title>
+    <link href="https://wswmsword.github.io/2019/05/01/A-sort/"/>
+    <id>https://wswmsword.github.io/2019/05/01/A-sort/</id>
+    <published>2019-04-30T19:04:55.000Z</published>
+    <updated>2019-04-30T19:04:55.099Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>A 康托展开</title>

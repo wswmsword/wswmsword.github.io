@@ -4,19 +4,19 @@
 <html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head><meta name="generator" content="Hexo 3.8.0">
-    <title>A knuth-morris-pratt - strawberryfields</title>
+    <title>A 并查集 - strawberryfields</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="strawberry">
-<meta name="description" content="FIND(X,Y)初始化数组f全部置0用于部分匹配表
-MARRY(X)
-for i=0 to y.size
-   while j&amp;gt;0 and x[j]!=y[i]
-      j=f[j]
-   if x[j]==y[i]
-      j=j+1
-   if j==x.size
-      sum=sum...">
+<meta name="description" content="UFIND()初始化dir数组使值和自身下标相等
+初始化结构体数组G存放连通边
+for i=0 to g.len-1
+   MERGE(g.x,g,y)
+for i=0 to 点数
+   if(dir[i]==i)
+      count=count+1
+return count
+MERGE(x,y)fx=FF...">
 <meta name="keywords" content>
 
 <link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
@@ -28,7 +28,7 @@ for i=0 to y.size
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?4425825">
+<link rel="stylesheet" href="/css/journal.css?61970791">
 <script src="/js/loadCSS.js"></script>
 <script>
     loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
@@ -167,10 +167,10 @@ for i=0 to y.size
         <div class="post">
             <div class="post-head-wrapper-text-only" style="background-image: url('')">
                 <div class="post-title">
-                    A knuth-morris-pratt
+                    A 并查集
                     <div class="post-meta">
-                        <time datetime="2019-04-25T06:56:43.000Z" itemprop="datePublished">
-                            2019-04-25 14:56
+                        <time datetime="2019-04-30T19:06:36.000Z" itemprop="datePublished">
+                            2019-05-01 03:06
                         </time>&nbsp;
                         
                         
@@ -186,7 +186,7 @@ for i=0 to y.size
                         
                         <a href="/tags/A/">A</a>, 
                         
-                        <a href="/tags/kmp/">kmp</a>
+                        <a href="/tags/并查集/">并查集</a>
                         
                         
                     </div>
@@ -195,40 +195,36 @@ for i=0 to y.size
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <h3 id="FIND-X-Y"><a href="#FIND-X-Y" class="headerlink" title="FIND(X,Y)"></a>FIND(X,Y)</h3><pre><code>初始化数组f全部置0用于部分匹配表
-MARRY(X)
-for i=0 to y.size
-   while j&gt;0 and x[j]!=y[i]
-      j=f[j]
-   if x[j]==y[i]
-      j=j+1
-   if j==x.size
-      sum=sum+1
-return sum
-</code></pre><h3 id="MARRY-X"><a href="#MARRY-X" class="headerlink" title="MARRY(X)"></a>MARRY(X)</h3><pre><code>for i=1 to x.size
-   j=f[i]
-   while j&gt;0 and x[j]!=x[i]
-      j=f[j]
-   if x[j]==x[i]
-      f[i+1]=j+1
-   else f[i+1]=0
-</code></pre><blockquote>
-<p><a href="https://blog.csdn.net/apigisyou/article/details/89540490" target="_blank" rel="noopener">P2375 [NOI2014]动物园</a></p>
-</blockquote>
-
+                    <h3 id="UFIND"><a href="#UFIND" class="headerlink" title="UFIND()"></a>UFIND()</h3><pre><code>初始化dir数组使值和自身下标相等
+初始化结构体数组G存放连通边
+for i=0 to g.len-1
+   MERGE(g.x,g,y)
+for i=0 to 点数
+   if(dir[i]==i)
+      count=count+1
+return count
+</code></pre><h3 id="MERGE-x-y"><a href="#MERGE-x-y" class="headerlink" title="MERGE(x,y)"></a>MERGE(x,y)</h3><pre><code>fx=FFIND(x)
+fy=FFIND(y)
+if fx!=fy
+   dir[fy]=fx
+</code></pre><h3 id="FFIND-n"><a href="#FFIND-n" class="headerlink" title="FFIND(n)"></a>FFIND(n)</h3><pre><code>i=n
+while dir[i]!=i
+   i=dir[i]
+while dir[n]!=i
+   t=dir[n]
+   dir[n]=i
+   n=t
+return n
+</code></pre>
                 </div>
             </div>
     
             <nav class="post-pagination">
     
-    <a class="newer-posts" href="/2019/04/25/A-boyer-moore/">
-        上一篇<br>A boyer-moore
-    </a>
-    
     <span class="page-number"></span>
     
-    <a class="older-posts" href="/2019/04/18/葫芦岛23点/">
-        下一篇<br>葫芦岛23点
+    <a class="older-posts" href="/2019/05/01/A-sort/">
+        下一篇<br>A sort
     </a>
     
 </nav>
@@ -254,7 +250,7 @@ return sum
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?73282966"></script>
+<script src="/js/journal.js?56627543"></script>
 
 
 
