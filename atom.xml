@@ -50,7 +50,7 @@ for i=0 to g.
     <link href="https://wswmsword.github.io/2019/05/01/A-sort/"/>
     <id>https://wswmsword.github.io/2019/05/01/A-sort/</id>
     <published>2019-04-30T19:04:55.000Z</published>
-    <updated>2019-05-01T07:13:35.000Z</updated>
+    <updated>2019-05-01T08:20:28.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><h3 id="QSORT"><a href="#QSORT" class="headerlink" title="QSORT()"></a>QSORT()</h3><pre><code>初始化数组z存放准备排序的序列n=z.lenINI(0,n-1)</code></pre><h3 id="INI-int-left-int-right"><a href="#INI-int-left-int-right" class="headerlink" title="INI(int left,int right)"></a>INI(int left,int right)</h3><pre><code>if(left&lt;right){   parti=par(left,right);   INI(left,parti-1);   INI(parti+1,right);}</code></pre><h3 id="PAR-int-left-int-right"><a href="#PAR-int-left-int-right" class="headerlink" title="PAR(int left,int right)"></a>PAR(int left,int right)</h3><pre><code>i=leftj=right+1while 1   do   {      j=j-1   }while z[j]&gt;z[left]   do   {      i=i+1   }while z[i]&lt;z[left] and i&lt;right   if j&gt;i      SWAP(z[i],z[j])   else      SWAP(z[j],z[left])      breakreturn j</code></pre><h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><h3 id="MSORT"><a href="#MSORT" class="headerlink" title="MSORT()"></a>MSORT()</h3><pre><code>初始化数组z存放准备排序的序列n=z.lenINI(0,n-1)</code></pre><h3 id="INI-int-left-int-right-1"><a href="#INI-int-left-int-right-1" class="headerlink" title="INI(int left,int right)"></a>INI(int left,int right)</h3><pre><code>if(left&lt;right){   mid=(left+right)/2   INI(left,mid)   INI(mid+1,right)   MER(left,mid,right)}</code></pre><h3 id="MER-int-left-int-mid-int-right"><a href="#MER-int-left-int-mid-int-right" class="headerlink" title="MER(int left,int mid,int right)"></a>MER(int left,int mid,int right)</h3><pre><code>i=leftj=mid+1k=rightwhile i!=mid+1 and j!=right+1{   if z[i]&gt;z[j]   {      prez[k]=z[j]      k=k+1      j=j+1   }else   {      prez[k]=z[i]      k=k+1      i=i+1   }}while i!=mid+1{   prez[k]=z[i]   k=k+1   i=i+1}while j!=right+1{   prez[k]=z[j]   k=k+1   j=j+1}for i=left to right   z[i]=prez[i]</code></pre>]]></content>
     
@@ -104,9 +104,9 @@ for i=0 to g.
     <link href="https://wswmsword.github.io/2019/04/30/A-%E5%BF%AB%E9%80%9F%E5%B9%82/"/>
     <id>https://wswmsword.github.io/2019/04/30/A-快速幂/</id>
     <published>2019-04-30T02:36:06.000Z</published>
-    <updated>2019-04-30T02:49:54.000Z</updated>
+    <updated>2019-05-07T01:14:01.340Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="POWERMOD-X-Y-Z"><a href="#POWERMOD-X-Y-Z" class="headerlink" title="POWERMOD(X,Y,Z)"></a>POWERMOD(X,Y,Z)</h3><pre><code>初始化res=1x=x%zwhile y!=0   if y是奇数      res=(res*x)%z   y=y/2   x=(x*x)%zreturn res</code></pre><blockquote><p><a href="https://blog.csdn.net/apigisyou/article/details/89578049" target="_blank" rel="noopener">P1659 [国家集训队]拉拉队排练</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h3 id="POWERMOD-X-Y-Z"><a href="#POWERMOD-X-Y-Z" class="headerlink" title="POWERMOD(X,Y,Z)"></a>POWERMOD(X,Y,Z)</h3><pre><code>初始化res=1x=x%zwhile y!=0   if y是奇数      res=(res*x)%z   y=y/2   x=(x*x)%zreturn res</code></pre><blockquote><p><a href="https://blog.csdn.net/apigisyou/article/details/89578049" target="_blank" rel="noopener">P1659 [国家集训队]拉拉队排练</a><br><a href="https://blog.csdn.net/apigisyou/article/details/89893770" target="_blank" rel="noopener">P3193 [HNOI2008]GT考试</a></p></blockquote>]]></content>
     
     <summary type="html">
     
@@ -186,9 +186,9 @@ x=x
     <link href="https://wswmsword.github.io/2019/04/25/A-knuth-morris-pratt/"/>
     <id>https://wswmsword.github.io/2019/04/25/A-knuth-morris-pratt/</id>
     <published>2019-04-25T06:56:43.000Z</published>
-    <updated>2019-04-26T06:36:34.000Z</updated>
+    <updated>2019-05-07T01:13:55.563Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="FIND-X-Y"><a href="#FIND-X-Y" class="headerlink" title="FIND(X,Y)"></a>FIND(X,Y)</h3><pre><code>初始化数组f全部置0用于部分匹配表MARRY(X)for i=0 to y.size   while j&gt;0 and x[j]!=y[i]      j=f[j]   if x[j]==y[i]      j=j+1   if j==x.size      sum=sum+1return sum</code></pre><h3 id="MARRY-X"><a href="#MARRY-X" class="headerlink" title="MARRY(X)"></a>MARRY(X)</h3><pre><code>for i=1 to x.size   j=f[i]   while j&gt;0 and x[j]!=x[i]      j=f[j]   if x[j]==x[i]      f[i+1]=j+1   else f[i+1]=0</code></pre><blockquote><p><a href="https://blog.csdn.net/apigisyou/article/details/89540490" target="_blank" rel="noopener">P2375 [NOI2014]动物园</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h3 id="FIND-X-Y"><a href="#FIND-X-Y" class="headerlink" title="FIND(X,Y)"></a>FIND(X,Y)</h3><pre><code>初始化数组f全部置0用于部分匹配表MARRY(X)for i=0 to y.size   while j&gt;0 and x[j]!=y[i]      j=f[j]   if x[j]==y[i]      j=j+1   if j==x.size      sum=sum+1return sum</code></pre><h3 id="MARRY-X"><a href="#MARRY-X" class="headerlink" title="MARRY(X)"></a>MARRY(X)</h3><pre><code>for i=1 to x.size   j=f[i]   while j&gt;0 and x[j]!=x[i]      j=f[j]   if x[j]==x[i]      f[i+1]=j+1   else f[i+1]=0</code></pre><blockquote><p><a href="https://blog.csdn.net/apigisyou/article/details/89540490" target="_blank" rel="noopener">P2375 [NOI2014]动物园</a><br><a href="https://blog.csdn.net/apigisyou/article/details/89893770" target="_blank" rel="noopener">P3193 [HNOI2008]GT考试</a></p></blockquote>]]></content>
     
     <summary type="html">
     
