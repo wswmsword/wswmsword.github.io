@@ -132,9 +132,9 @@ x=x
     <link href="https://wswmsword.github.io/2019/04/26/A-manacher/"/>
     <id>https://wswmsword.github.io/2019/04/26/A-manacher/</id>
     <published>2019-04-26T05:14:19.000Z</published>
-    <updated>2019-04-30T02:49:56.000Z</updated>
+    <updated>2019-05-08T04:40:33.796Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="M-S-VS"><a href="#M-S-VS" class="headerlink" title="M(S,VS)"></a>M(S,VS)</h3><pre><code>初始化整形数组p[1057]，整形变量ci，rei=0 //palindrome,central,right endpointlen=initialize(s,vs);for i=1 to len-1   if i&lt;rei      p[i]=min(p[2*ci-i],rei-i)   else p[i]=1   while vs[i-p[i]]==vs[i+p[i]]      p[i]=p[i]+1   if rei&lt;i+p[i]      ci=i      rei=i+p[i]   maxlen=max(maxlen,p[i-1])return maxlen</code></pre><h3 id="INITIALIZE-S-VS"><a href="#INITIALIZE-S-VS" class="headerlink" title="INITIALIZE(S,VS)"></a>INITIALIZE(S,VS)</h3><pre><code>len=s.lengthvs[0]=&#39;@&#39;vs[1]=&#39;!&#39;for j=2 i=0 to len-1   vs[j]=s[i]   j=j+1   vs[j]=&#39;!&#39;   j=j+1return j</code></pre><blockquote><p><a href="https://blog.csdn.net/apigisyou/article/details/89578049" target="_blank" rel="noopener">P1659 [国家集训队]拉拉队排练</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h3 id="M-S-VS"><a href="#M-S-VS" class="headerlink" title="M(S,VS)"></a>M(S,VS)</h3><pre><code>初始化整形数组p[1057]，整形变量ci，rei=0 //palindrome,central,right endpointlen=INITIALIZE(s,vs);for i=1 to len-1   if i&lt;rei      p[i]=min(p[2*ci-i],rei-i)   else p[i]=1   while vs[i-p[i]]==vs[i+p[i]]      p[i]=p[i]+1   if rei&lt;i+p[i]      ci=i      rei=i+p[i]   maxlen=max(maxlen,p[i-1])return maxlen</code></pre><h3 id="INITIALIZE-S-VS"><a href="#INITIALIZE-S-VS" class="headerlink" title="INITIALIZE(S,VS)"></a>INITIALIZE(S,VS)</h3><pre><code>len=s.lengthvs[0]=&#39;@&#39;vs[1]=&#39;!&#39;for j=2 i=0 to len-1   vs[j]=s[i]   j=j+1   vs[j]=&#39;!&#39;   j=j+1return j</code></pre><blockquote><p><a href="https://blog.csdn.net/apigisyou/article/details/89578049" target="_blank" rel="noopener">P1659 [国家集训队]拉拉队排练</a><br><a href="https://blog.csdn.net/apigisyou/article/details/89949591" target="_blank" rel="noopener">P4555 [国家集训队]最长双回文串</a></p></blockquote>]]></content>
     
     <summary type="html">
     
