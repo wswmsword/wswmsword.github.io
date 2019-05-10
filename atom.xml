@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wswmsword.github.io/"/>
-  <updated>2019-05-01T05:54:43.000Z</updated>
+  <updated>2019-05-10T09:59:36.000Z</updated>
   <id>https://wswmsword.github.io/</id>
   
   <author>
@@ -15,6 +15,115 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>A 逆元</title>
+    <link href="https://wswmsword.github.io/2019/05/10/A-%E9%80%86%E5%85%83/"/>
+    <id>https://wswmsword.github.io/2019/05/10/A-逆元/</id>
+    <published>2019-05-10T09:02:24.000Z</published>
+    <updated>2019-05-10T09:59:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="多用"><a href="#多用" class="headerlink" title="多用"></a>多用</h2><h3 id="POWERMOD-X-Y-Z"><a href="#POWERMOD-X-Y-Z" class="headerlink" title="POWERMOD(X,Y,Z)"></a>POWERMOD(X,Y,Z)</h3><pre><code>初始化res=1x=x%zwhile y!=0   if y是奇数      res=(res*x)%z   y=y/2   x=(x*x)%zreturn res</code></pre><h3 id="GCDEX-a-b-amp-x-amp-y"><a href="#GCDEX-a-b-amp-x-amp-y" class="headerlink" title="GCDEX(a,b,&amp;x,&amp;y)"></a>GCDEX(a,b,&amp;x,&amp;y)</h3><pre><code>if b==0   x=1   y=0   return agcd=GCDEX(b,a%b,x1,y1)x=y1y=x1-a/b*y1return gcd</code></pre><h2 id="费马小定理求逆元"><a href="#费马小定理求逆元" class="headerlink" title="费马小定理求逆元"></a>费马小定理求逆元</h2><h3 id="FERMINV-a"><a href="#FERMINV-a" class="headerlink" title="FERMINV(a)"></a>FERMINV(a)</h3><pre><code>初始化p为质数，求a关于p的逆元return POWERMOD(a,p-2,p)</code></pre><h2 id="扩展欧几里得求逆元"><a href="#扩展欧几里得求逆元" class="headerlink" title="扩展欧几里得求逆元"></a>扩展欧几里得求逆元</h2><h3 id="GCDINV-a-p"><a href="#GCDINV-a-p" class="headerlink" title="GCDINV(a,p)"></a>GCDINV(a,p)</h3><pre><code>初始化x，y作为二元一次方程解，并且保证a，p互质GCDEX(a,p,x,y)x=(x%p+p)%preturn x</code></pre><h2 id="逆元线性筛"><a href="#逆元线性筛" class="headerlink" title="逆元线性筛"></a>逆元线性筛</h2><h3 id="LININV-p"><a href="#LININV-p" class="headerlink" title="LININV(p)"></a>LININV(p)</h3><pre><code>初始化数组inv，inv[i]表示i关于p的逆元inv[1]=1for i=2 to p-1   inv[i]=inv[p%i]*(p-p/i)%p</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;多用&quot;&gt;&lt;a href=&quot;#多用&quot; class=&quot;headerlink&quot; title=&quot;多用&quot;&gt;&lt;/a&gt;多用&lt;/h2&gt;&lt;h3 id=&quot;POWERMOD-X-Y-Z&quot;&gt;&lt;a href=&quot;#POWERMOD-X-Y-Z&quot; class=&quot;headerlink&quot; titl
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+    
+      <category term="A" scheme="https://wswmsword.github.io/tags/A/"/>
+    
+      <category term="逆元" scheme="https://wswmsword.github.io/tags/%E9%80%86%E5%85%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>A 尼姆博弈</title>
+    <link href="https://wswmsword.github.io/2019/05/10/A-%E5%B0%BC%E5%A7%86%E5%8D%9A%E5%BC%88/"/>
+    <id>https://wswmsword.github.io/2019/05/10/A-尼姆博弈/</id>
+    <published>2019-05-10T08:34:18.000Z</published>
+    <updated>2019-05-10T09:01:04.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="NIMM-m"><a href="#NIMM-m" class="headerlink" title="NIMM(m)"></a>NIMM(m)</h3><pre><code>初始化p数组，其中代表m堆石子，第i堆石子里有p[i]颗石子初始化sum=0，res=0for i=0 to m   sum^=p[i]for i=0 to m   if p[i]&gt;(sum^p[i])      res=res+1return res</code></pre><h2 id="阶梯博弈"><a href="#阶梯博弈" class="headerlink" title="阶梯博弈"></a>阶梯博弈</h2><h3 id="STAIRCASENIMM-m"><a href="#STAIRCASENIMM-m" class="headerlink" title="STAIRCASENIMM(m)"></a>STAIRCASENIMM(m)</h3><pre><code>初始化p数组，其中代表m颗棋子，第i颗棋子在第p[i]位置初始化sum=0if m为奇数   p[m]=0SORT(p)for i=1 to m step=2   sum^=(p[i]-p[i-1]-1)if sum==0   print &quot;Z will win&quot;else print &quot;G will win&quot;</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;NIMM-m&quot;&gt;&lt;a href=&quot;#NIMM-m&quot; class=&quot;headerlink&quot; title=&quot;NIMM(m)&quot;&gt;&lt;/a&gt;NIMM(m)&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;初始化p数组，其中代表m堆石子，第i堆石子里有p[i]颗石子
+初始化sum=0，res=
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+    
+      <category term="A" scheme="https://wswmsword.github.io/tags/A/"/>
+    
+      <category term="尼姆博弈" scheme="https://wswmsword.github.io/tags/%E5%B0%BC%E5%A7%86%E5%8D%9A%E5%BC%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>A 扩展欧几里得</title>
+    <link href="https://wswmsword.github.io/2019/05/10/A-%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97/"/>
+    <id>https://wswmsword.github.io/2019/05/10/A-扩展欧几里得/</id>
+    <published>2019-05-10T08:24:12.000Z</published>
+    <updated>2019-05-10T08:31:03.444Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="GCDEX-a-b-amp-x-amp-y"><a href="#GCDEX-a-b-amp-x-amp-y" class="headerlink" title="GCDEX(a,b,&amp;x,&amp;y)"></a>GCDEX(a,b,&amp;x,&amp;y)</h3><pre><code>if b==0   x=1   y=0   return agcd=GCDEX(b,a%b,x1,y1)x=y1y=x1-a/b*y1return gcd</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;GCDEX-a-b-amp-x-amp-y&quot;&gt;&lt;a href=&quot;#GCDEX-a-b-amp-x-amp-y&quot; class=&quot;headerlink&quot; title=&quot;GCDEX(a,b,&amp;amp;x,&amp;amp;y)&quot;&gt;&lt;/a&gt;GCDEX(a,b,&amp;amp;x,&amp;am
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+    
+      <category term="A" scheme="https://wswmsword.github.io/tags/A/"/>
+    
+      <category term="扩展欧几里得" scheme="https://wswmsword.github.io/tags/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>A 最大公约数</title>
+    <link href="https://wswmsword.github.io/2019/05/10/A-%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0/"/>
+    <id>https://wswmsword.github.io/2019/05/10/A-最大公约数/</id>
+    <published>2019-05-10T08:19:43.000Z</published>
+    <updated>2019-05-10T08:23:10.876Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="欧几里得求最大公约数"><a href="#欧几里得求最大公约数" class="headerlink" title="欧几里得求最大公约数"></a>欧几里得求最大公约数</h2><h3 id="GCD-x-y"><a href="#GCD-x-y" class="headerlink" title="GCD(x,y)"></a>GCD(x,y)</h3><pre><code>if y==0   return xreturn GCD(y,x%y)</code></pre><h3 id="最小公倍数"><a href="#最小公倍数" class="headerlink" title="最小公倍数"></a>最小公倍数</h3><p><code>LCM(x,y)=x*y/GCD(x,y)</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;欧几里得求最大公约数&quot;&gt;&lt;a href=&quot;#欧几里得求最大公约数&quot; class=&quot;headerlink&quot; title=&quot;欧几里得求最大公约数&quot;&gt;&lt;/a&gt;欧几里得求最大公约数&lt;/h2&gt;&lt;h3 id=&quot;GCD-x-y&quot;&gt;&lt;a href=&quot;#GCD-x-y&quot; class
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+    
+      <category term="A" scheme="https://wswmsword.github.io/tags/A/"/>
+    
+      <category term="最大公约数" scheme="https://wswmsword.github.io/tags/%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>A 并查集</title>
@@ -104,7 +213,7 @@ for i=0 to g.
     <link href="https://wswmsword.github.io/2019/04/30/A-%E5%BF%AB%E9%80%9F%E5%B9%82/"/>
     <id>https://wswmsword.github.io/2019/04/30/A-快速幂/</id>
     <published>2019-04-30T02:36:06.000Z</published>
-    <updated>2019-05-07T01:14:01.340Z</updated>
+    <updated>2019-05-10T09:24:01.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="POWERMOD-X-Y-Z"><a href="#POWERMOD-X-Y-Z" class="headerlink" title="POWERMOD(X,Y,Z)"></a>POWERMOD(X,Y,Z)</h3><pre><code>初始化res=1x=x%zwhile y!=0   if y是奇数      res=(res*x)%z   y=y/2   x=(x*x)%zreturn res</code></pre><blockquote><p><a href="https://blog.csdn.net/apigisyou/article/details/89578049" target="_blank" rel="noopener">P1659 [国家集训队]拉拉队排练</a><br><a href="https://blog.csdn.net/apigisyou/article/details/89893770" target="_blank" rel="noopener">P3193 [HNOI2008]GT考试</a></p></blockquote>]]></content>
     
@@ -132,7 +241,7 @@ x=x
     <link href="https://wswmsword.github.io/2019/04/26/A-manacher/"/>
     <id>https://wswmsword.github.io/2019/04/26/A-manacher/</id>
     <published>2019-04-26T05:14:19.000Z</published>
-    <updated>2019-05-08T04:40:33.796Z</updated>
+    <updated>2019-05-08T04:40:51.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="M-S-VS"><a href="#M-S-VS" class="headerlink" title="M(S,VS)"></a>M(S,VS)</h3><pre><code>初始化整形数组p[1057]，整形变量ci，rei=0 //palindrome,central,right endpointlen=INITIALIZE(s,vs);for i=1 to len-1   if i&lt;rei      p[i]=min(p[2*ci-i],rei-i)   else p[i]=1   while vs[i-p[i]]==vs[i+p[i]]      p[i]=p[i]+1   if rei&lt;i+p[i]      ci=i      rei=i+p[i]   maxlen=max(maxlen,p[i-1])return maxlen</code></pre><h3 id="INITIALIZE-S-VS"><a href="#INITIALIZE-S-VS" class="headerlink" title="INITIALIZE(S,VS)"></a>INITIALIZE(S,VS)</h3><pre><code>len=s.lengthvs[0]=&#39;@&#39;vs[1]=&#39;!&#39;for j=2 i=0 to len-1   vs[j]=s[i]   j=j+1   vs[j]=&#39;!&#39;   j=j+1return j</code></pre><blockquote><p><a href="https://blog.csdn.net/apigisyou/article/details/89578049" target="_blank" rel="noopener">P1659 [国家集训队]拉拉队排练</a><br><a href="https://blog.csdn.net/apigisyou/article/details/89949591" target="_blank" rel="noopener">P4555 [国家集训队]最长双回文串</a></p></blockquote>]]></content>
     
