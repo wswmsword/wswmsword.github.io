@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wswmsword.github.io/"/>
-  <updated>2019-05-10T09:59:36.000Z</updated>
+  <updated>2019-05-17T02:45:41.165Z</updated>
   <id>https://wswmsword.github.io/</id>
   
   <author>
@@ -17,11 +17,41 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>A floyd-steinberg dithering</title>
+    <link href="https://wswmsword.github.io/2019/05/17/A-floyd-steinberg-dithering/"/>
+    <id>https://wswmsword.github.io/2019/05/17/A-floyd-steinberg-dithering/</id>
+    <published>2019-05-17T02:38:34.000Z</published>
+    <updated>2019-05-17T02:45:41.165Z</updated>
+    
+    <content type="html"><![CDATA[<pre><code>for each y from top to bottom   for each x from left to right      oldpixel:=pixel[x][y]      newpixel:=find_closest_palette_color(oldpixel)      pixel[x][y]:=newpixel      quant_error:=oldpixel-newpixel      pixel[x+1][y  ]:=pixel[x+1][  y]+quant_error*7/16      pixel[x-1][y+1]:=pixel[x-1][y+1]+quant_error*3/16      pixel[x  ][y+1]:=pixel[x  ][y+1]+quant_error*5/16      pixel[x+1][y+1]:=pixel[x+1][y+1]+quant_error*1/16</code></pre><blockquote><p><a href="https://en.wikipedia.org/wiki/Floyd–Steinberg_dithering" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Floyd–Steinberg_dithering</a><br><a href="https://www.visgraf.impa.br/Courses/ip00/proj/Dithering1/floyd_steinberg_dithering.html" target="_blank" rel="noopener">https://www.visgraf.impa.br/Courses/ip00/proj/Dithering1/floyd_steinberg_dithering.html</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;pre&gt;&lt;code&gt;for each y from top to bottom
+   for each x from left to right
+      oldpixel:=pixel[x][y]
+      newpixel:=find_closest_palette_c
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+    
+      <category term="A" scheme="https://wswmsword.github.io/tags/A/"/>
+    
+      <category term="floyd-steinberg dithering" scheme="https://wswmsword.github.io/tags/floyd-steinberg-dithering/"/>
+    
+  </entry>
+  
+  <entry>
     <title>A 逆元</title>
     <link href="https://wswmsword.github.io/2019/05/10/A-%E9%80%86%E5%85%83/"/>
     <id>https://wswmsword.github.io/2019/05/10/A-逆元/</id>
     <published>2019-05-10T09:02:24.000Z</published>
-    <updated>2019-05-10T09:59:36.000Z</updated>
+    <updated>2019-05-10T10:14:58.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="多用"><a href="#多用" class="headerlink" title="多用"></a>多用</h2><h3 id="POWERMOD-X-Y-Z"><a href="#POWERMOD-X-Y-Z" class="headerlink" title="POWERMOD(X,Y,Z)"></a>POWERMOD(X,Y,Z)</h3><pre><code>初始化res=1x=x%zwhile y!=0   if y是奇数      res=(res*x)%z   y=y/2   x=(x*x)%zreturn res</code></pre><h3 id="GCDEX-a-b-amp-x-amp-y"><a href="#GCDEX-a-b-amp-x-amp-y" class="headerlink" title="GCDEX(a,b,&amp;x,&amp;y)"></a>GCDEX(a,b,&amp;x,&amp;y)</h3><pre><code>if b==0   x=1   y=0   return agcd=GCDEX(b,a%b,x1,y1)x=y1y=x1-a/b*y1return gcd</code></pre><h2 id="费马小定理求逆元"><a href="#费马小定理求逆元" class="headerlink" title="费马小定理求逆元"></a>费马小定理求逆元</h2><h3 id="FERMINV-a"><a href="#FERMINV-a" class="headerlink" title="FERMINV(a)"></a>FERMINV(a)</h3><pre><code>初始化p为质数，求a关于p的逆元return POWERMOD(a,p-2,p)</code></pre><h2 id="扩展欧几里得求逆元"><a href="#扩展欧几里得求逆元" class="headerlink" title="扩展欧几里得求逆元"></a>扩展欧几里得求逆元</h2><h3 id="GCDINV-a-p"><a href="#GCDINV-a-p" class="headerlink" title="GCDINV(a,p)"></a>GCDINV(a,p)</h3><pre><code>初始化x，y作为二元一次方程解，并且保证a，p互质GCDEX(a,p,x,y)x=(x%p+p)%preturn x</code></pre><h2 id="逆元线性筛"><a href="#逆元线性筛" class="headerlink" title="逆元线性筛"></a>逆元线性筛</h2><h3 id="LININV-p"><a href="#LININV-p" class="headerlink" title="LININV(p)"></a>LININV(p)</h3><pre><code>初始化数组inv，inv[i]表示i关于p的逆元inv[1]=1for i=2 to p-1   inv[i]=inv[p%i]*(p-p/i)%p</code></pre>]]></content>
     

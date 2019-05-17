@@ -4,22 +4,11 @@
 <html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head><meta name="generator" content="Hexo 3.8.0">
-    <title>A 康托展开 - strawberryfields</title>
+    <title>标签: floyd-steinberg dithering - strawberryfields</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="strawberry">
-<meta name="description" content="多用FAC(n)初始化数组f用于存放阶乘
-f[0]=1
-for i=1 to n-1
-   f[i]=f[i-1]*i
-return f
-编码CT(Z)l=z.len
-FAC(l)
-初始化res=0
-for i=0 to l-1
-   count=0
-   for j=i+1 to l-1
-      if z...">
+<meta name="description" content="Pain is temporary Pride is forever">
 <meta name="keywords" content>
 
 <link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
@@ -31,7 +20,7 @@ for i=0 to l-1
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?51722444">
+<link rel="stylesheet" href="/css/journal.css?5990818">
 <script src="/js/loadCSS.js"></script>
 <script>
     loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
@@ -162,97 +151,46 @@ for i=0 to l-1
         </a>
 
         
+        
+
+        
+
+        
+        
     </div>
 </div>
 
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-shadow">
-        <div class="post">
-            <div class="post-head-wrapper-text-only" style="background-image: url('')">
-                <div class="post-title">
-                    A 康托展开
-                    <div class="post-meta">
-                        <time datetime="2019-04-30T03:26:00.000Z" itemprop="datePublished">
-                            2019-04-30 11:26
-                        </time>&nbsp;
-                        
-                        
-                        <i class="material-icons" style>folder</i>
-                        
-                        <a href="/categories/笔记本/">笔记本</a>
-                        
-                        
-    
-                        
-                        
-                        <i class="material-icons" style>label</i>
-                        
-                        <a href="/tags/A/">A</a>, 
-                        
-                        <a href="/tags/康托展开/">康托展开</a>
-                        
-                        
+        <div class="post-item-wrapper post-item-wrapper-no-hover">
+            <div class="post-item post-item-no-gaps">
+                <div class="post-item-info-wrapper">
+                    <div class="post-item-title  post-item-title-small">
+                        <a href="/tags/">标签</a> / floyd-steinberg dithering
                     </div>
                 </div>
             </div>
-    
-            <div class="post-body-wrapper">
-                <div class="post-body">
-                    <h2 id="多用"><a href="#多用" class="headerlink" title="多用"></a>多用</h2><h3 id="FAC-n"><a href="#FAC-n" class="headerlink" title="FAC(n)"></a>FAC(n)</h3><pre><code>初始化数组f用于存放阶乘
-f[0]=1
-for i=1 to n-1
-   f[i]=f[i-1]*i
-return f
-</code></pre><h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><h3 id="CT-Z"><a href="#CT-Z" class="headerlink" title="CT(Z)"></a>CT(Z)</h3><pre><code>l=z.len
-FAC(l)
-初始化res=0
-for i=0 to l-1
-   count=0
-   for j=i+1 to l-1
-      if z[j]&lt;z[i]
-         count=count+1
-   res=res+f[n-i-1]*count
-return res
-</code></pre><h2 id="解码"><a href="#解码" class="headerlink" title="解码"></a>解码</h2><h3 id="CT-Z-1"><a href="#CT-Z-1" class="headerlink" title="CT(Z)"></a>CT(Z)</h3><pre><code>初始化数组res用于存放第n个z
-初始化数组book全部置0用于标记
-l=z.len;
-FAC(l)
-sort(z);
-for i=0 to l-1
-   t=n/f[l-i-1]
-   for j=0 to l-1
-      if !book[j]
-         if t==0
-            break
-         t=t-1
-   res[i]=z[j]
-   book[j]=1
-   n=n%f(l-i-1)
-return res
-</code></pre>
+        </div>
+        
+        <a href="/2019/05/17/A-floyd-steinberg-dithering/" class="a-block">
+            <div class="post-item-wrapper">
+                <div class="post-item post-item-no-gaps">
+                    <div class="post-item-info-wrapper">
+                        <div class="post-item-title">
+                            A floyd-steinberg dithering
+                        </div>
+                        <div class="post-item-meta">
+                            2019-05-17
+                        </div>
+                    </div>
                 </div>
             </div>
-    
-            <nav class="post-pagination">
-    
-    <a class="newer-posts" href="/2019/05/01/A-sort/">
-        上一篇<br>A sort
-    </a>
-    
-    <span class="page-number"></span>
-    
-    <a class="older-posts" href="/2019/04/30/A-快速幂/">
-        下一篇<br>A 快速幂
-    </a>
-    
-</nav>
+        </a>
+        
 
-    
-            
-
-
-        </div>
+        
     </div>
+
     <div class="single-column-footer">
     Proudly published with Hexo<br>
     
@@ -268,9 +206,7 @@ return res
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?84634355"></script>
-
-
+<script src="/js/journal.js?66986243"></script>
 
 </body>
 </html>
