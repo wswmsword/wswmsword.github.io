@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wswmsword.github.io/"/>
-  <updated>2019-05-17T02:45:41.165Z</updated>
+  <updated>2019-05-18T22:10:41.228Z</updated>
   <id>https://wswmsword.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://wswmsword.github.io/2019/05/17/A-floyd-steinberg-dithering/"/>
     <id>https://wswmsword.github.io/2019/05/17/A-floyd-steinberg-dithering/</id>
     <published>2019-05-17T02:38:34.000Z</published>
-    <updated>2019-05-17T02:45:41.165Z</updated>
+    <updated>2019-05-18T22:10:41.228Z</updated>
     
-    <content type="html"><![CDATA[<pre><code>for each y from top to bottom   for each x from left to right      oldpixel:=pixel[x][y]      newpixel:=find_closest_palette_color(oldpixel)      pixel[x][y]:=newpixel      quant_error:=oldpixel-newpixel      pixel[x+1][y  ]:=pixel[x+1][  y]+quant_error*7/16      pixel[x-1][y+1]:=pixel[x-1][y+1]+quant_error*3/16      pixel[x  ][y+1]:=pixel[x  ][y+1]+quant_error*5/16      pixel[x+1][y+1]:=pixel[x+1][y+1]+quant_error*1/16</code></pre><blockquote><p><a href="https://en.wikipedia.org/wiki/Floyd–Steinberg_dithering" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Floyd–Steinberg_dithering</a><br><a href="https://www.visgraf.impa.br/Courses/ip00/proj/Dithering1/floyd_steinberg_dithering.html" target="_blank" rel="noopener">https://www.visgraf.impa.br/Courses/ip00/proj/Dithering1/floyd_steinberg_dithering.html</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<pre><code>for each y from top to bottom   for each x from left to right      oldpixel:=pixel[x][y]      newpixel:=find_closest_palette_color(oldpixel)      pixel[x][y]:=newpixel      quant_error:=oldpixel-newpixel      pixel[x+1][y  ]:=pixel[x+1][  y]+quant_error*7/16      pixel[x-1][y+1]:=pixel[x-1][y+1]+quant_error*3/16      pixel[x  ][y+1]:=pixel[x  ][y+1]+quant_error*5/16      pixel[x+1][y+1]:=pixel[x+1][y+1]+quant_error*1/16</code></pre>]]></content>
     
     <summary type="html">
     
