@@ -7,12 +7,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="google-site-verification" content>
   
-  <title>算法在计算中的作用</title>
+  <title>并查集</title>
   <meta name="author" content="strawberry">
   <meta name="description" content="Pain is temporary Pride is forever">
   
   
-  <meta property="og:title" content="算法在计算中的作用">
+  <meta property="og:title" content="并查集">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:site_name" content="strawberryfields">
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
@@ -43,7 +43,7 @@
       
   
     <h1 class="page-title center">
-        算法在计算中的作用
+        并查集
     </h1>
   
 
@@ -51,12 +51,12 @@
     </div>
     <div class="meta center">
       
-<time datetime="2019-02-26T15:03:12.000Z">
+<time datetime="2019-04-30T19:06:36.000Z">
 <svg class="i-calendar" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
     <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"/>
   </svg>
   &nbsp;
-  2019-02-26
+  2019-05-01
 </time>
 
 
@@ -68,7 +68,7 @@
       <path d="M2 18 L18 2 30 2 30 14 14 30 Z"/>
     </svg>
     &nbsp;
-    <a href="/categories/笔记本/">笔记本</a>
+    <a href="/categories/图论/">图论</a>
 
 
 
@@ -77,16 +77,32 @@
     </div>
     <hr>
     
-      
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#UFIND"><span class="toc-text">UFIND()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MERGE-x-y"><span class="toc-text">MERGE(x,y)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FFIND-n"><span class="toc-text">FFIND(n)</span></a></li></ol>
     
     <div class="picture-container">
       
     </div>
-    <blockquote>
-<p>计算机也许是快的，但不是无限快。存储器也许是廉价的，但不是免费的。所以计算时间是一种有限资源，存储器中的空间也一样。</p>
-</blockquote>
-<p>让运行插入排序的一台较快的计算机「计算机A」与运行归并排序的一台较慢的计算机「计算机B」竞争。<br>每台计算机必须排序一个具有1000万个数的数组「如果这些数是8字节的整数，那么输入将占用大致80MB。」。假设计算机A每秒执行百亿条指令，而计算机B每秒仅执行1000万条指令，结果计算机A就纯计算能力来说比计算机B快1000倍。为了使差别更具戏剧性，假设史上最巧妙的程序员为计算机A用机器语言编码插入排序，并且为了排序n个数，结果代码需要2n^2条指令。进一步假设仅由一位水平一般的程序员使用某种带有一个低效编译器的高级语言来实现归并排序，结果代码需要50nlgn条指令。<br>为了排序1000万个数，计算机A需要20000秒「(2*(10^7)^2条指令)/(10^10条指令/秒)「多于5.5小时」」，而计算机B需要约1163秒「(50*10^7lg10^7条指令)/(10^7条指令/秒)「少于20分钟」」。<br>为了排序1亿个数，计算机A需要2000000秒「(2*(10^8)^2条指令)/(10^10条指令/秒)「多于23天」」，而计算机B需要约13287秒「(50*10^8lg10^8条指令)/(10^7条指令/秒)「少于4小时」」。</p>
-
+    <h3 id="UFIND"><a href="#UFIND" class="headerlink" title="UFIND()"></a>UFIND()</h3><pre><code>初始化dir数组使值和自身下标相等
+初始化结构体数组G存放连通边
+for i=0 to g.len-1
+   MERGE(g.x,g,y)
+for i=0 to 顶点数
+   if(dir[i]==i)
+      count=count+1
+return count
+</code></pre><h3 id="MERGE-x-y"><a href="#MERGE-x-y" class="headerlink" title="MERGE(x,y)"></a>MERGE(x,y)</h3><pre><code>fx=FFIND(x)
+fy=FFIND(y)
+if fx!=fy
+   dir[fy]=fx
+</code></pre><h3 id="FFIND-n"><a href="#FFIND-n" class="headerlink" title="FFIND(n)"></a>FFIND(n)</h3><pre><code>i=n
+while dir[i]!=i
+   i=dir[i]
+while dir[n]!=i
+   t=dir[n]
+   dir[n]=i
+   n=t
+return n
+</code></pre>
 
   </article>
   
