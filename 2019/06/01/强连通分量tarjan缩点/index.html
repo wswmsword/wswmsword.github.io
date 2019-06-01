@@ -7,12 +7,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="google-site-verification" content>
   
-  <title>强连通分量targan缩点</title>
+  <title>强连通分量tarjan缩点</title>
   <meta name="author" content="strawberry">
   <meta name="description" content="Pain is temporary Pride is forever">
   
   
-  <meta property="og:title" content="强连通分量targan缩点">
+  <meta property="og:title" content="强连通分量tarjan缩点">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:site_name" content="strawberryfields">
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
@@ -43,7 +43,7 @@
       
   
     <h1 class="page-title center">
-        强连通分量targan缩点
+        强连通分量tarjan缩点
     </h1>
   
 
@@ -77,12 +77,31 @@
     </div>
     <hr>
     
-      
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#MAIN"><span class="toc-text">MAIN()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TARJAN-U"><span class="toc-text">TARJAN(U)</span></a></li></ol>
     
     <div class="picture-container">
       
     </div>
-    
+    <h3 id="MAIN"><a href="#MAIN" class="headerlink" title="MAIN()"></a>MAIN()</h3><pre><code>cnt:=1
+res:=0
+for i=1 to 总点数
+   if book[i]=0
+      TARJAN(i) endif
+endfor
+print res
+</code></pre><h3 id="TARJAN-U"><a href="#TARJAN-U" class="headerlink" title="TARJAN(U)"></a>TARJAN(U)</h3><pre><code>book[u]:=1
+low[u]:=dfn[u]:=cnt
+cnt:=cnt+1
+for i:=0 to (连接u的点数-1)
+   v:=连接u的第(i+1)个点
+   if book[v]=0
+      TARJAN(v) endif
+   if book[v]=1
+      low[u]=MIN(low[u],low[v]) endif
+endfor
+if dfn[u]=low[u]
+   res:=res+1
+</code></pre>
 
   </article>
   
