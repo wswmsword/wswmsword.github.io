@@ -7,12 +7,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="google-site-verification" content>
   
-  <title>排序算法</title>
+  <title>线段树</title>
   <meta name="author" content="strawberry">
   <meta name="description" content="Pain is temporary Pride is forever">
   
   
-  <meta property="og:title" content="排序算法">
+  <meta property="og:title" content="线段树">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:site_name" content="strawberryfields">
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
@@ -44,7 +44,7 @@
       
   
     <h1 class="page-title center">
-        排序算法
+        线段树
     </h1>
   
 
@@ -52,12 +52,12 @@
     </div>
     <div class="meta center">
       
-<time datetime="2019-04-30T19:04:55.000Z">
+<time datetime="2019-06-06T01:43:08.000Z">
 <svg class="i-calendar" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
     <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"/>
   </svg>
   &nbsp;
-  2019-05-01
+  2019-06-06
 </time>
 
 
@@ -69,7 +69,7 @@
       <path d="M2 18 L18 2 30 2 30 14 14 30 Z"/>
     </svg>
     &nbsp;
-    <a href="/categories/排序/">排序</a>
+    <a href="/categories/树形结构/">树形结构</a>
 
 
 
@@ -78,78 +78,116 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快速排序"><span class="toc-text">快速排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#QSORT"><span class="toc-text">QSORT()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#INI-int-left-int-right"><span class="toc-text">INI(int left,int right)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PAR-int-left-int-right"><span class="toc-text">PAR(int left,int right)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#归并排序"><span class="toc-text">归并排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MSORT"><span class="toc-text">MSORT()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#INI-int-left-int-right-1"><span class="toc-text">INI(int left,int right)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MER-int-left-int-mid-int-right"><span class="toc-text">MER(int left,int mid,int right)</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#给定n个数，q个操作，有给区间各数累加和求和的操作"><span class="toc-text">给定n个数，q个操作，有给区间各数累加和求和的操作</span></a></li></ol>
     
     <div class="picture-container">
       
     </div>
-    <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><h3 id="QSORT"><a href="#QSORT" class="headerlink" title="QSORT()"></a>QSORT()</h3><pre><code>初始化数组z存放准备排序的序列
-n=z.len
-INI(0,n-1)
-</code></pre><h3 id="INI-int-left-int-right"><a href="#INI-int-left-int-right" class="headerlink" title="INI(int left,int right)"></a>INI(int left,int right)</h3><pre><code>if(left&lt;right)
+    <h3 id="给定n个数，q个操作，有给区间各数累加和求和的操作"><a href="#给定n个数，q个操作，有给区间各数累加和求和的操作" class="headerlink" title="给定n个数，q个操作，有给区间各数累加和求和的操作"></a>给定n个数，q个操作，有给区间各数累加和求和的操作</h3><pre><code>#include&lt;iostream&gt;
+using namespace std;
+struct CNode
 {
-   parti=par(left,right);
-   INI(left,parti-1);
-   INI(parti+1,right);
+   int L,R;
+   CNode *pLeft,*pRight;
+   long long nSum;
+   long long Inc;
+};
+CNode Tree[200010];
+int nCount=0;
+int Mid(CNode *pRoot)
+{
+   return (pRoot-&gt;L+pRoot-&gt;R)/2;
 }
-</code></pre><h3 id="PAR-int-left-int-right"><a href="#PAR-int-left-int-right" class="headerlink" title="PAR(int left,int right)"></a>PAR(int left,int right)</h3><pre><code>i=left
-j=right+1
-while 1
-   do
+void BuildTree(CNode *pRoot,int L,int R)
+{
+   pRoot-&gt;L=L;
+   pRoot-&gt;R=R;
+   pRoot-&gt;nSum=0;
+   pRoot-&gt;Inc=0;
+   if(L==R)
+      return ;
+   nCount++;
+   pRoot-&gt;pLeft=Tree+nCount;
+   nCount++;
+   pRoot-&gt;pRight=Tree+nCount;
+   BuildTree(pRoot-&gt;pLeft,L,(L+R)/2);
+   BuildTree(pRoot-&gt;pRight,(L+R)/2+1,R);
+}
+void Insert(CNode *pRoot,int i,int v)
+{
+   if(pRoot-&gt;L==i&amp;&amp;pRoot-&gt;R==i)
    {
-      j=j-1
-   }while z[j]&gt;z[left]
-   do
-   {
-      i=i+1
-   }while z[i]&lt;z[left] and i&lt;right
-   if j&gt;i
-      SWAP(z[i],z[j])
+      pRoot-&gt;nSum=v;
+      return ;
+   }
+   pRoot-&gt;nSum+=v;
+   if(i&lt;=Mid(pRoot))
+      Insert(pRoot-&gt;pLeft,i,v);
    else
-      SWAP(z[j],z[left])
-      break
-return j
-</code></pre><h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><h3 id="MSORT"><a href="#MSORT" class="headerlink" title="MSORT()"></a>MSORT()</h3><pre><code>初始化数组z存放准备排序的序列
-n=z.len
-INI(0,n-1)
-</code></pre><h3 id="INI-int-left-int-right-1"><a href="#INI-int-left-int-right-1" class="headerlink" title="INI(int left,int right)"></a>INI(int left,int right)</h3><pre><code>if(left&lt;right)
-{
-   mid=(left+right)/2
-   INI(left,mid)
-   INI(mid+1,right)
-   MER(left,mid,right)
+      Insert(pRoot-&gt;pRight,i,v);
 }
-</code></pre><h3 id="MER-int-left-int-mid-int-right"><a href="#MER-int-left-int-mid-int-right" class="headerlink" title="MER(int left,int mid,int right)"></a>MER(int left,int mid,int right)</h3><pre><code>i=left
-j=mid+1
-k=right
-while i!=mid+1 and j!=right+1
+void Add(CNode *pRoot,int a,int b,long long c)
 {
-   if z[i]&gt;z[j]
+   if(pRoot-&gt;L==a&amp;&amp;pRoot-&gt;R==b)
    {
-      prez[k]=z[j]
-      k=k+1
-      j=j+1
-   }else
+      pRoot-&gt;Inc+=c;
+      return ;
+   }
+   pRoot-&gt;nSum+=c*(b-a+1);
+   if(b&lt;=(pRoot-&gt;L+pRoot-&gt;R)/2)
+      Add(pRoot-&gt;pLeft,a,b,c);
+   else if(a&gt;=(pRoot-&gt;L+pRoot-&gt;R)/2+1)
+      Add(pRoot-&gt;pRight,a,b,c);
+   else
    {
-      prez[k]=z[i]
-      k=k+1
-      i=i+1
+      Add(pRoot-&gt;pLeft,a,(pRoot-&gt;L+pRoot-&gt;R)/2,c);
+      Add(pRoot-&gt;pRight,(pRoot-&gt;L+pRoot-&gt;R)/2+1,b,c);
    }
 }
-while i!=mid+1
+long long QuerySum(CNode *pRoot,int a,int b)
 {
-   prez[k]=z[i]
-   k=k+1
-   i=i+1
+   if(pRoot-&gt;L==a&amp;&amp;pRoot-&gt;R==b)
+      return pRoot-&gt;nSum+(pRoot-&gt;R-pRoot-&gt;L+1)*pRoot-&gt;Inc;
+   pRoot-&gt;nSum+=(pRoot-&gt;R-pRoot-&gt;L+1)*pRoot-&gt;Inc;
+   Add(pRoot-&gt;pLeft,pRoot-&gt;L,Mid(pRoot),pRoot-&gt;Inc);
+   Add(pRoot-&gt;pRight,Mid(pRoot)+1,pRoot-&gt;R,pRoot-&gt;Inc);
+   pRoot-&gt;Inc=0;
+   if(b&lt;=Mid(pRoot))
+      return QuerySum(pRoot-&gt;pLeft,a,b);
+   else if(a&gt;=Mid(pRoot)+1)
+      return QuerySum(pRoot-&gt;pRight,a,b);
+   else
+   {
+      return QuerySum(pRoot-&gt;pLeft,a,Mid(pRoot))+QuerySum(pRoot-&gt;pRight,Mid(pRoot)+1,b);
+   }
 }
-while j!=right+1
+int main()
 {
-   prez[k]=z[j]
-   k=k+1
-   j=j+1
+   int n,q,a,b,c;
+   char cmd[10];
+   scanf(&quot;%d %d&quot;,&amp;n,&amp;q);
+   int i,j,k;
+   nCount=0;
+   BuildTree(Tree,1,n);
+   for(i=1;i&lt;=n;++i)
+   {
+      scanf(&quot;%d&quot;,&amp;a);
+      Insert(Tree,i,a);
+   }
+   for(i=0;i&lt;q;++i)
+   {
+      scanf(&quot;%s&quot;,cmd);
+      if(cmd[0]==&#39;C&#39;)
+      {
+         scanf(&quot;%d %d %d&quot;,&amp;a,&amp;b,&amp;c);
+         Add(Tree,a,b,c);
+      }else{
+         scanf(&quot;%d %d&quot;,&amp;a,&amp;b);
+         printf(&quot;%I64d\n&quot;,QuerySum(Tree,a,b));
+      }
+   }
+   return 0;
 }
-for i=left to right
-   z[i]=prez[i]
 </code></pre>
 
   </article>
