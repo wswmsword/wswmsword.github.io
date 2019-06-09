@@ -88,9 +88,9 @@
 GETBC(y,y.size,bc);
 GETGS(y,y.size,gs);
 while j&lt;xl-yl
-   for i=yl-1 downto 0 and y[i]==x[i+j]
-      if i&lt;0 j=j+gs[0]
-      else j=j+max(bc[x[i+j]]-yl+1+i,gs[i])
+   for i=yl-1 downto 0 and y[i]==x[i+j] endfor
+   if i&lt;0 j=j+gs[0]
+   else j=j+max(bc[x[i+j]]-yl+1+i,gs[i])
 </code></pre><h3 id="GETBC-Y-s-bc"><a href="#GETBC-Y-s-bc" class="headerlink" title="GETBC(Y,s,bc)"></a>GETBC(Y,s,bc)</h3><pre><code>for i=0 to 255
    bc[i]=s
 for i=0 to s
