@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>拓扑排序</title>
+  <meta name="author" content="strawberry">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="拓扑排序">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="strawberryfields">
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="strawberryfields" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+</html>
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="behind">
+      <!--<a href="/" class="back black-color" style="font-family:'Open Sans Condensed';color:#777;">
+      ZG
+        <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M2 30 L30 2 M30 30 L2 2"></path>
+        </svg>
+      </a>-->
+      <div class="description">
+        &nbsp;月光水面 阳光脸庞 面包蜂蜜 自由和谐
+      </div>
+    </div>
+    <div class="main-ctnr">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        拓扑排序
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2019-06-21T11:23:39.000Z">
+<svg class="i-calendar" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"/>
+  </svg>
+  &nbsp;
+  2019-06-21
+</time>
+
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"/>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"/>
+    </svg>
+    &nbsp;
+    <a href="/categories/图论/">图论</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#宽搜toposort"><span class="toc-text">宽搜toposort()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#深搜toposort"><span class="toc-text">深搜toposort()</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#dfs-u"><span class="toc-text">dfs(u)</span></a></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h3 id="宽搜toposort"><a href="#宽搜toposort" class="headerlink" title="宽搜toposort()"></a>宽搜toposort()</h3><pre><code>初始化优先队列q
+for i:=1 to n
+   if indegree[i]=0
+      q.push(i) endif endfor
+if 队列q空
+   return false endif
+while 队列q不空
+   cnt:=cnt+1
+   u:=队列q弹出并返回值
+   j:=j+1
+   topo[j]:=u
+   for k:=0 to u的出度数
+      v:=head[u,i]
+      indegree[v]:=indegree[v]-1
+      if(indegree[v]=0)
+         q.push(v) endif endfor endwhile
+if cnt=n
+   return false
+else
+   return true endif
+</code></pre><h3 id="深搜toposort"><a href="#深搜toposort" class="headerlink" title="深搜toposort()"></a>深搜toposort()</h3><pre><code>t:=n
+for u:=1 to n
+   if book[u]=0 and dfs(u)=false
+      return false endif endfor
+return true
+</code></pre><h4 id="dfs-u"><a href="#dfs-u" class="headerlink" title="dfs(u)"></a>dfs(u)</h4><pre><code>book[u]:=-1
+for v:=1 to n
+   if g[u,v]=1
+      if book[v]&lt;0
+         return false
+      else if book[v]=0 and dfs(v)=false
+         return false endif endif endfor
+book[u]=1
+t:=t-1
+topo[t]:=u
+return true
+</code></pre>
+
+  </article>
+  <!--</script>
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>-->
+
+
+
+    
+        <style>
+        .vcard .vimg{left:0;}
+        </style>
+
+        <div id="vcomment" class="vcomment" style="padding:0 6% 0 7%;"></div>
+
+        <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+        <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+        <script>
+            var GUEST_INFO = ['nick','mail','link'];
+            var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+                return GUEST_INFO.indexOf(item) > -1
+            });
+            var notify = 'true' == true;
+            var verify = 'true' == true;
+            var valine = new Valine();
+            valine.init({
+                el: '.vcomment',
+                notify: notify,
+                verify: verify,
+                appId: "u7sb13VkREJOo6CY4H5ymhSg-gzGzoHsz",
+                appKey: "ksRa7AgrJQLMetAvBoGGDXli",
+                placeholder: "Just go go~",
+                pageSize:'9',
+                avatar:'identicon',
+                lang:'zh-cn'
+            })
+        </script>
+    
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+<!-- 
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+ -->
+        <span class="i-caret-right">△</span>
+        </a>
+        © zgoss 🤪~2019
+    </div>
+    <div class="secondrow">
+        <a href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

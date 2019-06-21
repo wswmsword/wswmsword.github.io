@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>拓扑排序</title>
+      <link href="/2019/06/21/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/"/>
+      <url>/2019/06/21/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/</url>
+      
+        <content type="html"><![CDATA[<h3 id="宽搜toposort"><a href="#宽搜toposort" class="headerlink" title="宽搜toposort()"></a>宽搜toposort()</h3><pre><code>初始化优先队列qfor i:=1 to n   if indegree[i]=0      q.push(i) endif endforif 队列q空   return false endifwhile 队列q不空   cnt:=cnt+1   u:=队列q弹出并返回值   j:=j+1   topo[j]:=u   for k:=0 to u的出度数      v:=head[u,i]      indegree[v]:=indegree[v]-1      if(indegree[v]=0)         q.push(v) endif endfor endwhileif cnt=n   return falseelse   return true endif</code></pre><h3 id="深搜toposort"><a href="#深搜toposort" class="headerlink" title="深搜toposort()"></a>深搜toposort()</h3><pre><code>t:=nfor u:=1 to n   if book[u]=0 and dfs(u)=false      return false endif endforreturn true</code></pre><h4 id="dfs-u"><a href="#dfs-u" class="headerlink" title="dfs(u)"></a>dfs(u)</h4><pre><code>book[u]:=-1for v:=1 to n   if g[u,v]=1      if book[v]&lt;0         return false      else if book[v]=0 and dfs(v)=false         return false endif endif endforbook[u]=1t:=t-1topo[t]:=ureturn true</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 图论 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>线段树</title>
       <link href="/2019/06/06/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
       <url>/2019/06/06/%E7%BA%BF%E6%AE%B5%E6%A0%91/</url>
