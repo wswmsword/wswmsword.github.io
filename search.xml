@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>树状数组</title>
+      <link href="/2019/07/15/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
+      <url>/2019/07/15/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一维"><a href="#一维" class="headerlink" title="一维"></a>一维</h1><h2 id="component"><a href="#component" class="headerlink" title="component"></a>component</h2><h3 id="LOWBIT-x"><a href="#LOWBIT-x" class="headerlink" title="LOWBIT(x)"></a>LOWBIT(x)</h3><pre><code>return x&amp;(-x)</code></pre><h3 id="UPDATE-i-v"><a href="#UPDATE-i-v" class="headerlink" title="UPDATE(i,v)"></a>UPDATE(i,v)</h3><pre><code>while i&lt;n   btree[i]=btree[i]+v   i=i+lowbit(i)endwhile</code></pre><h3 id="SUM-i"><a href="#SUM-i" class="headerlink" title="SUM(i)"></a>SUM(i)</h3><pre><code>res=0while i&gt;0   res=res+btree[i]   i=i-lowbit(i)endwhilereturn res</code></pre><h2 id="单点更新-区间查询"><a href="#单点更新-区间查询" class="headerlink" title="单点更新 区间查询"></a>单点更新 区间查询</h2><pre><code>for i=1 to n   update(i,v) endforres=sum(r)-sum(l-1)</code></pre><h2 id="区间更新-单点查询"><a href="#区间更新-单点查询" class="headerlink" title="区间更新 单点查询"></a>区间更新 单点查询</h2><pre><code>update(l,v)update(r+1,-v)res=sum(i)</code></pre><h2 id="区间更新-区间查询"><a href="#区间更新-区间查询" class="headerlink" title="区间更新 区间查询"></a>区间更新 区间查询</h2><h3 id="UPDATE-i-v-1"><a href="#UPDATE-i-v-1" class="headerlink" title="UPDATE(i,v)"></a>UPDATE(i,v)</h3><pre><code>p=iwhile i&lt;n   sum1[i]=sum1+v   sum2[i]=sum2+p*v   i=i+lowbit(i)endwhile</code></pre><h3 id="SUM-i-1"><a href="#SUM-i-1" class="headerlink" title="SUM(i)"></a>SUM(i)</h3><pre><code>res=0p=iwhile i&gt;0   res=res+(p+1)*sum1[i]-sum2[i]   i=i=lowbit(i)endwhilereturn res</code></pre><pre><code>update(l,v)update(r+1,-v)res=sum(r)-sum(l-1)</code></pre><h1 id="二维"><a href="#二维" class="headerlink" title="二维"></a>二维</h1><h2 id="component-1"><a href="#component-1" class="headerlink" title="component"></a>component</h2><h3 id="UPDATE-x-y-v"><a href="#UPDATE-x-y-v" class="headerlink" title="UPDATE(x,y,v)"></a>UPDATE(x,y,v)</h3><pre><code>for i=x to n step lowbit(i)   for j=y to n step lowbit(j)      btree[i][j]=btree[i][j]+v</code></pre><h3 id="SUM-x-y"><a href="#SUM-x-y" class="headerlink" title="SUM(x,y)"></a>SUM(x,y)</h3><pre><code>res=0for i=x to 1 step lowbit(i)   for j=y to 1 step lowbit(j)      res=res+btree[i][j]return res</code></pre><h2 id="单点更新-区间查询-1"><a href="#单点更新-区间查询-1" class="headerlink" title="单点更新 区间查询"></a>单点更新 区间查询</h2><pre><code>x=x-1y=y-1return sum(xx,yy)+sum(x,y)-query(xx,y)-query(x,yy)</code></pre><h2 id="区间更新-单点查询-1"><a href="#区间更新-单点查询-1" class="headerlink" title="区间更新 单点查询"></a>区间更新 单点查询</h2><pre><code>update(x,y,v)update(x,yy+1,-v)update(xx+1,y,-v)update(xx+1,yy+1,v)sum(a,b)</code></pre><h2 id="区间更新-区间查询-1"><a href="#区间更新-区间查询-1" class="headerlink" title="区间更新 区间查询"></a>区间更新 区间查询</h2><h3 id="UPDATE-x-y-v-1"><a href="#UPDATE-x-y-v-1" class="headerlink" title="UPDATE(x,y,v)"></a>UPDATE(x,y,v)</h3><pre><code>for i=x to n step lowbit(i)   for j=y to n step lowbit(j)      btree1[i][j]=v      btree2[i][j]=v*x      btree3[i][j]=v*y      btree4[i][j]=v*x*y</code></pre><h3 id="SUM-x-y-1"><a href="#SUM-x-y-1" class="headerlink" title="SUM(x,y)"></a>SUM(x,y)</h3><pre><code>res=0for i=x to 1 step lowibt(i)   for j=y to 1 step lowbit(j)      res=res+(x+1)*(y+1)*btree1[i][j]-(y+1)*btree2[i][j]-(x+1)*btree3[i][j]+btree4[i][j]return res</code></pre><pre><code>update(x,y,v)update(x,yy+1,-v)update(xx+1,y,-v)update(xx+1,yy+1,v)return sum(aa,bb)+sum(a-1,b-1)-sum(a-1,bb)-sum(aa,b-1)</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 树形结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>拓扑排序</title>
       <link href="/2019/06/21/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/"/>
       <url>/2019/06/21/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/</url>
