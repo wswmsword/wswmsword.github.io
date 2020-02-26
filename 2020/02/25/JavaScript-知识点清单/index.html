@@ -1,0 +1,271 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>JavaScript 知识点清单</title>
+  <meta name="author" content="strawberry">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="JavaScript 知识点清单">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="strawberryfields">
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="strawberryfields" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+</html>
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="behind">
+      <!--<a href="/" class="back black-color" style="font-family:'Open Sans Condensed';color:#777;">
+      ZG
+        <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M2 30 L30 2 M30 30 L2 2"></path>
+        </svg>
+      </a>-->
+      <div class="description">
+        &nbsp;月光水面 阳光脸庞 面包蜂蜜 自由和谐
+      </div>
+    </div>
+    <div class="main-ctnr">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        JavaScript 知识点清单
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2020-02-24T17:54:35.000Z">
+<svg class="i-calendar" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"/>
+  </svg>
+  &nbsp;
+  2020-02-25
+</time>
+
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"/>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"/>
+    </svg>
+    &nbsp;
+    <a href="/categories/笔记本/">笔记本</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#闭包和作用域"><span class="toc-text">闭包和作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#产生闭包的两种表现"><span class="toc-text">产生闭包的两种表现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#作为参数"><span class="toc-text">作为参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#作为返回值"><span class="toc-text">作为返回值</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#this"><span class="toc-text">this</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#模拟-bind"><span class="toc-text">模拟 bind</span></a></li></ol></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加、删除"><span class="toc-text">添加、删除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#纯函数"><span class="toc-text">纯函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#slice-和-splice"><span class="toc-text">slice 和 splice</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map"><span class="toc-text">Map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Set"><span class="toc-text">Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用"><span class="toc-text">应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#深拷贝"><span class="toc-text">深拷贝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组拍平"><span class="toc-text">数组拍平</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#类型转换"><span class="toc-text">类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-text">==</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if-语句和逻辑运算"><span class="toc-text">if 语句和逻辑运算</span></a></li></ol></li>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h1 id="闭包和作用域"><a href="#闭包和作用域" class="headerlink" title="闭包和作用域"></a>闭包和作用域</h1><h4 id="产生闭包的两种表现"><a href="#产生闭包的两种表现" class="headerlink" title="产生闭包的两种表现"></a>产生闭包的两种表现</h4><ul>
+<li>函数作为参数被传递</li>
+<li>函数作为返回值被返回</li>
+</ul>
+<h5 id="作为参数"><a href="#作为参数" class="headerlink" title="作为参数"></a>作为参数</h5><pre><code class="javascript">function create() {
+  let a = 100;
+  return function() {
+    console.log(a);
+  }
+}
+let fn = create();
+let a = 200;
+fn(); // 100
+</code></pre>
+<h5 id="作为返回值"><a href="#作为返回值" class="headerlink" title="作为返回值"></a>作为返回值</h5><pre><code class="javascript">function print(fn) {
+  let a = 200;
+  fn();
+}
+let a = 100;
+function fn() {
+  console.log(a);
+}
+print(fn) // 100
+</code></pre>
+<p> 形成闭包，执行闭包里的函数，那么所使用的变量将从函数定义的域向上查找，而不是在执行函数所在的域。把形成的闭包想象成一颗气泡，会把域包裹进来并隔离闭包外的变量。</p>
+<h4 id="this"><a href="#this" class="headerlink" title="this"></a>this</h4><ul>
+<li>作为普通函数</li>
+<li>使用 call apply bind</li>
+<li>作为对象被调用</li>
+<li>在 class 方法中调用</li>
+<li>箭头函数</li>
+</ul>
+<p>和闭包相反，this 取的值由函数执行的域确认，而不是函数定义的域。</p>
+<p>this 有时会导致奇怪的结果：当调用全局方法时注意，全局方法内部的函数 this 指向 window；为了响应 ES6 来解决 this 问题可能使用箭头函数，但是箭头函数作为函数无法通过 apply 等方法指定其 this；</p>
+<h5 id="模拟-bind"><a href="#模拟-bind" class="headerlink" title="模拟 bind"></a>模拟 bind</h5><pre><code class="javascript">Function.prototype.bind1 = function() {
+    const args = Array.prototype.slice.call(arguments);
+  const t = args.shift();
+  const self = this;
+  return function() {
+    return self.apply(t, args);
+  }
+}
+</code></pre>
+<h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="添加、删除"><a href="#添加、删除" class="headerlink" title="添加、删除"></a>添加、删除</h3><p>push, pop, shift, unshift, slice, splice，其中 slice 是<code>纯函数</code>。</p>
+<h4 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h4><ul>
+<li>不改变原数组（无副作用）</li>
+<li>返回一个数组</li>
+</ul>
+<p>使用 shift 和 unshift 之后每一个索引都要调整，存在性能问题。</p>
+<pre><code class="javascript">var arr1 = arr.concat([50, 60]);
+var arr2 = arr.map(num =&gt; num*10)
+var arr3 = arr.filter(num =&gt; num &gt; 25)
+var arr4 = arr.slice()
+
+// 以下非纯函数
+// push pop shift unshift
+// forEach
+// some every
+// reduce
+</code></pre>
+<h4 id="slice-和-splice"><a href="#slice-和-splice" class="headerlink" title="slice 和 splice"></a>slice 和 splice</h4><p>字面意思，slice 抽取一段，splice 拼接一段。和 <code>delete</code>不同，delete 删除值使原位置的值为 undefined。</p>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>为了避免<code>浅拷贝</code>和直接<code>引用地址</code>使用深拷贝。</p>
+<pre><code class="javascript">function deepClone(onj = {}) {
+  if(typeof obj !== &#39;object&#39; || obj === null) {
+    return obj;
+  }
+
+  let result;
+  if (obj instanceof Array) {
+    result = [];
+  } else {
+    result = {};
+  }
+
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      result[key] = deepClone(obj[key]);
+    }
+  }
+  return result;
+}
+</code></pre>
+<p>递归深入，跳出递归的条件：参数不是对象类型（除了 null 对象）。</p>
+<h3 id="数组拍平"><a href="#数组拍平" class="headerlink" title="数组拍平"></a>数组拍平</h3><pre><code class="javascript">function flat(arr) {
+  var isDeep = arr.some(function(item) {
+    return item instanceof Array;
+  }); // 判断数组有否内嵌
+  if (!isDeep) {
+    return arr;
+  }
+  var res = Array.prototype.concat.apply([], arr);
+  return flat(res);
+}
+</code></pre>
+<p>如果数组没有内嵌数组，使用 concat 可以把所有一层的数组直接串联起来，这里的<code>Array.prototype.concat.apply([], arr)</code>把 arr 和 [] 串联。在数组内嵌的情况下进行递归即可平摊数组。</p>
+<h1 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h1><ul>
+<li>字符串拼接</li>
+<li>==</li>
+<li>if 语句和逻辑运算</li>
+</ul>
+<h2 id><a href="#" class="headerlink" title="=="></a>==</h2><pre><code class="javascript">100 == &#39;100&#39; // true
+0 == &#39;&#39; // true
+0 == false // true
+false == &#39;&#39; // true
+null == undefined // true
+
+// variable == null 相当于 variable === null || variable == undefined 
+</code></pre>
+<h2 id="if-语句和逻辑运算"><a href="#if-语句和逻辑运算" class="headerlink" title="if 语句和逻辑运算"></a>if 语句和逻辑运算</h2><pre><code class="javascript">// truly 变量即 !!variable === true
+// falsely 变量即 !!variable === false
+// 当判断条件或逻辑运算的值为变量时，它们是 truly 或 falsely
+!!0 === false
+!!NaN === false
+!!&#39;&#39; === false
+!!null === false
+!!undefined === false
+!!false === false
+</code></pre>
+
+
+  </article>
+  <!--</script>
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>-->
+
+
+
+    
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+<!-- 
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+ -->
+        <span class="i-caret-right">△</span>
+        </a>
+        © zgoss 🤪~2019
+    </div>
+    <div class="secondrow">
+        <a href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

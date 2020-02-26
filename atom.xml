@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wswmsword.github.io/"/>
-  <updated>2019-07-15T16:09:44.000Z</updated>
+  <updated>2020-02-26T05:42:11.779Z</updated>
   <id>https://wswmsword.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript 知识点清单</title>
+    <link href="https://wswmsword.github.io/2020/02/25/JavaScript-%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B8%85%E5%8D%95/"/>
+    <id>https://wswmsword.github.io/2020/02/25/JavaScript-知识点清单/</id>
+    <published>2020-02-24T17:54:35.000Z</published>
+    <updated>2020-02-26T05:42:11.779Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="闭包和作用域"><a href="#闭包和作用域" class="headerlink" title="闭包和作用域"></a>闭包和作用域</h1><h4 id="产生闭包的两种表现"><a href="#产生闭包的两种表现" class="headerlink" title="产生闭包的两种表现"></a>产生闭包的两种表现</h4><ul><li>函数作为参数被传递</li><li>函数作为返回值被返回</li></ul><h5 id="作为参数"><a href="#作为参数" class="headerlink" title="作为参数"></a>作为参数</h5><pre><code class="javascript">function create() {  let a = 100;  return function() {    console.log(a);  }}let fn = create();let a = 200;fn(); // 100</code></pre><h5 id="作为返回值"><a href="#作为返回值" class="headerlink" title="作为返回值"></a>作为返回值</h5><pre><code class="javascript">function print(fn) {  let a = 200;  fn();}let a = 100;function fn() {  console.log(a);}print(fn) // 100</code></pre><p> 形成闭包，执行闭包里的函数，那么所使用的变量将从函数定义的域向上查找，而不是在执行函数所在的域。把形成的闭包想象成一颗气泡，会把域包裹进来并隔离闭包外的变量。</p><h4 id="this"><a href="#this" class="headerlink" title="this"></a>this</h4><ul><li>作为普通函数</li><li>使用 call apply bind</li><li>作为对象被调用</li><li>在 class 方法中调用</li><li>箭头函数</li></ul><p>和闭包相反，this 取的值由函数执行的域确认，而不是函数定义的域。</p><p>this 有时会导致奇怪的结果：当调用全局方法时注意，全局方法内部的函数 this 指向 window；为了响应 ES6 来解决 this 问题可能使用箭头函数，但是箭头函数作为函数无法通过 apply 等方法指定其 this；</p><h5 id="模拟-bind"><a href="#模拟-bind" class="headerlink" title="模拟 bind"></a>模拟 bind</h5><pre><code class="javascript">Function.prototype.bind1 = function() {    const args = Array.prototype.slice.call(arguments);  const t = args.shift();  const self = this;  return function() {    return self.apply(t, args);  }}</code></pre><h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="添加、删除"><a href="#添加、删除" class="headerlink" title="添加、删除"></a>添加、删除</h3><p>push, pop, shift, unshift, slice, splice，其中 slice 是<code>纯函数</code>。</p><h4 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h4><ul><li>不改变原数组（无副作用）</li><li>返回一个数组</li></ul><p>使用 shift 和 unshift 之后每一个索引都要调整，存在性能问题。</p><pre><code class="javascript">var arr1 = arr.concat([50, 60]);var arr2 = arr.map(num =&gt; num*10)var arr3 = arr.filter(num =&gt; num &gt; 25)var arr4 = arr.slice()// 以下非纯函数// push pop shift unshift// forEach// some every// reduce</code></pre><h4 id="slice-和-splice"><a href="#slice-和-splice" class="headerlink" title="slice 和 splice"></a>slice 和 splice</h4><p>字面意思，slice 抽取一段，splice 拼接一段。和 <code>delete</code>不同，delete 删除值使原位置的值为 undefined。</p><h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>为了避免<code>浅拷贝</code>和直接<code>引用地址</code>使用深拷贝。</p><pre><code class="javascript">function deepClone(onj = {}) {  if(typeof obj !== &#39;object&#39; || obj === null) {    return obj;  }  let result;  if (obj instanceof Array) {    result = [];  } else {    result = {};  }  for (let key in obj) {    if (obj.hasOwnProperty(key)) {      result[key] = deepClone(obj[key]);    }  }  return result;}</code></pre><p>递归深入，跳出递归的条件：参数不是对象类型（除了 null 对象）。</p><h3 id="数组拍平"><a href="#数组拍平" class="headerlink" title="数组拍平"></a>数组拍平</h3><pre><code class="javascript">function flat(arr) {  var isDeep = arr.some(function(item) {    return item instanceof Array;  }); // 判断数组有否内嵌  if (!isDeep) {    return arr;  }  var res = Array.prototype.concat.apply([], arr);  return flat(res);}</code></pre><p>如果数组没有内嵌数组，使用 concat 可以把所有一层的数组直接串联起来，这里的<code>Array.prototype.concat.apply([], arr)</code>把 arr 和 [] 串联。在数组内嵌的情况下进行递归即可平摊数组。</p><h1 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h1><ul><li>字符串拼接</li><li>==</li><li>if 语句和逻辑运算</li></ul><h2 id><a href="#" class="headerlink" title="=="></a>==</h2><pre><code class="javascript">100 == &#39;100&#39; // true0 == &#39;&#39; // true0 == false // truefalse == &#39;&#39; // truenull == undefined // true// variable == null 相当于 variable === null || variable == undefined </code></pre><h2 id="if-语句和逻辑运算"><a href="#if-语句和逻辑运算" class="headerlink" title="if 语句和逻辑运算"></a>if 语句和逻辑运算</h2><pre><code class="javascript">// truly 变量即 !!variable === true// falsely 变量即 !!variable === false// 当判断条件或逻辑运算的值为变量时，它们是 truly 或 falsely!!0 === false!!NaN === false!!&#39;&#39; === false!!null === false!!undefined === false!!false === false</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;闭包和作用域&quot;&gt;&lt;a href=&quot;#闭包和作用域&quot; class=&quot;headerlink&quot; title=&quot;闭包和作用域&quot;&gt;&lt;/a&gt;闭包和作用域&lt;/h1&gt;&lt;h4 id=&quot;产生闭包的两种表现&quot;&gt;&lt;a href=&quot;#产生闭包的两种表现&quot; class=&quot;headerlink
+      
+    
+    </summary>
+    
+      <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>树状数组</title>
@@ -467,29 +490,6 @@ for i=0 t
     </summary>
     
       <category term="笔记本" scheme="https://wswmsword.github.io/categories/%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>LOvE</title>
-    <link href="https://wswmsword.github.io/2019/03/21/LOvE/"/>
-    <id>https://wswmsword.github.io/2019/03/21/LOvE/</id>
-    <published>2019-03-20T16:29:29.000Z</published>
-    <updated>2019-04-17T02:18:03.961Z</updated>
-    
-    <content type="html"><![CDATA[<p>时间流逝的非常快，不明白的事没有消失却越来越多。我在所有地方看着人们不停重复，像看到人踩死了虫子平淡表情的惊奇，虫子没有坐以守株，地上的蚯蚓被指引到宽阔可越道路另一头的绝妙世界，那儿不只有新泥新草甚至新蚯蚓，即使遍地被压瘪的躯体和漫天的膨胀灵魂。趁着夜黑风高风起林舞，越过前后不定错落无序的脚印坚定方向找到你，我想如果末日的尽头是你，我也只是饮下了末日止渴。我看见你，我很高兴，也很紧张，我喜欢你笑，这就是从来没为难困扰过我的明白的事。我多想我的世界尽是明镜，吹来微风，翠绿大树，柔软白云，湛蓝天空，透彻却不见伤心，最后任你驰骋。</p><!-- <span class="decorative"><span class="g"></span><span class="z"></span><span class="x"></span><span class="y"></span></span><img src="love.jpg" style="max-width:100%;" title="球球球球"/> -->]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;时间流逝的非常快，不明白的事没有消失却越来越多。我在所有地方看着人们不停重复，像看到人踩死了虫子平淡表情的惊奇，虫子没有坐以守株，地上的蚯蚓被指引到宽阔可越道路另一头的绝妙世界，那儿不只有新泥新草甚至新蚯蚓，即使遍地被压瘪的躯体和漫天的膨胀灵魂。趁着夜黑风高风起林舞，越过前
-      
-    
-    </summary>
-    
-      <category term="风起林舞" scheme="https://wswmsword.github.io/categories/%E9%A3%8E%E8%B5%B7%E6%9E%97%E8%88%9E/"/>
     
     
   </entry>
