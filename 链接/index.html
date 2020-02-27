@@ -7,12 +7,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="google-site-verification" content>
   
-  <title>尼姆博弈</title>
+  <title>链接</title>
   <meta name="author" content="strawberry">
   <meta name="description" content="Pain is temporary Pride is forever">
   
   
-  <meta property="og:title" content="尼姆博弈">
+  <meta property="og:title" content="链接">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:site_name" content="strawberryfields">
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
@@ -38,35 +38,26 @@
 </div>
 
 
-  <article class="standard post">
+  <article class="standard page">
     <div class="title">
       
   
     <h1 class="page-title center">
-        尼姆博弈
+        链接
     </h1>
   
 
 
     </div>
     <div class="meta center">
-      <time datetime="2019-05-10T08:34:18.000Z" itemprop="datePublished">
+      <time datetime="2020-02-27T05:37:10.000Z" itemprop="datePublished">
   <svg class="i-calendar" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
     <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"/>
   </svg>
   &nbsp;
-  2019-05-10
+  2020-02-27
 </time>
 
-
-    
-    &nbsp;
-    <svg class="i-tag" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-      <circle cx="24" cy="8" r="2"/>
-      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"/>
-    </svg>
-    &nbsp;
-    <a href="/categories/博弈论/">博弈论</a>
 
 
 
@@ -78,25 +69,7 @@
     <div class="picture-container">
       
     </div>
-    <h3 id="NIMM-m"><a href="#NIMM-m" class="headerlink" title="NIMM(m)"></a>NIMM(m)</h3><pre><code>初始化p数组，其中代表m堆石子，第i堆石子里有p[i]颗石子
-初始化sum=0，res=0
-for i=0 to m
-   sum^=p[i]
-for i=0 to m
-   if p[i]&gt;(sum^p[i])
-      res=res+1
-return res
-</code></pre><h2 id="阶梯博弈"><a href="#阶梯博弈" class="headerlink" title="阶梯博弈"></a>阶梯博弈</h2><h3 id="STAIRCASENIMM-m"><a href="#STAIRCASENIMM-m" class="headerlink" title="STAIRCASENIMM(m)"></a>STAIRCASENIMM(m)</h3><pre><code>初始化p数组，其中代表m颗棋子，第i颗棋子在第p[i]位置
-初始化sum=0
-if m为奇数
-   p[m]=0
-SORT(p)
-for i=1 to m step=2
-   sum^=(p[i]-p[i-1]-1)
-if sum==0
-   print &quot;Z will win&quot;
-else print &quot;G will win&quot;
-</code></pre>
+    
 
   </article>
   

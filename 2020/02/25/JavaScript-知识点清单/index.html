@@ -17,27 +17,26 @@
   <meta property="og:site_name" content="strawberryfields">
   <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
   <link rel="alternate" href="/atom.xml" title="strawberryfields" type="application/atom+xml">
-  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/m.min.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 </head>
 </html>
 <body>
   <a id="top"></a>
   <div id="main">
-    <div class="behind">
-      <!--<a href="/" class="back black-color" style="font-family:'Open Sans Condensed';color:#777;">
-      ZG
-        <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
-            <path d="M2 30 L30 2 M30 30 L2 2"></path>
-        </svg>
-      </a>-->
-      <div class="description">
-        &nbsp;月光水面 阳光脸庞 面包蜂蜜 自由和谐
-      </div>
-    </div>
     <div class="main-ctnr">
-      
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewbox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"/>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;月光水面 阳光脸庞 面包蜂蜜 自由和谐
+  </div>
+</div>
+
 
   <article class="standard post">
     <div class="title">
@@ -51,15 +50,13 @@
 
     </div>
     <div class="meta center">
-      
-<time datetime="2020-02-24T17:54:35.000Z">
-<svg class="i-calendar" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <time datetime="2020-02-24T17:54:35.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
     <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"/>
   </svg>
   &nbsp;
   2020-02-25
 </time>
-
 
 
     
@@ -77,8 +74,6 @@
 
     </div>
     <hr>
-    
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#闭包和作用域"><span class="toc-text">闭包和作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#产生闭包的两种表现"><span class="toc-text">产生闭包的两种表现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#作为参数"><span class="toc-text">作为参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#作为返回值"><span class="toc-text">作为返回值</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#this"><span class="toc-text">this</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#模拟-bind"><span class="toc-text">模拟 bind</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#模拟-call"><span class="toc-text">模拟 call</span></a></li></ol></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加、删除"><span class="toc-text">添加、删除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#纯函数"><span class="toc-text">纯函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#slice-和-splice"><span class="toc-text">slice 和 splice</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#split-和-join"><span class="toc-text">split 和 join</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map"><span class="toc-text">Map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Set"><span class="toc-text">Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用"><span class="toc-text">应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#深拷贝"><span class="toc-text">深拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#typeof-运算符"><span class="toc-text">typeof 运算符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组拍平"><span class="toc-text">数组拍平</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#类型转换"><span class="toc-text">类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-text">==</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if-语句和逻辑运算"><span class="toc-text">if 语句和逻辑运算</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#性能"><span class="toc-text">性能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件代理"><span class="toc-text">事件代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#节流"><span class="toc-text">节流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防抖"><span class="toc-text">防抖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图片加载"><span class="toc-text">图片加载</span></a></li></ol></li>
     
     <div class="picture-container">
       
@@ -238,18 +233,18 @@ null == undefined // true
 
 
   </article>
-  <!--</script>
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
   </script>
   <div class="busuanzi center">
     页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
     站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
     站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
-  </div>-->
-
+  </div>
 
 
     
+
 
 
 
@@ -261,14 +256,11 @@ null == undefined // true
 <div class="right-foot">
     <div class="firstrow">
         <a href="#top" target="_self">
-<!-- 
-        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
-            <path d="M10 30 L26 16 10 2 Z"></path>
+        <svg class="i-caret-right" viewbox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"/>
         </svg>
- -->
-        <span class="i-caret-right">△</span>
         </a>
-        © zgoss 🤪~2019
+        © chen 2016-2020
     </div>
     <div class="secondrow">
         <a href="https://github.com/gaoryrt/hexo-theme-pln">
