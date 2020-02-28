@@ -140,6 +140,70 @@ print(fn) // 100
   return res;
 }
 </code></pre>
+<h4 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h4><ul>
+<li>目标：多个实例（这里是存在 conveyo 数组里的 DOM 元素）的横向滚动动画。</li>
+<li>细节：使用 requestAnimationFrame 或 setInterval。<ul>
+<li>实现对多个实例的不同动画效果，如果直接调用函数则所有函数将共享同一个域的变量，导致每一个实例的行为相同，因此使用闭包。requestAnimationFrame 执行过程的关键在于它的动画逻辑函数里仍需调用 rAF，因此动画逻辑函数不能是匿名函数，在同属闭包域内声明这个动画逻辑函数，rAF 下一次执行它的时候便也可以继续使用闭包里的变量。</li>
+<li>和 rAF不同，setInterval 只需传入 1 次函数参数，然后 sI 反复执行这个函数，因此直接返回逻辑函数，形成闭包。</li>
+</ul>
+</li>
+<li>点</li>
+</ul>
+<pre><code class="javascript">var conveyo = [].slice.call(document.getElementsByClassName(&#39;conveyo&#39;));
+
+// 使用 requestAnimationFrame
+for (var i = 0; i &lt; l; ++ i) {
+  var z = conveyo[i];
+  var fn = blockAnimation2(z);
+  window.requestAnimationFrame(fn);
+}
+function blockAnimation2(obj) {
+   var hiddenStep = 0,
+   initLeft = 0,
+   dir = Math.floor(Math.random()*2) ? 0.5 : -0.5,
+   z = obj;
+   function blockAnimation() {
+      initLeft +=dir;
+      z.style.left = initLeft + &#39;px&#39;;
+      ++ hiddenStep;
+      if (hiddenStep === 107) {
+         z.removeChild(z.firstChild);
+         hiddenStep = 0;
+      }
+      window.requestAnimationFrame(blockAnimation)
+   }
+   return function() {
+      blockAnimation();
+   }
+}
+</code></pre>
+<pre><code class="javascript">var conveyo = [].slice.call(document.getElementsByClassName(&#39;conveyo&#39;));
+
+// 使用 setInterval
+for (var i = 0; i &lt; l; ++ i) {
+  var z = conveyo[i];
+  var fn = blockAnimation(z);
+  setInterval(fn, 16);
+}
+function blockAnimation(z) {
+   var hiddenStep = 0,
+      initLeft = 0,
+      dir = Math.floor(Math.random()*2) ? 2 : -2,
+      obj = z;
+   return function() {
+      // var left = parseInt(numReg.exec(obj.style.left));
+      // obj.style.left = (left-1) + &#39;px&#39;;
+      // console.log(obj);
+      initLeft += dir;
+      obj.style.left = initLeft + &#39;px&#39;;
+      ++ hiddenStep;
+      if (hiddenStep === 107) {
+         obj.removeChild(obj.firstChild);
+         hiddenStep = 0;
+      }
+   };
+}
+</code></pre>
 <h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="添加、删除"><a href="#添加、删除" class="headerlink" title="添加、删除"></a>添加、删除</h3><p>push, pop, shift, unshift, slice, splice，其中 slice 是<code>纯函数</code>。</p>
 <h4 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h4><ul>
 <li>不改变原数组（无副作用）</li>
