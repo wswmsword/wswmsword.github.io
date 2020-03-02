@@ -111,7 +111,8 @@ print(fn) // 100
 <li>箭头函数</li>
 </ul>
 <p>和闭包相反，this 取的值由函数执行的域确认，而不是函数定义的域。</p>
-<p>this 有时会导致奇怪的结果：当调用全局方法时注意，全局方法内部的函数 this 指向 window；为了响应 ES6 来解决 this 问题可能使用箭头函数，但是箭头函数作为函数无法通过 apply 等方法指定其 this；</p>
+<p>this 有时会导致奇怪的结果：当调用全局方法时注意，全局方法内部的函数 this 指向 window；为了响应 ES6 来解决 this 问题可能使用箭头函数，但是箭头函数作为函数无法通过 apply, call, bind 等方法指定其 this；</p>
+<p>箭头函数里的 this：箭头函数没有自己的 this，会继承上层作用域的 this</p>
 <h5 id="模拟-bind"><a href="#模拟-bind" class="headerlink" title="模拟 bind"></a>模拟 bind</h5><pre><code class="javascript">Function.prototype.bind1 = function() {
     const args = Array.prototype.slice.call(arguments);
   const t = args.shift();
@@ -291,9 +292,45 @@ null == undefined // true
 <li>e.target 获取触发元素</li>
 <li>matches 判断是否触发元素</li>
 </ul>
-<h3 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h3><h3 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h3><h3 id="图片加载"><a href="#图片加载" class="headerlink" title="图片加载"></a>图片加载</h3><p>// 刷新 DOM 避免点击事件逗留</p>
+<h3 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h3><pre><code class="javascript">function throttle(fn, delay = 500, context) {
+  var timer = null;
+  return function() {
+    if (timer) {
+      return ;
+    }
+    timer = setTimeout(function() {
+      fn.apply(context, arguments);
+      timer = null;
+    })
+  }
+}
+</code></pre>
+<h3 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h3><pre><code class="javascript">function debounce(fn, delay = 500, context) {
+  var timer = null;
+  return function() {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    var self = context;
+    timer = setTimeout(function() {
+      fn.apply(self, arguments);
+      timer = null;
+    }, delay)
+  }
+}
+</code></pre>
+<h3 id="图片加载"><a href="#图片加载" class="headerlink" title="图片加载"></a>图片加载</h3><p>// 刷新 DOM 避免点击事件逗留</p>
 <p>指定 DOM 内如果有图片，innerHtml 导致的重绘将重新请求服务器资源。</p>
 <p>容器内无子元素适用 innerHtml，向容器尾追加适用 appendChild。</p>
+<h1 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h1><h2 id="滚轮事件"><a href="#滚轮事件" class="headerlink" title="滚轮事件"></a>滚轮事件</h2><pre><code class="javascript">event.wheelDeltaX
+event.wheelDeltaY
+event.deltaX // FireFox 内容右移正值，左移负值
+event.deltaY // 内容上移负值，下移正值
+// 使用 X 和 Y 比较，X 大则表明触发了横向滚动事件
+elem.scrollTo(x, y) // 滚动至 (x, y) 处
+event.preventDefault() // 阻止默认事件，如果给监听器开启了 passive 为 true 的值，preventDefault 将被忽略，即遵循 passive 不阻止默认事件
+event.stopPropagation() // 阻止冒泡
+</code></pre>
 
 
   </article>
