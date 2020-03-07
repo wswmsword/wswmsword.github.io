@@ -33,7 +33,7 @@
     </svg>
   </a>
   <div class="description">
-    &nbsp;月光水面 阳光脸庞 面包蜂蜜 自由和谐
+    &nbsp;郁郁青青 长过千寻
   </div>
 </div>
 
@@ -75,30 +75,18 @@
     </div>
     <hr>
     
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ufind"><span class="toc-text">UFIND()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mergexy"><span class="toc-text">MERGE(x,y)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ffindn"><span class="toc-text">FFIND(n)</span></a></li></ol>
+    
     <div class="picture-container">
       
     </div>
-    <h3 id="UFIND"><a href="#UFIND" class="headerlink" title="UFIND()"></a>UFIND()</h3><pre><code>初始化dir数组使值和自身下标相等
-初始化结构体数组G存放连通边
-for i=0 to g.len-1
-   MERGE(g.x,g,y)
-for i=0 to 顶点数
-   if(dir[i]==i)
-      count=count+1
-return count
-</code></pre><h3 id="MERGE-x-y"><a href="#MERGE-x-y" class="headerlink" title="MERGE(x,y)"></a>MERGE(x,y)</h3><pre><code>fx=FFIND(x)
-fy=FFIND(y)
-if fx!=fy
-   dir[fy]=fx
-</code></pre><h3 id="FFIND-n"><a href="#FFIND-n" class="headerlink" title="FFIND(n)"></a>FFIND(n)</h3><pre><code>i=n
-while dir[i]!=i
-   i=dir[i]
-while dir[n]!=i
-   t=dir[n]
-   dir[n]=i
-   n=t
-return n
-</code></pre>
+    <h3 id="ufind">UFIND()</h3>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">初始化dir数组使值和自身下标相等</span><br><span class="line">初始化结构体数组G存放连通边</span><br><span class="line"><span class="keyword">for</span> <span class="attribute">i</span>=0 <span class="keyword">to</span> g.len-1</span><br><span class="line">   MERGE(g.x,g,y)</span><br><span class="line"><span class="keyword">for</span> <span class="attribute">i</span>=0 <span class="keyword">to</span> 顶点数</span><br><span class="line">   <span class="keyword">if</span>(dir[i]==i)</span><br><span class="line">      <span class="attribute">count</span>=count+1</span><br><span class="line">return count</span><br></pre></td></tr></table></figure>
+<h3 id="mergexy">MERGE(x,y)</h3>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">fx</span>=FFIND(x)</span><br><span class="line"><span class="attribute">fy</span>=FFIND(y)</span><br><span class="line"><span class="keyword">if</span> fx!=fy</span><br><span class="line">   dir[fy]=fx</span><br></pre></td></tr></table></figure>
+<h3 id="ffindn">FFIND(n)</h3>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">i=<span class="keyword">n</span></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">dir</span>[i]!=<span class="built_in">i</span></span><br><span class="line">   i=<span class="keyword">dir</span>[i]</span><br><span class="line"><span class="keyword">while</span> <span class="keyword">dir</span>[<span class="keyword">n</span>]!=<span class="built_in">i</span></span><br><span class="line">   t=<span class="keyword">dir</span>[<span class="keyword">n</span>]</span><br><span class="line">   <span class="keyword">dir</span>[<span class="keyword">n</span>]=<span class="built_in">i</span></span><br><span class="line">   <span class="keyword">n</span>=t</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">n</span></span><br></pre></td></tr></table></figure>
+
 
   </article>
   

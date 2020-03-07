@@ -33,7 +33,7 @@
     </svg>
   </a>
   <div class="description">
-    &nbsp;月光水面 阳光脸庞 面包蜂蜜 自由和谐
+    &nbsp;郁郁青青 长过千寻
   </div>
 </div>
 
@@ -75,77 +75,26 @@
     </div>
     <hr>
     
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快速排序"><span class="toc-text">快速排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#qsort"><span class="toc-text">QSORT()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iniint-leftint-right"><span class="toc-text">INI(int left,int right)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parint-leftint-right"><span class="toc-text">PAR(int left,int right)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#归并排序"><span class="toc-text">归并排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#msort"><span class="toc-text">MSORT()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iniint-leftint-right-1"><span class="toc-text">INI(int left,int right)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#merint-leftint-midint-right"><span class="toc-text">MER(int left,int mid,int right)</span></a></li></ol></li></ol>
+    
     <div class="picture-container">
       
     </div>
-    <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><h3 id="QSORT"><a href="#QSORT" class="headerlink" title="QSORT()"></a>QSORT()</h3><pre><code>初始化数组z存放准备排序的序列
-n=z.len
-INI(0,n-1)
-</code></pre><h3 id="INI-int-left-int-right"><a href="#INI-int-left-int-right" class="headerlink" title="INI(int left,int right)"></a>INI(int left,int right)</h3><pre><code>if(left&lt;right)
-{
-   parti=par(left,right);
-   INI(left,parti-1);
-   INI(parti+1,right);
-}
-</code></pre><h3 id="PAR-int-left-int-right"><a href="#PAR-int-left-int-right" class="headerlink" title="PAR(int left,int right)"></a>PAR(int left,int right)</h3><pre><code>i=left
-j=right+1
-while 1
-   do
-   {
-      j=j-1
-   }while z[j]&gt;z[left]
-   do
-   {
-      i=i+1
-   }while z[i]&lt;z[left] and i&lt;right
-   if j&gt;i
-      SWAP(z[i],z[j])
-   else
-      SWAP(z[j],z[left])
-      break
-return j
-</code></pre><h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><h3 id="MSORT"><a href="#MSORT" class="headerlink" title="MSORT()"></a>MSORT()</h3><pre><code>初始化数组z存放准备排序的序列
-n=z.len
-INI(0,n-1)
-</code></pre><h3 id="INI-int-left-int-right-1"><a href="#INI-int-left-int-right-1" class="headerlink" title="INI(int left,int right)"></a>INI(int left,int right)</h3><pre><code>if(left&lt;right)
-{
-   mid=(left+right)/2
-   INI(left,mid)
-   INI(mid+1,right)
-   MER(left,mid,right)
-}
-</code></pre><h3 id="MER-int-left-int-mid-int-right"><a href="#MER-int-left-int-mid-int-right" class="headerlink" title="MER(int left,int mid,int right)"></a>MER(int left,int mid,int right)</h3><pre><code>i=left
-j=mid+1
-k=right
-while i!=mid+1 and j!=right+1
-{
-   if z[i]&gt;z[j]
-   {
-      prez[k]=z[j]
-      k=k+1
-      j=j+1
-   }else
-   {
-      prez[k]=z[i]
-      k=k+1
-      i=i+1
-   }
-}
-while i!=mid+1
-{
-   prez[k]=z[i]
-   k=k+1
-   i=i+1
-}
-while j!=right+1
-{
-   prez[k]=z[j]
-   k=k+1
-   j=j+1
-}
-for i=left to right
-   z[i]=prez[i]
-</code></pre>
+    <h2 id="快速排序">快速排序</h2>
+<h3 id="qsort">QSORT()</h3>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">初始化数组z存放准备排序的序列</span><br><span class="line">n=z.len</span><br><span class="line"><span class="function"><span class="title">INI</span><span class="params">(<span class="number">0</span>,n-<span class="number">1</span>)</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="iniint-leftint-right">INI(int left,int right)</h3>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">left</span>&lt;<span class="built_in">right</span>)</span><br><span class="line">&#123;</span><br><span class="line">   parti=par(<span class="built_in">left</span>,<span class="built_in">right</span>);</span><br><span class="line">   INI(<span class="built_in">left</span>,parti<span class="number">-1</span>);</span><br><span class="line">   INI(parti+<span class="number">1</span>,<span class="built_in">right</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="parint-leftint-right">PAR(int left,int right)</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">i</span>=left</span><br><span class="line"><span class="built_in">j</span>=right+<span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span></span><br><span class="line">   do</span><br><span class="line">   &#123;</span><br><span class="line">      <span class="built_in">j</span>=<span class="built_in">j</span><span class="number">-1</span></span><br><span class="line">   &#125;<span class="keyword">while</span> z[<span class="built_in">j</span>]&gt;z[left]</span><br><span class="line">   do</span><br><span class="line">   &#123;</span><br><span class="line">      <span class="built_in">i</span>=<span class="built_in">i</span>+<span class="number">1</span></span><br><span class="line">   &#125;<span class="keyword">while</span> z[<span class="built_in">i</span>]&lt;z[left] and <span class="built_in">i</span>&lt;right</span><br><span class="line">   <span class="keyword">if</span> <span class="built_in">j</span>&gt;<span class="built_in">i</span></span><br><span class="line">      SWAP(z[<span class="built_in">i</span>],z[<span class="built_in">j</span>])</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">      SWAP(z[<span class="built_in">j</span>],z[left])</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line"><span class="keyword">return</span> <span class="built_in">j</span></span><br></pre></td></tr></table></figure>
+<h2 id="归并排序">归并排序</h2>
+<h3 id="msort">MSORT()</h3>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">初始化数组z存放准备排序的序列</span><br><span class="line">n=z.len</span><br><span class="line"><span class="function"><span class="title">INI</span><span class="params">(<span class="number">0</span>,n-<span class="number">1</span>)</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="iniint-leftint-right-1">INI(int left,int right)</h3>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">left</span>&lt;<span class="built_in">right</span>)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="built_in">mid</span>=(<span class="built_in">left</span>+<span class="built_in">right</span>)/<span class="number">2</span></span><br><span class="line">   INI(<span class="built_in">left</span>,<span class="built_in">mid</span>)</span><br><span class="line">   INI(<span class="built_in">mid</span>+<span class="number">1</span>,<span class="built_in">right</span>)</span><br><span class="line">   MER(<span class="built_in">left</span>,<span class="built_in">mid</span>,<span class="built_in">right</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="merint-leftint-midint-right">MER(int left,int mid,int right)</h3>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">i</span>=left</span><br><span class="line"><span class="attribute">j</span>=mid+1</span><br><span class="line"><span class="attribute">k</span>=right</span><br><span class="line"><span class="keyword">while</span> i!=mid+1 <span class="keyword">and</span> j!=right+1</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">if</span> z[i]&gt;z[j]</span><br><span class="line">   &#123;</span><br><span class="line">      prez[k]=z[j]</span><br><span class="line">      <span class="attribute">k</span>=k+1</span><br><span class="line">      <span class="attribute">j</span>=j+1</span><br><span class="line">   &#125;<span class="keyword">else</span></span><br><span class="line">   &#123;</span><br><span class="line">      prez[k]=z[i]</span><br><span class="line">      <span class="attribute">k</span>=k+1</span><br><span class="line">      <span class="attribute">i</span>=i+1</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> i!=mid+1</span><br><span class="line">&#123;</span><br><span class="line">   prez[k]=z[i]</span><br><span class="line">   <span class="attribute">k</span>=k+1</span><br><span class="line">   <span class="attribute">i</span>=i+1</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> j!=right+1</span><br><span class="line">&#123;</span><br><span class="line">   prez[k]=z[j]</span><br><span class="line">   <span class="attribute">k</span>=k+1</span><br><span class="line">   <span class="attribute">j</span>=j+1</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> <span class="attribute">i</span>=left <span class="keyword">to</span> right</span><br><span class="line">   z[i]=prez[i]</span><br></pre></td></tr></table></figure>
+
 
   </article>
   

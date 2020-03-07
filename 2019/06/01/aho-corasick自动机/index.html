@@ -33,7 +33,7 @@
     </svg>
   </a>
   <div class="description">
-    &nbsp;月光水面 阳光脸庞 面包蜂蜜 自由和谐
+    &nbsp;郁郁青青 长过千寻
   </div>
 </div>
 
@@ -75,48 +75,18 @@
     </div>
     <hr>
     
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#insertbuf"><span class="toc-text">INSERT(buf)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#build"><span class="toc-text">BUILD()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#querybuf"><span class="toc-text">QUERY(buf)</span></a></li></ol>
+    
     <div class="picture-container">
       
     </div>
-    <h3 id="INSERT-buf"><a href="#INSERT-buf" class="headerlink" title="INSERT(buf)"></a>INSERT(buf)</h3><pre><code>len:=组成trie树的单词buf长度
-now:=root即0
-for i:=0 to len-1
-   ch:=buf[i]的英文序列如25表示z
-   if nxt[now,ch]=-1
-      nxt[now,ch]:=NEW() endif
-   now:=nxt[now,ch]
-endfor
-end[now]:=end[now]+1
-</code></pre><h3 id="BUILD"><a href="#BUILD" class="headerlink" title="BUILD()"></a>BUILD()</h3><pre><code>建队列q
-for i=0 to 英文字母个数-1
-   if nxt[root,i]=-1
-      nxt[root,i]:=root
-   else
-      fail[nxt[root,i]]:=root
-      nxt[root,i]入q队
-   endif endfor
-while q队不空
-   now:=出q队并返回值
-   for i:=0 to 25
-      if nxt[now,i]=-1
-         nxt[now,i]:=nxt[fail[now],i]
-      else
-         fail[nxt[now,i]]:=nxt[fail[now],i]
-         nxt[now,i]入q队
-      endif endfor endwhile
-</code></pre><h3 id="QUERY-buf"><a href="#QUERY-buf" class="headerlink" title="QUERY(buf)"></a>QUERY(buf)</h3><pre><code>len:=查询trie数的字符串buf长度
-now:=root
-res:=0
-for i=0 to len-1
-   now:=nxt[now,buf[i]的英文序列]
-   tmp:=now
-   while tmp!=root
-      res:=res+end[tmp]
-      end[tmp]:=0
-      tmp:=fail[tmp]
-   endwhile endfor
-return res
-</code></pre>
+    <h3 id="insertbuf">INSERT(buf)</h3>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">len</span>:=组成trie树的单词buf长度</span><br><span class="line"><span class="built_in">now</span>:=root即<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i:=<span class="number">0</span> <span class="keyword">to</span> <span class="built_in">len</span><span class="number">-1</span></span><br><span class="line">   ch:=buf[i]的英文序列如<span class="number">25</span>表示z</span><br><span class="line">   <span class="keyword">if</span> nxt[<span class="built_in">now</span>,ch]=<span class="number">-1</span></span><br><span class="line">      nxt[<span class="built_in">now</span>,ch]:=<span class="keyword">NEW</span>() endif</span><br><span class="line">   <span class="built_in">now</span>:=nxt[<span class="built_in">now</span>,ch]</span><br><span class="line">endfor</span><br><span class="line"><span class="keyword">end</span>[<span class="built_in">now</span>]:=<span class="keyword">end</span>[<span class="built_in">now</span>]+<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="build">BUILD()</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">建队列q</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">0</span> to 英文字母个数<span class="number">-1</span></span><br><span class="line">   <span class="keyword">if</span> nxt[root,<span class="built_in">i</span>]=<span class="number">-1</span></span><br><span class="line">      nxt[root,<span class="built_in">i</span>]:=root</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">      fail[nxt[root,<span class="built_in">i</span>]]:=root</span><br><span class="line">      nxt[root,<span class="built_in">i</span>]入q队</span><br><span class="line">   endif endfor</span><br><span class="line"><span class="keyword">while</span> q队不空</span><br><span class="line">   now:=出q队并返回值</span><br><span class="line">   <span class="keyword">for</span> <span class="built_in">i</span>:=<span class="number">0</span> to <span class="number">25</span></span><br><span class="line">      <span class="keyword">if</span> nxt[now,<span class="built_in">i</span>]=<span class="number">-1</span></span><br><span class="line">         nxt[now,<span class="built_in">i</span>]:=nxt[fail[now],<span class="built_in">i</span>]</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">         fail[nxt[now,<span class="built_in">i</span>]]:=nxt[fail[now],<span class="built_in">i</span>]</span><br><span class="line">         nxt[now,<span class="built_in">i</span>]入q队</span><br><span class="line">      endif endfor endwhile</span><br></pre></td></tr></table></figure>
+<h3 id="querybuf">QUERY(buf)</h3>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">len</span>:=查询trie数的字符串buf长度</span><br><span class="line"><span class="keyword">no</span><span class="variable">w:</span>=root</span><br><span class="line">re<span class="variable">s:</span>=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i=<span class="number">0</span> <span class="keyword">to</span> <span class="built_in">len</span>-<span class="number">1</span></span><br><span class="line">   <span class="keyword">no</span><span class="variable">w:</span>=nxt[now,buf[i]的英文序列]</span><br><span class="line">   tmp:=now</span><br><span class="line">   <span class="keyword">while</span> tmp!=root</span><br><span class="line">      re<span class="variable">s:</span>=<span class="keyword">res</span>+end[tmp]</span><br><span class="line">      end[tmp]:=<span class="number">0</span></span><br><span class="line">      tmp:=fail[tmp]</span><br><span class="line">   <span class="keyword">endwhile</span> <span class="keyword">endfor</span></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">res</span></span><br></pre></td></tr></table></figure>
+
 
   </article>
   

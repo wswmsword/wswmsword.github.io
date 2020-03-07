@@ -33,7 +33,7 @@
     </svg>
   </a>
   <div class="description">
-    &nbsp;月光水面 阳光脸庞 面包蜂蜜 自由和谐
+    &nbsp;郁郁青青 长过千寻
   </div>
 </div>
 
@@ -75,35 +75,25 @@
     </div>
     <hr>
     
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#section"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包和作用域"><span class="toc-text">闭包和作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#产生闭包的两种表现"><span class="toc-text">产生闭包的两种表现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#作为参数"><span class="toc-text">作为参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#作为返回值"><span class="toc-text">作为返回值</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#this"><span class="toc-text">this</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#模拟-bind"><span class="toc-text">模拟 bind</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#模拟-call"><span class="toc-text">模拟 call</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实践"><span class="toc-text">实践</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加删除"><span class="toc-text">添加、删除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#纯函数"><span class="toc-text">纯函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#slice-和-splice"><span class="toc-text">slice 和 splice</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#split-和-join"><span class="toc-text">split 和 join</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#map"><span class="toc-text">Map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set"><span class="toc-text">Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用"><span class="toc-text">应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#深拷贝"><span class="toc-text">深拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#typeof-运算符"><span class="toc-text">typeof 运算符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组拍平"><span class="toc-text">数组拍平</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型转换"><span class="toc-text">类型转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#section-1"><span class="toc-text">==</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if-语句和逻辑运算"><span class="toc-text">if 语句和逻辑运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能"><span class="toc-text">性能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件代理"><span class="toc-text">事件代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#节流"><span class="toc-text">节流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防抖"><span class="toc-text">防抖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图片加载"><span class="toc-text">图片加载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件"><span class="toc-text">事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#滚轮事件"><span class="toc-text">滚轮事件</span></a></li></ol>
+    
     <div class="picture-container">
       
     </div>
-    <h1 id="闭包和作用域"><a href="#闭包和作用域" class="headerlink" title="闭包和作用域"></a>闭包和作用域</h1><h4 id="产生闭包的两种表现"><a href="#产生闭包的两种表现" class="headerlink" title="产生闭包的两种表现"></a>产生闭包的两种表现</h4><ul>
+    <h1 id="section"></h1>
+<h2 id="闭包和作用域">闭包和作用域</h2>
+<h4 id="产生闭包的两种表现">产生闭包的两种表现</h4>
+<ul>
 <li>函数作为参数被传递</li>
 <li>函数作为返回值被返回</li>
 </ul>
-<h5 id="作为参数"><a href="#作为参数" class="headerlink" title="作为参数"></a>作为参数</h5><pre><code class="javascript">function create() {
-  let a = 100;
-  return function() {
-    console.log(a);
-  }
-}
-let fn = create();
-let a = 200;
-fn(); // 100
-</code></pre>
-<h5 id="作为返回值"><a href="#作为返回值" class="headerlink" title="作为返回值"></a>作为返回值</h5><pre><code class="javascript">function print(fn) {
-  let a = 200;
-  fn();
-}
-let a = 100;
-function fn() {
-  console.log(a);
-}
-print(fn) // 100
-</code></pre>
-<p> 形成闭包，执行闭包里的函数，那么所使用的变量将从函数定义的域向上查找，而不是在执行函数所在的域。把形成的闭包想象成一颗气泡，会把域包裹进来并隔离闭包外的变量。</p>
-<h4 id="this"><a href="#this" class="headerlink" title="this"></a>this</h4><ul>
+<h5 id="作为参数">作为参数</h5>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">100</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> fn = create();</span><br><span class="line"><span class="keyword">let</span> a = <span class="number">200</span>;</span><br><span class="line">fn(); <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+<h5 id="作为返回值">作为返回值</h5>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">200</span>;</span><br><span class="line">  fn();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> a = <span class="number">100</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line">print(fn) <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+<p>形成闭包，执行闭包里的函数，那么所使用的变量将从函数定义的域向上查找，而不是在执行函数所在的域。把形成的闭包想象成一颗气泡，会把域包裹进来并隔离闭包外的变量。</p>
+<h4 id="this">this</h4>
+<ul>
 <li>作为普通函数</li>
 <li>使用 call apply bind</li>
 <li>作为对象被调用</li>
@@ -113,224 +103,84 @@ print(fn) // 100
 <p>和闭包相反，this 取的值由函数执行的域确认，而不是函数定义的域。</p>
 <p>this 有时会导致奇怪的结果：当调用全局方法时注意，全局方法内部的函数 this 指向 window；为了响应 ES6 来解决 this 问题可能使用箭头函数，但是箭头函数作为函数无法通过 apply, call, bind 等方法指定其 this；</p>
 <p>箭头函数里的 this：箭头函数没有自己的 this，会继承上层作用域的 this</p>
-<h5 id="模拟-bind"><a href="#模拟-bind" class="headerlink" title="模拟 bind"></a>模拟 bind</h5><pre><code class="javascript">Function.prototype.bind1 = function() {
-    const args = Array.prototype.slice.call(arguments);
-  const t = args.shift();
-  const self = this;
-  return function() {
-    return self.apply(t, args);
-  }
-}
-</code></pre>
-<h5 id="模拟-call"><a href="#模拟-call" class="headerlink" title="模拟 call"></a>模拟 call</h5><ul>
+<h5 id="模拟-bind">模拟 bind</h5>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.bind1 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">const</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">  <span class="keyword">const</span> t = args.shift();</span><br><span class="line">  <span class="keyword">const</span> self = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> self.apply(t, args);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="模拟-call">模拟 call</h5>
+<ul>
 <li>apply 以数组或集合的方式传入</li>
 <li>call 以多参数传入</li>
 </ul>
-<pre><code class="javascript">Function.prototype.call1 = function(t) {
-  const args, res;
-  t = t || window;
-  t.fn = this;
-  res = arguments.length;
-  if (res &gt; 1) {
-      args = Array.prototype.slice.call(arguments).slice(1);
-        t.fn(...args);
-  } else {
-    t.fn();
-  }
-  delete context.fn;
-  return res;
-}
-</code></pre>
-<h4 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h4><ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.call1 = <span class="function"><span class="keyword">function</span>(<span class="params">t</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> args, res;</span><br><span class="line">  t = t || <span class="built_in">window</span>;</span><br><span class="line">  t.fn = <span class="keyword">this</span>;</span><br><span class="line">  res = <span class="built_in">arguments</span>.length;</span><br><span class="line">  <span class="keyword">if</span> (res &gt; <span class="number">1</span>) &#123;</span><br><span class="line">	  args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>).slice(<span class="number">1</span>);</span><br><span class="line">		t.fn(...args);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    t.fn();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">delete</span> context.fn;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="实践">实践</h4>
+<ul>
 <li>目标：多个实例（这里是存在 conveyo 数组里的 DOM 元素）的横向滚动动画。</li>
-<li>细节：使用 requestAnimationFrame 或 setInterval。<ul>
+<li>细节：使用 requestAnimationFrame 或 setInterval。
+<ul>
 <li>实现对多个实例的不同动画效果，如果直接调用函数则所有函数将共享同一个域的变量，导致每一个实例的行为相同，因此使用闭包。requestAnimationFrame 执行过程的关键在于它的动画逻辑函数里仍需调用 rAF，因此动画逻辑函数不能是匿名函数，在同属闭包域内声明这个动画逻辑函数，rAF 下一次执行它的时候便也可以继续使用闭包里的变量。</li>
 <li>和 rAF不同，setInterval 只需传入 1 次函数参数，然后 sI 反复执行这个函数，因此直接返回逻辑函数，形成闭包。</li>
-</ul>
-</li>
+</ul></li>
 <li>点</li>
 </ul>
-<pre><code class="javascript">var conveyo = [].slice.call(document.getElementsByClassName(&#39;conveyo&#39;));
-
-// 使用 requestAnimationFrame
-for (var i = 0; i &lt; l; ++ i) {
-  var z = conveyo[i];
-  var fn = blockAnimation2(z);
-  window.requestAnimationFrame(fn);
-}
-function blockAnimation2(obj) {
-   var hiddenStep = 0,
-   initLeft = 0,
-   dir = Math.floor(Math.random()*2) ? 0.5 : -0.5,
-   z = obj;
-   function blockAnimation() {
-      initLeft +=dir;
-      z.style.left = initLeft + &#39;px&#39;;
-      ++ hiddenStep;
-      if (hiddenStep === 107) {
-         z.removeChild(z.firstChild);
-         hiddenStep = 0;
-      }
-      window.requestAnimationFrame(blockAnimation)
-   }
-   return function() {
-      blockAnimation();
-   }
-}
-</code></pre>
-<pre><code class="javascript">var conveyo = [].slice.call(document.getElementsByClassName(&#39;conveyo&#39;));
-
-// 使用 setInterval
-for (var i = 0; i &lt; l; ++ i) {
-  var z = conveyo[i];
-  var fn = blockAnimation(z);
-  setInterval(fn, 16);
-}
-function blockAnimation(z) {
-   var hiddenStep = 0,
-      initLeft = 0,
-      dir = Math.floor(Math.random()*2) ? 2 : -2,
-      obj = z;
-   return function() {
-      // var left = parseInt(numReg.exec(obj.style.left));
-      // obj.style.left = (left-1) + &#39;px&#39;;
-      // console.log(obj);
-      initLeft += dir;
-      obj.style.left = initLeft + &#39;px&#39;;
-      ++ hiddenStep;
-      if (hiddenStep === 107) {
-         obj.removeChild(obj.firstChild);
-         hiddenStep = 0;
-      }
-   };
-}
-</code></pre>
-<h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="添加、删除"><a href="#添加、删除" class="headerlink" title="添加、删除"></a>添加、删除</h3><p>push, pop, shift, unshift, slice, splice，其中 slice 是<code>纯函数</code>。</p>
-<h4 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h4><ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> conveyo = [].slice.call(<span class="built_in">document</span>.getElementsByClassName(<span class="string">'conveyo'</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 requestAnimationFrame</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; l; ++ i) &#123;</span><br><span class="line">  <span class="keyword">var</span> z = conveyo[i];</span><br><span class="line">  <span class="keyword">var</span> fn = blockAnimation2(z);</span><br><span class="line">  <span class="built_in">window</span>.requestAnimationFrame(fn);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">blockAnimation2</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> hiddenStep = <span class="number">0</span>,</span><br><span class="line">   initLeft = <span class="number">0</span>,</span><br><span class="line">   dir = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">2</span>) ? <span class="number">0.5</span> : <span class="number">-0.5</span>,</span><br><span class="line">   z = obj;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">blockAnimation</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      initLeft +=dir;</span><br><span class="line">      z.style.left = initLeft + <span class="string">'px'</span>;</span><br><span class="line">      ++ hiddenStep;</span><br><span class="line">      <span class="keyword">if</span> (hiddenStep === <span class="number">107</span>) &#123;</span><br><span class="line">         z.removeChild(z.firstChild);</span><br><span class="line">         hiddenStep = <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">window</span>.requestAnimationFrame(blockAnimation)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      blockAnimation();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> conveyo = [].slice.call(<span class="built_in">document</span>.getElementsByClassName(<span class="string">'conveyo'</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 setInterval</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; l; ++ i) &#123;</span><br><span class="line">  <span class="keyword">var</span> z = conveyo[i];</span><br><span class="line">  <span class="keyword">var</span> fn = blockAnimation(z);</span><br><span class="line">  setInterval(fn, <span class="number">16</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">blockAnimation</span>(<span class="params">z</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> hiddenStep = <span class="number">0</span>,</span><br><span class="line">      initLeft = <span class="number">0</span>,</span><br><span class="line">      dir = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">2</span>) ? <span class="number">2</span> : <span class="number">-2</span>,</span><br><span class="line">      obj = z;</span><br><span class="line">   <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// var left = parseInt(numReg.exec(obj.style.left));</span></span><br><span class="line">      <span class="comment">// obj.style.left = (left-1) + 'px';</span></span><br><span class="line">      <span class="comment">// console.log(obj);</span></span><br><span class="line">      initLeft += dir;</span><br><span class="line">      obj.style.left = initLeft + <span class="string">'px'</span>;</span><br><span class="line">      ++ hiddenStep;</span><br><span class="line">      <span class="keyword">if</span> (hiddenStep === <span class="number">107</span>) &#123;</span><br><span class="line">         obj.removeChild(obj.firstChild);</span><br><span class="line">         hiddenStep = <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="集合">集合</h2>
+<h2 id="数组">数组</h2>
+<h3 id="添加删除">添加、删除</h3>
+<p>push, pop, shift, unshift, slice, splice，其中 slice 是<code>纯函数</code>。</p>
+<h4 id="纯函数">纯函数</h4>
+<ul>
 <li>不改变原数组（无副作用）</li>
 <li>返回一个数组</li>
 </ul>
 <p>使用 shift 和 unshift 之后每一个索引都要调整，存在性能问题。</p>
-<pre><code class="javascript">var arr1 = arr.concat([50, 60]);
-var arr2 = arr.map(num =&gt; num*10)
-var arr3 = arr.filter(num =&gt; num &gt; 25)
-var arr4 = arr.slice()
-
-// 以下非纯函数
-// push pop shift unshift
-// forEach
-// some every
-// reduce
-</code></pre>
-<h4 id="slice-和-splice"><a href="#slice-和-splice" class="headerlink" title="slice 和 splice"></a>slice 和 splice</h4><p>字面意思，slice 抽取一段，splice 拼接一段。和 <code>delete</code>不同，delete 删除值使原位置的值为 undefined。</p>
-<h3 id="split-和-join"><a href="#split-和-join" class="headerlink" title="split 和 join"></a>split 和 join</h3><pre><code class="javascript">&#39;1-2-3&#39;.split(&#39;-&#39;) // [1, 2, 3]
-[1, 2, 3].join(&#39;-&#39;) // &#39;1-2-3&#39;
-</code></pre>
-<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>为了避免<code>浅拷贝</code>和直接<code>引用地址</code>使用深拷贝。</p>
-<pre><code class="javascript">function deepClone(onj = {}) {
-  if(typeof obj !== &#39;object&#39; || obj === null) {
-    return obj;
-  }
-
-  let result;
-  if (obj instanceof Array) {
-    result = [];
-  } else {
-    result = {};
-  }
-
-  for (let key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      result[key] = deepClone(obj[key]);
-    }
-  }
-  return result;
-}
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr1 = arr.concat([<span class="number">50</span>, <span class="number">60</span>]);</span><br><span class="line"><span class="keyword">var</span> arr2 = arr.map(<span class="function"><span class="params">num</span> =&gt;</span> num*<span class="number">10</span>)</span><br><span class="line"><span class="keyword">var</span> arr3 = arr.filter(<span class="function"><span class="params">num</span> =&gt;</span> num &gt; <span class="number">25</span>)</span><br><span class="line"><span class="keyword">var</span> arr4 = arr.slice()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下非纯函数</span></span><br><span class="line"><span class="comment">// push pop shift unshift</span></span><br><span class="line"><span class="comment">// forEach</span></span><br><span class="line"><span class="comment">// some every</span></span><br><span class="line"><span class="comment">// reduce</span></span><br></pre></td></tr></table></figure>
+<h4 id="slice-和-splice">slice 和 splice</h4>
+<p>字面意思，slice 抽取一段，splice 拼接一段。和 <code>delete</code>不同，delete 删除值使原位置的值为 undefined。</p>
+<h3 id="split-和-join">split 和 join</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'1-2-3'</span>.split(<span class="string">'-'</span>) <span class="comment">// [1, 2, 3]</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].join(<span class="string">'-'</span>) <span class="comment">// '1-2-3'</span></span><br></pre></td></tr></table></figure>
+<h2 id="map">Map</h2>
+<h2 id="set">Set</h2>
+<h2 id="应用">应用</h2>
+<h3 id="深拷贝">深拷贝</h3>
+<p>为了避免<code>浅拷贝</code>和直接<code>引用地址</code>使用深拷贝。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">onj = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> obj !== <span class="string">'object'</span> || obj === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">let</span> result;</span><br><span class="line">  <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123;</span><br><span class="line">    result = [];</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    result = &#123;&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (obj.hasOwnProperty(key)) &#123;</span><br><span class="line">      result[key] = deepClone(obj[key]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>递归深入，跳出递归的条件：参数不是对象类型（除了 null 对象）。</p>
-<h4 id="typeof-运算符"><a href="#typeof-运算符" class="headerlink" title="typeof 运算符"></a>typeof 运算符</h4><ul>
+<h4 id="typeof-运算符">typeof 运算符</h4>
+<ul>
 <li>识别所有值类型</li>
 <li>识别函数</li>
 <li>判断是否为引用类型（不可再细分）</li>
 </ul>
-<h3 id="数组拍平"><a href="#数组拍平" class="headerlink" title="数组拍平"></a>数组拍平</h3><pre><code class="javascript">function flat(arr) {
-  var isDeep = arr.some(function(item) {
-    return item instanceof Array;
-  }); // 判断数组有否内嵌
-  if (!isDeep) {
-    return arr;
-  }
-  var res = Array.prototype.concat.apply([], arr);
-  return flat(res);
-}
-</code></pre>
+<h3 id="数组拍平">数组拍平</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">flat</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> isDeep = arr.some(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> item <span class="keyword">instanceof</span> <span class="built_in">Array</span>;</span><br><span class="line">  &#125;); <span class="comment">// 判断数组有否内嵌</span></span><br><span class="line">  <span class="keyword">if</span> (!isDeep) &#123;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> res = <span class="built_in">Array</span>.prototype.concat.apply([], arr);</span><br><span class="line">  <span class="keyword">return</span> flat(res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果数组没有内嵌数组，使用 concat 可以把所有一层的数组直接串联起来，这里的<code>Array.prototype.concat.apply([], arr)</code>把 arr 和 [] 串联。在数组内嵌的情况下进行递归即可平摊数组。</p>
-<h1 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h1><ul>
+<h2 id="类型转换">类型转换</h2>
+<ul>
 <li>字符串拼接</li>
 <li>==</li>
 <li>if 语句和逻辑运算</li>
 </ul>
-<h2 id><a href="#" class="headerlink" title="=="></a>==</h2><pre><code class="javascript">100 == &#39;100&#39; // true
-0 == &#39;&#39; // true
-0 == false // true
-false == &#39;&#39; // true
-null == undefined // true
-
-// variable == null 相当于 variable === null || variable == undefined 
-</code></pre>
-<h2 id="if-语句和逻辑运算"><a href="#if-语句和逻辑运算" class="headerlink" title="if 语句和逻辑运算"></a>if 语句和逻辑运算</h2><pre><code class="javascript">// truly 变量即 !!variable === true
-// falsely 变量即 !!variable === false
-// 当判断条件或逻辑运算的值为变量时，它们是 truly 或 falsely
-!!0 === false
-!!NaN === false
-!!&#39;&#39; === false
-!!null === false
-!!undefined === false
-!!false === false
-</code></pre>
-<h1 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h1><h3 id="事件代理"><a href="#事件代理" class="headerlink" title="事件代理"></a>事件代理</h3><ul>
+<h2 id="section-1">==</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">100</span> == <span class="string">'100'</span> <span class="comment">// true</span></span><br><span class="line"><span class="number">0</span> == <span class="string">''</span> <span class="comment">// true</span></span><br><span class="line"><span class="number">0</span> == <span class="literal">false</span> <span class="comment">// true</span></span><br><span class="line"><span class="literal">false</span> == <span class="string">''</span> <span class="comment">// true</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// variable == null 相当于 variable === null || variable == undefined</span></span><br></pre></td></tr></table></figure>
+<h2 id="if-语句和逻辑运算">if 语句和逻辑运算</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// truly 变量即 !!variable === true</span></span><br><span class="line"><span class="comment">// falsely 变量即 !!variable === false</span></span><br><span class="line"><span class="comment">// 当判断条件或逻辑运算的值为变量时，它们是 truly 或 falsely</span></span><br><span class="line">!!<span class="number">0</span> === <span class="literal">false</span></span><br><span class="line">!!<span class="literal">NaN</span> === <span class="literal">false</span></span><br><span class="line">!!<span class="string">''</span> === <span class="literal">false</span></span><br><span class="line">!!<span class="literal">null</span> === <span class="literal">false</span></span><br><span class="line">!!<span class="literal">undefined</span> === <span class="literal">false</span></span><br><span class="line">!!<span class="literal">false</span> === <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h2 id="性能">性能</h2>
+<h3 id="事件代理">事件代理</h3>
+<ul>
 <li>e.target 获取触发元素</li>
 <li>matches 判断是否触发元素</li>
 </ul>
-<h3 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h3><pre><code class="javascript">function throttle(fn, delay = 500, context) {
-  var timer = null;
-  return function() {
-    if (timer) {
-      return ;
-    }
-    timer = setTimeout(function() {
-      fn.apply(context, arguments);
-      timer = null;
-    })
-  }
-}
-</code></pre>
-<h3 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h3><pre><code class="javascript">function debounce(fn, delay = 500, context) {
-  var timer = null;
-  return function() {
-    if (timer) {
-      clearTimeout(timer);
-    }
-    var self = context;
-    timer = setTimeout(function() {
-      fn.apply(self, arguments);
-      timer = null;
-    }, delay)
-  }
-}
-</code></pre>
-<h3 id="图片加载"><a href="#图片加载" class="headerlink" title="图片加载"></a>图片加载</h3><p>// 刷新 DOM 避免点击事件逗留</p>
+<h3 id="节流">节流</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, delay = <span class="number">500</span>, context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">      <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    timer = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      fn.apply(context, <span class="built_in">arguments</span>);</span><br><span class="line">      timer = <span class="literal">null</span>;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="防抖">防抖</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay = <span class="number">500</span>, context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">      clearTimeout(timer);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> self = context;</span><br><span class="line">    timer = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      fn.apply(self, <span class="built_in">arguments</span>);</span><br><span class="line">      timer = <span class="literal">null</span>;</span><br><span class="line">    &#125;, delay)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="图片加载">图片加载</h3>
+<p>// 刷新 DOM 避免点击事件逗留</p>
 <p>指定 DOM 内如果有图片，innerHtml 导致的重绘将重新请求服务器资源。</p>
 <p>容器内无子元素适用 innerHtml，向容器尾追加适用 appendChild。</p>
-<h1 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h1><h2 id="滚轮事件"><a href="#滚轮事件" class="headerlink" title="滚轮事件"></a>滚轮事件</h2><pre><code class="javascript">event.wheelDeltaX
-event.wheelDeltaY
-event.deltaX // FireFox 内容右移正值，左移负值
-event.deltaY // 内容上移负值，下移正值
-// 使用 X 和 Y 比较，X 大则表明触发了横向滚动事件
-elem.scrollTo(x, y) // 滚动至 (x, y) 处
-event.preventDefault() // 阻止默认事件，如果给监听器开启了 passive 为 true 的值，preventDefault 将被忽略，即遵循 passive 不阻止默认事件
-event.stopPropagation() // 阻止冒泡
-</code></pre>
+<h2 id="事件">事件</h2>
+<h2 id="滚轮事件">滚轮事件</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">event.wheelDeltaX</span><br><span class="line">event.wheelDeltaY</span><br><span class="line">event.deltaX <span class="comment">// FireFox 内容右移正值，左移负值</span></span><br><span class="line">event.deltaY <span class="comment">// 内容上移负值，下移正值</span></span><br><span class="line"><span class="comment">// 使用 X 和 Y 比较，X 大则表明触发了横向滚动事件</span></span><br><span class="line">elem.scrollTo(x, y) <span class="comment">// 滚动至 (x, y) 处</span></span><br><span class="line">event.preventDefault() <span class="comment">// 阻止默认事件，如果给监听器开启了 passive 为 true 的值，preventDefault 将被忽略，即遵循 passive 不阻止默认事件</span></span><br><span class="line">event.stopPropagation() <span class="comment">// 阻止冒泡</span></span><br></pre></td></tr></table></figure>
 
 
   </article>

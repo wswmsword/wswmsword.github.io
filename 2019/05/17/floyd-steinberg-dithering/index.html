@@ -33,7 +33,7 @@
     </svg>
   </a>
   <div class="description">
-    &nbsp;月光水面 阳光脸庞 面包蜂蜜 自由和谐
+    &nbsp;郁郁青青 长过千寻
   </div>
 </div>
 
@@ -75,20 +75,13 @@
     </div>
     <hr>
     
+      
+    
     <div class="picture-container">
       
     </div>
-    <pre><code>for each y from top to bottom
-   for each x from left to right
-      oldpixel:=pixel[x][y]
-      newpixel:=find_closest_palette_color(oldpixel)
-      pixel[x][y]:=newpixel
-      quant_error:=oldpixel-newpixel
-      pixel[x+1][y  ]:=pixel[x+1][  y]+quant_error*7/16
-      pixel[x-1][y+1]:=pixel[x-1][y+1]+quant_error*3/16
-      pixel[x  ][y+1]:=pixel[x  ][y+1]+quant_error*5/16
-      pixel[x+1][y+1]:=pixel[x+1][y+1]+quant_error*1/16
-</code></pre>
+    <figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">for each y from top to bottom</span><br><span class="line">   for each x from left to right</span><br><span class="line">      oldpixel:=pixel<span class="string">[x]</span><span class="string">[y]</span></span><br><span class="line">      newpixel:=find_closest_palette_color(oldpixel)</span><br><span class="line">      pixel<span class="string">[x]</span><span class="string">[y]</span>:=newpixel</span><br><span class="line">      quant_error:=oldpixel-newpixel</span><br><span class="line">      pixel<span class="string">[x+1]</span><span class="string">[y  ]</span>:=pixel<span class="string">[x+1]</span><span class="string">[  y]</span>+quant_error*<span class="number">7</span>/<span class="number">16</span></span><br><span class="line">      pixel<span class="string">[x-1]</span><span class="string">[y+1]</span>:=pixel<span class="string">[x-1]</span><span class="string">[y+1]</span>+quant_error*<span class="number">3</span>/<span class="number">16</span></span><br><span class="line">      pixel<span class="string">[x  ]</span><span class="string">[y+1]</span>:=pixel<span class="string">[x  ]</span><span class="string">[y+1]</span>+quant_error*<span class="number">5</span>/<span class="number">16</span></span><br><span class="line">      pixel<span class="string">[x+1]</span><span class="string">[y+1]</span>:=pixel<span class="string">[x+1]</span><span class="string">[y+1]</span>+quant_error*<span class="number">1</span>/<span class="number">16</span></span><br></pre></td></tr></table></figure>
+
 
   </article>
   

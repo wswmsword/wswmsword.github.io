@@ -33,7 +33,7 @@
     </svg>
   </a>
   <div class="description">
-    &nbsp;月光水面 阳光脸庞 面包蜂蜜 自由和谐
+    &nbsp;郁郁青青 长过千寻
   </div>
 </div>
 
@@ -75,41 +75,21 @@
     </div>
     <hr>
     
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#多用"><span class="toc-text">多用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#facn"><span class="toc-text">FAC(n)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编码"><span class="toc-text">编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ctz"><span class="toc-text">CT(Z)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解码"><span class="toc-text">解码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ctz-1"><span class="toc-text">CT(Z)</span></a></li></ol></li></ol>
+    
     <div class="picture-container">
       
     </div>
-    <h2 id="多用"><a href="#多用" class="headerlink" title="多用"></a>多用</h2><h3 id="FAC-n"><a href="#FAC-n" class="headerlink" title="FAC(n)"></a>FAC(n)</h3><pre><code>初始化数组f用于存放阶乘
-f[0]=1
-for i=1 to n-1
-   f[i]=f[i-1]*i
-return f
-</code></pre><h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><h3 id="CT-Z"><a href="#CT-Z" class="headerlink" title="CT(Z)"></a>CT(Z)</h3><pre><code>l=z.len
-FAC(l)
-初始化res=0
-for i=0 to l-1
-   count=0
-   for j=i+1 to l-1
-      if z[j]&lt;z[i]
-         count=count+1
-   res=res+f[n-i-1]*count
-return res
-</code></pre><h2 id="解码"><a href="#解码" class="headerlink" title="解码"></a>解码</h2><h3 id="CT-Z-1"><a href="#CT-Z-1" class="headerlink" title="CT(Z)"></a>CT(Z)</h3><pre><code>初始化数组res用于存放第n个z
-初始化数组book全部置0用于标记
-l=z.len;
-FAC(l)
-sort(z);
-for i=0 to l-1
-   t=n/f[l-i-1]
-   for j=0 to l-1
-      if !book[j]
-         if t==0
-            break
-         t=t-1
-   res[i]=z[j]
-   book[j]=1
-   n=n%f(l-i-1)
-return res
-</code></pre>
+    <h2 id="多用">多用</h2>
+<h3 id="facn">FAC(n)</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">初始化数组f用于存放阶乘</span><br><span class="line">f[<span class="number">0</span>]=<span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span> to n<span class="number">-1</span></span><br><span class="line">   f[<span class="built_in">i</span>]=f[<span class="built_in">i</span><span class="number">-1</span>]*<span class="built_in">i</span></span><br><span class="line"><span class="keyword">return</span> f</span><br></pre></td></tr></table></figure>
+<h2 id="编码">编码</h2>
+<h3 id="ctz">CT(Z)</h3>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">l</span>=z.len</span><br><span class="line">FAC(l)</span><br><span class="line">初始化<span class="attribute">res</span>=0</span><br><span class="line"><span class="keyword">for</span> <span class="attribute">i</span>=0 <span class="keyword">to</span> l-1</span><br><span class="line">   <span class="attribute">count</span>=0</span><br><span class="line">   <span class="keyword">for</span> <span class="attribute">j</span>=i+1 <span class="keyword">to</span> l-1</span><br><span class="line">      <span class="keyword">if</span> z[j]&lt;z[i]</span><br><span class="line">         <span class="attribute">count</span>=count+1</span><br><span class="line">   <span class="attribute">res</span>=res+f[n-i-1]<span class="number">*c</span>ount</span><br><span class="line">return res</span><br></pre></td></tr></table></figure>
+<h2 id="解码">解码</h2>
+<h3 id="ctz-1">CT(Z)</h3>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">初始化数组res用于存放第n个z</span><br><span class="line">初始化数组book全部置0用于标记</span><br><span class="line"><span class="attribute">l</span>=z.len;</span><br><span class="line">FAC(l)</span><br><span class="line">sort(z);</span><br><span class="line"><span class="keyword">for</span> <span class="attribute">i</span>=0 <span class="keyword">to</span> l-1</span><br><span class="line">   <span class="attribute">t</span>=n/f[l-i-1]</span><br><span class="line">   <span class="keyword">for</span> <span class="attribute">j</span>=0 <span class="keyword">to</span> l-1</span><br><span class="line">      <span class="keyword">if</span> !book[j]</span><br><span class="line">         <span class="keyword">if</span> <span class="attribute">t</span>==0</span><br><span class="line">            break</span><br><span class="line">         <span class="attribute">t</span>=t-1</span><br><span class="line">   res[i]=z[j]</span><br><span class="line">   book[j]=1</span><br><span class="line">   <span class="attribute">n</span>=n%f(l-i-1)</span><br><span class="line">return res</span><br></pre></td></tr></table></figure>
+
 
   </article>
   

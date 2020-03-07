@@ -33,7 +33,7 @@
     </svg>
   </a>
   <div class="description">
-    &nbsp;月光水面 阳光脸庞 面包蜂蜜 自由和谐
+    &nbsp;郁郁青青 长过千寻
   </div>
 </div>
 
@@ -75,75 +75,46 @@
     </div>
     <hr>
     
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一维"><span class="toc-text">一维</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#component"><span class="toc-text">component</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#lowbitx"><span class="toc-text">LOWBIT(x)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#updateiv"><span class="toc-text">UPDATE(i,v)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sumi"><span class="toc-text">SUM(i)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单点更新-区间查询"><span class="toc-text">单点更新 区间查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#区间更新-单点查询"><span class="toc-text">区间更新 单点查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#区间更新-区间查询"><span class="toc-text">区间更新 区间查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#updateiv-1"><span class="toc-text">UPDATE(i,v)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sumi-1"><span class="toc-text">SUM(i)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二维"><span class="toc-text">二维</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#component-1"><span class="toc-text">component</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#updatexyv"><span class="toc-text">UPDATE(x,y,v)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sumxy"><span class="toc-text">SUM(x,y)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单点更新-区间查询-1"><span class="toc-text">单点更新 区间查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#区间更新-单点查询-1"><span class="toc-text">区间更新 单点查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#区间更新-区间查询-1"><span class="toc-text">区间更新 区间查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#updatexyv-1"><span class="toc-text">UPDATE(x,y,v)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sumxy-1"><span class="toc-text">SUM(x,y)</span></a></li></ol></li></ol></li></ol>
+    
     <div class="picture-container">
       
     </div>
-    <h1 id="一维"><a href="#一维" class="headerlink" title="一维"></a>一维</h1><h2 id="component"><a href="#component" class="headerlink" title="component"></a>component</h2><h3 id="LOWBIT-x"><a href="#LOWBIT-x" class="headerlink" title="LOWBIT(x)"></a>LOWBIT(x)</h3><pre><code>return x&amp;(-x)
-</code></pre><h3 id="UPDATE-i-v"><a href="#UPDATE-i-v" class="headerlink" title="UPDATE(i,v)"></a>UPDATE(i,v)</h3><pre><code>while i&lt;n
-   btree[i]=btree[i]+v
-   i=i+lowbit(i)
-endwhile
-</code></pre><h3 id="SUM-i"><a href="#SUM-i" class="headerlink" title="SUM(i)"></a>SUM(i)</h3><pre><code>res=0
-while i&gt;0
-   res=res+btree[i]
-   i=i-lowbit(i)
-endwhile
-return res
-</code></pre><h2 id="单点更新-区间查询"><a href="#单点更新-区间查询" class="headerlink" title="单点更新 区间查询"></a>单点更新 区间查询</h2><pre><code>for i=1 to n
-   update(i,v) endfor
-res=sum(r)-sum(l-1)
-</code></pre><h2 id="区间更新-单点查询"><a href="#区间更新-单点查询" class="headerlink" title="区间更新 单点查询"></a>区间更新 单点查询</h2><pre><code>update(l,v)
-update(r+1,-v)
-res=sum(i)
-</code></pre><h2 id="区间更新-区间查询"><a href="#区间更新-区间查询" class="headerlink" title="区间更新 区间查询"></a>区间更新 区间查询</h2><h3 id="UPDATE-i-v-1"><a href="#UPDATE-i-v-1" class="headerlink" title="UPDATE(i,v)"></a>UPDATE(i,v)</h3><pre><code>p=i
-while i&lt;n
-   sum1[i]=sum1+v
-   sum2[i]=sum2+p*v
-   i=i+lowbit(i)
-endwhile
-</code></pre><h3 id="SUM-i-1"><a href="#SUM-i-1" class="headerlink" title="SUM(i)"></a>SUM(i)</h3><pre><code>res=0
-p=i
-while i&gt;0
-   res=res+(p+1)*sum1[i]-sum2[i]
-   i=i=lowbit(i)
-endwhile
-return res
-</code></pre><pre><code>update(l,v)
-update(r+1,-v)
-res=sum(r)-sum(l-1)
-</code></pre><h1 id="二维"><a href="#二维" class="headerlink" title="二维"></a>二维</h1><h2 id="component-1"><a href="#component-1" class="headerlink" title="component"></a>component</h2><h3 id="UPDATE-x-y-v"><a href="#UPDATE-x-y-v" class="headerlink" title="UPDATE(x,y,v)"></a>UPDATE(x,y,v)</h3><pre><code>for i=x to n step lowbit(i)
-   for j=y to n step lowbit(j)
-      btree[i][j]=btree[i][j]+v
-</code></pre><h3 id="SUM-x-y"><a href="#SUM-x-y" class="headerlink" title="SUM(x,y)"></a>SUM(x,y)</h3><pre><code>res=0
-for i=x to 1 step lowbit(i)
-   for j=y to 1 step lowbit(j)
-      res=res+btree[i][j]
-return res
-</code></pre><h2 id="单点更新-区间查询-1"><a href="#单点更新-区间查询-1" class="headerlink" title="单点更新 区间查询"></a>单点更新 区间查询</h2><pre><code>x=x-1
-y=y-1
-return sum(xx,yy)+sum(x,y)-query(xx,y)-query(x,yy)
-</code></pre><h2 id="区间更新-单点查询-1"><a href="#区间更新-单点查询-1" class="headerlink" title="区间更新 单点查询"></a>区间更新 单点查询</h2><pre><code>update(x,y,v)
-update(x,yy+1,-v)
-update(xx+1,y,-v)
-update(xx+1,yy+1,v)
-sum(a,b)
-</code></pre><h2 id="区间更新-区间查询-1"><a href="#区间更新-区间查询-1" class="headerlink" title="区间更新 区间查询"></a>区间更新 区间查询</h2><h3 id="UPDATE-x-y-v-1"><a href="#UPDATE-x-y-v-1" class="headerlink" title="UPDATE(x,y,v)"></a>UPDATE(x,y,v)</h3><pre><code>for i=x to n step lowbit(i)
-   for j=y to n step lowbit(j)
-      btree1[i][j]=v
-      btree2[i][j]=v*x
-      btree3[i][j]=v*y
-      btree4[i][j]=v*x*y
-</code></pre><h3 id="SUM-x-y-1"><a href="#SUM-x-y-1" class="headerlink" title="SUM(x,y)"></a>SUM(x,y)</h3><pre><code>res=0
-for i=x to 1 step lowibt(i)
-   for j=y to 1 step lowbit(j)
-      res=res+(x+1)*(y+1)*btree1[i][j]-(y+1)*btree2[i][j]-(x+1)*btree3[i][j]+btree4[i][j]
-return res
-</code></pre><pre><code>update(x,y,v)
-update(x,yy+1,-v)
-update(xx+1,y,-v)
-update(xx+1,yy+1,v)
-return sum(aa,bb)+sum(a-1,b-1)-sum(a-1,bb)-sum(aa,b-1)
-</code></pre>
+    <h1 id="一维">一维</h1>
+<h2 id="component">component</h2>
+<h3 id="lowbitx">LOWBIT(x)</h3>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> x&amp;(-x)</span><br></pre></td></tr></table></figure>
+<h3 id="updateiv">UPDATE(i,v)</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="built_in">i</span>&lt;n</span><br><span class="line">   btree[<span class="built_in">i</span>]=btree[<span class="built_in">i</span>]+v</span><br><span class="line">   <span class="built_in">i</span>=<span class="built_in">i</span>+lowbit(<span class="built_in">i</span>)</span><br><span class="line">endwhile</span><br></pre></td></tr></table></figure>
+<h3 id="sumi">SUM(i)</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">res=<span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">i</span>&gt;<span class="number">0</span></span><br><span class="line">   res=res+btree[<span class="built_in">i</span>]</span><br><span class="line">   <span class="built_in">i</span>=<span class="built_in">i</span>-lowbit(<span class="built_in">i</span>)</span><br><span class="line">endwhile</span><br><span class="line"><span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h2 id="单点更新-区间查询">单点更新 区间查询</h2>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i=1 to n</span><br><span class="line">   update(<span class="name">i</span>,v) endfor</span><br><span class="line">res=sum(<span class="name">r</span>)-sum(<span class="name">l-1</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="区间更新-单点查询">区间更新 单点查询</h2>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update(<span class="name">l</span>,v)</span><br><span class="line">update(<span class="name">r+1</span>,-v)</span><br><span class="line">res=sum(<span class="name">i</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="区间更新-区间查询">区间更新 区间查询</h2>
+<h3 id="updateiv-1">UPDATE(i,v)</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">p=<span class="built_in">i</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">i</span>&lt;n</span><br><span class="line">   sum1[<span class="built_in">i</span>]=sum1+v</span><br><span class="line">   sum2[<span class="built_in">i</span>]=sum2+p*v</span><br><span class="line">   <span class="built_in">i</span>=<span class="built_in">i</span>+lowbit(<span class="built_in">i</span>)</span><br><span class="line">endwhile</span><br></pre></td></tr></table></figure>
+<h3 id="sumi-1">SUM(i)</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">res=<span class="number">0</span></span><br><span class="line">p=<span class="built_in">i</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">i</span>&gt;<span class="number">0</span></span><br><span class="line">   res=res+(p+<span class="number">1</span>)*sum1[<span class="built_in">i</span>]-sum2[<span class="built_in">i</span>]</span><br><span class="line">   <span class="built_in">i</span>=<span class="built_in">i</span>=lowbit(<span class="built_in">i</span>)</span><br><span class="line">endwhile</span><br><span class="line"><span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update(<span class="name">l</span>,v)</span><br><span class="line">update(<span class="name">r+1</span>,-v)</span><br><span class="line">res=sum(<span class="name">r</span>)-sum(<span class="name">l-1</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="二维">二维</h1>
+<h2 id="component-1">component</h2>
+<h3 id="updatexyv">UPDATE(x,y,v)</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=x to n step lowbit(<span class="built_in">i</span>)</span><br><span class="line">   <span class="keyword">for</span> <span class="built_in">j</span>=y to n step lowbit(<span class="built_in">j</span>)</span><br><span class="line">      btree[<span class="built_in">i</span>][<span class="built_in">j</span>]=btree[<span class="built_in">i</span>][<span class="built_in">j</span>]+v</span><br></pre></td></tr></table></figure>
+<h3 id="sumxy">SUM(x,y)</h3>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">res</span>=0</span><br><span class="line"><span class="keyword">for</span> <span class="attribute">i</span>=x <span class="keyword">to</span> 1 <span class="keyword">step</span> lowbit(i)</span><br><span class="line">   <span class="keyword">for</span> <span class="attribute">j</span>=y <span class="keyword">to</span> 1 <span class="keyword">step</span> lowbit(j)</span><br><span class="line">      <span class="attribute">res</span>=res+btree[i][j]</span><br><span class="line">return res</span><br></pre></td></tr></table></figure>
+<h2 id="单点更新-区间查询-1">单点更新 区间查询</h2>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x=x-1</span><br><span class="line">y=y-1</span><br><span class="line">return sum(<span class="name">xx</span>,yy)+sum(<span class="name">x</span>,y)-query(<span class="name">xx</span>,y)-query(<span class="name">x</span>,yy)</span><br></pre></td></tr></table></figure>
+<h2 id="区间更新-单点查询-1">区间更新 单点查询</h2>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">update</span><span class="params">(x,y,v)</span></span></span><br><span class="line"><span class="function"><span class="title">update</span><span class="params">(x,yy+<span class="number">1</span>,-v)</span></span></span><br><span class="line"><span class="function"><span class="title">update</span><span class="params">(xx+<span class="number">1</span>,y,-v)</span></span></span><br><span class="line"><span class="function"><span class="title">update</span><span class="params">(xx+<span class="number">1</span>,yy+<span class="number">1</span>,v)</span></span></span><br><span class="line"><span class="function"><span class="title">sum</span><span class="params">(a,b)</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="区间更新-区间查询-1">区间更新 区间查询</h2>
+<h3 id="updatexyv-1">UPDATE(x,y,v)</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=x to n step lowbit(<span class="built_in">i</span>)</span><br><span class="line">   <span class="keyword">for</span> <span class="built_in">j</span>=y to n step lowbit(<span class="built_in">j</span>)</span><br><span class="line">      btree1[<span class="built_in">i</span>][<span class="built_in">j</span>]=v</span><br><span class="line">      btree2[<span class="built_in">i</span>][<span class="built_in">j</span>]=v*x</span><br><span class="line">      btree3[<span class="built_in">i</span>][<span class="built_in">j</span>]=v*y</span><br><span class="line">      btree4[<span class="built_in">i</span>][<span class="built_in">j</span>]=v*x*y</span><br></pre></td></tr></table></figure>
+<h3 id="sumxy-1">SUM(x,y)</h3>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">res</span>=0</span><br><span class="line"><span class="keyword">for</span> <span class="attribute">i</span>=x <span class="keyword">to</span> 1 <span class="keyword">step</span> lowibt(i)</span><br><span class="line">   <span class="keyword">for</span> <span class="attribute">j</span>=y <span class="keyword">to</span> 1 <span class="keyword">step</span> lowbit(j)</span><br><span class="line">      <span class="attribute">res</span>=res+(x+1)*(y+1)*btree1[i][j]-(y+1)<span class="number">*b</span>tree2[i][j]-(x+1)<span class="number">*b</span>tree3[i][j]+btree4[i][j]</span><br><span class="line">return res</span><br></pre></td></tr></table></figure>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">update(<span class="name">x</span>,y,v)</span><br><span class="line">update(<span class="name">x</span>,yy+1,-v)</span><br><span class="line">update(<span class="name">xx+1</span>,y,-v)</span><br><span class="line">update(<span class="name">xx+1</span>,yy+1,v)</span><br><span class="line">return sum(<span class="name">aa</span>,bb)+sum(<span class="name">a-1</span>,b-1)-sum(<span class="name">a-1</span>,bb)-sum(<span class="name">aa</span>,b-1)</span><br></pre></td></tr></table></figure>
+
 
   </article>
   

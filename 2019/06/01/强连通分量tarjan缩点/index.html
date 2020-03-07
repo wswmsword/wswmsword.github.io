@@ -33,7 +33,7 @@
     </svg>
   </a>
   <div class="description">
-    &nbsp;月光水面 阳光脸庞 面包蜂蜜 自由和谐
+    &nbsp;郁郁青青 长过千寻
   </div>
 </div>
 
@@ -75,29 +75,16 @@
     </div>
     <hr>
     
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#main"><span class="toc-text">MAIN()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tarjanu"><span class="toc-text">TARJAN(U)</span></a></li></ol>
+    
     <div class="picture-container">
       
     </div>
-    <h3 id="MAIN"><a href="#MAIN" class="headerlink" title="MAIN()"></a>MAIN()</h3><pre><code>cnt:=1
-res:=0
-for i=1 to 总点数
-   if book[i]=0
-      TARJAN(i) endif
-endfor
-print res
-</code></pre><h3 id="TARJAN-U"><a href="#TARJAN-U" class="headerlink" title="TARJAN(U)"></a>TARJAN(U)</h3><pre><code>book[u]:=1
-low[u]:=dfn[u]:=cnt
-cnt:=cnt+1
-for i:=0 to (连接u的点数-1)
-   v:=连接u的第(i+1)个点
-   if book[v]=0
-      TARJAN(v) endif
-   if book[v]=1
-      low[u]=MIN(low[u],low[v]) endif
-endfor
-if dfn[u]=low[u]
-   res:=res+1
-</code></pre>
+    <h3 id="main">MAIN()</h3>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cn</span><span class="variable">t:</span>=<span class="number">1</span></span><br><span class="line">re<span class="variable">s:</span>=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span> <span class="keyword">to</span> 总点数</span><br><span class="line">   <span class="keyword">if</span> book[i]=<span class="number">0</span></span><br><span class="line">      TARJAN(i) <span class="keyword">endif</span></span><br><span class="line"><span class="keyword">endfor</span></span><br><span class="line"><span class="keyword">print</span> <span class="keyword">res</span></span><br></pre></td></tr></table></figure>
+<h3 id="tarjanu">TARJAN(U)</h3>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">book[<span class="keyword">u</span>]:=<span class="number">1</span></span><br><span class="line">low[<span class="keyword">u</span>]:=dfn[<span class="keyword">u</span>]:=cnt</span><br><span class="line"><span class="keyword">cn</span><span class="variable">t:</span>=cnt+<span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> i:=<span class="number">0</span> <span class="keyword">to</span> (连接<span class="keyword">u</span>的点数-<span class="number">1</span>)</span><br><span class="line">   <span class="variable">v:</span>=连接<span class="keyword">u</span>的第(i+<span class="number">1</span>)个点</span><br><span class="line">   <span class="keyword">if</span> book[v]=<span class="number">0</span></span><br><span class="line">      TARJAN(v) <span class="keyword">endif</span></span><br><span class="line">   <span class="keyword">if</span> book[v]=<span class="number">1</span></span><br><span class="line">      low[<span class="keyword">u</span>]=MIN(low[<span class="keyword">u</span>],low[v]) <span class="keyword">endif</span></span><br><span class="line"><span class="keyword">endfor</span></span><br><span class="line"><span class="keyword">if</span> dfn[<span class="keyword">u</span>]=low[<span class="keyword">u</span>]</span><br><span class="line">   re<span class="variable">s:</span>=<span class="keyword">res</span>+<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
 
   </article>
   
