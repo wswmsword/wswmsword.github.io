@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>strawberryfields</title>
+  <meta name="author" content="strawberry">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="strawberryfields">
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="strawberryfields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+</head>
+</html>
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewbox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"/>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;郁郁青青 长过千寻
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-03-15T11:04:27.626Z" itemprop="datePublished">
+  <svg class="i-calendar" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"/>
+  </svg>
+  &nbsp;
+  2020-03-15
+</time>
+
+
+
+
+
+
+    </div>
+    <hr>
+    
+      
+    
+    <div class="picture-container">
+      
+    </div>
+    (function () {
+   function scrollX(options) {
+      this.setByScript = false;
+      this.options = scrollX.extend({}, this.options);
+      scrollX.extend(this.options, options);
+      this.Elem = this.options.xElem;
+      this.init();
+   }
+   window.scrollX = scrollX;
+   scrollX.prototype.options = {
+      knob: true,
+      xElem: 'body',
+      pixelPerStep: 10,
+      offsetX: 0,
+      offsetY: 0,
+   };
+   scrollX.prototype.mouseWheelHandler = function (e) {
+      var delta, change, newOffset, eleOffset, scrollWidth,
+         winWidth, maxOffset, elem = this.Elem;
+
+      delta = 0;
+
+      eleOffset = elem.offsetWidth;
+      scrollWidth = elem.scrollWidth;
+      winWidth = elem.clientWidth;
+      maxOffset = Math.max(eleOffset, scrollWidth) - winWidth;
+
+      if (Math.abs(e.wheelDeltaX) >= Math.abs(e.wheelDeltaY) ||
+         Math.abs(e.deltaX) >= Math.abs(e.deltaY)) {
+         return ;
+      }
+      if ('deltaY' in e) {
+         delta = e.deltaY*-10;
+         // console.log('deltaY = ' + e.deltaY);
+         // console.log('delta = e.deltaY*-10 = ' + delta);
+      } else if (e.detail) { // 老火狐、欧朋
+         delta = e.detail*-240;
+         // console.log('delta = ' + e.detail);
+         // console.log('delta = e.detail*-240 = ' + delta);
+      } else if (e.wheelDelta) {
+         delta = e.wheelDelta*5;
+      }
+
+      change = delta*(this.options.pixelPerStep)/120;
+      newOffset = this.options.offsetX-change;
+      this.setByScript = true;
+      if (newOffset >= 0 && newOffset <= 0 maxoffset) { this.options.offsetx="newOffset;" } else if (this.options.offsetx !="=" &&> maxOffset ? maxOffset : 0;
+      } else {
+         return false;
+      }
+      elem.scrollTo(this.options.offsetX, this.options.offsetY);
+      // elem.scrollTo({top: this.options.offsetY, left: this.options.offsetX, behavior: "instant"});
+      if (e.preventDefault && e.stopPropagation) {
+         e.preventDefault();
+         e.stopPropagation();
+      } else {
+         return false;
+      }
+
+   };
+   scrollX.prototype.scrollHandler = function () {
+      if (!this.setByScript) {
+         this.options.offsetX = scrollX.getOffset(this.Elem, 'x');
+         this.options.offsetY = scrollX.getOffset(this.Elem, 'y');
+      }
+      this.setByScript = false;
+   };
+   scrollX.prototype.init = function () {
+      if (!this.options.knob) {
+         return ;
+      }
+      var useCaptureOrOptions = scrollX.supportsEventListenerPassiveOption() ? {
+         capture: false, passive: false} : false,
+         self = this;
+      if ("onwheel" in this.Elem) {
+         this.Elem.addEventListener("wheel", function(e){
+            if (e.target.className === 'scrollY')
+               return ;
+            self.mouseWheelHandler(e);
+         }, useCaptureOrOptions);
+      } else if ("onmousewheel" in this.Elem) {
+         this.Elem.addEventListener("mousewheel", function(e){
+            if (e.target.className === 'scrollY')
+               return ;
+            self.mouseWheelHandler(e);
+         }, useCaptureOrOptions);
+      } else {
+         this.Elem.addEventListener("DOMMouseScroll", function(e){
+            if (e.target.className === 'scrollY')
+               return ;
+            self.mouseWheelHandler(e);
+         }, useCaptureOrOptions);
+      }
+
+      this.Elem.addEventListener("scroll", function(e){
+         self.scrollHandler(e);
+      }, useCaptureOrOptions);
+   };
+   scrollX.getOffset = function (Elem, axis) {
+      axis = axis.toUpperCase();
+      var pageOffset = 'page' + axis + 'Offset',
+         scrollValue = 'scroll' + axis,
+         scrollDir = 'scroll' + (axis === 'X' ? 'Left' : 'Top');
+      return Elem[pageOffset] || Elem[scrollValue] || Elem[scrollDir];
+   };
+   scrollX.supportsEventListenerPassiveOption = function () {
+      var supportsPassiveOption = false;
+      try {
+         var options = Object.defineProperty({}, 'passive', {
+            get: function () {
+               supportsPassiveOption = true;
+            }
+         });
+         window.addEventListener('test', null, options);
+         window.removeEventListener('test', null, options);
+      } catch (error) {}
+      return supportsPassiveOption;
+   }
+   scrollX.extend = function (x, y) {
+      for (var key in y) {
+         if (y.hasOwnProperty(key)) {
+            x[key] = y[key];
+         }
+      }
+      return x;
+   }
+})();</=>
+
+  </article>
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewbox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"/>
+        </svg>
+        </a>
+        © chen 2016-2020
+    </div>
+    <div class="secondrow">
+        <a href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
