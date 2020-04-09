@@ -45,7 +45,7 @@
       <ul class="dropdown-content">
 
           
-           <div><a href="/categories/笔记本/">笔记本</a></div><div><a href="/categories/剪贴板/">剪贴板</a></div><div><a href="/categories/风起林舞/">风起林舞</a></div><div><a href="/categories/字符串/">字符串</a></div><div><a href="/categories/图像处理/">图像处理</a></div><div><a href="/categories/博弈论/">博弈论</a></div><div><a href="/categories/图论/">图论</a></div><div><a href="/categories/离散数学/">离散数学</a></div><div><a href="/categories/数论/">数论</a></div><div><a href="/categories/排序/">排序</a></div><div><a href="/categories/树形结构/">树形结构</a></div><div><a href="/categories/震/">震</a></div>
+           <div><a href="/categories/剪贴板/">剪贴板</a></div><div><a href="/categories/笔记本/">笔记本</a></div><div><a href="/categories/风起林舞/">风起林舞</a></div><div><a href="/categories/字符串/">字符串</a></div><div><a href="/categories/图像处理/">图像处理</a></div><div><a href="/categories/博弈论/">博弈论</a></div><div><a href="/categories/图论/">图论</a></div><div><a href="/categories/离散数学/">离散数学</a></div><div><a href="/categories/数论/">数论</a></div><div><a href="/categories/排序/">排序</a></div><div><a href="/categories/树形结构/">树形结构</a></div><div><a href="/categories/震/">震</a></div>
 
       </ul>
 
@@ -147,6 +147,49 @@
   
   
     <h1 class="index-title">
+        <a href="/2020/04/09/Webpack-和-Babel/">
+            Webpack 和 Babel
+        </a>
+    </h1>
+  
+
+
+  <div class="excerpt">
+  
+    
+  
+  <a href="/2020/04/09/Webpack-和-Babel/">
+    更多
+  </a>
+  </div>
+  <div class="index-meta">
+    <time datetime="2020-04-09T02:49:38.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"/>
+  </svg>
+  &nbsp;
+  2020-04-09
+</time>
+
+
+
+
+
+
+  </div>
+</li>
+<hr>
+
+
+
+
+
+  
+    
+<li class="post-item">
+  
+  
+    <h1 class="index-title">
         <a href="/2020/03/08/前端性能优化/">
             前端性能优化
         </a>
@@ -156,10 +199,18 @@
 
   <div class="excerpt">
   
-    常用函数
-事件函数
-防抖
-123456789101112function debounce(fn, delay, context) &#123;  var timer = null;  return function() &#123;   
+    缓存
+
+强制缓存
+
+expires
+
+是 HTTP1.0 字段，首次请求时服务端返回具体时间作为资源过期时间
+问题：设置的过期时间和服务端一致，如果服务端和客户端存在误差则缓存无法预期
+
+Cache-Control
+
+HTTP1.1 字段，
   
   <a href="/2020/03/08/前端性能优化/">
     更多
@@ -257,12 +308,19 @@
 
   <div class="excerpt">
   
-    闭包和作用域
+    正则表达式
+
+删除头尾空格
+
+123function zTrim(z) &#123;  return z.replace(/^\s+|\s+$/gm, '');&#125;
+
+
+闭包和作用域
 产生闭包的两种表现
 
 函数作为参数被传递
 
-123456789function create() &#123;  let a = 100;  return function() &#123;    console.log(a)
+12
   
   <a href="/2020/02/25/JavaScript-知识点清单/">
     更多
@@ -450,59 +508,6 @@ SUM
     </svg>
     &nbsp;
     <a href="/categories/树形结构/">树形结构</a>
-
-
-
-
-
-  </div>
-</li>
-<hr>
-
-
-
-
-
-  
-    
-<li class="post-item">
-  
-  
-    <h1 class="index-title">
-        <a href="/2019/06/01/aho-corasick自动机/">
-            aho-corasick自动机
-        </a>
-    </h1>
-  
-
-
-  <div class="excerpt">
-  
-    INSERT(buf)
-123456789len:=组成trie树的单词buf长度now:=root即0for i:=0 to len-1   ch:=buf[i]的英文序列如25表示z   if nxt[now,ch]=-1      n
-  
-  <a href="/2019/06/01/aho-corasick自动机/">
-    更多
-  </a>
-  </div>
-  <div class="index-meta">
-    <time datetime="2019-06-01T03:38:45.000Z" itemprop="datePublished">
-  <svg class="i-calendar" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"/>
-  </svg>
-  &nbsp;
-  2019-06-01
-</time>
-
-
-    
-    &nbsp;
-    <svg class="i-tag" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-      <circle cx="24" cy="8" r="2"/>
-      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"/>
-    </svg>
-    &nbsp;
-    <a href="/categories/字符串/">字符串</a>
 
 
 
