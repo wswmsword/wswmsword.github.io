@@ -153,27 +153,31 @@
 <p><a href="https://juejin.im/post/5acd8ced6fb9a028d444ee4e" target="_blank" rel="noopener">详解Object.create(null)</a></p>
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create" target="_blank" rel="noopener">Object.create()</a></p>
 <h2 id="proxy">Proxy</h2>
-<p>紹介：代理，访问目标对象前拦截它，并对该访问进行过滤和改写。生成 Proxy 实例的例子：<code>var proxy = new Proxy(target, handler);</code>，target 是目标对象，handler 是用于拦截的处理器对象。</p>
+<p>紹介<small style="color: salmon">しょうかい</small>：代理，访问目标对象前拦截它，并对该访问进行过滤和改写。生成 Proxy 实例的例子：<code>var proxy = new Proxy(target, handler);</code>，target 是目标对象，handler 是用于拦截的处理器对象。</p>
 <p>handler 对象的方法：<code>handler.getPrototypeOf()</code>，Object.getPrototypeOf 方法的捕捉器；<code>handler.setPrototypeOf()</code>，Object.setPrototypeOf 方法的捕捉器；<code>handler.isExtensible()</code>，Object.isExtensible 方法的捕捉器；<code>handler.preventExtensions()</code>，Object.preventExtensions 方法的捕捉器；<code>handler.getOwnPropertyDescriptor()</code>，Object.getOwnPropertyDescriptor 方法的捕捉器；<code>handler.defineProperty()</code>，Object.defineProperty 方法的捕捉器；<code>handler.has()</code>，in 操作符的捕捉器；<code>handler.get()</code>，属性读取操作的捕捉器；<code>handler.set()</code>，属性设置操作的捕捉器；<code>handler.deleteProperty()</code>，delete 操作符的捕捉器；<code>handler.ownKeys()</code>，Object.getOwnPropertyNames 方法和 Object.getOwnPropertySymbols 方法的捕捉器；<code>handler.apply()</code>，函数调用操作的捕捉器；<code>handler.construct()</code>，new 操作符的捕捉器。方法の紹介：https://es6.ruanyifeng.com/#docs/proxy#get；https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy。</p>
 <p>Proxy 的　静的メサット：Proxy.revocable()，示例：<code>let {proxy, revoke} = Proxy.revocable(target, handler);</code>，执行返回的 revoke 函数后就不能使用 proxy 实例了。</p>
 <p>Proxy 实例的 this：Proxy 代理的目标对象 this 指向生成的实例，因此会无法直接访问一些属性或方法。</p>
 <p>使用处理器方法实现<strong>链式操作</strong>（get）、<strong>限制属性值大于 0</strong>（set）等例子：https://es6.ruanyifeng.com/#docs/proxy#get</p>
 <p><a href="#实现限制%20age%20的值大于%200">实现限制 age 的值大于 0</a></p>
 <h2 id="reflect">Reflect</h2>
-<p>Reflect　の設計目的：存储语言内部方法；返回合理结果（catch 和 bool）；使操作变为函数行为而非命令式；配合 Proxy。</p>
+<p>Reflect　の設計<small style="color: salmon;">せっけい</small>目的：存储语言内部方法；返回合理结果（catch 和 bool）；使操作变为函数行为而非命令式；配合 Proxy。</p>
 <p>Reflect 的方法和 Proxy 的所有拦截方法对应。</p>
 <p><strong>has</strong> 和 <strong>deleteProperty</strong> 的用法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123; foo: 1 &#125;</span><br><span class="line">Reflect.has(obj, &apos;foo&apos;) // true // 代替 in 演算子</span><br><span class="line">Reflect.deleteProperty(obj, &apos;foo&apos;) // true // 代替 delete 演算子</span><br></pre></td></tr></table></figure>
 <p>apply 方法：https://es6.ruanyifeng.com/#docs/reflect#Reflect-applyfunc-thisArg-args；https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect/apply。</p>
 <h2 id="generator">Generator</h2>
+<p>生成器函数参数发送值：正常参数。</p>
+<p>next 发送值：值是上一次被挂起的 yield 表达式的最终结果。</p>
+<p>生成器的<strong>双向通信</strong>：通过 yield 从生成器返回值（中间结果），通过迭代器 next() 把值传回生成器。</p>
+<p>抛出异常：异常将抛回生成器。</p>
 <h2 id="promise">Promise</h2>
 <h2 id="集合">集合</h2>
 <h2 id="数组">数组</h2>
 <p>プロパテイ：constructor, length, <span class="citation" data-cites="unscopables">[@@unscopables]</span>.</p>
 <p>メソッド：<strong>変更メソッド、アクセサメソッド、反復メソッド</strong>。</p>
-<p><strong>変更</strong>：copyWithin, fill, pop, push, reverse, shift, sort, splice, unshift.</p>
+<p><strong>変更</strong><small style="color: salmon">へんこう</small>：copyWithin, fill, pop, push, reverse, shift, sort, splice, unshift.</p>
 <p><strong>アクセサ</strong>：concat, includes, indexOf, join, lastIndexOf, slice, toSource, toString, toLocalString.</p>
-<p><strong>反復</strong>：entries, every, filter, find, findIndex, forEach, keys, map, reduce, reduceRight, some, values, <span class="citation" data-cites="iterator">[@@iterator]</span>.</p>
+<p><strong>反復</strong><small style="color: salmon">はんぷく</small>：entries, every, filter, find, findIndex, forEach, keys, map, reduce, reduceRight, some, values, <span class="citation" data-cites="iterator">[@@iterator]</span>.</p>
 <p>第一类修改器方法都不是纯函数（不改变原数组，返回一个数组），它们都修改了原函数。</p>
 <p>shift 的选择：使用 shift 和 unshift 之后每一个索引都要调整，存在性能问题。</p>
 <p>slice 和 splice：slice 是纯函数，抽取一段，splice 则是拼接（替换）一段，在原数组上可以拼接一段空也能拼接一段有意义的数据。</p>
