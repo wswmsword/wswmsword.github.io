@@ -66,12 +66,32 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一种常规执行步骤の记录"><span class="toc-text">一种常规执行步骤の记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小册实践路径记录"><span class="toc-text">小册实践路径记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主题博文"><span class="toc-text">主题博文</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#section"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ほしのかけら"><span class="toc-text">ほしのかけら</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一种常规执行步骤の记录"><span class="toc-text">一种常规执行步骤の记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小册实践路径记录"><span class="toc-text">小册实践路径记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主题博文"><span class="toc-text">主题博文</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
     </div>
-    <h2 id="一种常规执行步骤の记录">一种常规执行步骤の记录</h2>
+    <h1 id="section"></h1>
+<h2 id="webpack">webpack</h2>
+<p>練習問題：构建和打包的原因；module, chunk, bundle 的含义；loader 和 plugin 的区别；webpack 实现懒加载的方法；常见性能优化；babel-runtime, babel-polyfill 的区别。</p>
+<p>webpack-merge：组合多个 webpack 配置文件，例如组合公共配置文件 webpack.common.js，https://www.npmjs.com/package/webpack-merge。</p>
+<p>DefinePlugin：https://www.webpackjs.com/plugins/define-plugin/。</p>
+<p>webpack-dev-server：开发环境中配置，常用属性有 port 服务端口、progress 打包进度条开关、contentBase 根目录、open 自动打开浏览器开关、compress 启动 gzip 压缩开关、proxy 设置代理（跨域请求）。</p>
+<p>CleanWebpackPlugin：清空 output.path 文件夹，生产环境配置中使用。</p>
+<p>抽离压缩 CSS：mini-css-extract-plugin，使用该插件提供的 MiniCssExtractPlugin.loader 替换 style-loader，避免生产环境直接将样式用脚本动态插入标签，然后在 pugins 中执行抽离<code>new MiniCssExtractPlugin({ filename: 'css/main.[contentHash:8].css' })</code>；terser-webpack-plugin 和 optimize-css-assets-webpack 压缩 CSS，在<code>optimization:{ minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})], }</code>。</p>
+<p>抽离公共代码：避免同样的代码编码在多个文件中，而抽离公共代码引入，例如引入体积较大的库的时候，如果不抽离，即使修改很少的业务代码也将导致哈希值变更会引起整个文件的重新加载。</p>
+<p>懒加载：<code>setTimeout(() =&gt; {import('xxx').then(res =&gt; { xxxxxx })}, 5700)</code>。</p>
+<p>定义 chunk 的地方：entry, optimization.splitChunks.cacheGroups, 懒加载。</p>
+<p>从<strong>构建速度</strong>进行优化的关键点：babel-loader, happyPack, IgnorePlugin, ParallelUglifyPlugin, noParse, 自动刷新, 热更新, DllPlugin。</p>
+<p>babel-loader：性能消耗较多的地方，使用<strong>缓存</strong>和<strong>确定范围</strong>来提升速度；<code>module: {rules: [{ test: /\.js$/, use: ['babel-loader?cacheDirectory'], include: path.resolve(__dirname, 'src'), exclude: path.resolve(__dirname, 'node_modules') }], }</code>。</p>
+<p>IgnorePlugin：默认引入将引入模块中所有 js 代码，当只需要其中一部分时就使用 IgnorePlugin <strong>忽略</strong>模块<strong>动态引入</strong>我们需要的一部分；忽略<code>new webpack.IgnorePlugin(xx, xxx)</code>，动态引入<code>import 'xxxx'</code>。</p>
+<p>noParse：对于已经模块化处理过的模块，形如<code>xxx.min.js</code>这样的模块则忽略；<code>module: { noParse: [/xxx\.min\.js$/], }</code>。</p>
+<p>happyPack：。</p>
+<h2 id="ほしのかけら">ほしのかけら</h2>
+<p>loader 的执行顺序：后 → 前。</p>
+<p>关键词：css 浏览器兼容加前缀，postcss-loader，autoprefixer。</p>
+<p>赋值源码路径和输出路径：<code>const { srcPath, distPath } = require('./paths')</code>。</p>
+<h2 id="一种常规执行步骤の记录">一种常规执行步骤の记录</h2>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">. 新建文件夹 webpack-demo</span><br><span class="line">. node -v</span><br><span class="line">. npm init -y</span><br><span class="line">// 初始化 npm 环境，webpack-demo 文件里出现 package.json 文件（当前目录描述文件）</span><br><span class="line">. npm install webpack webpack-cli -D</span><br><span class="line">. 新建 src 文件夹，src 下新建 index.js，根目录下新建 webpack.config.js 文件</span><br></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.config.js</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>) <span class="comment">// 引用 nodejs 的 path 模块</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">   mode: <span class="string">'development'</span>, <span class="comment">// production</span></span><br><span class="line">   entry: path.join(__dirname, <span class="string">'src'</span>, <span class="string">'index.js'</span>), <span class="comment">// path 模块，寻找当前文件目录的模块，这里的 index.js 是整个文件的入口</span></span><br><span class="line">   output: &#123; <span class="comment">// </span></span><br><span class="line">      filename: <span class="string">'bundle.js'</span>,</span><br><span class="line">      path: path.join(__dirname, <span class="string">'dist'</span>)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">. 修改 package.json 文件，给属性 scripts 对象添加属性 build 属性</span><br><span class="line">// &quot;build&quot;: &quot;webpack --config webpack.config.js&quot;</span><br><span class="line">. npm run build</span><br><span class="line">// 根目录自动生成 dist 文件夹，并包含 bundle.js 文件</span><br><span class="line">. 新建 index.html 文件</span><br><span class="line">. npm install html-webpack-plugin -D</span><br><span class="line">// 解析 html 的插件</span><br><span class="line">. npm install webpack-dev-server -D</span><br><span class="line">// 启动服务的插件</span><br><span class="line">// package.json 文件里的 属性 devDependencies 对象生成属性 html-webpack-plugin 和 webpack-dev-server</span><br><span class="line">. 修改 webpack.config.js 文件</span><br></pre></td></tr></table></figure>
