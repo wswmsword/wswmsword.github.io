@@ -86,7 +86,14 @@
 <p>babel-loader：性能消耗较多的地方，使用<strong>缓存</strong>和<strong>确定范围</strong>来提升速度；<code>module: {rules: [{ test: /\.js$/, use: ['babel-loader?cacheDirectory'], include: path.resolve(__dirname, 'src'), exclude: path.resolve(__dirname, 'node_modules') }], }</code>。</p>
 <p>IgnorePlugin：默认引入将引入模块中所有 js 代码，当只需要其中一部分时就使用 IgnorePlugin <strong>忽略</strong>模块<strong>动态引入</strong>我们需要的一部分；忽略<code>new webpack.IgnorePlugin(xx, xxx)</code>，动态引入<code>import 'xxxx'</code>。</p>
 <p>noParse：对于已经模块化处理过的模块，形如<code>xxx.min.js</code>这样的模块则忽略；<code>module: { noParse: [/xxx\.min\.js$/], }</code>。</p>
-<p>happyPack：。</p>
+<p>happyPack：开启多<strong>进程</strong>打包。</p>
+<p>ParallelUglifyPlugin：多进程压缩 js。</p>
+<p>热更新：热更新后网页不刷新、状态不丢失，和自动刷新不同；HotModuleReplacementPlugin；热更新需要注册监听范围。</p>
+<p>DLLPlugin：。</p>
+<p>优化<strong>产出代码</strong>的关键点：小图片 base64；bundle 加哈希；懒加载；提取公共代码；IgnorePlugin；CDN 加速；使用 production；Scope Hosting。</p>
+<p>使用 production：自动开启代码压缩；React 等会自动删掉调试代码；启动 Tree-Shaking（ES6 Module 生效 tree-shaking，commonjs 不行）；</p>
+<p>ES6 Module 和 Commonjs 的区别：静态引入、编译时引入和动态引入、执行时引入的区别。</p>
+<p>Scope Hosting：代码体积更小；创建函数作用域更少；代码更可读。</p>
 <h2 id="ほしのかけら">ほしのかけら</h2>
 <p>loader 的执行顺序：后 → 前。</p>
 <p>关键词：css 浏览器兼容加前缀，postcss-loader，autoprefixer。</p>

@@ -66,7 +66,7 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#react-を使つかい始はじめる"><span class="toc-text">React を使つかい始はじめる</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#react-hooks"><span class="toc-text">React Hooks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-concepts-advanced-guides"><span class="toc-text">MAIN CONCEPTS &amp; ADVANCED GUIDES</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#パフォーマンス最適化さいてきか"><span class="toc-text">パフォーマンス最適化さいてきか</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原理げんり"><span class="toc-text">原理げんり</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学習がくしゅうサイト"><span class="toc-text">学習がくしゅうサイト</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#react-を使つかい始はじめる"><span class="toc-text">React を使つかい始はじめる</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#react-hooks"><span class="toc-text">React Hooks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-concepts-advanced-guides"><span class="toc-text">MAIN CONCEPTS &amp; ADVANCED GUIDES</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#パフォーマンス最適化さいてきか"><span class="toc-text">パフォーマンス最適化さいてきか</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vdom"><span class="toc-text">vdom</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原理げんり"><span class="toc-text">原理げんり</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redux"><span class="toc-text">Redux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#猫の餌えさ"><span class="toc-text">猫の餌えさ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学習がくしゅうサイト"><span class="toc-text">学習がくしゅうサイト</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
@@ -90,7 +90,7 @@
 <p>独自<small style="color: salmon">どくじ</small>の Hooks を作成<small style="color: salmon">さくせい</small>する、例を挙げましょう：https://codesandbox.io/s/react-useeffect-redux-ghl7c。</p>
 <h2 id="main-concepts-advanced-guides">MAIN CONCEPTS &amp; ADVANCED GUIDES</h2>
 <p>練習問題<small style="color: salmon">れんしゅうもんだい</small>：组件如何通讯；JSX 本质；context 的作用；shouldComponentUpdate（SCU）的作用；redux 单向数据流的简述；setState 是异步还是同步。</p>
-<p>渲染原生 HTML：JSX 标签需要 dangerouslySetInnerHTML 属性，这个属性的值必须是 <code>{__html: ''&lt;span&gt;富文本内容&lt;i&gt;斜体&lt;/i&gt;&lt;b&gt;加粗&lt;/b&gt;&lt;/span&gt;''}</code> 格式的对象。</p>
+<p>渲染原生 HTML：JSX 标签需要 dangerouslySetInnerHTML 属性，这个属性的值必须是 <code>{__html: ''&lt;span&gt;富文本内容&lt;i&gt;斜体&lt;/i&gt;&lt;b&gt;加粗&lt;/b&gt;&lt;/span&gt;''}</code> 格式的对象，https://zh-hans.reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml。</p>
 <p>React Event：SyntheticEvent 模拟出了 DOM 事件所有能力；event.nativeEvent 是原生事件对象；所有事件被挂载到了 document 上。</p>
 <p>制御<small style="color: salmon">せいぎょ</small>されたコンポーネント：表单组件的值受 state 的控制。</p>
 <p>父子组件的通信：state 管理当前组件数据，props 向子组件下流数据，父组件向子组件传递函数做到<strong>状态提升</strong>；安装“prop-types”插件做 props 的类型检查（更健壮）。</p>
@@ -99,21 +99,29 @@
 <p>非制御コンポーネント：<strong>ref</strong>，构造时创建 ref<code>this.nameInputRef = React.createRef()</code>，render 里为组件添加 ref 属性<code>ref = {this.nameInputRef}</code>；<strong>defaultValue, defaultChecked</strong>，为组件设置初始值<code>defaultValue = {this.state.name}</code>，state 在这里的作用只是初始化 value，可省；<strong>手动操作 DOM</strong>，通过 ref 获取 DOM<code>const e = this.nameInputRef.current</code>。</p>
 <p>Portals：令子节点渲染到父组件外的指定 DOM 里，<code>ReactDOM.createPortal(child, container)</code>。用在如 body 层的 fixed 的 position，跳出父元素的 hidden overflow 或 z-index。</p>
 <p>Context：适用全局的设置，如主题、语言的切换。</p>
-<p>异步组件：https://zh-hans.reactjs.org/docs/react-api.html#reactsuspense</p>
+<p>异步组件：懒加载，<code>&lt;React.Suspense fallback={&lt;Spinner /&gt;}&gt;&lt;OtherComponent /&gt;&lt;/React.Suspense&gt;</code>，https://zh-hans.reactjs.org/docs/react-api.html#reactsuspense。</p>
 <h2 id="パフォーマンス最適化さいてきか">パフォーマンス最適化<small style="color: salmon">さいてきか</small></h2>
 <p>shouldComponentUpdate（SCU）：除首次渲染和 forceUpdate() 时，此外渲染前被调用；父组件更新，子组件也更新，SCU 默认返回 true，可以在子组件的 SCU 中<strong>添加条件</strong>（返回 false）从而在满足条件的情况下，父组件的更新不连带子组件。可以在组件中添加 componentDidUpdate（CDU），打印查看子组件是否更新。</p>
-<p>データを変更<small style="color: salmon">へんこう</small>しないこと：如果现在已经给子组件 SCU 添加了条件，却使用非纯函数进行数据更新，将导致子组件静默不按预期渲染视图（数据已在 setState 前更新）。</p>
+<p>データを変更<small style="color: salmon">へんこう</small>しないこと：如果现在已经给子组件 SCU 添加了条件，却使用非纯函数进行数据更新，将导致子组件静默不按预期渲染视图（数据已在 setState 前更新），因为这个问题，React 默认情况下，SCU 返回 false 来保证按预期渲染视图（即使使用非纯函数）。</p>
 <p>PureComponent と memo：浅比较，分别用在类组件和函数组件中，前者不可自定义（可用 forceUpdate() 强制渲染），后者自定义在指定方法的第二参数。immutable.js，https://immutable-js.github.io/immutable-js/。</p>
-<p>HOC：“高階<small style="color: salmon">たかしな</small>コンパーネントとは、あるコンパーネントを受け取って新規<small style="color: salmon">しんき</small>のコンパーネントを返<small style="color: salmon">かえ</small>すような関数<small style="color: salmon">かんすう</small>です。”，用于复用组件逻辑，https://zh-hans.reactjs.org/docs/higher-order-components.html。</p>
+<p>HOC：“高階<small style="color: salmon">たかしな</small>コンパーネントとは、あるコンパーネントを受<small style="color: salmon">う</small>け取<small style="color: salmon">と</small>って新規<small style="color: salmon">しんき</small>のコンパーネントを返<small style="color: salmon">かえ</small>すような関数<small style="color: salmon">かんすう</small>です。”，类似于工厂模式，用于复用组件逻辑，https://zh-hans.reactjs.org/docs/higher-order-components.html。</p>
 <p>Render Props：https://zh-hans.reactjs.org/docs/render-props.html。</p>
+<h3 id="vdom">vdom</h3>
+<p>snabbdom。</p>
 <h2 id="原理げんり">原理<small style="color: salmon">げんり</small></h2>
 <p>JSX 本质：React.createElement 实现（https://www.babeljs.cn/），参数 1 是代表组件的变量或 dom 节点名称字符串，参数 2 是该组件属性，参数 3 是子组件，返回 vnode，通过 patch 渲染。</p>
 <p>合成事件机制的优点：更好的兼容性与跨平台；挂载在 document，减少内存消耗，避免频繁解绑；方便事件的统一管理（如事件机制）。</p>
 <p>合成事件的过程：DOM 触发事件，冒泡至顶层 document → 合成事件层，SyntheticEvent 派发事件 → 事件处理函数。</p>
 <p>batchUpdate：setState 命中该机制时会执行“保存组件于 dirtyComponents 中”，相反则“遍历所有 dirtyComponents，调用 updateComponent，更新 pending state or props”，体现在 setState 上就是同步；如何判断是否将命中该机制可以理解成，执行函数的机制是函数内有个布尔变量（isBatchingUpdates），在函数首位分别赋值为开和关，setState 时查看该变量，值为关<strong>反映的现象</strong>则是同步；能命中该机制的情况，如生命周期（和调用它的函数）、React 中注册的事件（和它调用的函数）、React 可以“管理”的入口。</p>
 <p>组件的渲染和更新：props state → render() 生成 vnode → patch(elem, vnode)；setState(newState) --&gt; dirtyComponents → render() 生成 newVnode → patch(vnode, newVnode)。</p>
+<h2 id="redux">Redux</h2>
+<p>Redux 应用总数据的生命周期：调用 store.dispatch(action)；Redux store 调用传入的 reducer 函数；根 reducer 把多个子 reducer 合并成一个单一的 state 树；Redux store 保存了根 reducer 返回的完整 state 树。</p>
+<p>mapStateToProps：这个函数指定如何把当前 Redux store state 映射到展示组件的 props 中。</p>
+<p>mapDispatchToProps：分发 action，这个函数接收 dispatch 方法并返回期望注入到展示组件的 props 中的回调方法。</p>
+<h2 id="猫の餌えさ">猫の餌<small style="color: salmon">えさ</small></h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.zhihu.com/question/24925709/answer/130708066</span><br></pre></td></tr></table></figure>
 <h2 id="学習がくしゅうサイト">学習<small style="color: salmon">がくしゅう</small>サイト</h2>
-<p>React 路由中文网：http://react-router.docschina.org/web/example/route-config</p>
+<p>React 路由中文网：http://react-router.docschina.org/web/example/route-config；https://reactrouter.com/web/guides/quick-start</p>
 <p>ライフサイクル図：https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/</p>
 <p>动画实现方式：https://segmentfault.com/a/1190000012783439</p>
 <p>林纳斯的程序时间：https://linux.slashdot.org/story/20/07/03/2133201/linus-torvalds-i-do-no-coding-any-more</p>

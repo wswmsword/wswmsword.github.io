@@ -66,7 +66,7 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#section"><span class="toc-text"></span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#section"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ほしのかけら"><span class="toc-text">ほしのかけら</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
@@ -80,7 +80,7 @@
 <p>模块不内置使用 --with 添加，内置了使用 --without 移除。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">tar xf nginx-1.19.0.tar.gz</span><br><span class="line">tar xf pcre-8.44.tar.gz</span><br><span class="line">tar xf zlib-1.2.11.tar.gz</span><br><span class="line"># 解压</span><br><span class="line">cd nginx-1.19.0</span><br><span class="line">./configure --help</span><br><span class="line"># 查看编译安装的配置参数</span><br><span class="line">rpm -ql pcre</span><br><span class="line">rpm -ql zlib</span><br><span class="line"># 查看安装目录</span><br><span class="line">./configure --prefix=/opt/nginx --conf-path=/opt/nginx/conf/nginx.conf --user=nginx --group=nginx --pid-path=/opt/nginx/pid/nginx.pid --error-log-path=/opt/nginx/logs/error.log --with-pcre=/opt/source/pcre-8.44 --with-zlib=/opt/source/zlib-1.2.11 --with-http_image_filter_module --with-http_stub_status_module --http-log-path=/opt/nginx/logs/access.log</span><br><span class="line">yum install gd gd-devel -y</span><br><span class="line">make</span><br><span class="line"># configure: error: Invalid C++ compiler or C++ compiler flags // 出现错误</span><br><span class="line">yum install gcc-c++</span><br><span class="line">vim MakeFile</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
 <p>查看编译的 nginx 有哪些命令：/opt/nginx/sbin/nginx -h</p>
-<p>常用命令：/opt/nginx/sbin/nginx -t；/opt/nginx/sbin/nginx -s。</p>
+<p>常用命令：/opt/nginx/sbin/nginx -t，检查配置文件语法是否正确；/opt/nginx/sbin/nginx -s signal，向进程发射信号量。</p>
 <hr>
 <p>Nginx 程序的 4 个组成部分（yum 包安装，非编译安装）：<code>二进制执行程序 /usr/sbin/nginx</code>、<code>配置文件 /etc/nginx/nginx.conf</code>、<code>/var/log/nginx/access.log</code>、<code>/var/log/nginx/error.log</code></p>
 <p>文件结构：{main, events, {http, {server, {location, [location]}}, [server]}}</p>
@@ -92,12 +92,92 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lscpu</span><br><span class="line"># 查看 cpu 数量，nginx 启动对应数量的 work 子进程</span><br><span class="line">/usr/sbin/nginx -h</span><br><span class="line"># 查看参数运行 nginx 二进制程序</span><br></pre></td></tr></table></figure>
 <p>reload 重载配置文件流程：向 master 进程发送 HUP 信号 =&gt; master 检测语法正确 =&gt; master 打开监听端口（新配置可能配置新端口）=&gt; master 启动新 worker 子进程 =&gt; master 向旧 worker 发送 QUIT 信号 =&gt; 旧 worker 关闭监听句柄，处理完关闭进程</p>
 <p>热（平滑）升级流程：旧 nginx 文件替换成新 nginx 文件 =&gt; 向 master 进程发送 USR2 信号 =&gt; master 修改 pid 文件，加后缀 .oldbin =&gt; master 用新 nginx 文件启动新 master =&gt; 向旧 master 发送 WINCH 信号，旧 worker 子进程退出 =&gt; 回滚情形：向旧 master 发送 HUP，向新 master 发送 QUIT</p>
-<p>Linux 自身最大大开文件数：65535</p>
+<p>Linux 自身最大打开文件数：65535</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /opt/nginx/tmp</span><br><span class="line">chown -R nginx.nginx /opt/nginx/tmp</span><br></pre></td></tr></table></figure>
 <p>server_name 优先级：精准，左侧通配符，右侧通配符，正则</p>
-<p>root 和 alias 的区别：root 导致在映射路径尾部叠加上层路径，alias 重命名即尾部不叠加</p>
+<p>root 和 alias 的区别：root 导致在映射路径尾部叠加上层路径，alias 重命名即尾部不叠加；alias 末尾一定加“/”，alias 只能位于 location 块中。</p>
 <p>location 指令中匹配规则优先级：高 = -&gt; ^~ -&gt; ~ -&gt; ~* -&gt; 低</p>
-<p>URL 带不带反斜杠  的区别：不带杠将导致---检查文件夹，若无再检查文件，反之不亦然</p>
+<p>location 指令：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">规则</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">例子</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">=</td>
+<td style="text-align: left;">精确匹配</td>
+<td style="text-align: left;">location = /images/ {...}</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">~</td>
+<td style="text-align: left;">正则</td>
+<td style="text-align: left;">location ~ \.(jpg|gif)$ {...}</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">~*</td>
+<td style="text-align: left;">正则，不区分大小写</td>
+<td style="text-align: left;">location ~* \.(jpg|gif)$ {...}</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">^~</td>
+<td style="text-align: left;">匹配到即停止搜索</td>
+<td style="text-align: left;">location ^~ /images/ {...}</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">不带符号</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">location / {...}</td>
+</tr>
+</tbody>
+</table>
+<p>location URL 带不带反斜杠  的区别：不带杠将导致---检查文件夹，若无再检查文件，反之只检查目录。</p>
+<p>if 的 condition：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">condition</th>
+<th style="text-align: left;">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">$variable</td>
+<td style="text-align: left;">仅为变量时，值为空或以 0 为开头的字符串都是 false</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">= 或 !=</td>
+<td style="text-align: left;">相等或不等比较</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">~ 或 !~</td>
+<td style="text-align: left;">正则匹配或非正则匹配</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">~*</td>
+<td style="text-align: left;">正则匹配不区分大小写</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">-f 或 !-f</td>
+<td style="text-align: left;">检查文件存在或不存在</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">-d 或 !-d</td>
+<td style="text-align: left;">检查目录存在或不存在</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">-e 或 !-e</td>
+<td style="text-align: left;">检查文件、目录、符号链接等存在或不存在</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">-x 或 !-x</td>
+<td style="text-align: left;">检查文件可不可执行。</td>
+</tr>
+</tbody>
+</table>
 <p>limit_conn 模块的基本功能：限制客户端并发连接数；使用共享内存，对所有 worker 子进程生效；默认编译，用 --without-http_limit_conn_module 禁用</p>
 <p>limit_req 模块的基本功能：限制处理请求的平均数据；默认编译；共享内存；限流算法 leaky_bucket 算法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">access 模块限定 ip、网段；auth_basic 限定特定用户，without 禁用默认；auth_request 鉴权服务器收到 http 状态码做访问控制；rewrite 模块的 return 指令；rewrite 模块的 rewrite 指令，flag 有 last 和 break 和 permanent 和 redirect；</span><br><span class="line">if</span><br></pre></td></tr></table></figure>
@@ -108,6 +188,8 @@
 <p>代理场景下 nginx 接收用户请求包体的相关参数：client_max_body_size, client_body_buffer_size, client_body_in_file_only, client_body_in_single_buffer, proxy_request_buffering, client_body_timeout.</p>
 <p>client_max_body_size：设置上传报文体的大小，如果大于设置值将报“request entity too large”错误。</p>
 <p>负载均衡器的抛出问题：session 共享；选择应用服务器的算法；应用服务器的缓存信息在 nginx 上的保存。</p>
+<h2 id="ほしのかけら">ほしのかけら</h2>
+<p>美化后缀 html 和斜杠：https://cobwwweb.com/remove-html-extension-and-trailing-slash-in-nginx-config；https://sixtwothree.org/posts/nginx-configuration-removing-html-file-extensions-and-trailing-slashes。</p>
 <p>vim 命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">9yy</span><br><span class="line"># 复制 9 行</span><br><span class="line">:.,$-1d</span><br><span class="line"># 删除从当前行至（最后一行-1）行</span><br><span class="line">:set nu</span><br><span class="line"># 显示行数</span><br></pre></td></tr></table></figure>
 <p>shell 命令</p>
