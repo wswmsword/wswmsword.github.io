@@ -114,6 +114,7 @@
 <p>Javascript实现继承的6种方式 https://blog.csdn.net/Tokki_/article/details/91357384</p>
 </blockquote>
 <p>instanceof 的警告：构造函数原型的改变会导致 instanceof 返回否。</p>
+<p><code>Object.create(null)</code>和<code>{}</code>：{} 创建的对象继承了 Object 自身，OCN 创建的对象则是干净的对象，可以使用<code>Object.create(Object.prototype)</code>达到和<code>{}</code>相同的效果。</p>
 <p>关联博文：<a href="https://juejin.im/post/5acd8ced6fb9a028d444ee4e" target="_blank" rel="noopener">详解Object.create(null)</a>；<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create" target="_blank" rel="noopener">Object.create()</a>。</p>
 <h2 id="symbol">Symbol</h2>
 <h2 id="proxy">Proxy</h2>
@@ -340,6 +341,7 @@
 </blockquote>
 <h2 id="私はのコードスタイル">私はのコードスタイル</h2>
 <h2 id="ほしのかけら">ほしのかけら</h2>
+<p>检查一个对象是否有某个方法：Object.prototype.hasOwnProperty.call(z, 'toString')，这里检查对象 z 有没有 toString 方法，不用 z.hasOwnProperty('toString') 的原因是 z 可能会有自定义的 hasOwnProperty 方法。</p>
 <p>0 和 1 的随机：Math.floor(Math.random()*2)。</p>
 <p>由于浏览器脚本的默认语言是 JavaScript，因此<code>type="application/javascript"</code>可以省略。</p>
 <p>HTML 标签的<code>contenteditable=“true”</code>和<code>tabindex="0"</code>令该标签可被获取焦点。</p>
