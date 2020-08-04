@@ -118,10 +118,13 @@
 <p>关联博文：<a href="https://juejin.im/post/5acd8ced6fb9a028d444ee4e" target="_blank" rel="noopener">详解Object.create(null)</a>；<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create" target="_blank" rel="noopener">Object.create()</a>。</p>
 <h2 id="symbol">Symbol</h2>
 <h2 id="proxy">Proxy</h2>
-<p>紹介<small style="color: salmon">しょうかい</small>：代理，访问目标对象前拦截它，并对该访问进行过滤和改写。生成 Proxy 实例的例子：<code>var proxy = new Proxy(target, handler);</code>，target 是目标对象，handler 是用于拦截的处理器对象。</p>
+<p>紹介<small style="color: salmon">しょうかい</small>：代理，访问目标对象前拦截它，并对该访问进行过滤和改写，它在 API 使用者和对象间是<strong>中间人</strong>角色。生成 Proxy 实例的例子：<code>var proxy = new Proxy(target, handler);</code>，target 是目标对象，handler 是用于拦截的处理器（trap）对象。</p>
+<p>借助代理并定义明确的规则来禁止访问 target 对象的某些属性，对外只暴露代理而不暴露 target 对象（target 应该对使用者完全隐藏）。</p>
 <p>handler 对象的方法：<code>handler.getPrototypeOf()</code>，Object.getPrototypeOf 方法的捕捉器；<code>handler.setPrototypeOf()</code>，Object.setPrototypeOf 方法的捕捉器；<code>handler.isExtensible()</code>，Object.isExtensible 方法的捕捉器；<code>handler.preventExtensions()</code>，Object.preventExtensions 方法的捕捉器；<code>handler.getOwnPropertyDescriptor()</code>，Object.getOwnPropertyDescriptor 方法的捕捉器；<code>handler.defineProperty()</code>，Object.defineProperty 方法的捕捉器；<code>handler.has()</code>，in 操作符的捕捉器；<code>handler.get()</code>，属性读取操作的捕捉器；<code>handler.set()</code>，属性设置操作的捕捉器；<code>handler.deleteProperty()</code>，delete 操作符的捕捉器；<code>handler.ownKeys()</code>，Object.getOwnPropertyNames 方法和 Object.getOwnPropertySymbols 方法的捕捉器；<code>handler.apply()</code>，函数调用操作的捕捉器；<code>handler.construct()</code>，new 操作符的捕捉器。メソッドの紹介：https://es6.ruanyifeng.com/#docs/proxy#get；https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy。</p>
 <p>Proxy 的　静的<small style="color: salmon">せいてき</small>メサット：Proxy.revocable()，示例：<code>let {proxy, revoke} = Proxy.revocable(target, handler);</code>，执行返回的 revoke 函数后就不能使用 proxy 实例了。</p>
 <p>Proxy 实例的 this：Proxy 代理的目标对象 this 指向生成的实例，因此会无法直接访问一些属性或方法。</p>
+<p>get：如需要“禁止访问下划线开头的属性”的时候使用，访问的时候抛错让使用者知道这些属性不可通过代理访问。</p>
+<p>set：如需要“禁止设置下划线开头的属性”的时候使用；如需要“模式验证”的时候使用，例如让 age 属性只能是数字和大于零；如需要“限制通过代理设置属性的次数”的时候使用，结合 revocable。</p>
 <p>使用处理器方法实现<strong>链式操作</strong>（get）、<strong>限制属性值大于 0</strong>（set）等例子：https://es6.ruanyifeng.com/#docs/proxy#get</p>
 <p><a href="#实现限制%20age%20的值大于%200">实现限制 age 的值大于 0</a></p>
 <h2 id="reflect">Reflect</h2>
@@ -277,6 +280,8 @@
 <p>Etag / If-None-Match：使用 Hash 判断资源是否被修改，因此不受秒级准确度限制，更精准。</p>
 <p>缓存改进方案：md5 / hash 缓存和 CDN 缓存。</p>
 <p>DNS Prefetch：打开后，浏览器提前将域名转为 IP 地址到浏览器 DNS 缓存中；<code>&lt;meta http-equiv="x-dns-prefetch-control" content="on"&gt;&lt;link rel="dns-prefetch" href="//www.imooc.com"&gt;</code></p>
+<p>不能被缓存的请求：HTTPS 请求；POST 请求；HTTP 响应头中不包含 Last-Modified/Etag，不包含 Cache-Control/Expires 的请求；HTTP 响应头中包含 Cache-Control:no-cache, pragma:no-cache 等告诉浏览器不用缓存的请求。</p>
+<p>浏览器缓存过程：https://blog.csdn.net/i13738612458/article/details/80383390。</p>
 <hr>
 <p>CDN：避免 CDN 和应用服务器的域名相同，可以避免携带 cookie；本地 DNS 服务器，网站权威 DNS 服务器，CDN 权威 DNS 服务器，CND 全局负载均衡，边缘节点，区域节点，中心节点，网站。</p>
 <p>渲染：解析 HTML 生成 DOM 树，解析 CSS 生成规则树，解析完成后生成渲染树，绘制，显示；针对这样的渲染顺序，使用诸如内联 CSS 和 async 的方法加快渲染速度；https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/。</p>
