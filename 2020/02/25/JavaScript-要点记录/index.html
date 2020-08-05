@@ -325,15 +325,15 @@
 <p>expires：HTTP1.0 字段，设置具体的时间值（首次请求时服务端返回）作为缓存资源过期时间；问题是，设置的时间和服务端一致，如果服务端和客户端时间有误差（时区）则缓存无法预期。</p>
 <p>Cache-Control：HTTP1.1 字段，设置相对时间控制缓存过期时间；<code>cache-control: max-age=315360000</code>表示过期时间一年；子字段有，public, private（避免代理服务器缓存）, no-cache（请求前先和服务端确认资源是否变化）, no-store（禁止任何缓存，每次请求拉取最新资源）, max-age=（单位是秒）, s-maxage=（优先级高于 max-age= 和 expires，仅适用共享缓存）, max-stale[=]（表示客户端愿意接受已过期资源，但是不能超过给定时间）。</p>
 <p>协商缓存：Last-Modified / If-Modified-Since；第一次请求服务器返回 Last-Modefied 后浏览器保存为 If-Modified-Since，之后浏览器每次发出请求，若未命中强制缓存，则携带 IMS，服务器对比最后修改时间来确定返回 304 或 200；问题是，秒级精确度，无法应对更细时间粒度的变化而使用旧缓存，服务端也可能定期生成文件，内容不变 Last-Modified 却变了，会导致无法使用缓存。</p>
-<p>为什么是强制和协商：。</p>
+<p>为什么是强制和协商：强制本地缓存；协商先请求服务器再本地缓存。</p>
 <p>Etag / If-None-Match：使用 Hash 判断资源是否被修改，因此不受秒级准确度限制，更精准。</p>
 <p>缓存改进方案：md5 / hash 缓存和 CDN 缓存。</p>
 <p>DNS Prefetch：打开后，浏览器提前将域名转为 IP 地址到浏览器 DNS 缓存中；<code>&lt;meta http-equiv="x-dns-prefetch-control" content="on"&gt;&lt;link rel="dns-prefetch" href="//www.imooc.com"&gt;</code></p>
 <p>不能被缓存的请求：HTTPS 请求；POST 请求；HTTP 响应头中不包含 Last-Modified/Etag，不包含 Cache-Control/Expires 的请求；HTTP 响应头中包含 Cache-Control:no-cache, pragma:no-cache 等告诉浏览器不用缓存的请求。</p>
-<p>浏览器缓存过程：https://blog.csdn.net/i13738612458/article/details/80383390。</p>
+<p>浏览器缓存过程： - https://blog.csdn.net/i13738612458/article/details/80383390； - 地址栏回车，链接跳转，前进、后退，走过请求缓存全过程（Cache-Control, Expires, Etag, Last-Modified）； - 新开窗口，F5 刷新，从协商缓存开始请求缓存； - control F5 不读取缓存。</p>
 <hr>
 <p>CDN：避免 CDN 和应用服务器的域名相同，可以避免携带 cookie；本地 DNS 服务器，网站权威 DNS 服务器，CDN 权威 DNS 服务器，CND 全局负载均衡，边缘节点，区域节点，中心节点，网站。</p>
-<p>渲染：解析 HTML 生成 DOM 树，解析 CSS 生成规则树，解析完成后生成渲染树，绘制，显示；针对这样的渲染顺序，使用诸如内联 CSS 和 async 的方法加快渲染速度；https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/。</p>
+<p>渲染：解析 HTML 生成 DOM 树，解析 CSS 生成规则树，解析完成后生成渲染树，绘制，显示；针对这样的渲染顺序，使用诸如内联 CSS 和 async 的方法加快渲染速度；浏览器的工作原理，https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/。</p>
 <p>重绘与回流：回流（位置、尺寸、字体）将引起重绘（边框、颜色、阴影）；把合适的样式设置成 position 或 fixed 会让元素提升到 Rander Layer，这样在回流操作时不会影响其它元素。</p>
 <h2 id="事件">事件</h2>
 <p>移除事件：removeEventListener 和 addEventListener 的第二参数（函数）要保持一致，为了避免分别使用 bind 返回新函数（非单 this 的区别）应该<strong>提前</strong>使 bind 返回的新函数赋值一个可以<strong>共同访问的上级作用域变量</strong>，再分别使用它。</p>
@@ -363,6 +363,7 @@
 <li>利用 module 顶层<code>this</code>指向<code>undefined</code>，侦测当前代码是否在模块中，<code>const isNotModuleScript = this !== undefined;</code></li>
 <li>ES6 模块输出的是值的引用</li>
 </ul>
+<p>ES6 模块和 CommonJS 和 AMD 模块：ES6 模块不是“运行时加载”，而是“编译时加载”，好处是，将来服务器和浏览器都会支持 ES6 模块，将来不用全局变量或 navigator 对象的属性，将来不需要对象作为命名空间；编译时加载在分析编译时，可以做静态优化，tree shaking，在头部引用。</p>
 <h3 id="node.js-加载">Node.js 加载</h3>
 <ul>
 <li>v13.2 开始，Node.js 默认打开了 ES6 模块支持</li>

@@ -66,7 +66,7 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#section"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ほしのかけら"><span class="toc-text">ほしのかけら</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一种常规执行步骤の记录"><span class="toc-text">一种常规执行步骤の记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小册实践路径记录"><span class="toc-text">小册实践路径记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主题博文"><span class="toc-text">主题博文</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#section"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babel"><span class="toc-text">babel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ほしのかけら"><span class="toc-text">ほしのかけら</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一种常规执行步骤の记录"><span class="toc-text">一种常规执行步骤の记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小册实践路径记录"><span class="toc-text">小册实践路径记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主题博文"><span class="toc-text">主题博文</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
@@ -80,7 +80,7 @@
 <p>CleanWebpackPlugin：清空 output.path 文件夹，生产环境配置中使用。</p>
 <p>抽离压缩 CSS：mini-css-extract-plugin，使用该插件提供的 MiniCssExtractPlugin.loader 替换 style-loader，避免生产环境直接将样式用脚本动态插入标签，然后在 pugins 中执行抽离<code>new MiniCssExtractPlugin({ filename: 'css/main.[contentHash:8].css' })</code>；terser-webpack-plugin 和 optimize-css-assets-webpack 压缩 CSS，在<code>optimization:{ minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})], }</code>。</p>
 <p>抽离公共代码：避免同样的代码编码在多个文件中，而抽离公共代码引入，例如引入体积较大的库的时候，如果不抽离，即使修改很少的业务代码也将导致哈希值变更会引起整个文件的重新加载。</p>
-<p>懒加载：<code>setTimeout(() =&gt; {import('xxx').then(res =&gt; { xxxxxx })}, 5700)</code>。</p>
+<p>懒加载：<code>setTimeout(() =&gt; {import('xxx').then(res =&gt; { xxxxxx })}, 5700)</code>；结合 React-router 异步加载路由。</p>
 <p>定义 chunk 的地方：entry, optimization.splitChunks.cacheGroups, 懒加载。</p>
 <p>从<strong>构建速度</strong>进行优化的关键点：babel-loader, happyPack, IgnorePlugin, ParallelUglifyPlugin, noParse, 自动刷新, 热更新, DllPlugin。</p>
 <p>babel-loader：性能消耗较多的地方，使用<strong>缓存</strong>和<strong>确定范围</strong>来提升速度；<code>module: {rules: [{ test: /\.js$/, use: ['babel-loader?cacheDirectory'], include: path.resolve(__dirname, 'src'), exclude: path.resolve(__dirname, 'node_modules') }], }</code>。</p>
@@ -93,7 +93,21 @@
 <p>优化<strong>产出代码</strong>的关键点：小图片 base64；bundle 加哈希；懒加载；提取公共代码；IgnorePlugin；CDN 加速；使用 production；Scope Hosting。</p>
 <p>使用 production：自动开启代码压缩；React 等会自动删掉调试代码；启动 Tree-Shaking（ES6 Module 生效 tree-shaking，commonjs 不行）；</p>
 <p>ES6 Module 和 Commonjs 的区别：静态引入、编译时引入和动态引入、执行时引入的区别。</p>
-<p>Scope Hosting：代码体积更小；创建函数作用域更少；代码更可读。</p>
+<p>Scope Hosting：代码体积更小；创建函数作用域更少；代码更可读；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const ModuleConcatenationPlugin = require(&apos;webpack/lib/optimize/ModuleConcatenationPlugin&apos;)</span><br><span class="line">module.export = &#123;</span><br><span class="line">	resolve: &#123;</span><br><span class="line">		mainFields: [&apos;jsnext:main&apos;, &apos;browser&apos;, &apos;main&apos;]</span><br><span class="line">	&#125;,</span><br><span class="line">	plugin: [</span><br><span class="line">		new ModuleConcatenationPlugin(),</span><br><span class="line">	]</span><br><span class="line">&#125; // 。</span><br></pre></td></tr></table></figure>
+<hr>
+<p>打包构建的好处：体积更小（Tree-Shaking、压缩、合并），加载更快；编译高级语言或语法（TS、ES6、模块化、scss）；兼容性和错误检查（Polyfill、postcss、eslint）；同一、高效的开发环境，统一的构建流程和产出标准，集成公司构建规范（体测、上线等）。</p>
+<p>Proxy 无法被模拟。</p>
+<p>webpack 优化构建速度（prod）：优化 babel-loader；IgnorePlugin；noParse；happyPack；ParallelUglifyPlugin。</p>
+<p>webpack 优化构建速度（dev）：自动刷新；热更新；DllPlugin。</p>
+<p>webpack 优化产出代码：小图片 base64；提取公共代码；bundle 加 hash；使用 CDN 加速；懒加载；IgnorePlugin；使用 production；Scope Hosting。</p>
+<h2 id="babel">babel</h2>
+<p>解析 ES6 或更高级的语法满足浏览器兼容性。babel 只处理语法，webpack 处理模块化。</p>
+<p>babel-polyfill：是 core-js 和 regenerator 的集合，前者没有 generator 语法支持，后者补充；v7.4 已被弃用，推荐直接使用 babel-polyfill。</p>
+<p>babel-polyfill 按需引入：在只用了一部分功能时按需引入；按需引入的时候无需在文件顶部加 import '<span class="citation" data-cites="babel/polyfill">@babel/polyfill</span>'；下面是 .babelrc 文件按需引入的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;presets&quot;: [</span><br><span class="line">		[</span><br><span class="line">			&quot;@babel/preset-env&quot;,</span><br><span class="line">			&#123;</span><br><span class="line">				&quot;useBuiltIns&quot;: &quot;usage&quot;,</span><br><span class="line">				&quot;corejs&quot;: 3</span><br><span class="line">			&#125;]], &quot;plugins&quot;: []&#125;</span><br></pre></td></tr></table></figure>
+<p>babel-runtime：安装 <span class="citation" data-cites="babel/plugin-transform-runtime">@babel/plugin-transform-runtime</span>(- D) 和 <span class="citation" data-cites="babel/runtime">@babel/runtime</span>；进行 .babelrc 配置，下面是配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;presets&quot;: [...],</span><br><span class="line">	&quot;plugins&quot;: [</span><br><span class="line">		[</span><br><span class="line">			&quot;@babel/plugin-transform-runtime&quot;,</span><br><span class="line">			&#123;</span><br><span class="line">				&quot;absoluteRuntime&quot;: false,</span><br><span class="line">				&quot;corejs&quot;: 3,</span><br><span class="line">				&quot;helpers&quot;: true,</span><br><span class="line">				&quot;regenerator&quot;: true,</span><br><span class="line">				&quot;useESModules&quot;: false</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>；避免了污染全局环境，利于开发第三方库。</p>
 <h2 id="ほしのかけら">ほしのかけら</h2>
 <p>loader 的执行顺序：后 → 前。</p>
 <p>关键词：css 浏览器兼容加前缀，postcss-loader，autoprefixer。</p>
