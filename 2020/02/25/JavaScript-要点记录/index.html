@@ -108,7 +108,7 @@
 <h2 id="对象">对象</h2>
 <h3 id="模拟继承">模拟继承</h3>
 <p>这样继承不会出现子类的构造器是父类的错误：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Person.prototype.dance = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ninja</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Ninja.prototype = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Ninja.prototype, <span class="string">"constructor"</span>, &#123;</span><br><span class="line">  enumberable: <span class="literal">false</span>,</span><br><span class="line">  value: Ninja,</span><br><span class="line">  writable: <span class="literal">true</span> <span class="comment">// 定义一个不可枚举的 constructor 属性 Ninja</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ninja = Ninja();</span><br><span class="line"><span class="comment">// ninja.constructor === Ninja // true。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Person.prototype.dance = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ninja</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Ninja.prototype = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Ninja.prototype, <span class="string">"constructor"</span>, &#123;</span><br><span class="line">  enumberable: <span class="literal">false</span>,</span><br><span class="line">  value: Ninja,</span><br><span class="line">  writable: <span class="literal">true</span> <span class="comment">// 定义一个不可枚举的 constructor 属性 Ninja</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ninja = <span class="keyword">new</span> Ninja();</span><br><span class="line"><span class="comment">// ninja.constructor === Ninja // true。</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>扎实前端系列：JavaScript实现继承 https://www.jianshu.com/p/af39457e7722</p>
 <p>Javascript实现继承的6种方式 https://blog.csdn.net/Tokki_/article/details/91357384</p>
@@ -116,6 +116,11 @@
 <p>instanceof 的警告：构造函数原型的改变会导致 instanceof 返回否。</p>
 <p><code>Object.create(null)</code>和<code>{}</code>：{} 创建的对象继承了 Object 自身，OCN 创建的对象则是干净的对象，可以使用<code>Object.create(Object.prototype)</code>达到和<code>{}</code>相同的效果。</p>
 <p>关联博文：<a href="https://juejin.im/post/5acd8ced6fb9a028d444ee4e" target="_blank" rel="noopener">详解Object.create(null)</a>；<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create" target="_blank" rel="noopener">Object.create()</a>。</p>
+<hr>
+<p>Object.getOwnPropertyNames()： - 返回自身属性，包括不可枚举属性，不包括 Symbol 值作为名称的属性； - 该方法使用 Array.prototype.filter() 方法结合 Object.keys() 计算出所有不可枚举属性； - ES5 中该方法的入参不是原始对象类型会报异常。</p>
+<hr>
+<p>Object.prototype.hasOwnProperty()： - 检测一个对象是否有特定的自身属性；和 in 不同，该方法忽略从原型链上继承的属性； - 无视属性值为 null 或 undefined，只要有键即返回 true； - 直接使用原型上的该方法，Object.prototype.hasOwnProperty.call(foo, 'bar')</p>
+<hr>
 <h2 id="symbol">Symbol</h2>
 <h2 id="proxy">Proxy</h2>
 <p>紹介<small style="color: salmon">しょうかい</small>：代理，访问目标对象前拦截它，并对该访问进行过滤和改写，它在 API 使用者和对象间是<strong>中间人</strong>角色。生成 Proxy 实例的例子：<code>var proxy = new Proxy(target, handler);</code>，target 是目标对象，handler 是用于拦截的处理器（trap）对象。</p>
@@ -182,7 +187,51 @@
 <p>向 Map 添加成员，作为构造函数，可以接受数组作为参数。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>([</span><br><span class="line">  [<span class="string">'name'</span>, <span class="string">'张三'</span>],</span><br><span class="line">  [<span class="string">'title'</span>, <span class="string">'Author'</span>]</span><br><span class="line">]);</span><br><span class="line">map.get(<span class="string">'name'</span>); <span class="comment">// "张三"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 传入数组参数时，可看作如下算法</span></span><br><span class="line"><span class="keyword">const</span> items = [</span><br><span class="line">  [<span class="string">'name'</span>, <span class="string">'张三'</span>],</span><br><span class="line">  [<span class="string">'title'</span>, <span class="string">'Author'</span>]</span><br><span class="line">];</span><br><span class="line"><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">items.forEach(</span><br><span class="line">  ([key, value]) =&gt; map.set(key, value)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <p>Map 的键和内存地址绑定，这能解决了同名属性碰撞（clash）的问题。</p>
-<p>两个值<code>严格相等</code>，Map 则视为同一个键，<code>NaN</code>除外。如 0, -0, +0 被视为一个键。</p>
+<p>两个值<code>严格相等</code>，Map 则视为同一个键，<code>NaN</code>除外，即使 NaN!==NaN，Map 也视为同一个键。0, -0, +0 被视为一个键。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Map</th>
+<th style="text-align: left;">Object</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">意外的键</td>
+<td style="text-align: left;">Map 只有显式插入的键</td>
+<td style="text-align: left;">有原型，可能被显式插入的覆盖</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">键的类型</td>
+<td style="text-align: left;">任意值</td>
+<td style="text-align: left;">String 或 Symbol</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">键的顺序</td>
+<td style="text-align: left;">有序，插入顺序</td>
+<td style="text-align: left;">无序*</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Size</td>
+<td style="text-align: left;">size 属性</td>
+<td style="text-align: left;">手动计算</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">迭代</td>
+<td style="text-align: left;">可迭代</td>
+<td style="text-align: left;">迭代的前提是获取键</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">性能</td>
+<td style="text-align: left;">适合频繁增删</td>
+<td style="text-align: left;">不适合频繁增删</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Web 开发技术请参见 - JavaScript请参见 - JavaScript 参考请参见 - JavaScript 标准内置对象 - Map - https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map</p>
+</blockquote>
 <h3 id="实例属性和方法">实例属性和方法</h3>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">size, Map.prototype.set(key, value), 1.2.get(key), 1.2.has(key), 1.2.delete(key), 1.2.clear()</span><br><span class="line">Map.prototype.keys(), 1.2.values(), 1.2.entries(), 1.2.forEach()</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map 的默认遍历器接口是 entries 方法</span><br><span class="line">map[Symbol.iterator] === map.entries // true</span><br><span class="line">for (let [key, value] of map.entries()) 等同于</span><br><span class="line">for (let item of map.entries()) 等同于</span><br><span class="line">for (let item of map)</span><br></pre></td></tr></table></figure>
@@ -210,7 +259,7 @@
 <h2 id="应用">应用</h2>
 <h3 id="深拷贝">深拷贝</h3>
 <p>为了避免<code>浅拷贝</code>和直接<code>引用地址</code>使用深拷贝。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">onj = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> obj !== <span class="string">'object'</span> || obj === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">let</span> result;</span><br><span class="line">  <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123;</span><br><span class="line">    result = [];</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    result = &#123;&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (obj.hasOwnProperty(key)) &#123;</span><br><span class="line">      result[key] = deepClone(obj[key]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">obj = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> obj !== <span class="string">'object'</span> || obj === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">let</span> result;</span><br><span class="line">  <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123;</span><br><span class="line">    result = [];</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    result = &#123;&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (obj.hasOwnProperty(key)) &#123;</span><br><span class="line">      result[key] = deepClone(obj[key]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>递归深入，跳出递归的条件：参数不是对象类型（除了 null 对象）。</p>
 <h3 id="数组拍平">数组拍平</h3>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">flat</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> isDeep = arr.some(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> item <span class="keyword">instanceof</span> <span class="built_in">Array</span>;</span><br><span class="line">  &#125;); <span class="comment">// 判断数组有否内嵌</span></span><br><span class="line">  <span class="keyword">if</span> (!isDeep) &#123;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> res = <span class="built_in">Array</span>.prototype.concat.apply([], arr);</span><br><span class="line">  <span class="keyword">return</span> flat(res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
