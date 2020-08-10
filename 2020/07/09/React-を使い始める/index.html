@@ -82,8 +82,8 @@
 <p>React Hooks 使用函数写出<strong>全功能</strong>组件，函数无状态，因此使用 React Hooks 进行<strong>状态的读写</strong>。</p>
 <p>4 个常用 hook：“useState, useContext, useReducer, useEffect.”。</p>
 <hr>
-<p>useState()，例<small style="color: salmon">れい</small>を挙<small style="color: salmon">あ</small>げましょう：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState &#125; from &quot;react&quot;;</span><br><span class="line"></span><br><span class="line">export default function  Button()  &#123;</span><br><span class="line">  const  [buttonText, setButtonText] =  useState(&quot;Click me,   please&quot;);</span><br><span class="line"></span><br><span class="line">  function handleClick()  &#123;</span><br><span class="line">    return setButtonText(&quot;Thanks, been clicked!&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return  &lt;button  onClick=&#123;handleClick&#125;&gt;&#123;buttonText&#125;&lt;/button&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>useState()，例<small style="color: salmon">れい</small>を挙<small style="color: salmon">あ</small>げましょう，下面是一个“计数组件”的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState &#125; from &quot;react&quot;;</span><br><span class="line"></span><br><span class="line">export default function EffectDemo() &#123;</span><br><span class="line">   const [count, setCount] = useState(0)</span><br><span class="line">   useEffect(() =&gt; &#123;</span><br><span class="line">      const timer = setInterval(() =&gt; &#123;</span><br><span class="line">         setCount(count =&gt; count + 1)</span><br><span class="line">      &#125;, 1000)</span><br><span class="line"></span><br><span class="line">      return () =&gt; &#123; clearInterval(timer) &#125;</span><br><span class="line">   &#125;, [])</span><br><span class="line"></span><br><span class="line">   return &lt;h1&gt;&#123; count &#125;&lt;/h1&gt;</span><br><span class="line">&#125; // 。</span><br></pre></td></tr></table></figure>
 <hr>
 <p>useContext()：</p>
 <p>在同时存在多个子组件的组件里<code>const AppContext = React.createContext({});</code>，并在该组件外层包裹<code>&lt;AppContext.Provider value=\{\{testkey: 'testvalue'}}&gt;&lt;/AppContext.Provider&gt;</code>，最后在子组件里<code>const { testkey } = useContext(AppContext);</code>。</p>
@@ -104,11 +104,11 @@
 <p>React Event：SyntheticEvent 模拟出了 DOM 事件所有能力；event.nativeEvent 是原生事件对象；所有事件被挂载到了 document 上；e.nativeEvent, e.nativeEvent.target, e.nativeEvent.currentTarget。</p>
 <p>制御<small style="color: salmon">せいぎょ</small>されたコンポーネント：表单组件的值受 state 的控制；onChange, value 搭配，onChange, checked 搭配。</p>
 <p>父子组件的通信：state 管理当前组件数据，props 向子组件下流数据，父组件向子组件传递函数做到<strong>状态提升</strong>；安装“prop-types”插件做 props 的类型检查（更健壮）。</p>
-<p>setState：关键词“不可变值”，setState 前不改变 this.state，而使用副本或临时值（纯函数，concat, slice, filter 等，而非 push, pop, splice 等）；可能同步（监听事件，计时）或异步；可能会合并（传入函数不会合并，如<code>this.setState((prevState, props) =&gt; { return { x : xxx }})</code>）。</p>
+<p>setState：关键词“不可变值”，setState 前不改变 this.state，而使用副本或临时值（纯函数，concat, slice, filter 等，而非 push, pop, splice 等）；可能同步（监听事件，计时）或异步；可能会合并（传入函数不会合并，如<code>this.setState((prevState, props) =&gt; { return { x : xxx }})</code>）；以回调函数的形式获取最新值。</p>
 <p>ライフサイクル：ライフサイクル図<small style="color: salmon">ず</small>，https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/；https://codepen.io/birdknothing/pen/XvVqmx?editors=1011。</p>
 <p>非制御コンポーネント：<strong>ref</strong>，构造时创建 ref<code>this.nameInputRef = React.createRef()</code>，render 里为组件添加 ref 属性<code>ref = {this.nameInputRef}</code>；<strong>defaultValue, defaultChecked</strong>，为组件设置初始值<code>defaultValue = {this.state.name}</code>，state 在这里的作用只是初始化 value，可省；<strong>手动操作 DOM</strong>，通过 ref 获取 DOM<code>const e = this.nameInputRef.current</code>。</p>
 <p>Portals：令子节点渲染到父组件外的指定 DOM 里，<code>ReactDOM.createPortal(child, container)</code>。用在如 body 层的 fixed 的 position，跳出父元素的 hidden overflow 或 z-index。</p>
-<p>Context：适用全局的设置，如主题、语言的切换。</p>
+<p>Context：适用全局的设置，如主题、语言的切换；下面是一个例子， - <code>const ThemeContext = React.createContext('dark')</code>创建一个 Context 对象； - <code>&lt;ThemeContext.Provider value={this.state.theme}&gt;</code>，类组件最外层渲染 Context 对象返回的 Provider React 组件； - 可以在子类内部<code>static contextType = ThemeContext</code>，也可以在子类外部用<code>ThemedButton.contextType = ThemeContext</code>，之后就可以消费最近的 Context 的值<code>const theme = this.context</code>； - 函数组件这么消费，<code>return &lt;ThemeContext.Consumer&gt;{ value =&gt; &lt;p&gt;link's theme is {value}&lt;/p&gt; }&lt;/ThemeContext.Consumer&gt;</code>。</p>
 <p>异步组件：懒加载，<code>&lt;React.Suspense fallback={&lt;Spinner /&gt;}&gt;&lt;OtherComponent /&gt;&lt;/React.Suspense&gt;</code>，https://zh-hans.reactjs.org/docs/react-api.html#reactsuspense。</p>
 <h2 id="パフォーマンス最適化さいてきか">パフォーマンス最適化<small style="color: salmon">さいてきか</small></h2>
 <p>shouldComponentUpdate（SCU）：除首次渲染和 forceUpdate() 时，此外渲染前被调用；父组件更新，子组件也更新，SCU 默认返回 true，可以在子组件的 SCU 中<strong>添加条件</strong>（返回 false）从而在满足条件的情况下，父组件的更新不连带子组件。可以在组件中添加 componentDidUpdate（CDU），打印查看子组件是否更新。</p>
@@ -126,7 +126,7 @@
 <p>组件的渲染和更新：props state → render() 生成 vnode → patch(elem, vnode)；setState(newState) --&gt; dirtyComponents → render() 生成 newVnode → patch(vnode, newVnode)。</p>
 <hr>
 <h3 id="diff-算法">diff 算法</h3>
-<p>React 的 diff 算法的时间复杂度相比传统 diff 算法，从指数级的 O(n3) 降到了 线性的 O(n)。</p>
+<p>React 的 diff 算法的时间复杂度相比传统 diff 算法，从指数级的 O(n3) 降到了线性的 O(n)。</p>
 <p>React diff 的 3 个假设： - Web UI 中 DOM 节点跨层级的移动操作特别少，可忽略不计（tree diff）； - 两个相同组件产生类似的 DOM 结构，不同组件产生不同 DOM 结构（component diff）； - 对于同一层次的一组子节点，可以通过唯一的 id 进行区分（element diff）。</p>
 <h2 id="redux">Redux</h2>
 <p>Redux 应用总数据的生命周期：调用 store.dispatch(action)；Redux store 调用传入的 reducer 函数；根 reducer 把多个子 reducer 合并成一个单一的 state 树；Redux store 保存了根 reducer 返回的完整 state 树。</p>
