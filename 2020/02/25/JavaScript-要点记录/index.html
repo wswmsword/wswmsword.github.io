@@ -83,6 +83,8 @@
     <h1 id="section"></h1>
 <p>Brendan Eich</p>
 <h2 id="iloveregex">iLoveRegex</h2>
+<p>URL query 参数获取：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function query(name)</span><br><span class="line">&#123;</span><br><span class="line">	const search = location.search.substr(1)</span><br><span class="line">	const reg = new RegExp(`(^|&amp;)$&#123;name&#125;=([^&amp;]*)(&amp;|$)`, &apos;i&apos;)</span><br><span class="line">	const res = search.match(reg)</span><br><span class="line">	if (res === null) &#123; return null &#125;</span><br><span class="line">	return res[2]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>删除头尾空格：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">zTrim</span>(<span class="params">z</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> z.replace(<span class="regexp">/^\s+|\s+$/gm</span>, <span class="string">''</span>); <span class="comment">// 多行全局匹配</span></span><br><span class="line">&#125; <span class="comment">// 。</span></span><br></pre></td></tr></table></figure>
 <p>补全非自闭合标签：</p>
@@ -119,7 +121,7 @@
 <hr>
 <p>Object.getOwnPropertyNames()： - 返回自身属性，包括不可枚举属性，不包括 Symbol 值作为名称的属性； - 该方法使用 Array.prototype.filter() 方法结合 Object.keys() 计算出所有不可枚举属性； - ES5 中该方法的入参不是原始对象类型会报异常。</p>
 <hr>
-<p>Object.prototype.hasOwnProperty()： - 检测一个对象是否有特定的自身属性；和 in 不同，该方法忽略从原型链上继承的属性； - 无视属性值为 null 或 undefined，只要有键即返回 true； - 直接使用原型上的该方法，Object.prototype.hasOwnProperty.call(foo, 'bar')</p>
+<p>Object.prototype.hasOwnProperty()： - 检测一个对象是否有特定的自身属性；和 in 不同，该方法忽略从原型链上继承的属性； - 无视属性值为 null 或 undefined，只要有键即返回 true； - 直接使用原型上的该方法，Object.prototype.hasOwnProperty.call(foo, 'bar')，这样防止对象把继承的 hasOwnProperty 方法覆盖了，无法发挥正确作用。</p>
 <hr>
 <h3 id="对象函数和构造器的关系图">对象、函数和构造器的关系图</h3>
 <p><img src="objFunConstructor.png"></p>
@@ -406,6 +408,9 @@
 </blockquote>
 <h2 id="私はのコードスタイル">私はのコードスタイル</h2>
 <h2 id="ほしのかけら">ほしのかけら</h2>
+<p>URL 获取 query：URLSearchParams。</p>
+<p>前端如何给 JavaScript 加米：https://www.zhihu.com/question/47047191/answer/121013968。</p>
+<p>JavaScript 字符串底层是如何实现的呢：https://www.zhihu.com/question/51132164/answer/124450796。</p>
 <p>Lodash 常用：https://www.cnblogs.com/t-sun-j/p/10642568.html。</p>
 <p>检查一个对象是否有某个方法：Object.prototype.hasOwnProperty.call(z, 'toString')，这里检查对象 z 有没有 toString 方法，不用 z.hasOwnProperty('toString') 的原因是 z 可能会有自定义的 hasOwnProperty 方法。</p>
 <p>0 和 1 的随机：Math.floor(Math.random()*2)。</p>
