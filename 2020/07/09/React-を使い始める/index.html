@@ -132,6 +132,7 @@
 <p>Redux 应用总数据的生命周期：调用 store.dispatch(action)；Redux store 调用传入的 reducer 函数；根 reducer 把多个子 reducer 合并成一个单一的 state 树；Redux store 保存了根 reducer 返回的完整 state 树。</p>
 <p>mapStateToProps：这个函数指定如何把当前 Redux store state 映射到展示组件的 props 中。</p>
 <p>mapDispatchToProps：分发 action，这个函数接收 dispatch 方法并返回期望注入到展示组件的 props 中的回调方法。</p>
+<p><em>中间件要点：</em> - <code>({ dispatch, store }) =&gt; (next) =&gt; (action) =&gt; {}</code>； - 中间件是对初始 dispatch 的包装； - 使用 applyMiddleware 包装的中间件有顺序，从左到右，执行时是从左到右； - 中间件里调用 next 方法，控制权到达下个中间件，调用 dispatch 方法，控制权回到头部； - 中间件的 return 只会被上一级捕获。</p>
 <blockquote>
 <p>Redux 中间件和异步操作 https://www.cnblogs.com/SamWeb/p/11332484.html</p>
 </blockquote>
