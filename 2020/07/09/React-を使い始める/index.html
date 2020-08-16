@@ -92,11 +92,12 @@
 <hr>
 <p>useEffect()，例を挙げましょう：https://codesandbox.io/s/react-useeffect-redux-9t3bg，“引入具有副作用的操作，最常见的就是向服务器请求数据”。</p>
 <hr>
-<p>useCallback &amp;&amp; useMemo：函数组件重新渲染时，如果重复执行了计算量很大的函数，会有性能问题，这是可以使用 useMemo <strong>返回缓存值</strong>来避免；组件的渲染会导致子组件渲染，在对子组件优化，不让它渲染的时候，使用 useCallback <strong>返回缓存函数</strong>避免渲染。</p>
+<p>useCallback &amp;&amp; useMemo：函数组件重新渲染时，如果重复执行了计算量很大的函数，会有性能问题，这时可以使用 useMemo <strong>返回缓存值</strong>来避免；组件的渲染会导致子组件渲染，在对子组件优化，不让它渲染的时候，使用 useCallback <strong>返回缓存函数</strong>避免渲染。</p>
 <p>独自<small style="color: salmon">どくじ</small>の Hooks を作成<small style="color: salmon">さくせい</small>する、例を挙げましょう：https://codesandbox.io/s/react-useeffect-redux-ghl7c。</p>
 <h3 id="相关链接">相关链接</h3>
 <blockquote>
 <p>react hooks进阶与原理 https://zhuanlan.zhihu.com/p/51356920</p>
+<p>useHooks 诀窍 https://usehooks.com</p>
 </blockquote>
 <h2 id="main-concepts-advanced-guides">MAIN CONCEPTS &amp; ADVANCED GUIDES</h2>
 <p>練習問題<small style="color: salmon">れんしゅうもんだい</small>：组件如何通讯；JSX 本质；context 的作用；shouldComponentUpdate（SCU）的作用；redux 单向数据流的简述；setState 是异步还是同步。</p>
