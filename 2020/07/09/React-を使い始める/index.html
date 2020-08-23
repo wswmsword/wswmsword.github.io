@@ -164,6 +164,12 @@
 <li>中间件里调用 next 方法，控制权到达下个中间件，调用 dispatch 方法，控制权回到头部；</li>
 <li>中间件的 return 只会被上一级捕获。</li>
 </ul>
+<p>应用保存的数据类型，通常分为下面 3 种，这 3 种组成 state：</p>
+<ul>
+<li>数据域 Domain data，实体数据；</li>
+<li>应用状态 App state，行为数据，如某条数据被选择了；</li>
+<li>UI 状态 UI state，展示数据，如某个面板被展开了；</li>
+</ul>
 <blockquote>
 <p>Redux 中间件和异步操作 https://www.cnblogs.com/SamWeb/p/11332484.html</p>
 </blockquote>
