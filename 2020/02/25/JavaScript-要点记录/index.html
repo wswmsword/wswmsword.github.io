@@ -168,12 +168,14 @@
 </blockquote>
 <h2 id="promise">Promise</h2>
 <p>简单回调函数的 3 个问题：错误处理困难；相互依赖的“金字塔噩梦”；并行任务的棘手样板代码。</p>
+<p>创建 Promise 的 3 个方式：fetch；Promise.resolve；Promise.reject；Promise 的构造函数。</p>
 <p>promise 对象的状态：pending 挂起，未实现；fulfilled 兑现承诺，实现；rejected 违背承诺，拒绝态。</p>
-<p>promise 对象构造函数的参数：该参数是函数，执行成功进入 fulfilled，执行失败（隐式或显式）进入 rejected，否则 pending。</p>
-<p>promise 的回调函数：成功和失败的回调可以同时在 then 方法中（错误函数在 then 的第二参数），也能<strong>链式调用</strong>分别在 then 和 catch 方法内。</p>
+<p>Promise 对象构造函数的参数：该参数是函数，执行成功进入 fulfilled，执行失败（隐式或显式）进入 rejected，否则 pending。</p>
+<p>Promise 的回调函数：成功和失败的回调可以同时在 then 方法中（错误函数在 then 的第二参数），也能<strong>链式调用</strong>分别在 then 和 catch 方法内。</p>
 <p>如果不是处理互相依赖的任务，<strong>并行任务</strong>使用 Promise.all，<strong>竞赛任务</strong>使用 Promise.race，两个方法的参数都是 1 个 Promise 数组。</p>
 <p>Promise 结合 Generator 完成互相依赖的异步任务：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">async(generator);</span><br><span class="line">function* generator()</span><br><span class="line">&#123;</span><br><span class="line">	try</span><br><span class="line">	&#123;</span><br><span class="line">		const ninjas = yield getJSON(&quot;data/ninjas.json&quot;);</span><br><span class="line">		const missions = yield getJSON(ninjas[0].missionsUrl);</span><br><span class="line">	&#125;</span><br><span class="line">	catch(e)</span><br><span class="line">	&#123;</span><br><span class="line">		console.log(&quot;we weren&apos;t able to get details&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">function async(generator)</span><br><span class="line">&#123;</span><br><span class="line">	var iterator = generator();</span><br><span class="line">	function handle(iteratorResult)</span><br><span class="line">	&#123;</span><br><span class="line">		if (iteratorResult.done) &#123; return &#125;</span><br><span class="line">		const iteratorValue = iteratorResult.value;</span><br><span class="line">		if (iteratorValue instanceof Promise)</span><br><span class="line">		&#123;</span><br><span class="line">			iteratorValue.then(res =&gt; handle(iterator.next(res)))</span><br><span class="line">										.catch(err =&gt; iterator.throw(err));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	try &#123; handle(iterator.next) &#125;</span><br><span class="line">	catch(e) &#123; iterator.throw(e) &#125;</span><br><span class="line">&#125; // 。</span><br></pre></td></tr></table></figure>
+<p>在线工具解释 Promise 链（Promise 连缀调用的树型结构）：https://bevacqua.github.io/promisees。</p>
 <h2 id="async-function">async function</h2>
 <p>利用 async 和 promise 完成同步等待：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function sleep(milliS)</span><br><span class="line">&#123;</span><br><span class="line">	return new Promise(resolve =&gt; &#123; setTimeout(() =&gt; &#123; resolve() &#125;, milliS) &#125;)</span><br><span class="line">&#125;</span><br><span class="line">await sleep(3576).then(() =&gt; &#123; console.log(&apos;action&apos;) &#125;)</span><br><span class="line">console.log(1) // 等待了约 3576 毫秒后，执行了本条语句</span><br></pre></td></tr></table></figure>
@@ -450,6 +452,10 @@
 <p>Chrome 的 Base64 编解码：window.btoa(""), window.atob("")。</p>
 <p>Git：git log --graph --pretty=oneline --abbrev-commit 美化日志；git branch -d feature1 删除分支；</p>
 <p>ECMAScript 标准定义的 8 种数据类型：<code>Boolean, Null, Undefined, Number, BigInt, String, Symbol</code>, <code>Object</code>。</p>
+<p>待读书籍：</p>
+<ul>
+<li>Web性能实战，https://www.ituring.com.cn/book/2011。</li>
+</ul>
 <h2 id="文ぶんの中の愚おろかな言葉ことば">文<small style="color: salmon">ぶん</small>の中の愚<small style="color: salmon">おろ</small>かな言葉<small style="color: salmon">ことば</small></h2>
 <blockquote>
 <p>多数情况下你会使用</p>

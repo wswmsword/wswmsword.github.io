@@ -89,18 +89,16 @@
 <hr>
 <p><em>useContext()：</em></p>
 <p>在同时存在多个子组件的组件里<code>const AppContext = React.createContext({});</code>，并在该组件外层包裹<code>&lt;AppContext.Provider value=\{\{testkey: 'testvalue'}}&gt;&lt;/AppContext.Provider&gt;</code>，最后在子组件里<code>const { testkey } = useContext(AppContext);</code>。</p>
-<hr>
 <p><em>useReducer()，例を挙げましょう：</em></p>
 <ul>
 <li>https://codesandbox.io/s/react-usereducer-redux-xqlet?file=/src/index.js，需要有 reducer<code>const myReducer = (state, action) =&gt; {};</code>，参数是<strong>需要管理的状态</strong>和<strong>区分管理的动作</strong>，useReducer 需要 reducer 函数和状态数据的初始值，并生成<strong>组件里使用的状态</strong>和<strong>触发函数</strong><code>const [state, dispatch] = useReducer(myReducer, { count: 0 });</code>，最后可以在组件里使用<code>&lt;button onClick={() =&gt; dispatch({ type: "countUp" })}&gt;+1&lt;/button&gt; &lt;p&gt;Count: {state.count}&lt;/p&gt;</code>；</li>
 <li>总结，执行 useReducer 的三步，第一事件发生，第二 dispatch(action)，第三 reducer 根据 action.type 返回一个新 state；</li>
 <li>该 hook 的优点，高可读性，分离“做什么”和“怎么做”，集中处理 state。</li>
 </ul>
-<hr>
 <p>useEffect()，例を挙げましょう：https://codesandbox.io/s/react-useeffect-redux-9t3bg，“引入具有副作用的操作，最常见的就是向服务器请求数据”。</p>
-<hr>
 <p>useCallback &amp;&amp; useMemo：函数组件重新渲染时，如果重复执行了计算量很大的函数，会有性能问题，这时可以使用 useMemo <strong>返回缓存值</strong>来避免；组件的渲染会导致子组件渲染，在对子组件优化，不让它渲染的时候，使用 useCallback <strong>返回缓存函数</strong>避免渲染。</p>
-<p>独自<small style="color: salmon">どくじ</small>の Hooks を作成<small style="color: salmon">さくせい</small>する、例を挙げましょう：https://codesandbox.io/s/react-useeffect-redux-ghl7c。</p>
+<p>useRef()：ref 不导致 render，并且结果总是最终的值，不会像 state hook 会使用闭包在每个状态保存一个值；借用 useRef() 模拟类组件的 componentDidMount 生命周期；赋值给 DOM 节点的 ref 属性，访问 DOM 节点。</p>
+<p>独自<small style="color: salmon">どくじ</small>の Hooks を作成<small style="color: salmon">さくせい</small>する、例を挙げましょう：https://codesandbox.io/s/react-useeffect-redux-ghl7c；把公共的逻辑代码提取到函数中，然后像调用函数一样调用它。</p>
 <h3 id="相关链接">相关链接</h3>
 <blockquote>
 <p>react hooks进阶与原理 https://zhuanlan.zhihu.com/p/51356920</p>
@@ -143,6 +141,16 @@
 <p>合成事件的过程：DOM 触发事件，冒泡至顶层 document → 合成事件层，SyntheticEvent 派发事件 → 事件处理函数。</p>
 <p>batchUpdate：setState 命中该机制时会执行“保存组件于 dirtyComponents 中”，相反则“遍历所有 dirtyComponents，调用 updateComponent，更新 pending state or props”，体现在 setState 上就是同步；如何判断是否将命中该机制可以理解成，执行函数的机制是函数内有个布尔变量（isBatchingUpdates），在函数首尾分别赋值为开和关，setState 时查看该变量，值为关<strong>反映的现象</strong>则是同步；能命中该机制的情况，如生命周期（和调用它的函数）、React 中注册的事件（和它调用的函数）、React 可以“管理”的入口。</p>
 <p>组件的渲染和更新：props state → render() 生成 vnode → patch(elem, vnode)；setState(newState) --&gt; dirtyComponents → render() 生成 newVnode → patch(vnode, newVnode)。</p>
+<p>React 官方对自己的总结是：声明式；组件化；一次学习，随处编写。这里解释怎么做到声明式。“函数式编程就是一种声明式，能够避免代码副作用，同时它推崇数据不可变，以便更易维护与考量代码”，下面是 React 里普遍使用的一些这样的概念：</p>
+<ul>
+<li>一等对象，函数既可以赋值给变量，也可以作为参数传递，如高阶函数的应用（增强行为）；</li>
+<li>纯粹性，不改变自身作用域意外的任何东西，如<code>const add = (x, y) =&gt; x + y</code>存粹，<code>let x = 0; const add = y =&gt; (x = x + y)</code>不纯粹；</li>
+<li>不可变性，改了变量就不纯粹了，那么我们需要修改变量只能通过赋值新变量的方式，如<code>const add3 = arr =&gt; arr.concat(3); const myArr = [1, 2]; const result = add3(myArr)</code>；</li>
+<li>柯里化，多参转单参，转化后一个个参数是一个个状态方便保存下来，如<code>const add = x =&gt; y =&gt; x + y</code>；</li>
+<li>组合，通过组合，方便分解缩小，易于阅读和测试；</li>
+<li>函数式编程与 UI，React 用函数式编程构建 UI，使函数是一个幂等函数。</li>
+</ul>
+<p>声明式而非命令式。</p>
 <hr>
 <h3 id="diff-算法">diff 算法</h3>
 <p>React 的 diff 算法的时间复杂度相比传统 diff 算法，从指数级的 O(n3) 降到了线性的 O(n)。</p>
@@ -164,7 +172,7 @@
 <li>中间件里调用 next 方法，控制权到达下个中间件，调用 dispatch 方法，控制权回到头部；</li>
 <li>中间件的 return 只会被上一级捕获。</li>
 </ul>
-<p>应用保存的数据类型，通常分为下面 3 种，这 3 种组成 state：</p>
+<p><em>应用保存的数据类型，通常分为下面 3 种，这 3 种组成 state：</em></p>
 <ul>
 <li>数据域 Domain data，实体数据；</li>
 <li>应用状态 App state，行为数据，如某条数据被选择了；</li>
@@ -174,6 +182,13 @@
 <p>Redux 中间件和异步操作 https://www.cnblogs.com/SamWeb/p/11332484.html</p>
 </blockquote>
 <h2 id="ほしのかけら">ほしのかけら</h2>
+<p><em>组件之间数据的传递和更新：</em></p>
+<ul>
+<li>父组件向子组件，通过 props 进行传递；</li>
+<li>子组件向父组件，先在父组件向子组件传递函数 props，然后在子组件调用时设置入参即可使父组件获得设置的参数；</li>
+<li>跨级组件，利用 Context 避免逐层传递实现跨级传递；</li>
+<li>非嵌套组件，可以使用 Hooks API，结合 useContext 和 useReducer，可以使用 Redux，可以使用发布订阅者模式，安装<code>npm install events -S</code>。</li>
+</ul>
 <p><em>组件设计：</em></p>
 <ul>
 <li>拆分功能，分层；</li>
