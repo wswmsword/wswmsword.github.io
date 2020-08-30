@@ -72,6 +72,7 @@
       
     </div>
     <h1 id="react-を使つかい始はじめる">React を使<small style="color:salmon">つか</small>い始<small style="color:salmon">はじ</small>める</h1>
+<p>v16.7 版本及以前的特性。</p>
 <h2 id="react-hooks">React Hooks</h2>
 <p><em>クラスコンポーネントの欠点<small style="color: salmon">けってん</small>：</em></p>
 <blockquote>
@@ -97,7 +98,7 @@
 </ul>
 <p>useEffect()，例を挙げましょう：https://codesandbox.io/s/react-useeffect-redux-9t3bg，“引入具有副作用的操作，最常见的就是向服务器请求数据”。</p>
 <p>useCallback &amp;&amp; useMemo：函数组件重新渲染时，如果重复执行了计算量很大的函数，会有性能问题，这时可以使用 useMemo <strong>返回缓存值</strong>来避免；组件的渲染会导致子组件渲染，在对子组件优化，不让它渲染的时候，使用 useCallback <strong>返回缓存函数</strong>避免渲染。</p>
-<p>useRef()：ref 不导致 render，并且结果总是最终的值，不会像 state hook 会使用闭包在每个状态保存一个值；借用 useRef() 模拟类组件的 componentDidMount 生命周期；赋值给 DOM 节点的 ref 属性，访问 DOM 节点。</p>
+<p>useRef()：ref 不导致 render，并且结果总是最终的值，不会像 state hook 会使用闭包在每个状态保存一个值；借用 useRef() 模拟类组件的 componentDidMount 生命周期（在第一次渲染时执行操作，book）；赋值给 DOM 节点的 ref 属性，访问 DOM 节点。</p>
 <p>独自<small style="color: salmon">どくじ</small>の Hooks を作成<small style="color: salmon">さくせい</small>する、例を挙げましょう：https://codesandbox.io/s/react-useeffect-redux-ghl7c；把公共的逻辑代码提取到函数中，然后像调用函数一样调用它。</p>
 <h3 id="相关链接">相关链接</h3>
 <blockquote>
@@ -148,7 +149,7 @@
 <p>React 官方对自己的总结是：声明式；组件化；一次学习，随处编写。这里解释怎么做到声明式。“函数式编程就是一种声明式，能够避免代码副作用，同时它推崇数据不可变，以便更易维护与考量代码”，下面是 React 里普遍使用的一些这样的概念：</p>
 <ul>
 <li>一等对象，函数既可以赋值给变量，也可以作为参数传递，如高阶函数的应用（增强行为）；</li>
-<li>纯粹性，不改变自身作用域意外的任何东西，如<code>const add = (x, y) =&gt; x + y</code>存粹，<code>let x = 0; const add = y =&gt; (x = x + y)</code>不纯粹；</li>
+<li>纯粹性，不改变自身作用域以外的任何东西，如<code>const add = (x, y) =&gt; x + y</code>纯粹，<code>let x = 0; const add = y =&gt; (x = x + y)</code>不纯粹；</li>
 <li>不可变性，改了变量就不纯粹了，那么我们需要修改变量只能通过赋值新变量的方式，如<code>const add3 = arr =&gt; arr.concat(3); const myArr = [1, 2]; const result = add3(myArr)</code>；</li>
 <li>柯里化，多参转单参，转化后一个个参数是一个个状态方便保存下来，如<code>const add = x =&gt; y =&gt; x + y</code>；</li>
 <li>组合，通过组合，方便分解缩小，易于阅读和测试；</li>
