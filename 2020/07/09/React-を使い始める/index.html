@@ -66,7 +66,7 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#react-を使つかい始はじめる"><span class="toc-text">React を使つかい始はじめる</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#react-hooks"><span class="toc-text">React Hooks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关链接"><span class="toc-text">相关链接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-concepts-advanced-guides"><span class="toc-text">MAIN CONCEPTS &amp; ADVANCED GUIDES</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#パフォーマンス最適化さいてきか"><span class="toc-text">パフォーマンス最適化さいてきか</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vdom"><span class="toc-text">vdom</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原理げんり"><span class="toc-text">原理げんり</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟-dom"><span class="toc-text">虚拟 DOM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#snabbdom"><span class="toc-text">snabbdom</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#diff-算法"><span class="toc-text">diff 算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redux"><span class="toc-text">Redux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ほしのかけら"><span class="toc-text">ほしのかけら</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#猫の餌えさ"><span class="toc-text">猫の餌えさ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学習がくしゅうサイト"><span class="toc-text">学習がくしゅうサイト</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#react-を使つかい始はじめる"><span class="toc-text">React を使つかい始はじめる</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#react-hooks"><span class="toc-text">React Hooks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关链接"><span class="toc-text">相关链接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-concepts-advanced-guides"><span class="toc-text">MAIN CONCEPTS &amp; ADVANCED GUIDES</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#パフォーマンス最適化さいてきか"><span class="toc-text">パフォーマンス最適化さいてきか</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vdom"><span class="toc-text">vdom</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原理げんり"><span class="toc-text">原理げんり</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟-dom"><span class="toc-text">虚拟 DOM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#snabbdom"><span class="toc-text">snabbdom</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#diff-算法"><span class="toc-text">diff 算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redux"><span class="toc-text">Redux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#react-router"><span class="toc-text">React Router</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ほしのかけら"><span class="toc-text">ほしのかけら</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#猫の餌えさ"><span class="toc-text">猫の餌えさ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学習がくしゅうサイト"><span class="toc-text">学習がくしゅうサイト</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
@@ -189,6 +189,19 @@
 <blockquote>
 <p>Redux 中间件和异步操作 https://www.cnblogs.com/SamWeb/p/11332484.html</p>
 </blockquote>
+<h2 id="react-router">React Router</h2>
+<p>多页应用的 URL 跳转不同 html 文件，单页应用的则跳转不同组件，URL 对应路由，React Router 在 React App 中实现路由功能。</p>
+<p>Quick Start:</p>
+<ul>
+<li>如果需要路由，<code>&lt;Router&gt;</code>包裹在组件最外层；</li>
+<li><code>&lt;Link&gt;</code>触发跳转，to 属性定义链接，最终渲染成<code>&lt;a&gt;</code>可以方便键盘和屏幕阅读器操作；</li>
+<li><code>&lt;Route&gt;</code>内包含各路由对应的组件，path 属性和上面的 to 属性一致将匹配，一组<code>&lt;Route&gt;</code>外要被<code>&lt;Switch&gt;</code>包裹；</li>
+<li>如果使用嵌套路由，规则遵守以上步骤，下面是异于以上步骤的部分，首先在包含嵌套路由的组件中执行<code>let match = useRouteMatch()</code>，然后就可以在 to 或者 path 属性中用<code>match.url</code> 或 <code>match.path</code> 匹配路由的前部，如果要在一个<code>&lt;Route&gt;</code>中匹配多个路由而不是像之前各个<code>&lt;Route&gt;</code>对应自己的<code>&lt;Link&gt;</code>，那么在 path 属性的前部路由后面添加<code>/:word</code>，子组件里就可以执行<code>let {word} = useParams()</code>。</li>
+</ul>
+<p>Primary Components:</p>
+<ul>
+<li></li>
+</ul>
 <h2 id="ほしのかけら">ほしのかけら</h2>
 <p><em>组件之间数据的传递和更新：</em></p>
 <ul>

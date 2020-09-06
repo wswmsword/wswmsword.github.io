@@ -426,6 +426,7 @@
 <p><em>CORS：</em> - http://www.ruanyifeng.com/blog/2016/04/cors.html； - 有一些公共接口，通常用来测试 ajax 请求在应用中正常运作的状态，比如 https://dog.ceo/api/breeds/image/random，自己的应用中请求它将开启 cors，请求头中可以看见 origin 字段，响应头中可以看见 access-control-allow-origin 字段； - cors 中预检（preflight）请求的作用，preflight 出现在非简单请求中，客户端在正式发出请求前“先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段”，如果得到否定回复，触发的错误将被 XMLHttpRequest 的 onerror 回调函数捕捉； - 実践<small style="color: salmon">じっせん</small> CORS：https://www.cnblogs.com/MrSaver/p/11202319.html。</p>
 <p>XSS：嵌入 script 脚本，收割 cookie；XSS 攻击的处理 https://blog.alswl.com/2017/05/xss/；XSS 预防工具 https://github.com/leizongmin/js-xss/blob/master/README.zh.md。</p>
 <p>CSRF：https://www.cnblogs.com/meituantech/p/9777222.html。</p>
+<p>阮一峰-图解 SSL/TLS 协议：http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html。</p>
 <h2 id="module">Module</h2>
 <ul>
 <li>浏览器加载 ES6 模块使用<code>&lt;script&gt;</code>标签，加入<code>type=module</code>属性</li>
@@ -458,6 +459,8 @@
 <li>使用<code>Charles</code>，Android 设置<code>代理服务器主机名</code>、<code>端口</code>，Mac 在系统偏好设置的网络下查看主机名，在 Charles 的<code>proxy settings</code>选项查看端口</li>
 </ul>
 <h2 id="sass">Sass</h2>
+<p>一种样式文件结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">styles/</span><br><span class="line">	_variables.scss（各种变量以及可配置设置）</span><br><span class="line">	_mixins.scss（全局 mixins）</span><br><span class="line">	_functions.scss（全局 functions）</span><br><span class="line">components/</span><br><span class="line">	Button/</span><br><span class="line">		style.scss（组件单独的样式）</span><br></pre></td></tr></table></figure>
 <p>Sass 主要知识点小记 https://www.cnblogs.com/ForRickHuan/p/8330401.html</p>
 <h2 id="eslint">ESLint</h2>
 <p>ESLint 工作原理探讨 https://www.jianshu.com/p/526db7eeeecc</p>
