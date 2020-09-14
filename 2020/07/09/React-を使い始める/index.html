@@ -97,7 +97,7 @@
 <li>该 hook 的优点，高可读性，分离“做什么”和“怎么做”，集中处理 state。</li>
 </ul>
 <p>useEffect()，例を挙げましょう：https://codesandbox.io/s/react-useeffect-redux-9t3bg，“引入具有副作用的操作，最常见的就是向服务器请求数据”。</p>
-<p>useCallback &amp;&amp; useMemo：函数组件重新渲染时，如果重复执行了计算量很大的函数，会有性能问题，这时可以使用 useMemo <strong>返回缓存值</strong>来避免；组件的渲染会导致子组件渲染，在对子组件优化，不让它渲染的时候，使用 useCallback <strong>返回缓存函数</strong>避免渲染。</p>
+<p>useCallback &amp;&amp; useMemo：函数组件改变 state 将导致组件重新渲染，如果重复执行了计算量很大的函数，会有性能问题，这时可以使用 useMemo <strong>返回缓存值</strong>来避免；组件的渲染会导致子组件渲染，在对子组件优化，不让它渲染的时候，父组件使用 useCallback <strong>返回缓存函数</strong>避免渲染。</p>
 <p>useRef()：ref 不导致 render，并且结果总是最终的值，不会像 state hook 会使用闭包在每个状态保存一个值；借用 useRef() 模拟类组件的 componentDidMount 生命周期（在第一次渲染时执行操作，book）；赋值给 DOM 节点的 ref 属性，访问 DOM 节点。</p>
 <p>独自<small style="color: salmon">どくじ</small>の Hooks を作成<small style="color: salmon">さくせい</small>する、例を挙げましょう：https://codesandbox.io/s/react-useeffect-redux-ghl7c；把公共的逻辑代码提取到函数中，然后像调用函数一样调用它。</p>
 <h3 id="相关链接">相关链接</h3>
