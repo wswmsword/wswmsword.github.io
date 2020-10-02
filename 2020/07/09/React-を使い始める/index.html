@@ -59,6 +59,15 @@
 </time>
 
 
+    
+    &nbsp;
+    <svg class="i-tag" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"/>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"/>
+    </svg>
+    &nbsp;
+    <a href="/categories/笔记本/">笔记本</a>
+
 
 
 
@@ -114,6 +123,7 @@
 <p>制御<small style="color: salmon">せいぎょ</small>されたコンポーネント：表单组件的值受 state 的控制；onChange, value 搭配，onChange, checked 搭配。</p>
 <p>父子组件的通信：state 管理当前组件数据，props 向子组件下流数据，父组件向子组件传递函数做到<strong>状态提升</strong>；安装“prop-types”插件做 props 的类型检查（更健壮）。</p>
 <p>setState：关键词“不可变值”，setState 前不改变 this.state，而使用副本或临时值（纯函数，concat, slice, filter 等，而非 push, pop, splice 等）；可能同步（监听事件，计时）或异步；可能会合并（传入函数不会合并，如<code>this.setState((prevState, props) =&gt; { return { x : xxx }})</code>）；以回调函数的形式获取最新值。</p>
+<p>setState 相关博文：https://segmentfault.com/a/1190000015463599。</p>
 <p>ライフサイクル：ライフサイクル図<small style="color: salmon">ず</small>，https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/；https://codepen.io/birdknothing/pen/XvVqmx?editors=1011。</p>
 <p>非制御コンポーネント：<strong>ref</strong>，构造时创建 ref<code>this.nameInputRef = React.createRef()</code>，render 里为组件添加 ref 属性<code>ref = {this.nameInputRef}</code>；<strong>defaultValue, defaultChecked</strong>，为组件设置初始值<code>defaultValue = {this.state.name}</code>，state 在这里的作用只是初始化 value，可省；<strong>手动操作 DOM</strong>，通过 ref 获取 DOM<code>const e = this.nameInputRef.current</code>。</p>
 <p>Portals：令子节点渲染到父组件外的指定 DOM 里，<code>ReactDOM.createPortal(child, container)</code>。用在如 body 层的 fixed 的 position，跳出父元素的 hidden overflow 或 z-index。</p>
@@ -230,7 +240,7 @@
 <p><em>React 阻止默认事件：</em>显式调用对象的 preventDefault 方法阻止。</p>
 <p><em>类组件里常用的定义事件函数方法：</em>ES7 的属性初始化语法，无需手动绑定 this。</p>
 <h2 id="猫の餌えさ">猫の餌<small style="color: salmon">えさ</small></h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">https://www.zhihu.com/question/24925709/answer/130708066</span><br><span class="line"></span><br><span class="line">猫咪怀孕，产前准备及生产后护理全攻略：https://zhuanlan.zhihu.com/p/180313588</span><br><span class="line"></span><br><span class="line">母猫产后吃什么？该怎样护理？ https://zhuanlan.zhihu.com/p/34534366</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">https://www.zhihu.com/question/24925709/answer/130708066</span><br><span class="line"></span><br><span class="line">猫咪怀孕，产前准备及生产后护理全攻略：https://zhuanlan.zhihu.com/p/180313588</span><br><span class="line"></span><br><span class="line">母猫产后吃什么？该怎样护理？ https://zhuanlan.zhihu.com/p/34534366</span><br><span class="line"></span><br><span class="line">Python 编程快速上手：让繁琐工作自动化：https://automatetheboringstuff.com/</span><br></pre></td></tr></table></figure>
 <h2 id="学習がくしゅうサイト">学習<small style="color: salmon">がくしゅう</small>サイト</h2>
 <p>React v17 rc 介绍：https://reactjs.org/blog/2020/08/10/react-v17-rc.html。</p>
 <p>React 路由中文网：http://react-router.docschina.org/web/example/route-config；https://reactrouter.com/web/guides/quick-start</p>
