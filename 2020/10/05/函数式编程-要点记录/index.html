@@ -1,0 +1,237 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content>
+  
+  <title>函数式编程-要点记录</title>
+  <meta name="author" content="strawberry">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="函数式编程-要点记录">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="strawberryfields">
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="strawberryfields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+</head>
+</html>
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewbox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"/>
+    </svg>
+  </a>
+  <div class="description">
+    &nbsp;郁郁青青 长过千寻
+  </div>
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        函数式编程-要点记录
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-10-04T22:59:18.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"/>
+  </svg>
+  &nbsp;
+  2020-10-05
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewbox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"/>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"/>
+    </svg>
+    &nbsp;
+    <a href="/categories/笔记本/">笔记本</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#section"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#document"><span class="toc-text">Document</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#柯里化"><span class="toc-text">柯里化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ほしのかけら"><span class="toc-text">ほしのかけら</span></a></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h1 id="section"></h1>
+<h2 id="document">Document</h2>
+<h3 id="柯里化">柯里化</h3>
+<p>柯里函数：每传递一个参数调用函数，就返回一个新函数处理剩余的函数。</p>
+<h2 id="ほしのかけら">ほしのかけら</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">中</th>
+<th style="text-align: left;">英</th>
+<th style="text-align: left;">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">局部调用</td>
+<td style="text-align: left;">partial application</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">样板代码</td>
+<td style="text-align: left;">boilerplate code</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">高阶函数</td>
+<td style="text-align: left;">higher order function</td>
+<td style="text-align: left;">参数或返回值为函数的函数</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li>范畴论
+<ul>
+<li>范畴的概念
+<ul>
+<li>“范畴就是使用箭头连接的物体。”，箭头即“态射（morphism）”。</li>
+</ul></li>
+<li>数学模型
+<ul>
+<li>集合（所有成员） + 函数（变形关系）</li>
+</ul></li>
+<li>范畴与容器
+<ul>
+<li>范畴想象成容器；<code>Category</code>类（容器），有一个值<code>this.val</code>和一种变形关系<code>addOne</code>，这里的范畴就是所有彼此差 1 的数字。</li>
+</ul></li>
+<li>范畴论与函数式编程的关系
+<ul>
+<li>范畴论使用函数，伴随范畴论的发展，形成一整套函数运算方法，在计算机上实现后就是“函数式编程”；作为数学运算，函数的原始目的就是求值，因此要求函数要纯；函数像管道（pipe）。</li>
+</ul></li>
+</ul></li>
+<li>函数的合成和柯里化
+<ul>
+<li>函数的合成
+<ul>
+<li>运算的过程中，合并中间步骤成一个函数，叫函数的合成（compose），<code>f(x)</code>和<code>g(x)</code>合成为<code>f(g(x))</code>；函数合成连接管道，数据穿过其中。</li>
+</ul></li>
+<li>柯里化
+<ul>
+<li>合成的时候，单个参数函数很方便，但是函数多参时，就需要柯里化了；<code>add(x, y)</code>柯里化成<code>addX(y)(x)</code>。</li>
+</ul></li>
+</ul></li>
+<li>函子
+<ul>
+<li>函子的概念
+<ul>
+<li>范畴的运算是函子（Functor），它的变形关系作用于每个值，将当前容器变形成另一个容器；<code>a---&gt;f---&gt;b</code> 传入函子<code>F</code>变成<code>Fa---&gt;Ff---&gt;Fb</code>。</li>
+</ul></li>
+<li>函子的代码实现
+<ul>
+<li>函子的标志是容器具有<code>map</code>方法，该方法将容器里每个值映射成另一容器。</li>
+</ul></li>
+</ul></li>
+<li>of 方法
+<ul>
+<li>of 方法生成新容器，代替 new 命令（面向对象的标志）。</li>
+</ul></li>
+<li>Maybe 函子
+<ul>
+<li>函数管道未必有处理空值的能力这一些列问题，为了解决它们，出现 Maybe 函子。</li>
+</ul></li>
+<li>Either 函子
+<ul>
+<li>Either 函子内部有左值（Left）和右值（Right），正常情况使用左值，如果不存在使用默认值右值。</li>
+</ul></li>
+<li>ap 函子
+<ul>
+<li>To be continued http://www.ruanyifeng.com/blog/2017/02/fp-tutorial.html</li>
+</ul></li>
+</ol>
+
+
+  </article>
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewbox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"/>
+        </svg>
+        </a>
+        © chen 2016-2020
+    </div>
+    <div class="secondrow">
+        <a href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
