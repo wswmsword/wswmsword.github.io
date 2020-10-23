@@ -75,39 +75,66 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#section"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#document"><span class="toc-text">Document</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#柯里化"><span class="toc-text">柯里化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ほしのかけら"><span class="toc-text">ほしのかけら</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#section"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#document"><span class="toc-text">Document</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#柯里化"><span class="toc-text">柯里化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例应用"><span class="toc-text">示例应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例应用-1"><span class="toc-text">示例应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ほしのかけら"><span class="toc-text">ほしのかけら</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
     </div>
     <h1 id="section"></h1>
+<p>这是一篇我对函数式编程指南中文文档等学习资料的复述，其中是对信息的提取和整理，正在完善中。</p>
 <h2 id="document">Document</h2>
 <h3 id="柯里化">柯里化</h3>
 <p>柯里函数：每传递一个参数调用函数，就返回一个新函数处理剩余的函数。</p>
+<p>接下来在终端跑 node 进行实验：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var curry = require(&apos;lodash&apos;)</span><br><span class="line"></span><br><span class="line">var match = curry((what, str) =&gt; str.match(what))</span><br><span class="line">var filter = curry((f, ary) =&gt; ary.filter(f))</span><br><span class="line"></span><br><span class="line">match(/\s+/g, &quot;hello world&quot;)</span><br><span class="line"></span><br><span class="line">var hasSpaces = match(/\s+/g)</span><br><span class="line">hasSpaces(&quot;hello world&quot;)</span><br><span class="line"></span><br><span class="line">filter(hasSpaces, [&quot;tori_spelling&quot;, &quot;tori amos&quot;])</span><br></pre></td></tr></table></figure>
+<p>因此，通过柯里化传递参数，还会记住已经传递过这些参数后返回的函数，方便重复、交叉使用。</p>
+<h3 id="示例应用">示例应用</h3>
+<p>声明式代码：指明的是<code>做什么</code>，不是<code>怎么做</code>。</p>
+<p>JIT 优化代码相关视频：https://www.youtube.com/watch?v=65-RbBwZQdU。</p>
+<h3 id="示例应用-1">示例应用</h3>
+<p>这一章上手写一份声明式代码。</p>
 <h2 id="ほしのかけら">ほしのかけら</h2>
+<p>Pointfree 编程风格指南：http://www.ruanyifeng.com/blog/2017/03/pointfree.html。</p>
+<p>ramdajs：函数式编程工具，https://ramda.cn。</p>
 <table>
 <thead>
 <tr class="header">
 <th style="text-align: left;">中</th>
 <th style="text-align: left;">英</th>
 <th style="text-align: left;">解释</th>
+<th style="text-align: left;">来源</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">局部调用</td>
 <td style="text-align: left;">partial application</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">传递函数一部分参数</td>
+<td style="text-align: left;"><a href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch4.html#%E4%B8%8D%E4%BB%85%E4%BB%85%E6%98%AF%E5%8F%8C%E5%85%B3%E8%AF%AD%E5%92%96%E5%96%B1" target="_blank" rel="noopener">不仅仅是双关语／咖喱</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">样板代码</td>
 <td style="text-align: left;">boilerplate code</td>
 <td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch4.html#%E4%B8%8D%E4%BB%85%E4%BB%85%E6%98%AF%E5%8F%8C%E5%85%B3%E8%AF%AD%E5%92%96%E5%96%B1" target="_blank" rel="noopener">不仅仅是双关语／咖喱</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">高阶函数</td>
 <td style="text-align: left;">higher order function</td>
 <td style="text-align: left;">参数或返回值为函数的函数</td>
+<td style="text-align: left;"><a href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch4.html#%E4%B8%8D%E4%BB%85%E4%BB%85%E6%98%AF%E5%8F%8C%E5%85%B3%E8%AF%AD%E5%92%96%E5%96%B1" target="_blank" rel="noopener">不仅仅是双关语／咖喱</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">高级规范</td>
+<td style="text-align: left;">high level specification</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch6.html#%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener">声明式代码</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">等式推导</td>
+<td style="text-align: left;">equational reasoning</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch6.html#%E6%9C%89%E5%8E%9F%E5%88%99%E7%9A%84%E9%87%8D%E6%9E%84" target="_blank" rel="noopener">有原则的重构</a></td>
 </tr>
 </tbody>
 </table>
