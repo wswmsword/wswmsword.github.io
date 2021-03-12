@@ -93,7 +93,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">style</span>(<span class="params">element, name, value</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  name = name.replace(<span class="regexp">/-([a-z])/ig</span>,</span><br><span class="line">	  (all, letter) =&gt; (letter.toUpperCase())</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> value !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">    element.style[name] = value;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> element.style[name];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="闭包-closure-和作用域">闭包 closure 和作用域</h2>
 <h3 id="闭包">闭包</h3>
-<p><span id="r闭包参数"></span> <span id="r闭包返回值"></span> 函数作为<a href="#闭包参数">入参</a>或<a href="#闭包返回值">返回值</a>都<strong>有可能</strong>形成闭包（特殊的作用域）。这是因为，函数的执行会创建作用域，作用域形成作用域链，作用域链又会存在分支，因此作用域有了父子、兄弟关系，作用域中传递的是变量，<strong>当使用变量的作用域不是定义变量的作用域的子作用域的时候，一定会产生闭包</strong>，这一<code>策略</code>使闭包里的变量让函数正常引用变量、正常执行。</p>
+<p><span id="r闭包参数"></span> <span id="r闭包返回值"></span> 函数作为<a href="#闭包参数">入参</a>或<a href="#闭包返回值">返回值</a>都<strong>有可能</strong>形成闭包（特殊的作用域）。这是因为，函数的执行会创建作用域，作用域形成作用域链，作用域链又会存在分支，因此作用域有了父子、兄弟关系，作用域中传递的是变量，<strong>当使用变量的作用域不是定义变量的作用域的子作用域的时候，一定会产生闭包</strong>，这一<code>策略</code>使闭包里的变量<strong>让函数正常引用变量、正常执行</strong>。</p>
 <p>闭包很常见，例如可以观察 forEach 检测是否形成了闭包：这里 forEach 的回调是监听一串 li 的点击事件，点击后打印 li 的序号（及 forEach 回调的第二参）。点击 li 后发现打印出了对应的序号，和这个现象作对比的是将 forEach 替换成 for 循环，结果将始终打印 1 个值</p>
 <p>在上述 forEach 的例子，往监听的回调函数添加断点后，点击某个 li 就看见了 DevTools 内 Sources 下的 Scope 面板出现了 Closure 这个特殊的作用域（下方图）。想用 for 循环完成这样的工作，可以给监听的回调使用 bind 或裸 IIFE 返回函数（IIFE 内定义变量存储 index，返回的函数中使用），后者利用了闭包。</p>
 <p><img src="forEachClosure.png"></p>
@@ -370,11 +370,15 @@
 <li><p>DCL(DOMContentLoaded Event)；</p></li>
 <li><p>FMP(First Meaningful Paint)，首次有意义内容出现；</p></li>
 <li><p>（TTI, Time To Interactive）；</p></li>
-<li><p>LCP(Largest Contentful Paint)；</p></li>
+<li><p><a href="https://web.dev/lcp/" target="_blank" rel="noopener">LCP(Largest Contentful Paint)</a>；</p></li>
 <li><p>L(Onload Event)。</p></li>
 </ul>
 <blockquote>
+<p><a href="https://developers.google.com/speed/pagespeed/insights" target="_blank" rel="noopener">PageSpeed Insights</a>：谷歌的页面性能分析工具，提供了优化建议。</p>
+<p><a href="https://developers.google.com/web/tools/chrome-devtools/rendering-tools" target="_blank" rel="noopener">分析运行时性能</a>：谷歌 DevTools 官网里的性能部分，是对 DevTools Performance 面板的讲解。</p>
 <p><a href="https://googlechrome.github.io/lighthouse/scorecalc/" target="_blank" rel="noopener">Lighthouse Scoring Calculator</a></p>
+<p><a href="https://webpagetest.org" target="_blank" rel="noopener">WEBPAGETEST</a>：这个网页输入页面，会返回页面性能相关内容，这个网站在我了解 LCP 计算方法的时候收集到（目测比较原始、专业）。</p>
+<p><a href="https://imageoptim.com/mac" target="_blank" rel="noopener">ImageOptim</a>：这是 Mac 上压缩图片的应用，从<a href="https://webpagetest.org/result/210306_Ai2M_3d9e882b6b2de837deb4125989a49840/" target="_blank" rel="noopener">WEBPAGETEST</a>这个网站的“Did you know...”内容跳转找到。</p>
 </blockquote>
 <p>缩短 TTFB（time to first byte）时间：</p>
 <ul>
@@ -433,6 +437,7 @@
 <p>// 刷新 DOM 避免点击事件逗留</p>
 <p>指定 DOM 内如果有图片，innerHtml 导致的重绘将重新请求服务器资源。</p>
 <p>容器内无子元素适用 innerHtml，向容器尾追加适用 appendChild。</p>
+<p><a href="https://sylvenas.github.io/blog/2018/03/07/webp.html" target="_blank" rel="noopener">WEB IMAGE 加载优化方案--WEBP</a>：网易云 FP 工程师的关于优化的文章，里面描述了使用 imagemin 生成 webp。</p>
 <h3 id="缓存">缓存</h3>
 <p>强制缓存：expires 和 Cache-Control。</p>
 <p>expires：HTTP1.0 字段，设置具体的时间值（首次请求时服务端返回）作为缓存资源过期时间；问题是，设置的时间和服务端一致，如果服务端和客户端时间有误差（时区）则缓存无法预期。</p>
@@ -454,7 +459,7 @@
 </ul>
 <hr>
 <p>CDN：避免 CDN 和应用服务器的域名相同，可以避免携带 cookie；本地 DNS 服务器，网站权威 DNS 服务器，CDN 权威 DNS 服务器，CND 全局负载均衡，边缘节点，区域节点，中心节点，网站。</p>
-<p>渲染：解析 HTML 生成 DOM 树，解析 CSS 生成规则树，解析完成后生成渲染树，绘制，显示；针对这样的渲染顺序，使用诸如内联 CSS 和 async 的方法加快渲染速度；浏览器的工作原理，https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/。</p>
+<p>渲染：解析 HTML 生成 DOM 树，解析 CSS 生成规则树，解析完成后生成渲染树，绘制，显示；针对这样的渲染顺序，使用诸如内联 CSS 和 async 的方法加快渲染速度；下方的 Reference 中有关于浏览器的工作原理的文章，用于了解渲染。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">|----------|</span><br><span class="line">| HTML 文档 |------------</span><br><span class="line">|----------|           ｜ CSS 解析</span><br><span class="line">      | DOM 解析        ｜</span><br><span class="line">|----------|      |----------|</span><br><span class="line">| DOM Tree |      |  CSS OM  |</span><br><span class="line">|----------|      |----------| </span><br><span class="line">      |     附着 CSS 规则 |</span><br><span class="line">      |------------------</span><br><span class="line">      |</span><br><span class="line">|-------------|</span><br><span class="line">| Render Tree | 回流（reflow）--------------------【 paint 】</span><br><span class="line">|-------------|               没有触发 Render Layer</span><br><span class="line">      |</span><br><span class="line">      | 层叠上写文处理</span><br><span class="line">      |</span><br><span class="line">|--------------| 重绘</span><br><span class="line">| Render Layer |--------</span><br><span class="line">|--------------|       |</span><br><span class="line">      |                | 层提升</span><br><span class="line">      |           |----------------|</span><br><span class="line">      |           | Graphics Layer |</span><br><span class="line">      |           |----------------|</span><br><span class="line">      |                |</span><br><span class="line">|----------|      |---------|</span><br><span class="line">|   Paint  |      | GPU 绘制 |</span><br><span class="line">|----------|      |---------|</span><br><span class="line">      |                |</span><br><span class="line">      ------------------</span><br><span class="line">               |</span><br><span class="line">               | 层合并</span><br><span class="line">          |-----------|</span><br><span class="line">          | 渲染最终页面 |</span><br><span class="line">          |-----------|</span><br></pre></td></tr></table></figure>
 <p>重绘与回流：回流（位置、尺寸、字体）将引起重绘（边框、颜色、阴影）；把合适的样式设置成 position 或 fixed 会让元素提升到 Rander Layer，这样在回流操作时不会影响其它元素；可以使用<strong>启动硬件加速</strong>的方式，使用 GPU 进行绘制，避免重绘、回流。</p>
 <p>常见触发回流的情况：初次渲染；元素大小变化；元素位置变化；窗口变化；插删 DOM 元素；激活伪类；改变字体。</p>
@@ -468,10 +473,10 @@
 </ul>
 <h3 id="reference-1">Reference</h3>
 <blockquote>
+<p><a href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/#Introduction" target="_blank" rel="noopener">浏览器的工作原理：新式网络浏览器幕后揭秘</a></p>
 <p><a href="https://segmentfault.com/a/1190000020867090" target="_blank" rel="noopener">前端性能优化指南</a></p>
-<p><a href="https://www.yuque.com/docs/share/a2c9e32d-6b31-4c03-9d58-ab5fbfb01883?#" target="_blank" rel="noopener">运行原理&amp;整体优化建议（外部）</a></p>
-<p><a href="http://kangax.github.io/compat-table/es6/" target="_blank" rel="noopener">尾递归优化的支持度</a></p>
-<p><a href="https://developers.google.com/web/tools/chrome-devtools/network/reference?utm_source=devtools#timing-explanation" target="_blank" rel="noopener">Chrome DevTools 的使用</a></p>
+<p><a href="http://kangax.github.io/compat-table/es6/" target="_blank" rel="noopener">尾递归优化的支持度</a>：浏览器会尾递归优化，一直递归不报错。</p>
+<p><a href="https://developers.google.com/web/tools/chrome-devtools/network/reference?utm_source=devtools#timing-explanation" target="_blank" rel="noopener">Chrome DevTools 的使用</a>：谷歌 DevTools 官网（英文），微软 Edge DevTools 官网有对应的中文版本。</p>
 <p><a href="https://www.bilibili.com/read/cv7148970" target="_blank" rel="noopener">Web 性能优化（翻译）</a></p>
 <p><a href="https://github.com/xitu/gold-miner/blob/master/TODO1/front-end-performance-checklist-2019-pdf-pages-6.md#62-%E6%98%AF%E5%90%A6%E8%AE%BE%E7%BD%AE%E4%BA%86%E6%8C%81%E7%BB%AD%E7%9B%91%E6%8E%A7" target="_blank" rel="noopener">2019 前端性能优化年度总结（译文）</a>，<a href="https://www.smashingmagazine.com/2021/01/front-end-performance-2021-free-pdf-checklist/" target="_blank" rel="noopener">原文</a></p>
 <p><a href="https://github.com/laoqiren/web-performance" target="_blank" rel="noopener">Web 性能的方方面面</a>：GitHub 文章，通过<a href="https://juejin.cn/user/1697301683260343" target="_blank" rel="noopener">掘金作者</a>跳转来，这位作者“自己动手撸一个静态博客生成器”。</p>
@@ -537,7 +542,6 @@
 <li>ES6 模块是动态引用，如果使用<code>import</code>从一个模块加载变量（即<code>import foo from 'foo'</code>），那些变量不会被缓存，而是成为一个指向被加载模块的引用，需要开发者自己保证，真正取值的时候能够取到值</li>
 </ul>
 <h3 id="amd-cmd-commonjs-umd-...">AMD, CMD, CommonJS, UMD ...</h3>
-<p>这些过时的缩写令人烦躁，阅读两篇相关高分博文，他们说啥就是啥，希望是最后一次查它们（看了用不到忘了又碰到）的解释了。</p>
 <p>模块化的规范制度。</p>
 <table>
 <colgroup>
@@ -608,6 +612,7 @@
 <p>移动设备可视区域宽度的获取方法（Visual Viewport）：window.innerWidth，Android 2, Opera mini, UC8 无法获取。</p>
 <p>理想宽度：作用是为了让不同分辨率设备上观看网站的效果差不多。</p>
 <p>content 里的 width 和 initial-scale：width=device-width 用来修改 LV 成理想宽度，但是 iPhone 和 iPad 会有问题（转不过来），因此用 initial-scale=1 来相对 VV 缩放一倍（不变），达到 width 属性相同效果，但是 IE 有问题（不转），最后两者结合解决问题。</p>
+<p><a href="https://sylvenas.github.io/blog/2018/03/06/web-image-%E4%BC%98%E5%8C%96.html" target="_blank" rel="noopener">WEB IMAGE 加载优化方案</a>：网易云 FP 工程师的文章，解释了 CSS 密度。</p>
 <h4 id="px-像素问题">1px 像素问题</h4>
 <p>解决方法 1：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@media only screen and (-webkit-min-device-pixel-ratio: 3.0) &#123;</span><br><span class="line">    .border-bottom::after &#123;</span><br><span class="line">        transform: scaleY(0.33);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -628,11 +633,11 @@
 <p>https://javascript.info/</p>
 <p>这是谷歌的 Web 教程、指南、最佳实践 https://developers.google.com/web/fundamentals?hl=zh-cn</p>
 <p>前端精读周刊 https://github.com/dt-fe/weekly</p>
+<p><a href="https://wangdoc.com/es6/index.html" target="_blank" rel="noopener">ES6 教程</a>：阮一峰的 js 教程</p>
 </blockquote>
 <h2 id="私はのコードスタイル">私はのコードスタイル</h2>
 <h2 id="精选-blog">精选 blog</h2>
 <p><a href="https://developer.ibm.com/zh/languages/javascript/" target="_blank" rel="noopener">IBM JavaScript</a></p>
-<p><a href="https://yangzw.vip/blog" target="_blank" rel="noopener">Joway Young Blog</a></p>
 <p><a href="https://bobi.ink/" target="_blank" rel="noopener">Bobi.ink</a>：“if 我是前端 Leader”系列文章；来源：作为参考资料的“CodeSandbox 如何工作？上篇”。</p>
 <p><a href="https://sylvenas.github.io/" target="_blank" rel="noopener">little forest</a>：网易云前端成员，写作函数式文章。</p>
 <h3 id="团队-blog">团队 blog</h3>

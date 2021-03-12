@@ -66,7 +66,7 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#section"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ほしのかけら"><span class="toc-text">ほしのかけら</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#section"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ほしのかけら"><span class="toc-text">ほしのかけら</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
@@ -196,6 +196,10 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">9yy</span><br><span class="line"># 复制 9 行</span><br><span class="line">:.,$-1d</span><br><span class="line"># 删除从当前行至（最后一行-1）行</span><br><span class="line">:set nu</span><br><span class="line"># 显示行数</span><br></pre></td></tr></table></figure>
 <p>shell 命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">mkdir &#123;all-match,left-match,right-match&#125;</span><br><span class="line"># 创建 3 个文件夹</span><br><span class="line">tail -f /opt/nginx/logs/error.log</span><br><span class="line"># 查看错误日志</span><br><span class="line">curl localhost/test</span><br><span class="line"># 访问，-I 返回响应头</span><br><span class="line">cat /etc/hosts</span><br><span class="line"># 域名映射</span><br><span class="line">mkdir /opt/nginx/html/app/proxy</span><br><span class="line"># 创建目录，创建了没有的 app 和 proxy</span><br><span class="line">less configure</span><br><span class="line"># 查看</span><br><span class="line">ls -rlt</span><br><span class="line"># 长格式按时间倒序，新的在下</span><br><span class="line">ss -tnl</span><br><span class="line"># 查看主机监听的端口</span><br><span class="line">mkdir server&#123;2..3&#125;</span><br><span class="line"># 创建 server2 和 server3 目录</span><br><span class="line">echo &quot;&lt;h1&gt;test1 nginx&lt;/h1&gt;&quot; &gt;&gt; domain_vm1/login.html</span><br><span class="line"># 保存内容到指定目录</span><br><span class="line">ls domain_vm*</span><br><span class="line"># 查看这个前缀的文件夹里的文件</span><br><span class="line">mv doamin_vm1/ domain_vm1</span><br><span class="line"># 重命名</span><br></pre></td></tr></table></figure>
+<h2 id="reference">Reference</h2>
+<blockquote>
+<p><a href="https://blog.detectify.com/2020/11/10/common-nginx-misconfigurations/" target="_blank" rel="noopener">Common Nginx misconfigurations that leave your web server open to attack</a>：阮一峰 2021/03，常见的 Nginx 不安全配置；搜索了一下，很快被网友翻译成了中文，<a href="https://www.cnblogs.com/lovebing/p/14484632.html" target="_blank" rel="noopener">常见的 Nginx 配置错误，使您的 Web 服务器可以被攻击</a>。</p>
+</blockquote>
 
 
   </article>
