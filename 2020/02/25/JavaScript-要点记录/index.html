@@ -102,6 +102,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function returnF()</span><br><span class="line">&#123;</span><br><span class="line">	var b = 0;</span><br><span class="line">	return function()</span><br><span class="line">	&#123;</span><br><span class="line">		++ b;</span><br><span class="line">		console.log(b);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">// 这里创建了 3 个不同的变量 b</span><br><span class="line">let c = returnF(); let d = returnF(); let e = returnF();</span><br><span class="line"></span><br><span class="line">console.log(&apos;=== closure ===&apos;);</span><br><span class="line"></span><br><span class="line">c(); c();</span><br><span class="line">d();</span><br><span class="line">e(); e(); e();</span><br></pre></td></tr></table></figure>
 <p>直接使用闭包会导致内存无法释放，下面进行释放内存的例子，浏览器中使用 DevTools / Memory 的 Allocation instrumentation on timeline 查看释放前后对比区别：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function returnF() &#123;</span><br><span class="line">    var b = 0;</span><br><span class="line">    return &#123;</span><br><span class="line">        incr: () =&gt; &#123; ++ b; return &apos;ok&apos;; &#125;,</span><br><span class="line">        get: () =&gt; &#123; console.log(b); return &apos;ok&apos;; &#125;,</span><br><span class="line">        free: () =&gt; &#123; b = null; return &apos;ok&apos;&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="https://zh.wikipedia.org/zh-cn/%E9%97%AD%E5%8C%85_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)" target="_blank" rel="noopener">闭包 (计算机科学)</a></p>
+</blockquote>
 <h3 id="作用域">作用域</h3>
 <h4 id="this">this</h4>
 <p>this 很好理解，this 总是会出现在实例中，指向（代表）当前实例。</p>
@@ -478,6 +481,8 @@
 </ul>
 <h3 id="reference-1">Reference</h3>
 <blockquote>
+<p><a href="https://developer.chrome.com/docs/devtools/evaluate-performance/reference/" target="_blank" rel="noopener">Performance features reference</a>：解释了 Devtools 的性能面板，暂无译文（谷歌）</p>
+<p><a href="https://developers.google.com/web/fundamentals/performance/rendering" target="_blank" rel="noopener">渲染性能</a>：渲染性能的系列文章，均有译文（谷歌）</p>
 <p><a href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/#Introduction" target="_blank" rel="noopener">浏览器的工作原理：新式网络浏览器幕后揭秘</a></p>
 <p><a href="https://segmentfault.com/a/1190000020867090" target="_blank" rel="noopener">前端性能优化指南</a></p>
 <p><a href="http://kangax.github.io/compat-table/es6/" target="_blank" rel="noopener">尾递归优化的支持度</a>：浏览器会尾递归优化，一直递归不报错。</p>
