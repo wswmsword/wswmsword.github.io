@@ -75,15 +75,22 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#section"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#emacs-大战"><span class="toc-text">🌊Emacs 大战</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#emacs-魔法"><span class="toc-text">🪄Emacs 魔法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#windows"><span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动游标"><span class="toc-text">移动游标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#帮助指令"><span class="toc-text">帮助指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊指令"><span class="toc-text">特殊指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flycheck"><span class="toc-text">flycheck</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#emacs-lisp"><span class="toc-text">🔮Emacs Lisp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#私の-emacs-の設定"><span class="toc-text">私の Emacs の設定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#星のかけら"><span class="toc-text">✨星のかけら</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#section"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#emacs-大战"><span class="toc-text">🌊Emacs 大战</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#emacs-魔法"><span class="toc-text">🪄Emacs 魔法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#帮助指令"><span class="toc-text">帮助指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#windows"><span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动游标"><span class="toc-text">移动游标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#帮助指令-1"><span class="toc-text">帮助指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊指令"><span class="toc-text">特殊指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#company"><span class="toc-text">company</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yasnippetyet-another-snippet"><span class="toc-text">yasnippet(yet another snippet)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ivy-mode"><span class="toc-text">ivy-mode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flycheck"><span class="toc-text">flycheck</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c-ide"><span class="toc-text">C++ IDE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#emacs-lisp"><span class="toc-text">🔮Emacs Lisp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#私の-emacs-の設定"><span class="toc-text">私の Emacs の設定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#星のかけら"><span class="toc-text">✨星のかけら</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
     </div>
     <h1 id="section"></h1>
 <p>（草稿）</p>
-<p>在 Emacs 中和计算机沟通很像透过画家的眼睛欣赏世界，而且形形色色（奇奇怪怪）的人正活跃其中，他们着魔的样子让你不禁斜起 45 度看看究竟发生了什么。这些作为开始 Emacs 的理由确实显得不很理智，那就再补充一点：尾随直觉吧（<a href="http://music.163.com/song?id=1476675&amp;userid=99975689" target="_blank" rel="noopener">“Intuition takes me there”, Intuition, Mind Games, John Lennon</a>），相遇第一（好像更严重了呢(◓Д◒)）。</p>
-<p>话虽如此，Emacs 也真有打动人（至少我）的理由清单：一触即发的上古编辑器之战；化身魔法师挥动魔棒执行函数；继承使用者的战斗力；臆想中的末世编辑器……自然，也少不了那张代表 Emacs 的螺旋形学习曲线图。不过，更有人爱谈 Emacs“作为操作系统”和“煮咖啡”。</p>
+<p>住在这个“开箱即用”的环境里时间长了就会觉得反胃，但是看见一撮人着魔般沉浸在 Emacs 中的时候，你会向往，我们很可能要成为环境里的“叛徒”了。如果犹豫要不要开始 Emacs，我的建议只有：年轻的话，请跟着直觉去吧（<a href="http://music.163.com/song?id=1476675&amp;userid=99975689" target="_blank" rel="noopener">“Intuition takes me there”, Intuition, Mind Games, John Lennon</a>）。</p>
+<p>实际上，人们偏爱 Emacs 的理由也不少：</p>
+<ul>
+<li>一触即发的上古编辑器之战；</li>
+<li>Emacs 是魔棒，函数是咒语；</li>
+<li>继承使用者的战斗力；</li>
+<li>最强编辑器……</li>
+<li>自然，还有那张代表 Emacs 的螺旋形学习曲线图。还有“作为操作系统”的 Emacs和“煮咖啡”的 Emacs。</li>
+</ul>
 <p>Emacs 是一个多才多艺的编辑器。</p>
 <p>Emacs 有内置的帮助文档。<code>M-x</code>，<code>~ help-with-tutorial-spec-language</code>，<code>Chinese-GB</code>。</p>
 <h2 id="emacs-大战">🌊Emacs 大战</h2>
@@ -115,6 +122,43 @@
 <tr class="odd">
 <td style="text-align: left;"><code>C-x k</code></td>
 <td style="text-align: left;">杀死 buffer</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="帮助指令">帮助指令</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Emacs</th>
+<th style="text-align: left;">解释</th>
+<th style="text-align: left;">举例</th>
+<th style="text-align: left;">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>C-h ?</code></td>
+<td style="text-align: left;">列出帮助项目</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>C-h c C-p</code></td>
+<td style="text-align: left;">函数名称</td>
+<td style="text-align: left;">两侧布局</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>C-h k C-p</code></td>
+<td style="text-align: left;">函数说明文件</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>C-h f</code></td>
+<td style="text-align: left;">解释函数</td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
@@ -254,7 +298,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="帮助指令">帮助指令</h3>
+<h3 id="帮助指令-1">帮助指令</h3>
 <h3 id="特殊指令">特殊指令</h3>
 <table>
 <thead>
@@ -298,7 +342,17 @@
 </tr>
 </tbody>
 </table>
+<h3 id="company"><a href="http://company-mode.github.io/" target="_blank" rel="noopener">company</a></h3>
+<h3 id="yasnippetyet-another-snippet"><a href="https://github.com/joaotavora/yasnippet" target="_blank" rel="noopener">yasnippet(yet another snippet)</a></h3>
+<ul>
+<li>打 key 带入程序片段；</li>
+<li>下载其他人已完成的程序片段；</li>
+<li>定义自己的片段；</li>
+<li>不同主模式带入不同的片段（在 c 和 python 里打 'main' 会带入不一样的片段）。</li>
+</ul>
+<h3 id="ivy-mode"><a href>ivy-mode</a></h3>
 <h3 id="flycheck"><a href="https://www.flycheck.org/en/latest/" target="_blank" rel="noopener">flycheck</a></h3>
+<p>语法检查套件</p>
 <table>
 <thead>
 <tr class="header">
@@ -324,6 +378,15 @@
 </tbody>
 </table>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(use-package flycheck</span><br><span class="line">	:ensure t</span><br><span class="line">	:config</span><br><span class="line">	(global-flycheck-mode t))</span><br></pre></td></tr></table></figure>
+<h3 id="c-ide">C++ IDE</h3>
+<ul>
+<li>跳转定义</li>
+<li>自动补全</li>
+<li>语法高亮</li>
+<li>工作区寻找文件</li>
+<li>按键编译</li>
+<li>图形化调试</li>
+</ul>
 <h2 id="emacs-lisp">🔮Emacs Lisp</h2>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">; 浮点数不能准确的相等，这里实现一定误差的相等测试</span><br><span class="line">; fun</span><br><span class="line">(defvar fuzz-factor 1.0e-6)</span><br><span class="line">(defun approx-equal (x y)</span><br><span class="line">	(or (and (= x 0) (= y 0))</span><br><span class="line">			(&lt; (/ (abs (- x y))</span><br><span class="line">						(max (abs x) (abs y)))</span><br><span class="line">			   fuzz-factor)))</span><br><span class="line">; run</span><br><span class="line">(setq foo (- (+ 1.0 1.0e-3) 1.0))</span><br><span class="line">(setq bar 1.0e-3)</span><br><span class="line">(approx-equal foo bar)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">; 字符串测试用 stringp，string-or-null-p 测试对象是字符或 nil 时返回 t，char-or-string-p 测试是否字符串或字符类型，但是没有测试空字符串的函数，这个函数实现了</span><br><span class="line">; fun</span><br><span class="line">(defun string-emptyp (str)</span><br><span class="line">	(not (string&lt; &quot;&quot; str)))</span><br></pre></td></tr></table></figure>
@@ -335,7 +398,7 @@
 <li>智能括号：smartpares</li>
 <li>Git 客户端：magit-git</li>
 <li>项目导航：projectile</li>
-<li>翻译：有道翻译、webster</li>
+<li>翻译：<a href="https://github.com/xuchunyang/youdao-dictionary.el" target="_blank" rel="noopener">有道翻译</a>、webster</li>
 <li>web 模式：web-mode</li>
 <li>markdown：markdown mode</li>
 <li>输入法：pyim</li>
@@ -358,6 +421,7 @@
 <p>设置自动保存文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(setq auto-save-visited-mode t)</span><br><span class="line">(auto-save-visited-mode +1)</span><br></pre></td></tr></table></figure>
 <h2 id="reference">Reference</h2>
+<p><a href="https://github.com/xuyangkang/AlgorithmTemplates" target="_blank" rel="noopener">AlgorithmTemplatesv</a>：This is my code template and Emacs config for ACM/ICPC, TopCoder, CodeForces and other sport programming contests.</p>
 <p><a href="https://docs.huihoo.com/homepage/shredderyin/emacs_power.html" target="_blank" rel="noopener">Emacs 能做什么</a></p>
 <p><a href="http://www.manuelmagic.me/manuelsweb/geek/texteditors/" target="_blank" rel="noopener">Text editor learning curves</a>：关于编辑器学习曲线。</p>
 <p><a href="https://www.newsmth.net/nForum/#!article/Emacs/104386" target="_blank" rel="noopener">水木社区的 Emacs 相关资料</a></p>
