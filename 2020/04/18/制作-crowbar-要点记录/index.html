@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>制作 crowbar 要点记录</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="制作 crowbar 要点记录"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        制作 crowbar 要点记录
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-04-18T03:31:56.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-04-18
+</time>
+
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A5%87%E6%80%AA%E7%9A%84%E8%AE%A1%E7%AE%97%E5%99%A8"><span class="toc-text">奇怪的计算器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#lex"><span class="toc-text">lex</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yacc"><span class="toc-text">yacc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="toc-text">生成执行文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E4%BB%A5%E5%8F%8A%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-text">执行流程以及生成的文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%B2%E7%AA%81%E7%9A%84%E5%90%AB%E4%B9%89"><span class="toc-text">冲突的含义</span></a></li></ol></li></ol></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">搭建环境</span><br><span class="line">UNIX 标准环境下已预装 yacc、lex</span><br><span class="line">Windows 使用免费替代品 bison、flex</span><br></pre></td></tr></table></figure>
+
+<p>编程语言的语法处理过程：词法分析 =）语法分析 =）语义分析 =）生成代码</p>
+<ul>
+<li>词法分析，分割 token，由词法分析器（lexical analyzer, lexer, scanner）执行，如<code>lex</code>根据此法规则生成词法分析器</li>
+<li>语法分析，构建抽象语法树 <em>abstract stntax tree</em>, <strong>AST</strong>，由解析器执行，如<code>yacc</code>（Yet Another Compiler Compiler）会根据语法规则生成解析器程序</li>
+<li>语义分析，上一个步骤不包含<code>数据类型</code>等语义信息，因此这里会检查是否有语法正确但是<code>逻辑</code>错误的问题</li>
+<li>生成代码</li>
+</ul>
+<h2 id="奇怪的计算器"><a href="#奇怪的计算器" class="headerlink" title="奇怪的计算器"></a>奇怪的计算器</h2><p>现在借助开发奇怪计算器 mycalc 的例子来熟悉工具。</p>
+<h3 id="lex"><a href="#lex" class="headerlink" title="lex"></a>lex</h3><p>lex 是自动生成<code>词法分析器</code>的工具，通过输入扩展名为 .l 的文件，输出词法分析器的 C 代码。</p>
+<p>词法分析会把字符串分割为记号，因此首先定义 mycalc 所用到的记号，使用正则表达式定义记号。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">运算符，+、-、*、/；整数；实数；换行符，输入完算式即刻换行就执行程序，所以换行符也是记号</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"> /* 文件 mycalc.l */</span><br><span class="line">%&#123;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &quot;y.tab.h&quot;</span><br><span class="line"></span><br><span class="line">int </span><br><span class="line">yywrap(void)</span><br><span class="line">&#123;</span><br><span class="line">  return 1;</span><br><span class="line">&#125;</span><br><span class="line">%&#125;</span><br><span class="line">%%</span><br><span class="line"> /* 本行之前叫`定义区块`，用来定义初始状态或者为正则表达式命名 */</span><br><span class="line"> /* 这里的定义区块里放了 C 代码，其中如果缺失 yywrap 函数就必须手动链接 lex 的库文件，在不同环境下编译时会出现麻烦 */</span><br><span class="line">&quot;+&quot;		return ADD;</span><br><span class="line">&quot;-&quot;		return SUB;</span><br><span class="line">&quot;*&quot;		return MUL;</span><br><span class="line">&quot;/&quot;		return DIV;</span><br><span class="line">&quot;\n&quot;	return CR;</span><br><span class="line">([1-9][0-9]*)|0|([0-9]+\.[0-9]+) &#123;</span><br><span class="line">  double temp;</span><br><span class="line">  sscanf(yytext, &quot;%lf&quot;, &amp;temp);</span><br><span class="line">  yylval.double_value = temp;</span><br><span class="line">  return DOUBLE_LITERAL;</span><br><span class="line">&#125;</span><br><span class="line">[ \t] ;</span><br><span class="line">. &#123;</span><br><span class="line">    fprintf(stderr, &quot;lexical error. \n&quot;);</span><br><span class="line">    exit(1);</span><br><span class="line">&#125;</span><br><span class="line"> /* 规则区块，一个正则后跟若干空格，再跟 C 代码（动作 action），返回特征符 */</span><br><span class="line">%%</span><br><span class="line"> /* 本行以后叫`用户代码区块`，可编写任意 C 代码 */</span><br></pre></td></tr></table></figure>
+
+<h3 id="yacc"><a href="#yacc" class="headerlink" title="yacc"></a>yacc</h3><p>yacc 是自动生成<code>语法分析器</code>的工具，通过输入扩展名为 .y 的文件，输出语法分析器的 C 代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"> /* 文件 mycalc.y */</span><br><span class="line">%&#123;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#define YYDEBUG 1 // 设置非 0 值开启 Debug 模式，可以看到运行时语法分析状态</span><br><span class="line">%&#125;</span><br><span class="line">%union &#123;</span><br><span class="line">	int		int_value;</span><br><span class="line">	double	double_value; // 声明`非终结符`类型，此类型的对立面是`终结符`</span><br><span class="line">&#125;</span><br><span class="line">%token &lt;double_value&gt;	DOUBLE_LITERAL /* 值为 DOUBLE_LITERAL 的记号，类型为 &lt;double_value&gt;，double_value 来自上方 %union 集合的一个成员名 */</span><br><span class="line">%token ADD SUB MUL DIV CR /* 记号类型 */</span><br><span class="line">%type &lt;double_value&gt; expression term primary_expression /* 声明非终结符类型 */</span><br><span class="line">%% /* 本行以后的区块叫`规则区块`，由语法规则和 C 编写的相应动作两部分组成 */</span><br><span class="line"> /* 使用 BNF 规范编写语法规则，巴科斯范式，巴库斯-瑙尔范式，Backus Normal Form */</span><br><span class="line">line_list</span><br><span class="line">	: line</span><br><span class="line">	| line_list line</span><br><span class="line">	;</span><br><span class="line">line</span><br><span class="line">	: expression CR</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;&gt;&gt;%lf\n&quot;, $1);</span><br><span class="line">	&#125;</span><br><span class="line">	| error CR /* 简单的错误恢复机制 */</span><br><span class="line">	&#123;</span><br><span class="line">		yyclearin; /* 丢弃预读的记号 */</span><br><span class="line">		yyerrok; /* 通知 yacc 程序已经从错误状态恢复了 */</span><br><span class="line">	&#125;</span><br><span class="line">	;</span><br><span class="line">expression</span><br><span class="line">	: term</span><br><span class="line">	| expression ADD term</span><br><span class="line">	&#123;</span><br><span class="line">		$$ = $1 + $3; // 记号值，$1 是 expression，$3 是 term，$2 不存在记号值，因为它是加法运算符 +，计算结果会赋给 $$ 保存在栈中</span><br><span class="line">	&#125;</span><br><span class="line">	| expression SUB term</span><br><span class="line">	&#123;</span><br><span class="line">		$$ = $1 - $3;</span><br><span class="line">	&#125;</span><br><span class="line">	;</span><br><span class="line">term</span><br><span class="line">	: primary_expression</span><br><span class="line">	| term MUL primary_expression</span><br><span class="line">	&#123;</span><br><span class="line">		$$ = $1 * $3;</span><br><span class="line">	&#125;</span><br><span class="line">	| term DIV primary_expression</span><br><span class="line">	&#123;</span><br><span class="line">		$$ = $1 / $3;</span><br><span class="line">	&#125;</span><br><span class="line">	;</span><br><span class="line">primary_expression</span><br><span class="line">	: DOUBLE_LITERAL</span><br><span class="line">	;</span><br><span class="line">%%</span><br><span class="line">int</span><br><span class="line">yyerror(char const *str)</span><br><span class="line">&#123;</span><br><span class="line">	extern char *yytext;</span><br><span class="line">	fprintf(stderr, &quot;parser error near %s\n&quot;, yytext);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">	extern int yyparse(void);</span><br><span class="line">	extern FILE *yyin;</span><br><span class="line"></span><br><span class="line">	yyin = stdin;</span><br><span class="line">	if (yyparse()) &#123;</span><br><span class="line">		fprintf(stderr, &quot;Error ! Error ! Error !\n&quot;);</span><br><span class="line">		exit(1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>yacc 的运作方式：移进 shift；归约 reduce。记号进入并堆积叫移进，记号和记号之间触发了某个规则并进行置换叫归约。</p>
+<h3 id="生成执行文件"><a href="#生成执行文件" class="headerlink" title="生成执行文件"></a>生成执行文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">% yacc -dv mycalc.y</span><br><span class="line">% lex mycalc.l</span><br><span class="line">% cc -o mycalc y.tab.c lex.yy.c -std=c89</span><br><span class="line">// 使用 C89 https://stackoverflow.com/questions/27220759/linker-error-yacc-on-mac</span><br></pre></td></tr></table></figure>
+
+<h4 id="执行流程以及生成的文件"><a href="#执行流程以及生成的文件" class="headerlink" title="执行流程以及生成的文件"></a>执行流程以及生成的文件</h4><ul>
+<li>mycalc.y<ul>
+<li>yacc<ul>
+<li>y.tab.c<ul>
+<li>+ lex.yy.c =）mycalc 执行文件</li>
+</ul>
+</li>
+<li>y.tab.h</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>mycalc.l<ul>
+<li>lex<ul>
+<li>lex.yy.c<ul>
+<li>+ y.tab.c =）mycalc 执行文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="冲突的含义"><a href="#冲突的含义" class="headerlink" title="冲突的含义"></a>冲突的含义</h4><p>yacc 运行时会发生<code>规约 / 规约（reduce/reduce）</code>冲突和<code>移进 / 规约（shift/reduce）</code>冲突。我们查看<code>y.output</code>文件了解冲突情况，yacc 运行时附带<code>-v</code>参数将生成 y.output 文件，即生成执行文件步骤的<code>yacc -dv mycalc.y</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

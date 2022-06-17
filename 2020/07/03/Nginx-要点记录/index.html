@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>Nginx 要点记录</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="Nginx 要点记录"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Nginx 要点记录
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-07-02T18:01:09.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-07-03
+</time>
+
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%81%BB%E3%81%97%E3%81%AE%E3%81%8B%E3%81%91%E3%82%89"><span class="toc-text">ほしのかけら</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>Игорем Сысоевым</p>
+<p><strong>yum 安装</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release -y</span><br><span class="line">yum list all | grep nginx</span><br><span class="line">yum install nginx -y</span><br><span class="line">rpm -ql nginx</span><br><span class="line">rpm -ql nginx | grep bin</span><br><span class="line"># 查看启动参数</span><br><span class="line">netstat -tnlp | grep :80</span><br><span class="line"># 查看默认 80 端口是否被占用</span><br><span class="line">curl ifconfig.me</span><br><span class="line"># 查看本机公网地址</span><br><span class="line">/usr/sbin/nginx -c /etc/nginx/nginx.conf</span><br><span class="line"># 启动 nginx</span><br></pre></td></tr></table></figure>
+
+<p><strong>编译安装</strong>，编译目录 /opt/nginx，nginx 源码目录 /opt/source/nginx-1.19.0</p>
+<p>配置参数：prefix, pid-path, conf-path, with-pcre, with-zlib 等。</p>
+<p>模块不内置使用 –with 添加，内置了使用 –without 移除。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">tar xf nginx-1.19.0.tar.gz</span><br><span class="line">tar xf pcre-8.44.tar.gz</span><br><span class="line">tar xf zlib-1.2.11.tar.gz</span><br><span class="line"># 解压</span><br><span class="line">cd nginx-1.19.0</span><br><span class="line">./configure --help</span><br><span class="line"># 查看编译安装的配置参数</span><br><span class="line">rpm -ql pcre</span><br><span class="line">rpm -ql zlib</span><br><span class="line"># 查看安装目录</span><br><span class="line">./configure --prefix=/opt/nginx --conf-path=/opt/nginx/conf/nginx.conf --user=nginx --group=nginx --pid-path=/opt/nginx/pid/nginx.pid --error-log-path=/opt/nginx/logs/error.log --with-pcre=/opt/source/pcre-8.44 --with-zlib=/opt/source/zlib-1.2.11 --with-http_image_filter_module --with-http_stub_status_module --http-log-path=/opt/nginx/logs/access.log</span><br><span class="line">yum install gd gd-devel -y</span><br><span class="line">make</span><br><span class="line"># configure: error: Invalid C++ compiler or C++ compiler flags // 出现错误</span><br><span class="line">yum install gcc-c++</span><br><span class="line">vim MakeFile</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>查看编译的 nginx 有哪些命令：/opt/nginx/sbin/nginx -h</p>
+<p>常用命令：/opt/nginx/sbin/nginx -t，检查配置文件语法是否正确；/opt/nginx/sbin/nginx -s signal，向进程发射信号量。</p>
+<hr>
+<p>Nginx 程序的 4 个组成部分（yum 包安装，非编译安装）：<code>二进制执行程序 /usr/sbin/nginx</code>、<code>配置文件 /etc/nginx/nginx.conf</code>、<code>/var/log/nginx/access.log</code>、<code>/var/log/nginx/error.log</code></p>
+<p>文件结构：{main, events, {http, {server, {location, [location]}}, [server]}}</p>
+<p>子进程使用<code>共享内存</code>通信，<code>反向代理</code>时，CacheManager 管理缓存，CacheLoader 加载缓存</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kill -l</span><br><span class="line"># 查看所有信号量</span><br><span class="line">### SIGCHLD   kill -17 $PID     ### SIGQUIT   kill -3  $PID</span><br><span class="line">### SIGTERM   kill -15 $PID     ### SIGKILL   kill -9  $PID</span><br><span class="line">### SIGHUP    kill -1  $PID     ### SIGUSR1   kill -10 $PID</span><br><span class="line">### SIGUSR2   kill -12 $PID     ### SIGWINCH  kill -28 $PID</span><br></pre></td></tr></table></figure>
+
+<p>Master 进程的任务：监控 worker 进程<code>CHLD</code>；管理 worker 进程；接收信号<code>TERM, INT, QUIT, HUP, USR1, USR2, WINCH</code></p>
+<p>Worker 进程的任务：接收信号<code>TERM, INT, QUIT, USR1, WINCH</code></p>
+<p>sbin 目录下的程序加参数运行：reload: HUP; reopen: USR1; stop: TERM; quit: QUIT</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lscpu</span><br><span class="line"># 查看 cpu 数量，nginx 启动对应数量的 work 子进程</span><br><span class="line">/usr/sbin/nginx -h</span><br><span class="line"># 查看参数运行 nginx 二进制程序</span><br></pre></td></tr></table></figure>
+
+<p>reload 重载配置文件流程：向 master 进程发送 HUP 信号 =&gt; master 检测语法正确 =&gt; master 打开监听端口（新配置可能配置新端口）=&gt; master 启动新 worker 子进程 =&gt; master 向旧 worker 发送 QUIT 信号 =&gt; 旧 worker 关闭监听句柄，处理完关闭进程</p>
+<p>热（平滑）升级流程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">=&gt; 旧 nginx 文件替换成新 nginx 文件</span><br><span class="line">=&gt; 向 master 进程发送 USR2 信号 // kill -s SIGUSR2 &#123;old-pid&#125;</span><br><span class="line">=&gt; master 修改 pid 文件，加后缀 .oldbin</span><br><span class="line">=&gt; master 用新 nginx 文件启动新 master</span><br><span class="line">=&gt; 向旧 master 发送 WINCH 信号，旧 worker 子进程退出 // kill -s SIGWINCH &#123;old-pid&#125; // kill -s SIGQUIT &#123;old-pid&#125;</span><br><span class="line">=&gt; 回滚情形：向旧 master 发送 HUP，向新 master 发送 QUIT // kill -s SIGHUP &#123;old-pid&#125; // kill -s SIGQUIT &#123;new-pid&#125;</span><br><span class="line">=&gt; 。</span><br></pre></td></tr></table></figure>
+
+<p>Linux 自身最大打开文件数：65535</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /opt/nginx/tmp</span><br><span class="line">chown -R nginx.nginx /opt/nginx/tmp</span><br></pre></td></tr></table></figure>
+
+<p>server_name 优先级：精准，左侧通配符，右侧通配符，正则</p>
+<p>root 和 alias 的区别：root 导致在映射路径尾部叠加上层路径，alias 重命名即尾部不叠加；alias 末尾一定加“/”，alias 只能位于 location 块中。</p>
+<p>location 指令中匹配规则优先级：高 = -&gt; ^~ -&gt; ~ -&gt; ~* -&gt;   低</p>
+<p>location 指令：</p>
+<table>
+<thead>
+<tr>
+<th align="left">规则</th>
+<th align="left">含义</th>
+<th align="left">例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">=</td>
+<td align="left">精确匹配</td>
+<td align="left">location = /images/ {…}</td>
+</tr>
+<tr>
+<td align="left">~</td>
+<td align="left">正则</td>
+<td align="left">location ~ \.(jpg|gif)$ {…}</td>
+</tr>
+<tr>
+<td align="left">~*</td>
+<td align="left">正则，不区分大小写</td>
+<td align="left">location ~* \.(jpg|gif)$ {…}</td>
+</tr>
+<tr>
+<td align="left">^~</td>
+<td align="left">匹配到即停止搜索</td>
+<td align="left">location ^~ /images/ {…}</td>
+</tr>
+<tr>
+<td align="left">不带符号</td>
+<td align="left"></td>
+<td align="left">location / {…}</td>
+</tr>
+</tbody></table>
+<p>location URL 带不带反斜杠 \ 的区别：不带杠将导致—检查文件夹，若无再检查文件，反之只检查目录。</p>
+<p>if 的 condition：</p>
+<table>
+<thead>
+<tr>
+<th align="left">condition</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$variable</td>
+<td align="left">仅为变量时，值为空或以 0 为开头的字符串都是 false</td>
+</tr>
+<tr>
+<td align="left">= 或 !=</td>
+<td align="left">相等或不等比较</td>
+</tr>
+<tr>
+<td align="left">~ 或 !~</td>
+<td align="left">正则匹配或非正则匹配</td>
+</tr>
+<tr>
+<td align="left">~*</td>
+<td align="left">正则匹配不区分大小写</td>
+</tr>
+<tr>
+<td align="left">-f 或 !-f</td>
+<td align="left">检查文件存在或不存在</td>
+</tr>
+<tr>
+<td align="left">-d 或 !-d</td>
+<td align="left">检查目录存在或不存在</td>
+</tr>
+<tr>
+<td align="left">-e 或 !-e</td>
+<td align="left">检查文件、目录、符号链接等存在或不存在</td>
+</tr>
+<tr>
+<td align="left">-x 或 !-x</td>
+<td align="left">检查文件可不可执行。</td>
+</tr>
+</tbody></table>
+<p>limit_conn 模块的基本功能：限制客户端并发连接数；使用共享内存，对所有 worker 子进程生效；默认编译，用 –without-http_limit_conn_module 禁用</p>
+<p>limit_req 模块的基本功能：限制处理请求的平均数据；默认编译；共享内存；限流算法 leaky_bucket 算法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">access 模块限定 ip、网段；auth_basic 限定特定用户，without 禁用默认；auth_request 鉴权服务器收到 http 状态码做访问控制；rewrite 模块的 return 指令；rewrite 模块的 rewrite 指令，flag 有 last 和 break 和 permanent 和 redirect；</span><br><span class="line">if</span><br></pre></td></tr></table></figure>
+
+<p>auth_basic 模块：基于 HTTP Basic Authentication 协议进行用户名密码认证；auth_basic_user_file 命令设置密码文件地址，auth_basic 命令设置浏览器给用户的提示文字。</p>
+<p>反向代理优势：隐藏真实服务器；便于横向扩充，提升吞吐量；动静分离，更健壮。</p>
+<p>upstream 模块的部分解释：server 字段 <strong>parameters 参数的 fail_timeout 和 max_fails 的值</strong>表示，Nginx 发现应用服务器不可用时开始计时，在该时间里尝试请求次数达到最多次数，剩余的时间里不再请求<a target="_blank" rel="noopener" href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#server">server文档</a>；keepalive 字段的 connections 参数值是<strong>空闲长连接</strong>的最大数量；keepalive_requests 限制单个长连接最多请求次数；keepalive_timeout 超过时间自动销毁。</p>
+<p>proxy_pass 带不带反斜杠 \ 的区别：不带，上网的人请求什么地址 nginx 向上游透传什么地址，带则把和 location 重叠的部分删去后再请求上游。</p>
+<p>代理场景下 nginx 接收用户请求包体的相关参数：client_max_body_size, client_body_buffer_size, client_body_in_file_only, client_body_in_single_buffer, proxy_request_buffering, client_body_timeout.</p>
+<p>client_max_body_size：设置上传报文体的大小，如果大于设置值将报“request entity too large”错误。</p>
+<p>负载均衡器的抛出问题：session 共享；选择应用服务器的算法；应用服务器的缓存信息在 nginx 上的保存。</p>
+<h2 id="ほしのかけら"><a href="#ほしのかけら" class="headerlink" title="ほしのかけら"></a>ほしのかけら</h2><p>美化后缀 html 和斜杠：<a target="_blank" rel="noopener" href="https://cobwwweb.com/remove-html-extension-and-trailing-slash-in-nginx-config%EF%BC%9Bhttps://sixtwothree.org/posts/nginx-configuration-removing-html-file-extensions-and-trailing-slashes%E3%80%82">https://cobwwweb.com/remove-html-extension-and-trailing-slash-in-nginx-config；https://sixtwothree.org/posts/nginx-configuration-removing-html-file-extensions-and-trailing-slashes。</a></p>
+<p>二级域名转发：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_22317977/article/details/103270616?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~first_rank_v2~rank_v25-11-103270616.nonecase%EF%BC%9B">https://blog.csdn.net/qq_22317977/article/details/103270616?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~first_rank_v2~rank_v25-11-103270616.nonecase；</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lzx_victory/article/details/52835907?utm_medium=distribute.pc_relevant_bbs_down.none-task--2~all~first_rank_v2~rank_v25-2.nonecase&amp;depth_1-utm_source=distribute.pc_relevant_bbs_down.none-task--2~all~first_rank_v2~rank_v25-2.nonecase%E3%80%82">https://blog.csdn.net/lzx_victory/article/details/52835907?utm_medium=distribute.pc_relevant_bbs_down.none-task--2~all~first_rank_v2~rank_v25-2.nonecase&amp;depth_1-utm_source=distribute.pc_relevant_bbs_down.none-task--2~all~first_rank_v2~rank_v25-2.nonecase。</a></li>
+</ul>
+<p>vim 命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">9yy</span><br><span class="line"># 复制 9 行</span><br><span class="line">:.,$-1d</span><br><span class="line"># 删除从当前行至（最后一行-1）行</span><br><span class="line">:set nu</span><br><span class="line"># 显示行数</span><br></pre></td></tr></table></figure>
+
+<p>shell 命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">mkdir &#123;all-match,left-match,right-match&#125;</span><br><span class="line"># 创建 3 个文件夹</span><br><span class="line">tail -f /opt/nginx/logs/error.log</span><br><span class="line"># 查看错误日志</span><br><span class="line">curl localhost/test</span><br><span class="line"># 访问，-I 返回响应头</span><br><span class="line">cat /etc/hosts</span><br><span class="line"># 域名映射</span><br><span class="line">mkdir /opt/nginx/html/app/proxy</span><br><span class="line"># 创建目录，创建了没有的 app 和 proxy</span><br><span class="line">less configure</span><br><span class="line"># 查看</span><br><span class="line">ls -rlt</span><br><span class="line"># 长格式按时间倒序，新的在下</span><br><span class="line">ss -tnl</span><br><span class="line"># 查看主机监听的端口</span><br><span class="line">mkdir server&#123;2..3&#125;</span><br><span class="line"># 创建 server2 和 server3 目录</span><br><span class="line">echo &quot;&lt;h1&gt;test1 nginx&lt;/h1&gt;&quot; &gt;&gt; domain_vm1/login.html</span><br><span class="line"># 保存内容到指定目录</span><br><span class="line">ls domain_vm*</span><br><span class="line"># 查看这个前缀的文件夹里的文件</span><br><span class="line">mv doamin_vm1/ domain_vm1</span><br><span class="line"># 重命名</span><br></pre></td></tr></table></figure>
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.detectify.com/2020/11/10/common-nginx-misconfigurations/">Common Nginx misconfigurations that leave your web server open to attack</a>：阮一峰 2021/03，常见的 Nginx 不安全配置；搜索了一下，很快被网友翻译成了中文，<a target="_blank" rel="noopener" href="https://www.cnblogs.com/lovebing/p/14484632.html">常见的 Nginx 配置错误，使您的 Web 服务器可以被攻击</a>。</p>
+</blockquote>
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

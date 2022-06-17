@@ -1,0 +1,484 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>快乐 Emacs</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="快乐 Emacs"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        快乐 Emacs
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2021-03-12T19:34:37.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2021-03-13
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/笔记本/">笔记本</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9C%E5%BC%80%E7%AE%B1%E5%8D%B3%E7%94%A8%E2%80%9D"><span class="toc-text">“开箱即用”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Emacs"><span class="toc-text">Emacs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%8AEmacs-%E5%A4%A7%E6%88%98"><span class="toc-text">🌊Emacs 大战</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%AA%84Emacs-%E9%AD%94%E6%B3%95"><span class="toc-text">🪄Emacs 魔法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%AE%E5%8A%A9%E6%8C%87%E4%BB%A4"><span class="toc-text">帮助指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows"><span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%A0%87"><span class="toc-text">移动游标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%AE%E5%8A%A9%E6%8C%87%E4%BB%A4-1"><span class="toc-text">帮助指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E6%8C%87%E4%BB%A4"><span class="toc-text">特殊指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#company"><span class="toc-text">company</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yasnippet-yet-another-snippet"><span class="toc-text">yasnippet(yet another snippet)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ivy-mode"><span class="toc-text">ivy-mode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flycheck"><span class="toc-text">flycheck</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-IDE"><span class="toc-text">C++ IDE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%A4%B9%E6%93%8D%E4%BD%9C"><span class="toc-text">文件夹操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-text">创建文件夹</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%AEEmacs-Lisp"><span class="toc-text">🔮Emacs Lisp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%81%E3%81%AE-Emacs-%E3%81%AE%E8%A8%AD%E5%AE%9A"><span class="toc-text">私の Emacs の設定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%A8%E6%98%9F%E3%81%AE%E3%81%8B%E3%81%91%E3%82%89"><span class="toc-text">✨星のかけら</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>2021年 7月29日 星期四 00时46分23秒 CST - 最近看到一位设计师，离得近，现在无聊抄一段这位的摘抄：当一个人产生羞耻感的时候，童年便结束，青春开始了；当一个人的羞耻感丧失的时候，他的青春便结束了。</p>
+<hr>
+<h2 id="“开箱即用”"><a href="#“开箱即用”" class="headerlink" title="“开箱即用”"></a>“开箱即用”</h2><p>现在很流行“开箱即用”，从速食快餐到软件框架。“开箱即用”的问题是隐藏了过程和细节，事情只剩结果，选择“开箱即用”就像是放弃了一切去取悦“方便”，这样的结果是上手快了，投入却更难了，但是快乐源于投入。</p>
+<h2 id="Emacs"><a href="#Emacs" class="headerlink" title="Emacs"></a>Emacs</h2><p>这里我要记录的是编辑器 Emacs 的使用，按现在的潮流看，它是逆行的，因为它不是“开箱即用”的。</p>
+<p>人们有很多偏爱 Emacs 的理由：</p>
+<ul>
+<li>一触即发的上古编辑器之战；</li>
+<li>Emacs 是魔棒，函数是咒语；</li>
+<li>继承使用者的战斗力；</li>
+<li>最强编辑器；</li>
+<li>自由软件；</li>
+<li>Emacs 特有螺旋形学习曲线图；以及“作为操作系统”的 Emacs 和“煮咖啡”的 Emacs。</li>
+</ul>
+<p>Emacs 是一个多才多艺的编辑器。</p>
+<p>Emacs 有内置的帮助文档。<code>M-x</code>，<code>~ help-with-tutorial-spec-language</code>，<code>Chinese-GB</code>。</p>
+<h2 id="🌊Emacs-大战"><a href="#🌊Emacs-大战" class="headerlink" title="🌊Emacs 大战"></a>🌊Emacs 大战</h2><h2 id="🪄Emacs-魔法"><a href="#🪄Emacs-魔法" class="headerlink" title="🪄Emacs 魔法"></a>🪄Emacs 魔法</h2><p>在我想查看“数的转换”相关内容的时候，可以输入：<code>C-h i m elisp RET m Numberic Conversions RET</code>，以后以这个模式描述：<code>info elisp - Numberic Conversions</code>。</p>
+<p>在我想查看“位运算”的相关内容的时候：<code>info elisp - Bitwise Operations on Integers</code>。</p>
+<table>
+<thead>
+<tr>
+<th align="left">Emacs</th>
+<th align="left">解释</th>
+<th align="left">举例</th>
+<th align="left">来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>C-x C-b</code></td>
+<td align="left">打开 buffer 列表</td>
+<td align="left">配合<code>C-x b</code>或<code>C-x k</code>，切换或杀死某个 buffer 前先执行该键预览所有 buffer</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-x b</code></td>
+<td align="left">切换 buffer</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-x k</code></td>
+<td align="left">杀死 buffer</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="帮助指令"><a href="#帮助指令" class="headerlink" title="帮助指令"></a>帮助指令</h3><table>
+<thead>
+<tr>
+<th align="left">Emacs</th>
+<th align="left">解释</th>
+<th align="left">举例</th>
+<th align="left">来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>C-h ?</code></td>
+<td align="left">列出帮助项目</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-h c C-p</code></td>
+<td align="left">函数名称</td>
+<td align="left">两侧布局</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-h k C-p</code></td>
+<td align="left">函数说明文件</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-h f</code></td>
+<td align="left">解释函数</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><table>
+<thead>
+<tr>
+<th align="left">Emacs</th>
+<th align="left">解释</th>
+<th align="left">举例</th>
+<th align="left">来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>C-x 2</code></td>
+<td align="left">垂直切割当前 Window</td>
+<td align="left">上下布局</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-x 3</code></td>
+<td align="left">水平切割当前 Window</td>
+<td align="left">两侧布局</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-x o</code></td>
+<td align="left">切换至其他 Window</td>
+<td align="left">配合<code>C-x 2</code>，把焦点转移到新窗口</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-x 0</code></td>
+<td align="left">关闭当前 Window</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-x 1</code></td>
+<td align="left">关闭当前以外的所有 Window</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">Emacs</th>
+<th align="left">解释</th>
+<th align="left">举例</th>
+<th align="left">来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>C-x C-f</code></td>
+<td align="left">打开或者新建文件</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-x C-1</code></td>
+<td align="left">全屏</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-x C-r</code></td>
+<td align="left">以只读权限打开文件</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="移动游标"><a href="#移动游标" class="headerlink" title="移动游标"></a>移动游标</h3><table>
+<thead>
+<tr>
+<th align="left">Emacs</th>
+<th align="left">解释</th>
+<th align="left">举例</th>
+<th align="left">来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>C-a</code></td>
+<td align="left">行首</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-e</code></td>
+<td align="left">行尾</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>M-a</code></td>
+<td align="left">句首</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>M-e</code></td>
+<td align="left">句尾</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-p</code></td>
+<td align="left">上</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-n</code></td>
+<td align="left">下</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-f</code></td>
+<td align="left">右</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-b</code></td>
+<td align="left">左</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="帮助指令-1"><a href="#帮助指令-1" class="headerlink" title="帮助指令"></a>帮助指令</h3><h3 id="特殊指令"><a href="#特殊指令" class="headerlink" title="特殊指令"></a>特殊指令</h3><table>
+<thead>
+<tr>
+<th align="left">Emacs</th>
+<th align="left">解释</th>
+<th align="left">举例</th>
+<th align="left">来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>C-u</code></td>
+<td align="left">重复指令</td>
+<td align="left"><code>C-u 8 C-f</code>移动 8 个字</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-g</code></td>
+<td align="left">停止指令</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-l</code></td>
+<td align="left">中央</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-z</code></td>
+<td align="left">暂停指令</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-s</code>, <code>C-r</code></td>
+<td align="left">搜寻</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="company"><a href="#company" class="headerlink" title="company"></a><a target="_blank" rel="noopener" href="http://company-mode.github.io/">company</a></h3><h3 id="yasnippet-yet-another-snippet"><a href="#yasnippet-yet-another-snippet" class="headerlink" title="yasnippet(yet another snippet)"></a><a target="_blank" rel="noopener" href="https://github.com/joaotavora/yasnippet">yasnippet(yet another snippet)</a></h3><ul>
+<li>打 key 带入程序片段；</li>
+<li>下载其他人已完成的程序片段；</li>
+<li>定义自己的片段；</li>
+<li>不同主模式带入不同的片段（在 c 和 python 里打 ‘main’ 会带入不一样的片段）。</li>
+</ul>
+<h3 id="ivy-mode"><a href="#ivy-mode" class="headerlink" title="ivy-mode"></a><a href="">ivy-mode</a></h3><h3 id="flycheck"><a href="#flycheck" class="headerlink" title="flycheck"></a><a target="_blank" rel="noopener" href="https://www.flycheck.org/en/latest/">flycheck</a></h3><p>语法检查套件</p>
+<table>
+<thead>
+<tr>
+<th align="left">Emacs</th>
+<th align="left">解释</th>
+<th align="left">举例</th>
+<th align="left">来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>C-c ! v</code></td>
+<td align="left">查看 flyc 配置</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>C-c ! l</code></td>
+<td align="left">查看检测结果</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(use-package flycheck</span><br><span class="line">	:ensure t</span><br><span class="line">	:config</span><br><span class="line">	(global-flycheck-mode t))</span><br></pre></td></tr></table></figure>
+
+<h3 id="C-IDE"><a href="#C-IDE" class="headerlink" title="C++ IDE"></a>C++ IDE</h3><ul>
+<li>跳转定义</li>
+<li>自动补全</li>
+<li>语法高亮</li>
+<li>工作区寻找文件</li>
+<li>按键编译</li>
+<li>图形化调试</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">M-x compile</span><br><span class="line">M-! ~/hello</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件夹操作"><a href="#文件夹操作" class="headerlink" title="文件夹操作"></a>文件夹操作</h3><h4 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">M-x make-directory RET dir/to/create RET</span><br><span class="line">M-! mkdir -p dir/parent&#123;1,2&#125;/node RET</span><br></pre></td></tr></table></figure>
+
+<p><code>C-x d</code>‌进入<code>Dired</code> mode，输入 <code>+</code></p>
+<p>绑定命令：<code>(global-set-key (kbd &quot;C-c d&quot;) &#39;make-directory)</code></p>
+<h2 id="🔮Emacs-Lisp"><a href="#🔮Emacs-Lisp" class="headerlink" title="🔮Emacs Lisp"></a>🔮Emacs Lisp</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">; 浮点数不能准确的相等，这里实现一定误差的相等测试</span><br><span class="line">; fun</span><br><span class="line">(defvar fuzz-factor 1.0e-6)</span><br><span class="line">(defun approx-equal (x y)</span><br><span class="line">	(or (and (= x 0) (= y 0))</span><br><span class="line">			(&lt; (/ (abs (- x y))</span><br><span class="line">						(max (abs x) (abs y)))</span><br><span class="line">			   fuzz-factor)))</span><br><span class="line">; run</span><br><span class="line">(setq foo (- (+ 1.0 1.0e-3) 1.0))</span><br><span class="line">(setq bar 1.0e-3)</span><br><span class="line">(approx-equal foo bar)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">; 字符串测试用 stringp，string-or-null-p 测试对象是字符或 nil 时返回 t，char-or-string-p 测试是否字符串或字符类型，但是没有测试空字符串的函数，这个函数实现了</span><br><span class="line">; fun</span><br><span class="line">(defun string-emptyp (str)</span><br><span class="line">	(not (string&lt; &quot;&quot; str)))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">; string-to-number 从字符串转到数字的时候可以设置进制，也可以通过 format 把整数输出为八进制或十六进制字符串，但是无法输出二进制，这里实现</span><br><span class="line">; fun</span><br><span class="line">(defun number-to-bin-string (number)</span><br><span class="line">	(require &#x27;calculator)</span><br><span class="line">	(let ((calculator-output-radix &#x27;bin)</span><br><span class="line">				(calculator-radix-grouping-mode nil))</span><br><span class="line">		(calculator-number-to-string number)))</span><br><span class="line">; run</span><br><span class="line">(number-to-bin-string 256) ; =&gt; &quot;100000000&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(defun my-subseq (list from &amp;optional to)</span><br><span class="line">	(if (null to) (nthcdr from list)</span><br><span class="line">		(butlast (nthcdr from list) (- (length list) to))))</span><br></pre></td></tr></table></figure>
+
+<h2 id="私の-Emacs-の設定"><a href="#私の-Emacs-の設定" class="headerlink" title="私の Emacs の設定"></a>私の Emacs の設定</h2><ul>
+<li>文件管理：dired</li>
+<li>智能括号：smartpares</li>
+<li>Git 客户端：magit-git</li>
+<li>项目导航：projectile</li>
+<li>翻译：<a target="_blank" rel="noopener" href="https://github.com/xuchunyang/youdao-dictionary.el">有道翻译</a>、webster</li>
+<li>web 模式：web-mode</li>
+<li>markdown：markdown mode</li>
+<li>输入法：pyim</li>
+<li>lint 语法检查：flycheck</li>
+<li></li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/Qquanwei/emacs">emacs</a>：作者的“一生的emacs配置”。</p>
+<p><a target="_blank" rel="noopener" href="https://emacs-china.org/t/ivy-counsel/8718">请问ivy和counsel究竟是什么？</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.acfun.cn/v/ac14543547">Emacs - 工欲善其事必先利其器 第二话 - ivy, counsel, swiper</a>：AcFun 视频</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jerryhsieh/Emacs-config">Emacs-config</a>：Youtube 洋葱工作室的 GitHub 上的 emacs 配置</p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/@zac.wood9/a-beginners-emacs-config-44400bcf54a1">A beginner’s Emacs config</a>：新人肯能会用到的 package</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21943533">有哪些是必备的emacs扩展？</a>：知乎问题，陈斌的回答</p>
+<p><a target="_blank" rel="noopener" href="https://huadeyu.tech/tools/emacs-setup-notes.html#org9c072db">极简Emacs开发环境配置</a></p>
+<p><a target="_blank" rel="noopener" href="https://uwabami.github.io/cc-env/Emacs.html">Emacs の設定</a>：一位日本人的 Emacs 配置，博客主题好看</p>
+</blockquote>
+<h2 id="✨星のかけら"><a href="#✨星のかけら" class="headerlink" title="✨星のかけら"></a>✨星のかけら</h2><p>取消预设画面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;- 编辑 .emacs 文件</span><br><span class="line">emacs ~/.emacs</span><br><span class="line">&lt;- 加入以下 elisp 程码</span><br><span class="line">;; ~/.emacs</span><br><span class="line">(setq inhibit-startup-message t)</span><br><span class="line">&lt;- setq 是指派變數 (assign) 的 Function，t 和 nil 分別指 true 和 false，所以 (setq inhibit-startup-message t) 就是將 inhibit-startup-message 這個變數的值設為 true</span><br></pre></td></tr></table></figure>
+
+<p>设置自动保存文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(setq auto-save-visited-mode t)</span><br><span class="line">(auto-save-visited-mode +1)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>和直觉有关的歌曲：<a target="_blank" rel="noopener" href="http://music.163.com/song?id=1476675&userid=99975689">“Intuition takes me there”, Intuition, Mind Games, John Lennon</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/xuyangkang/AlgorithmTemplates">AlgorithmTemplatesv</a>：This is my code template and Emacs config for ACM/ICPC, TopCoder, CodeForces and other sport programming contests.</p>
+<p><a target="_blank" rel="noopener" href="https://docs.huihoo.com/homepage/shredderyin/emacs_power.html">Emacs 能做什么</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.manuelmagic.me/manuelsweb/geek/texteditors/">Text editor learning curves</a>：关于编辑器学习曲线。</p>
+<p><a target="_blank" rel="noopener" href="https://www.newsmth.net/nForum/#!article/Emacs/104386">水木社区的 Emacs 相关资料</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Leap-abead/articles/762180.html">Lisp 的本质（翻译）</a></p>
+<p><a target="_blank" rel="noopener" href="https://learnxinyminutes.com/docs/zh-cn/elisp-cn/">X 分钟速成 elisp</a>：这是篇长在 el 文件里的 elisp 教程，从完成最简单的输出字符串的函数开始，逐步完善到文末更复杂的能够控制 buffer 并使用列表的输出字符串的函数，让阅读者上手基本语法和了解 elisp 与 Emacs 的关联。</p>
+<p><a target="_blank" rel="noopener" href="http://norvig.com/21-days.html">Teach Yourself Programming in Ten Years</a> </p>
+<p>知乎译文：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/101358246">十年学会编程</a><br>博客园译文：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/hawk-li/p/10950550.html">一份传世典文：十年编程（Teach Yourself Programming in Ten Years）</a></p>
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

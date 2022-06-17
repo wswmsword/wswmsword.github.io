@@ -1,0 +1,397 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>Java GC</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="Java GC"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Java GC
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-03-06T18:28:47.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-03-07
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/笔记本/">笔记本</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E8%A2%AB%E5%88%A4%E5%AE%9A%E4%B8%BA%E5%9E%83%E5%9C%BE%E7%9A%84%E6%A0%87%E5%87%86"><span class="toc-text">对象被判定为垃圾的标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="toc-text">垃圾回收算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%EF%BC%88Mark-and-Sweep%EF%BC%89"><span class="toc-text">标记 - 清除（Mark and Sweep）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%EF%BC%88Copying%EF%BC%89"><span class="toc-text">复制（Copying）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%EF%BC%88Compacting%EF%BC%89"><span class="toc-text">标记 - 整理（Compacting）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%EF%BC%88Generational-Collector%EF%BC%89"><span class="toc-text">分代收集（Generational Collector）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">常见垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B4%E8%BD%BB%E4%BB%A3%E5%B8%B8%E8%A7%81%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">年轻代常见垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Serial%EF%BC%88-XX-UseSerialGC%EF%BC%8C%E5%A4%8D%E5%88%B6%EF%BC%89"><span class="toc-text">Serial（-XX:UseSerialGC，复制）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ParNew%EF%BC%88-XX-UseParNewGC%EF%BC%8C%E5%A4%8D%E5%88%B6%EF%BC%89"><span class="toc-text">ParNew（-XX:+UseParNewGC，复制）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Parallel-Scavenge%EF%BC%88-XX-UseParallelGC%EF%BC%8C%E5%A4%8D%E5%88%B6%EF%BC%89"><span class="toc-text">Parallel Scavenge（-XX:+UseParallelGC，复制）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E8%80%81%E5%B9%B4%E4%BB%A3%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">常见老年代垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Serial-Old%EF%BC%88-XX-UseSerialOldGC%EF%BC%8C%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%EF%BC%89"><span class="toc-text">Serial Old（-XX:+UseSerialOldGC，标记-整理）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Parallel-Old%EF%BC%88-XX-UseParallelOldGC%EF%BC%8C%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%EF%BC%89"><span class="toc-text">Parallel Old（-XX:+UseParallelOldGC，标记-整理）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CMS%EF%BC%88-XX-UseConcMarkSweepGC%EF%BC%8C%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%EF%BC%89"><span class="toc-text">CMS（-XX:+UseConcMarkSweepGC，标记-清除）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#G1%EF%BC%88-XX-UseG1GC%EF%BC%8C%E5%A4%8D%E5%88%B6-%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%EF%BC%89"><span class="toc-text">G1（-XX:+UseG1GC，复制 + 标记-整理）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E5%BC%95%E7%94%A8%EF%BC%8C%E8%BD%AF%E5%BC%95%E7%94%A8%EF%BC%8C%E5%BC%B1%E5%BC%95%E7%94%A8%EF%BC%8C%E8%99%9A%E5%BC%95%E7%94%A8"><span class="toc-text">强引用，软引用，弱引用，虚引用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Strong-Reference"><span class="toc-text">Strong Reference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Soft-Reference"><span class="toc-text">Soft Reference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Phantom-Reference"><span class="toc-text">Phantom Reference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA-gt-%E8%BD%AF-gt-%E5%BC%B1-gt-%E8%99%9A"><span class="toc-text">强 &gt; 软 &gt; 弱 &gt; 虚</span></a></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <p>Java 垃圾回收机制回收分配给对象的内存，正因为有了这个机制，我们能看似不用关心内存的释放，将其交由 JVM 来管理。垃圾回收机制几乎成为 Java 之后出生语言的标配，目前 Java 的回收机制仍在演进。</p>
+<h2 id="对象被判定为垃圾的标准"><a href="#对象被判定为垃圾的标准" class="headerlink" title="对象被判定为垃圾的标准"></a>对象被判定为垃圾的标准</h2><ul>
+<li>没有被其它对象引用的对象<ul>
+<li>引用计数算法<ul>
+<li>判断对象的引用数量<ul>
+<li>通过判断对象的引用数量来决定对象是否可以被回收</li>
+<li>每个对象实例都有一个引用计数器，被引用则 + 1，完成引用则 - 1</li>
+<li>任何引用对象为 0 的对象实例可被当作垃圾收集</li>
+</ul>
+</li>
+<li>优点：执行效率高，程序执行受影响较小</li>
+<li>缺点：无法检测出循环引用的情况，导致内存泄漏（父子对象互相引用）</li>
+</ul>
+</li>
+<li>可达性分析算法<ul>
+<li>通过判断对象的引用链是否可达来决定对象是否可以被回收<ul>
+<li><img src="GCRoot.jpg" alt="GCRoot"></li>
+</ul>
+</li>
+<li>可以作为 GC Root 的对象<ul>
+<li>虚拟机中引用的对象（栈帧中的本地变量表）（如 new obj，cp&gt;局部变量，jbbl 被销毁钱的对象成为 GCR）</li>
+<li>方法区中的常量引用对象（如类定义常量，常量保存 obj 地址，obj 成为 GCR）</li>
+<li>方法区中的类静态属性引用对象</li>
+<li>本地方法栈中 JNI（Native 方法） 的引用对象（非 Java 构成的 obj）</li>
+<li>活跃线程的引用对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h2><h3 id="标记-清除（Mark-and-Sweep）"><a href="#标记-清除（Mark-and-Sweep）" class="headerlink" title="标记 - 清除（Mark and Sweep）"></a>标记 - 清除（Mark and Sweep）</h3><ul>
+<li>标记：从根集合进行扫描，对存活的对象进行标记（首先可达性算法）</li>
+<li>清除：对堆内存从头到尾进行线性遍历，回收不可达对象内存</li>
+<li><img src="MarkAndSweep.jpg" alt="标记清除"><ul>
+<li>碎片化，产生不连续的内存碎片，需要分配较大内存对象时无法找到连续内存，而不得不触发另一次垃圾收集工作</li>
+</ul>
+</li>
+</ul>
+<h3 id="复制（Copying）"><a href="#复制（Copying）" class="headerlink" title="复制（Copying）"></a>复制（Copying）</h3><ul>
+<li>分为对象面和空闲面</li>
+<li>对象在对象面上创建</li>
+<li>存活的对象被从对象面复制到空闲面</li>
+<li>将对象面所有对象内存清楚</li>
+<li><img src="copying.jpg"><ul>
+<li>解决碎片化问题</li>
+<li>顺序分配内存，简单高效</li>
+<li>适用于对象存活率低的场景</li>
+</ul>
+</li>
+</ul>
+<h3 id="标记-整理（Compacting）"><a href="#标记-整理（Compacting）" class="headerlink" title="标记 - 整理（Compacting）"></a>标记 - 整理（Compacting）</h3><ul>
+<li>应对 50% 空间保证 100% 的对象存活的极端情况需要另外 50% 空间担保，老年代不适用 Copying</li>
+<li>标记：从根集合进行扫描，对存活的对象进行标记</li>
+<li>清除：移动所有存活的对象，且按照内存地址次序依次排列，然后将末端内存地址以后的内存全部回收</li>
+<li><img src="compacting.jpg"><ul>
+<li>避免内存不连续性</li>
+<li>不用设置两块内存互换</li>
+<li>适用于存活率高的场景</li>
+</ul>
+</li>
+</ul>
+<h3 id="分代收集（Generational-Collector）"><a href="#分代收集（Generational-Collector）" class="headerlink" title="分代收集（Generational Collector）"></a>分代收集（Generational Collector）</h3><ul>
+<li>垃圾回收算法的组合拳</li>
+<li>按照对象生命周期的不同划分区域以采用不同的垃圾回收算法</li>
+<li>目的：提高 JVM 回收效率<ul>
+<li>jdk6, jdk7<ul>
+<li><img src="jdk67heap.jpg"></li>
+</ul>
+</li>
+<li>jdk8（年轻代存活率低：Copying；老年代存活率高：Compacting || Mark and Sweap）<ul>
+<li><img src="jdk8heap.jpg"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>GC 的分类<ul>
+<li>Minor GC</li>
+<li>Full GC</li>
+</ul>
+</li>
+<li>年轻代：尽可能快速地收集掉那些生命周期短的对象<ul>
+<li>Eden 区（放不下可能放置 Survivor，甚至老年代中）</li>
+<li>两个 Survivor 区</li>
+<li><img src="GenerationalC1.jpg"></li>
+<li>年轻代垃圾回收演示<ul>
+<li><img src="GCPlay.jpg"></li>
+<li>默认 15 岁到老年代，MaxTenuringThreshold</li>
+</ul>
+</li>
+<li>如何晋升老年代<ul>
+<li>经历一定 Minor 次数依然存活的对象</li>
+<li>Survivor 区中存放不下的对象</li>
+<li>新生成的大对象（-XX:+PretenuerSizeThreshold 来控制大对象大小）</li>
+</ul>
+</li>
+<li>常用的调优参数<ul>
+<li>-XX:SurvivorRatio：Eden 和 Survivor 的比值，默认 8：1</li>
+<li>-XX:NewRatio：老年代和年轻代内存大小比例，比如值为 2，老年代是年轻代的两倍，即年轻代占据内存的 3/1<ul>
+<li>新生代和老年代的总大小如何决定：-Xms 堆的初始值，-Xmx 堆能达到的最大值</li>
+</ul>
+</li>
+<li>-XX:MaxTenuringThreshold：对象从年轻代晋升到老年代经过 GC 次数的最大阀值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>老年代：存放生命周期较长的对象<ul>
+<li>回收算法<ul>
+<li>标记 - 清理算法</li>
+<li>标记 - 整理算法</li>
+</ul>
+</li>
+<li>Full GC 和 Major GC（回收同时通常也伴随对年轻代堆内存的回收）</li>
+<li>Full 比 Minor 慢，但执行频率低<ul>
+<li>触发 Full GC 条件<ul>
+<li>老年代空间不足（为了避免，最好不要创建太大对象）</li>
+<li>永久代空间不足（jdk 7 之前的版本）</li>
+<li>CMS GC 时出现 promotion failed, concurrent mode failure</li>
+<li>Minor GC 晋升到老年代的平均大小大于老年代的剩余空间</li>
+<li>调用 System.gc()</li>
+<li>使用 RMI 来进行 RPC 或管理的 JDK 应用，每小时执行 1 次 Full GC 2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Stop the World<ul>
+<li>JVM 由于要执行 GC 而停止了应用程序的执行</li>
+<li>任何一种 GC 算法都会发生</li>
+<li>多数 GC 优化通过减少 STW 发生的事件提高性能</li>
+</ul>
+</li>
+<li>Safepoint<ul>
+<li>分析过程中对象引用关系不会发生变化的点</li>
+<li>产生地方：方法调用；循环跳转；异常跳转等</li>
+<li>安全点数量得适中</li>
+</ul>
+</li>
+</ul>
+<h2 id="常见垃圾收集器"><a href="#常见垃圾收集器" class="headerlink" title="常见垃圾收集器"></a>常见垃圾收集器</h2><ul>
+<li>JVM 的运行模式<ul>
+<li>Server（反，java -version）</li>
+<li>Client（启动快，轻量，稳定后速度慢）</li>
+</ul>
+</li>
+<li>垃圾收集器之间的联系<ul>
+<li><img src="GCRelation.jpg"></li>
+</ul>
+</li>
+</ul>
+<h3 id="年轻代常见垃圾收集器"><a href="#年轻代常见垃圾收集器" class="headerlink" title="年轻代常见垃圾收集器"></a>年轻代常见垃圾收集器</h3><h4 id="Serial（-XX-UseSerialGC，复制）"><a href="#Serial（-XX-UseSerialGC，复制）" class="headerlink" title="Serial（-XX:UseSerialGC，复制）"></a>Serial（-XX:UseSerialGC，复制）</h4><ul>
+<li>单线程收集，进行垃圾收集时，必须暂停所有工作线程</li>
+<li>简单高效，Client 模式下默认的年轻代收集器</li>
+<li><img src="serialGC.jpg"></li>
+</ul>
+<h4 id="ParNew（-XX-UseParNewGC，复制）"><a href="#ParNew（-XX-UseParNewGC，复制）" class="headerlink" title="ParNew（-XX:+UseParNewGC，复制）"></a>ParNew（-XX:+UseParNewGC，复制）</h4><ul>
+<li>多线程收集，其余的行为、特点和 Serial 收集器一样</li>
+<li>单核执行效率不如 Serial，在多核下执行优势（线程交互开销，使用 ParGCThreads 限制垃圾收集线程数）</li>
+<li><img src="ParNewGC.jpg"></li>
+</ul>
+<h4 id="Parallel-Scavenge（-XX-UseParallelGC，复制）"><a href="#Parallel-Scavenge（-XX-UseParallelGC，复制）" class="headerlink" title="Parallel Scavenge（-XX:+UseParallelGC，复制）"></a>Parallel Scavenge（-XX:+UseParallelGC，复制）</h4><ul>
+<li>吞吐量 = 运行用户代码时间/（运行用户代码时间+垃圾收集时间）</li>
+<li>比起关注用户线程停顿时间，更关注吞吐量</li>
+<li>在多核下执行优势，Server 模式下默认的年轻代收集器</li>
+<li><img src="parallelGC.jpg"></li>
+</ul>
+<h3 id="常见老年代垃圾收集器"><a href="#常见老年代垃圾收集器" class="headerlink" title="常见老年代垃圾收集器"></a>常见老年代垃圾收集器</h3><h4 id="Serial-Old（-XX-UseSerialOldGC，标记-整理）"><a href="#Serial-Old（-XX-UseSerialOldGC，标记-整理）" class="headerlink" title="Serial Old（-XX:+UseSerialOldGC，标记-整理）"></a>Serial Old（-XX:+UseSerialOldGC，标记-整理）</h4><ul>
+<li>单线程收集，进行垃圾收集时，必须暂停所有工作线程</li>
+<li>简单高效，Client 模式下默认的老轻代收集器</li>
+<li><img src="serialOldGC.jpg"></li>
+</ul>
+<h4 id="Parallel-Old（-XX-UseParallelOldGC，标记-整理）"><a href="#Parallel-Old（-XX-UseParallelOldGC，标记-整理）" class="headerlink" title="Parallel Old（-XX:+UseParallelOldGC，标记-整理）"></a>Parallel Old（-XX:+UseParallelOldGC，标记-整理）</h4><ul>
+<li>多线程，吞吐量优先</li>
+<li><img src="parallelOldGC.jpg"></li>
+</ul>
+<h4 id="CMS（-XX-UseConcMarkSweepGC，标记-清除）"><a href="#CMS（-XX-UseConcMarkSweepGC，标记-清除）" class="headerlink" title="CMS（-XX:+UseConcMarkSweepGC，标记-清除）"></a>CMS（-XX:+UseConcMarkSweepGC，标记-清除）</h4><ul>
+<li>几乎与用户 Thr 同时工作，几乎表不完全做到不需 Stop-the-World，尽可能缩短停顿时间。对停顿敏感，并能提供更高硬件，此优势。JVM 内较多存活较长对象，此适合。</li>
+<li>*初始标记：Stop-the-World</li>
+<li>并发标记：并发追溯标记，程序不会停顿</li>
+<li>并发预清理：查找执行并发标记阶段从年轻代晋升到老年代的对象</li>
+<li>*重新标记：暂停虚拟机，扫描 CMS 堆中剩余对象</li>
+<li>并发清理：清理垃圾对象，程序不会停顿</li>
+<li>并发重置：重置 CMS 收集器的数据结构</li>
+<li><img src="CMSGC.jpg"></li>
+</ul>
+<h4 id="G1（-XX-UseG1GC，复制-标记-整理）"><a href="#G1（-XX-UseG1GC，复制-标记-整理）" class="headerlink" title="G1（-XX:+UseG1GC，复制 + 标记-整理）"></a>G1（-XX:+UseG1GC，复制 + 标记-整理）</h4><ul>
+<li>Garbage First 收集器的特点<ul>
+<li>并行和并发</li>
+<li>分代收集</li>
+<li>空间整合</li>
+<li>可预测的停顿</li>
+</ul>
+</li>
+<li>Garbage First 收集器<ul>
+<li>将整个 Java 堆内存划分成多个大小相等的 Rejion</li>
+<li>年轻代和老年代不再物理隔离<ul>
+<li><img src="G1GC.jpg"></li>
+</ul>
+</li>
+<li>jdk11: Epsilon GC, ZGC</li>
+</ul>
+</li>
+</ul>
+<h2 id="强引用，软引用，弱引用，虚引用"><a href="#强引用，软引用，弱引用，虚引用" class="headerlink" title="强引用，软引用，弱引用，虚引用"></a>强引用，软引用，弱引用，虚引用</h2><h3 id="Strong-Reference"><a href="#Strong-Reference" class="headerlink" title="Strong Reference"></a>Strong Reference</h3><ul>
+<li>最普遍的引用：Object obj = new Object()</li>
+<li>当内存不足时，虚拟机宁可抛出 OutOfMemoryError 终止程序也不会回收具有强引用的对象</li>
+<li>通过将对象设置为 null 来弱化引用，使其回收</li>
+</ul>
+<h3 id="Soft-Reference"><a href="#Soft-Reference" class="headerlink" title="Soft Reference"></a>Soft Reference</h3><ul>
+<li><p>对象处在有用但非必须状态</p>
+</li>
+<li><p>只有当内存空间不足时，GC 会回收该引用的对象的内存</p>
+</li>
+<li><p>实现内存敏感的高速缓存</p>
+</li>
+<li><p>```java<br>String str = new String(“abc”);<br>SoftReference<String> softRef = new SoftReference<String>(str);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### Weak Reference</span><br><span class="line"></span><br><span class="line">- 非必须的对象，比软引用更弱一些</span><br><span class="line"></span><br><span class="line">- GC 时会被回收（无论内存是否紧缺）</span><br><span class="line"></span><br><span class="line">- 被回收的概率也不大，因为 GC 线程优先级比较低</span><br><span class="line"></span><br><span class="line">- 适用于引用偶尔被使用且不影响垃圾收集的对象</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  String str = new String(&quot;abc&quot;);</span><br><span class="line">  WeakReference&lt;String&gt; weakRef = new WeakReference&lt;String&gt;(str);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Phantom-Reference"><a href="#Phantom-Reference" class="headerlink" title="Phantom Reference"></a>Phantom Reference</h3><ul>
+<li><p>不会决定对象的生命周期</p>
+</li>
+<li><p>任何时候都可能被垃圾收集器回收</p>
+</li>
+<li><p>跟踪对象被垃圾收集器回收的活动，起哨兵作用</p>
+</li>
+<li><p>必须和引用队列 ReferenceQueue 联合使用</p>
+</li>
+<li><pre><code class="java">String str = new String(&quot;abc&quot;);
+ReferenceQueue queue = new ReferenceQueue();
+PhantomReference ref = new PhantomReference(str, queue);
+</code></pre>
+</li>
+</ul>
+<h3 id="强-gt-软-gt-弱-gt-虚"><a href="#强-gt-软-gt-弱-gt-虚" class="headerlink" title="强 &gt; 软 &gt; 弱 &gt; 虚"></a>强 &gt; 软 &gt; 弱 &gt; 虚</h3><ul>
+<li><img src="reference.jpg"></li>
+<li>类层次结构<ul>
+<li><img src="referenceClass.jpg"></li>
+</ul>
+</li>
+<li>引用队列<ul>
+<li>无实际存储结构，存储逻辑依赖于内部结点之间的关系来表达</li>
+<li></li>
+</ul>
+</li>
+</ul>
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

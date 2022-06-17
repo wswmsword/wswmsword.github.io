@@ -1,0 +1,553 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>函数式编程-要点记录</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="函数式编程-要点记录"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        函数式编程-要点记录
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-10-04T22:59:18.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-10-05
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/笔记本/">笔记本</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Document"><span class="toc-text">Document</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%AF%E5%87%BD%E6%95%B0"><span class="toc-text">纯函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%AF%E5%87%BD%E6%95%B0%E5%92%8C%E5%89%AF%E4%BD%9C%E7%94%A8"><span class="toc-text">纯函数和副作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9D%9A%E6%8C%81%E7%BA%AF%E5%87%BD%E6%95%B0%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-text">坚持纯函数的原因</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%AF%E9%87%8C%E5%8C%96"><span class="toc-text">柯里化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%BB%84%E5%90%88"><span class="toc-text">代码组合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pointfree"><span class="toc-text">pointfree</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6%E6%B5%81%E7%9A%84%E7%BB%84%E5%90%88%E5%AD%90"><span class="toc-text">管理程序控制流的组合子</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hindley-Milner-%E7%B1%BB%E5%9E%8B%E7%AD%BE%E5%90%8D"><span class="toc-text">Hindley-Milner 类型签名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8"><span class="toc-text">容器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Container"><span class="toc-text">Container</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Maybe"><span class="toc-text">Maybe</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Either"><span class="toc-text">Either</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IO"><span class="toc-text">IO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Task"><span class="toc-text">Task</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E5%BE%8B"><span class="toc-text">定律</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Monad"><span class="toc-text">Monad</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AA%E6%B4%8B%E8%91%B1%E8%88%AC%E7%9A%84-Monad"><span class="toc-text">制作一个洋葱般的 Monad</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#join"><span class="toc-text">join</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#chain"><span class="toc-text">chain</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E5%BE%8B-1"><span class="toc-text">定律</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Applicative-Functor"><span class="toc-text">Applicative Functor</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lift"><span class="toc-text">lift</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E5%BE%8B-2"><span class="toc-text">定律</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC"><span class="toc-text">本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%81%BB%E3%81%97%E3%81%AE%E3%81%8B%E3%81%91%E3%82%89"><span class="toc-text">ほしのかけら</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>2021年 8月15日 星期日 01时08分45秒 CST - “世界上只有一种真正的英雄主义，那就是看清生活的真相之后，依然热爱生活。”，很热血，我忍不住翻成了代码：<code>Hero = Compose(Repeat, Work, Sleep, Code);</code>，这个函数或许可以鼓励生活中重复或者看不见意义的沮丧时刻，比如调用<code>Hero(&#39;me&#39;);</code>的时候，我也许就充满了英雄主义和燃起来了。</p>
+<hr>
+<p>程序越来越大，代码越来越臭，想想办法让代码的味道香起来。</p>
+<p>（草稿）</p>
+<p>什么是函数式编程functional programming：编程范例a programming paradigm；编码风格a coding style；心态a mindset。</p>
+<p><a target="_blank" rel="noopener" href="http://www.nowamagic.net/librarys/images/201306/2013_06_25_01.jpg">函数式属于声明式代码</a>：指明的是<code>做什么</code>，不是<code>怎么做</code>。</p>
+<p>注意点：使用高阶函数；不遍历；避免数据突变。</p>
+<p>代码中将用到例如 Ramda，Lodash, folktale 这些函数式库，它们作为工具来帮助非纯粹函数式语言的 JavaScript 模拟函数式语言的核心特性。</p>
+<h2 id="Document"><a href="#Document" class="headerlink" title="Document"></a>Document</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>用一个函数把另一个函数包起来，通常使用这样的方法进行延迟执行，这样不仅<code>多余</code>，而且形成的“胶水”函数让我们<code>很难爽快的对源函数进行改动</code>。此外，为了让一个函数能做更多事情，就要<code>保持它的命名普适抽象</code>。下面代码列举了一些例子。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const getServerStuff = callback =&gt; ajaxCall(json =&gt; callback(json));</span><br><span class="line"></span><br><span class="line">// 相当于</span><br><span class="line">const getServerStuff = callback =&gt; ajaxCall(callback);</span><br><span class="line"></span><br><span class="line">// 相当于</span><br><span class="line">const getServerStuff = ajaxCall; // 何必呢</span><br></pre></td></tr></table></figure>
+
+<h3 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h3><h4 id="纯函数和副作用"><a href="#纯函数和副作用" class="headerlink" title="纯函数和副作用"></a>纯函数和副作用</h4><p>相同输入得到相同输出，而且没有可观察的副作用，这样的函数叫<em>纯函数</em>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let c = [9, 9, 6];</span><br><span class="line">c.splice(0, 1);</span><br><span class="line">//=&gt; [9] // splice 不是纯函数，因为它产生了可观察的副作用：原函数改变了</span><br></pre></td></tr></table></figure>
+
+<p>除了数据突变，引入一个全局变量也会让函数不纯，那么什么是副作用：计算过程中，系统状态变化了，或者与外部进行了可观察的交互。</p>
+<p>如更改文件系统、发送请求、打印、DOM 查询等都是副作用，不用怀疑无副作用编程的可行性，因为我们不是要禁止副作用，只是我们怀疑副作用的行为，因此要学会如何控制它们。</p>
+<h4 id="坚持纯函数的原因"><a href="#坚持纯函数的原因" class="headerlink" title="坚持纯函数的原因"></a>坚持纯函数的原因</h4><p>纯函数是数学上的函数，也是函数式编程的全部。</p>
+<ul>
+<li>可缓存性Cacheable，缓存值或者函数，甚至通过延迟执行把不纯函数变纯；</li>
+<li>可移植性/自文档化Portable/Self-Documenting，参数化让使用者知道函数的更多信息，不依赖环境（函数序列化并通过 socket 发送；在 web workers 运行）实现可移植性；</li>
+<li>可测试性Testable，输入，并断言输出；</li>
+<li>合理性Reasonable，纯函数的引用透明，通过等式推导让一段代码可以替换成他执行所得的结果；</li>
+<li>并行代码，纯函数不访问共享内存，也不会因副作用进入竞争态。</li>
+</ul>
+<h3 id="柯里化"><a href="#柯里化" class="headerlink" title="柯里化"></a>柯里化</h3><p>柯里函数：每传递一个参数调用函数，就返回一个新函数处理剩余的函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// curry 的实现</span><br><span class="line">function curry(func) &#123;</span><br><span class="line">	return function curried(...args) &#123;</span><br><span class="line">		if (args.length &gt;= func.length) &#123;</span><br><span class="line">			return func.apply(this, args);</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			return function(...args2) &#123;</span><br><span class="line">				return curried.apply(this, args.concat(args2));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面对原生提供的迭代函数柯里化。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var match = curry((what, str) =&gt; str.match(what));</span><br><span class="line">var replace = curry((what, replacement, str) =&gt; str.replace(what, replacement));</span><br><span class="line">var filter = curry((f, ary) =&gt; ary.filter(f));</span><br><span class="line">var map = curry((f, ary) =&gt; ary.map(f));</span><br><span class="line">var slice = curry((start, end, xs) =&gt; xs.slice(start, end));</span><br><span class="line"></span><br><span class="line">match(/\s+/g, &quot;hello world&quot;)</span><br><span class="line">var hasSpaces = match(/\s+/g)</span><br><span class="line">hasSpaces(&quot;hello world&quot;)</span><br><span class="line">filter(hasSpaces, [&quot;tori_spelling&quot;, &quot;tori amos&quot;])</span><br></pre></td></tr></table></figure>
+
+<p>柯里化时，参数的顺序很重要，被柯里化后的函数具有了“预加载”的能力。和 curry 函数差不多，但是更自由的、不用被参数顺序所限制的函数是 partial 函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const partial = function(fn, ...partialArgs) &#123;</span><br><span class="line">  let args = partialArgs.slice(0);</span><br><span class="line">  return function partialedFn(...extraArgs) &#123;</span><br><span class="line">    console.log(args)</span><br><span class="line">    let arg = 0;</span><br><span class="line">    let undefN = 0;</span><br><span class="line">    for (let i = 0; arg &lt; extraArgs.length &amp;&amp; i &lt; args.length; ++ i) &#123;</span><br><span class="line">      if (args[i] === undefined) &#123;</span><br><span class="line">        args[i] = extraArgs[arg];</span><br><span class="line">        undefN = extraArgs[arg] == null ? undefN + 1 : undefN;</span><br><span class="line">        ++ arg;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (undefN === 0) &#123;</span><br><span class="line">      return fn.apply(this, args);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      return partialedFn;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码组合"><a href="#代码组合" class="headerlink" title="代码组合"></a>代码组合</h3><p>组合<code>compose</code>若干函数会搭建成一个新函数，执行它就向它投喂 1 个参数，这个参数会从最右边的若干函数开始向左执行。</p>
+<p>被组合的函数都是一元函数，并且满足数学中的结合律。它带来的好处是灵活、易读和强表达性。下面用组合的三种方式完成一项工作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var loudLastUpper = compose(exclaim, toUpperCase, head, reverse);</span><br><span class="line"></span><br><span class="line">// 或</span><br><span class="line">var last = compose(head, reverse);</span><br><span class="line">var loudLastUpper = compose(exclaim, toUpperCase, last);</span><br><span class="line"></span><br><span class="line">// 或</span><br><span class="line">var last = compose(head, reverse);</span><br><span class="line">var angry = compose(exclaim, toUpperCase);</span><br><span class="line">var loudLastUpper = compose(angry, last);</span><br></pre></td></tr></table></figure>
+
+<p>柯里化、组合结合起来还能实现无点样式 point-free；在函数式代码里 debug 也利用 compose 插入用于 debug 的函数，如插入一个 trace 函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// compose 的实现</span><br><span class="line">function compose(/* fns */) &#123;</span><br><span class="line">	let args = arguments;</span><br><span class="line">	let start = args.length - 1;</span><br><span class="line">	return function() &#123;</span><br><span class="line">		let i = start;</span><br><span class="line">		let result = args[start].apply(this, arguments);</span><br><span class="line">		while (i --) &#123;</span><br><span class="line">			result = args[i].call(this, result);</span><br><span class="line">		&#125;</span><br><span class="line">		return result;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 或</span><br><span class="line">function compose(...fns) &#123;</span><br><span class="line">	return value =&gt; reduce(fns.reverse(), (acc, fn) =&gt; fn(acc), value); // reduce 的妙用</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="pointfree"><a href="#pointfree" class="headerlink" title="pointfree"></a>pointfree</h4><p>pointfree 和点记法 dot notation syntax 的作用一样，都是链式执行一系列操作，但前者的优势体现在构造函数时不用依赖实例以及线性的执行流程。</p>
+<p>pointfree 也避免了函数调用的嵌套情况，例如<code>f(g(n))</code>的 pointfree 版本是<code>compose(f, g)(n)</code>。</p>
+<h4 id="管理程序控制流的组合子"><a href="#管理程序控制流的组合子" class="headerlink" title="管理程序控制流的组合子"></a>管理程序控制流的组合子</h4><p>编写利用组合的 point-free 风格的代码时，将对程序产生影响，例如：错误处理和调试；使用条件逻辑或按某种方式执行多个函数。</p>
+<p>关于控制流程，就可以使用这些常见函数组合子：</p>
+<ul>
+<li>identity</li>
+<li>tap<ul>
+<li>tap 会忽略执行结果而返回入参；</li>
+<li>可以用在打印日志的功能上；</li>
+<li>tap :: (a -&gt; *) -&gt; a -&gt; a</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const debug = R.tap(debugLog); // 部分实例代码演示</span><br><span class="line">const isValidSsn = R.compose(debug, checkLengthSsn, debug, cleanInput);</span><br><span class="line">isValidSsn(&#x27;444-44-4444&#x27;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>alternation（OR-组合子）<ul>
+<li>入参是两个函数，如果第一个函数返回值未定义则返回第二个函数返回值；</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const alt = function(func1, func2) &#123; // alt 函子的实现</span><br><span class="line">	return function(val) &#123;</span><br><span class="line">		return func1(val) || func2(val);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">const alt = R.curry((func1, func2, val) =&gt; func1(val) || func2(val)); // curry 与 lambda 表达式的版本</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>sequence（S-组合子）<ul>
+<li>入参是许多函数，执行时将用一个值顺序执行这些函数，但是不返回值；</li>
+<li>seq 组合子和 tap 组合子结合，可以嵌入函数组合间；</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const seq = function(/*funcs*/) &#123; // seq 组合子的实现</span><br><span class="line">	const funcs = Array.prototype.slice.call(arguments);</span><br><span class="line">	return function(val) &#123;</span><br><span class="line">		funcs.forEach(function(fn) &#123;</span><br><span class="line">			fn(val);</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>fork (join)<ul>
+<li>入参是 3 个函数，执行时两个函数的执行结果作为第三个函数的入参并返回执行结果；</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const fork = function(join, func1, func2) &#123;</span><br><span class="line">	return function(val) &#123;</span><br><span class="line">		return join(func1(val), func2(val));</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Hindley-Milner-类型签名"><a href="#Hindley-Milner-类型签名" class="headerlink" title="Hindley-Milner 类型签名"></a><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch7.html">Hindley-Milner 类型签名</a></h3><p>类型签名不但可以用于编译时检测，也是最好的文档，它在写纯函数时作用很大，下面是一个类型签名的例子。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var R = require(&#x27;ramda&#x27;);</span><br><span class="line">var curry = R.curry;</span><br><span class="line">//  reduce :: (b -&gt; a -&gt; b) -&gt; b -&gt; [a] -&gt; b</span><br><span class="line">var reduce = curry(function(f, x, xs) &#123;</span><br><span class="line">	return xs.reduce(f, x);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>类型签名能推断函数实现，也带来了“自由定理”，下面是一个例子，说明了虽然实现不同，但是定理普适。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// filter :: (a -&gt; Bool) -&gt; [a] -&gt; [a]</span><br><span class="line">compose(map(f), filter(compose(p, f))) == compose(filter(p), map(f));</span><br></pre></td></tr></table></figure>
+
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><h4 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var Container = function(x) &#123;</span><br><span class="line">	this.__value = x;</span><br><span class="line">&#125;</span><br><span class="line">Container.of = function(x) &#123; return new Container(x); &#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>Container</code>是个只有一个属性的对象，大多数情况下也只有一个；</li>
+<li><code>__value</code>不能是某个特定类型；</li>
+<li>直接用<code>.__value</code>获取数据有悖初衷，只能在 Container 内部获取。</li>
+</ul>
+<p>要操作容器里的值就用 map，想要怎么操作值，自己定义传入 map 的参数 f 即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// (a -&gt; b) -&gt; Container a -&gt; Container b</span><br><span class="line">Container.prototype.map = function(f) &#123;</span><br><span class="line">	return Container.of(f(this.__value));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// pointfree</span><br><span class="line">// map :: Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b</span><br><span class="line">var map = curry((f, any_functor_at_all) =&gt; &#123;</span><br><span class="line">	return any_functor_at_all.map(f);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>实现了函数 map 的容器就是函子 functor。</p>
+<h4 id="Maybe"><a href="#Maybe" class="headerlink" title="Maybe"></a>Maybe</h4><p><code>Maybe</code>这个 functor 调用 map 的时候先检查自己的值是否为空，然后调用传进来的函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var Maybe = function(x) &#123; // 纸糊的程序变壮了</span><br><span class="line">	this.__value = x;</span><br><span class="line">&#125;</span><br><span class="line">Maybe.of = function(x) &#123;</span><br><span class="line">	return new Maybe(x);</span><br><span class="line">&#125;</span><br><span class="line">Maybe.prototype.isNothing = function() &#123;</span><br><span class="line">	return (this.__value === null || this.__value === undefined);</span><br><span class="line">&#125;</span><br><span class="line">Maybe.prototype.map = function(f) &#123;</span><br><span class="line">	return this.isNothing() ? Maybe.of(null) : Maybe.of(f(this.__value));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// pointfree</span><br><span class="line">// maybe :: b -&gt; (a -&gt; b) -&gt; Maybe a -&gt; b</span><br><span class="line">const maybe = curry((x, f, m) =&gt; m.isNothing() ? x : f(m.__value););</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://folktale.origamitower.com/api/v2.3.0/en/folktale.maybe.html#source-code">函子 Maybe 的实现（folktale）</a></p>
+<p>函子 Maybe 的实现：JavaScript 函数式编程指南 5.3.2</p>
+<p><a target="_blank" rel="noopener" href="https://mostly-adequate.gitbooks.io/mostly-adequate-guide/content/appendix_b.html#maybe">函子 Maybe 的实现（Mostly Adequate Guide to Functional Programming）</a></p>
+</blockquote>
+<h4 id="Either"><a href="#Either" class="headerlink" title="Either"></a>Either</h4><p>错误抛出的时候，如果要收到一个返回值，使用<code>Either</code>，它还比<code>Maybe</code>能说明更多的事情。下面的例子里，省去了<code>Either</code>，<code>Left</code>和<code>Right</code>是<code>Either</code>的抽象类型的两个子类。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">var Left = function(x) &#123;</span><br><span class="line">	this.__value = x;</span><br><span class="line">&#125;</span><br><span class="line">Left.of = function(x) &#123;</span><br><span class="line">	return new Left(x);</span><br><span class="line">&#125;</span><br><span class="line">Left.prototype.map = function(f) &#123;</span><br><span class="line">	return this;</span><br><span class="line">&#125;</span><br><span class="line">var Right = function(x) &#123;</span><br><span class="line">	this.__value = x;</span><br><span class="line">&#125;</span><br><span class="line">Right.of = function(x) &#123;</span><br><span class="line">	return new Right(x);</span><br><span class="line">&#125;</span><br><span class="line">Right.prototype.map = function(f) &#123;</span><br><span class="line">	return Right.of(f(this.__value));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// pointfree</span><br><span class="line">const either = curry((f, g, e) =&gt; &#123;</span><br><span class="line">	switch(e.constructor) &#123;</span><br><span class="line">		case Left: return f(e.__value);</span><br><span class="line">		case Right: return g(e.__value);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>此外，<code>Either</code>能做更多，它表示逻辑或，也体现了范畴学里的 coproduct 的概念，它还是标准的 sum type（不交并集，disjoint union of sets），等，但这里作为函数式的函子只用它处理错误。</p>
+<p>Maybe 和 Either 通常被用来：</p>
+<ul>
+<li>隔离不纯；</li>
+<li>合并判空逻辑；</li>
+<li>避免异常；</li>
+<li>支持函数组合；</li>
+<li>中心化逻辑，用于提供默认值。</li>
+</ul>
+<h4 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h4><p>把会产生副作用的函数包裹在另一个函数里，看起来就像个纯函数，它的输出值就定了（被包裹的函数），但是要使用这个副作用，就要依靠<code>IO</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let IO = function(f) &#123;</span><br><span class="line">	this.__value = f;</span><br><span class="line">&#125;;</span><br><span class="line">IO.of = function(x) &#123;</span><br><span class="line">	return new IO(function() &#123;</span><br><span class="line">		return x;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;;</span><br><span class="line">IO.prototype.map = function(f) &#123;</span><br><span class="line">	return new IO(_.compose(f, this.__value));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>数据封闭在包裹着的函数 wrapper 中，终究会被释放出来的，释放者的责任就是把这个危险动作以公开的方式进行，通过<code>__value()</code>或<code>unsafePerformIO()</code>得到数据。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//  url :: IO String</span><br><span class="line">var url = new IO(function() &#123; return window.location.href; &#125;);</span><br><span class="line"></span><br><span class="line">//  toPairs =  String -&gt; [[String]]</span><br><span class="line">var toPairs = compose(map(split(&#x27;=&#x27;)), split(&#x27;&amp;&#x27;));</span><br><span class="line"></span><br><span class="line">//  params :: String -&gt; [[String]]</span><br><span class="line">var params = compose(toPairs, last, split(&#x27;?&#x27;));</span><br><span class="line"></span><br><span class="line">//  findParam :: String -&gt; IO Maybe [String]</span><br><span class="line">var findParam = function(key) &#123;</span><br><span class="line">  return map(compose(Maybe.of, filter(compose(eq(key), head)), params), url);</span><br><span class="line">&#125;;</span><br><span class="line">findParam(&quot;searchTerm&quot;).__value();</span><br></pre></td></tr></table></figure>
+
+<h4 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch8.html#%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1">异步任务</a></p>
+</blockquote>
+<h4 id="定律"><a href="#定律" class="headerlink" title="定律"></a>定律</h4><p>同一律</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compose(map(f), map(g)) === map(compose(f, g))</span><br></pre></td></tr></table></figure>
+
+<p>交换律</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compose(F.of, f) === compose(map(f), F.of)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch8.html#%E4%B8%80%E7%82%B9%E7%90%86%E8%AE%BA">一点理论</a></p>
+</blockquote>
+<h3 id="Monad"><a href="#Monad" class="headerlink" title="Monad"></a>Monad</h3><h4 id="制作一个洋葱般的-Monad"><a href="#制作一个洋葱般的-Monad" class="headerlink" title="制作一个洋葱般的 Monad"></a>制作一个洋葱般的 Monad</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//    hey :: String -&gt; IO String</span><br><span class="line">const hey = function(say) &#123;</span><br><span class="line">	return new IO(function() &#123;</span><br><span class="line">		return &#x27;hey, &#x27; + say;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;;</span><br><span class="line">//    print :: String -&gt; IO String</span><br><span class="line">const print = function(x) &#123;</span><br><span class="line">	return new IO(function() &#123;</span><br><span class="line">		console.log(x);</span><br><span class="line">		return x;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br><span class="line">//    show :: IO(IO String)</span><br><span class="line">const show = compose(map(print), hey);</span><br><span class="line">show(&#x27;let me show&#x27;).__value().__value(); // hey, let me show</span><br></pre></td></tr></table></figure>
+
+<p>每次 map 解析函子后又会多嵌套一层，要解决这个问题就需要有压扁能力的 monad，monad 实现了 join 或者 chain 方法。</p>
+<h4 id="join"><a href="#join" class="headerlink" title="join"></a>join</h4><p>join 会将两层或多层 Monadic 结构合并成一层。</p>
+<p>Monadic 类型：是 Monad 的具体实现，Monad 为 Monadic 提供抽象接口。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Wrapper.prototype.join = function() &#123;</span><br><span class="line">	if (!(this.__value instanceof Wrapper) &#123;</span><br><span class="line">		return this;</span><br><span class="line">	&#125;</span><br><span class="line">	return this.__value.join();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="chain"><a href="#chain" class="headerlink" title="chain"></a>chain</h4><p>chain 叫做<code>&gt;&gt;=</code>（读作 bind）或者 flatMap。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const chain = curry(function(f, m) &#123;</span><br><span class="line">	return compose(join, map(f))(m); // 或者 m.map(f).join()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch9.html#chain-%E5%87%BD%E6%95%B0">chain-函数</a></p>
+</blockquote>
+<h4 id="定律-1"><a href="#定律-1" class="headerlink" title="定律"></a>定律</h4><p>结合律</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">compose(join, map(join)) == compose(join, join)</span><br><span class="line">//  M(M(Ma)) -----map(join)-----&gt; M(Ma)</span><br><span class="line">//           |                  |</span><br><span class="line">//      join |                  | join</span><br><span class="line">//           v                  v</span><br><span class="line">//     M(Ma) -------join--------&gt; Ma</span><br></pre></td></tr></table></figure>
+
+<p>同一律</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">compose(join, of) == compose(join, map(of)) == id</span><br><span class="line">//  Ma -----of-----&gt; M(Ma) &lt;---map(of)--- Ma</span><br><span class="line">//   \                 |                  /</span><br><span class="line">//    -----            |             -----</span><br><span class="line">//      id \           | join       / id</span><br><span class="line">//          -----      |       -----</span><br><span class="line">//               \     v      /</span><br><span class="line">//                --&gt;  Ma  &lt;--</span><br></pre></td></tr></table></figure>
+
+<p>monad 来自一个叫“Kleisli 范畴”的范畴。</p>
+<h3 id="Applicative-Functor"><a href="#Applicative-Functor" class="headerlink" title="Applicative Functor"></a>Applicative Functor</h3><p>ap 函数能把一个 functor 的函数应用到另一个 functor 的值上。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Container.prototype.ap = function(other_container) &#123;</span><br><span class="line">	return other_container.map(this.__value);</span><br><span class="line">&#125;</span><br><span class="line">// 例子：</span><br><span class="line">Container.of(add).ap(Container.of(3)).ap(Container.of(4)) // Container &#123;__value: 5&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="lift"><a href="#lift" class="headerlink" title="lift"></a>lift</h4><p>有了 ap 就可以让同类型的 functor 互相应用了，虽然 chain 也可以，但是这会让所有代码在前一个 monad 执行完后才执行。</p>
+<p>上面的 ap 有普通函数调用的感觉，下面是 ap 的 pointfree 版本。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const liftA2 = curry(function(f, functor1, functor2) &#123;</span><br><span class="line">	return functor1.map(f).ap(functor2);</span><br><span class="line">&#125;)</span><br><span class="line">const liftA3 = curry(function(f, functor1, functor2, functor3) &#123;</span><br><span class="line">	return functor1.map(f).ap(functor2).ap(functor3);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="定律-2"><a href="#定律-2" class="headerlink" title="定律"></a>定律</h4><p>同一律</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A.of(id).ap(v) == v</span><br></pre></td></tr></table></figure>
+
+<p>同态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A.of(f).ap(A.of(x)) == A.of(f(x))</span><br><span class="line">// 所有计算都放在容器里（等式左边）== 现在外面进行计算然后再放到容器里（等式右边）</span><br><span class="line">// 例子：Either.of(_.toUpper).ap(Either.of(&quot;oreos&quot;)) == Either.of(_.toUpper(&quot;ereos&quot;))</span><br></pre></td></tr></table></figure>
+
+<p>互换</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v.ap(A.of(x)) == A.of(function(f) &#123; return f(x) &#125;).ap(v)</span><br></pre></td></tr></table></figure>
+
+<p>组合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A.of(compose).ap(u).ap(v).ap(w) == u.ap(v.ap(w))</span><br></pre></td></tr></table></figure>
+
+<h2 id="本"><a href="#本" class="headerlink" title="本"></a>本</h2><p>函数式编程入门经典；JavaScript函数式编程指南；</p>
+<p><a target="_blank" rel="noopener" href="http://www.nowamagic.net/academy/part/12/306/">PHP：编程范式篇</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.zhenghui.org/2009/09/04/colon-class-2_2/">冒号课堂</a></p>
+<h2 id="ほしのかけら"><a href="#ほしのかけら" class="headerlink" title="ほしのかけら"></a>ほしのかけら</h2><p><a target="_blank" rel="noopener" href="https://wizardforcel.gitbooks.io/clojure-fpftj/content/1.html">Clojure 入门教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=65-RbBwZQdU">JIT 优化代码相关视频</a></p>
+<p><a target="_blank" rel="noopener" href="https://byvoid.com/zhs/blog/why-functional-programming/">函数式程序设计为什么至关重要</a></p>
+<p><a target="_blank" rel="noopener" href="http://hackll.com/are-you-ok/">are-you-ok</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/llh911001/mostly-adequate-guide-chinese">mostly-adequate-guide-chinese</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/MostlyAdequate/mostly-adequate-guide">mostly-adequate-guide</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2015/07/monad.html">图解 Monad</a></p>
+<p><a target="_blank" rel="noopener" href="https://folktale.origamitower.com/">Folktale</a></p>
+<p><a href="JavaScript%E4%B9%8Bjs%E5%AF%B9%E8%B1%A1%E7%BB%88%E6%9E%81%E5%BA%8F%E5%88%97%E5%8C%96(%E5%8F%AF%E5%BA%8F%E5%88%97%E5%8C%96%E5%87%BD%E6%95%B0)">JavaScript之js对象终极序列化(可序列化函数)</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2017/03/ramda.html?utm_source=tuicool&utm_medium=referral">Ramda 函数库参考教程</a></p>
+<p>Pointfree 编程风格指南：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2017/03/pointfree.html%E3%80%82">http://www.ruanyifeng.com/blog/2017/03/pointfree.html。</a></p>
+<p>ramdajs：函数式编程工具，<a target="_blank" rel="noopener" href="https://ramda.cn./">https://ramda.cn。</a></p>
+<table>
+<thead>
+<tr>
+<th align="left">中</th>
+<th align="left">英</th>
+<th align="left">解释</th>
+<th align="left">来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">系统状态</td>
+<td align="left">system state</td>
+<td align="left">外部变量是系统状态的一部分</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch3.html#%E8%BF%BD%E6%B1%82%E2%80%9C%E7%BA%AF%E2%80%9D%E7%9A%84%E7%90%86%E7%94%B1">再次强调“纯”</a></td>
+</tr>
+<tr>
+<td align="left">认知负荷</td>
+<td align="left">cognitive load</td>
+<td align="left">引入了外部环境</td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left">引用透明性</td>
+<td align="left">referential transparency</td>
+<td align="left">纯函数的好处</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch3.html#%E8%BF%BD%E6%B1%82%E2%80%9C%E7%BA%AF%E2%80%9D%E7%9A%84%E7%90%86%E7%94%B1">追求“纯”的理由</a></td>
+</tr>
+<tr>
+<td align="left">等式推导</td>
+<td align="left">equational reasoning</td>
+<td align="left">“一对一”替换</td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left">程序性执行的怪异行为</td>
+<td align="left">quirks of programmatic evaluation</td>
+<td align="left">手动执行代码，不考虑 qpe，像“等式推导”</td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left">竞争态</td>
+<td align="left">race condition</td>
+<td align="left"></td>
+<td align="left"><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch3.html#%E5%B9%B6%E8%A1%8C%E4%BB%A3%E7%A0%81">并行代码</a></td>
+</tr>
+<tr>
+<td align="left">局部调用</td>
+<td align="left">partial application</td>
+<td align="left">传递函数一部分参数，减少大量样板代码</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch4.html#%E4%B8%8D%E4%BB%85%E4%BB%85%E6%98%AF%E5%8F%8C%E5%85%B3%E8%AF%AD%E5%92%96%E5%96%B1">不仅仅是双关语／咖喱</a></td>
+</tr>
+<tr>
+<td align="left">样板代码</td>
+<td align="left">boilerplate code</td>
+<td align="left"></td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left">高阶函数</td>
+<td align="left">higher order function</td>
+<td align="left">参数或返回值为函数的函数</td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left">可变的组合</td>
+<td align="left">variadic compose</td>
+<td align="left">函数可以组合，产出不同功能的函数</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch5.html#%E5%87%BD%E6%95%B0%E9%A5%B2%E5%85%BB">函数饲养</a></td>
+</tr>
+<tr>
+<td align="left">高级规范</td>
+<td align="left">high level specification</td>
+<td align="left"></td>
+<td align="left"><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch6.html#%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BB%A3%E7%A0%81">声明式代码</a></td>
+</tr>
+<tr>
+<td align="left">自由定理</td>
+<td align="left">free theorems</td>
+<td align="left"></td>
+<td align="left"><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch7.html">初识类型</a></td>
+</tr>
+<tr>
+<td align="left">编译时检测</td>
+<td align="left">compile time checks</td>
+<td align="left"></td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left">函数性</td>
+<td align="left">functionally</td>
+<td align="left"></td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left">多态性</td>
+<td align="left">polymorphism</td>
+<td align="left"></td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left">可能性范围的缩小</td>
+<td align="left">narrowing of possibility</td>
+<td align="left"></td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">parametricity</td>
+<td align="left"></td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left">类型约束</td>
+<td align="left">type constraints</td>
+<td align="left">获取信息功能、限制作用范围</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch7.html#%E6%80%BB%E7%BB%93">类型约束</a></td>
+</tr>
+<tr>
+<td align="left">点记法</td>
+<td align="left">dot notation syntax</td>
+<td align="left">足够函数式的方法</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch8.html#%E8%96%9B%E5%AE%9A%E8%B0%94%E7%9A%84-maybe">薛定谔的 Maybe</a></td>
+</tr>
+<tr>
+<td align="left">非纯执行函数</td>
+<td align="left">impure action</td>
+<td align="left"></td>
+<td align="left"><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch8.html#%E7%8E%8B%E8%80%81%E5%85%88%E7%94%9F%E6%9C%89%E4%BD%9C%E7%94%A8">王老先生有作用</a></td>
+</tr>
+<tr>
+<td align="left">衍生函数</td>
+<td align="left">derived function</td>
+<td align="left"></td>
+<td align="left"><a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch10.html#%E5%85%8D%E8%B4%B9%E5%BC%80%E7%93%B6%E5%99%A8">免费开瓶器</a></td>
+</tr>
+<tr>
+<td align="left">计算上的大和谐</td>
+<td align="left">computational harmony</td>
+<td align="left"></td>
+<td align="left">同上</td>
+</tr>
+</tbody></table>
+<ol>
+<li>范畴论<ul>
+<li>范畴的概念<ul>
+<li>“范畴就是使用箭头连接的物体。”，箭头即“态射（morphism）”。</li>
+</ul>
+</li>
+<li>数学模型<ul>
+<li>集合（所有成员） + 函数（变形关系）</li>
+</ul>
+</li>
+<li>范畴与容器<ul>
+<li>范畴想象成容器；<code>Category</code>类（容器），有一个值<code>this.val</code>和一种变形关系<code>addOne</code>，这里的范畴就是所有彼此差 1 的数字。</li>
+</ul>
+</li>
+<li>范畴论与函数式编程的关系<ul>
+<li>范畴论使用函数，伴随范畴论的发展，形成一整套函数运算方法，在计算机上实现后就是“函数式编程”；作为数学运算，函数的原始目的就是求值，因此要求函数要纯；函数像管道（pipe）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>函数的合成和柯里化<ul>
+<li>函数的合成<ul>
+<li>运算的过程中，合并中间步骤成一个函数，叫函数的合成（compose），<code>f(x)</code>和<code>g(x)</code>合成为<code>f(g(x))</code>；函数合成连接管道，数据穿过其中。</li>
+</ul>
+</li>
+<li>柯里化<ul>
+<li>合成的时候，单个参数函数很方便，但是函数多参时，就需要柯里化了；<code>add(x, y)</code>柯里化成<code>add(y)(x)</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>函子<ul>
+<li>函子的概念<ul>
+<li>范畴的运算是函子（Functor），它的变形关系作用于每个值，将当前容器变形成另一个容器；<code>a---&gt;f---&gt;b</code> 传入函子<code>F</code>变成<code>Fa---&gt;Ff---&gt;Fb</code>。</li>
+</ul>
+</li>
+<li>函子的代码实现<ul>
+<li>函子的标志是容器具有<code>map</code>方法，该方法将容器里每个值映射成另一容器；</li>
+<li>functor 是实现了 map 函数并遵守一些特定规则的容器类型。</li>
+</ul>
+</li>
+<li>利：抽象，对函数运用的抽象。</li>
+</ul>
+</li>
+<li>of 方法<ul>
+<li>of 方法生成新容器，代替 new 命令（面向对象的标志）。</li>
+</ul>
+</li>
+<li>Maybe 函子<ul>
+<li>函数管道未必有处理空值的能力这一些列问题，为了解决它们，出现 Maybe 函子。</li>
+</ul>
+</li>
+<li>Either 函子<ul>
+<li>Either 函子内部有左值（Left）和右值（Right），正常情况使用左值，如果不存在使用默认值右值，因此它能提供默认值、代替<code>try...catch</code>。</li>
+</ul>
+</li>
+<li>ap 函子<ul>
+<li>是 applicative 的缩写，部署 ap 方法后的函子就是<code>ap 函子</code>；</li>
+<li>“ap 函子的意义在于，对于那些多参数的函数，就可以从多个容器之中取值，实现函子的链式操作。”。</li>
+</ul>
+</li>
+<li>Monad 函子<ul>
+<li>“Monad 函子的作用是，总是返回一个单层的函子。它有一个flatMap方法，与map方法作用相同，唯一的区别是如果生成了一个嵌套函子，它会取出后者内部的值，保证返回的永远是一个单层的容器，不会出现嵌套的情况。”。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="http://jiyinyiyong.github.io/monads-in-pictures/">Functor, Applicative, 以及 Monad 的图片阐释</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/33652103">有哪些函数式编程在前端的实践经验？</a></p>
+<p><a target="_blank" rel="noopener" href="https://musicfe.dev/javascript-functional-programming-functor/">函数式编程进阶：应用函子（网易云前端文章，同时作者赵祥涛创作大量函数式文章）</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/56810671">用 JS 代码完整解释 Monad（知乎，后台很久了）</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/47130217">前端中的 Monad（知乎，扫过一遍）</a></p>
+</blockquote>
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

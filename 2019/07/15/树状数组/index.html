@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>树状数组</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="树状数组"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        树状数组
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2019-07-14T17:42:41.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2019-07-15
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/树形结构/">树形结构</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4"><span class="toc-text">一维</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#component"><span class="toc-text">component</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LOWBIT-x"><span class="toc-text">LOWBIT(x)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UPDATE-i-v"><span class="toc-text">UPDATE(i,v)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUM-i"><span class="toc-text">SUM(i)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E7%82%B9%E6%9B%B4%E6%96%B0-%E5%8C%BA%E9%97%B4%E6%9F%A5%E8%AF%A2"><span class="toc-text">单点更新 区间查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E9%97%B4%E6%9B%B4%E6%96%B0-%E5%8D%95%E7%82%B9%E6%9F%A5%E8%AF%A2"><span class="toc-text">区间更新 单点查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E9%97%B4%E6%9B%B4%E6%96%B0-%E5%8C%BA%E9%97%B4%E6%9F%A5%E8%AF%A2"><span class="toc-text">区间更新 区间查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UPDATE-i-v-1"><span class="toc-text">UPDATE(i,v)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUM-i-1"><span class="toc-text">SUM(i)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4"><span class="toc-text">二维</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#component-1"><span class="toc-text">component</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UPDATE-x-y-v"><span class="toc-text">UPDATE(x,y,v)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUM-x-y"><span class="toc-text">SUM(x,y)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E7%82%B9%E6%9B%B4%E6%96%B0-%E5%8C%BA%E9%97%B4%E6%9F%A5%E8%AF%A2-1"><span class="toc-text">单点更新 区间查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E9%97%B4%E6%9B%B4%E6%96%B0-%E5%8D%95%E7%82%B9%E6%9F%A5%E8%AF%A2-1"><span class="toc-text">区间更新 单点查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E9%97%B4%E6%9B%B4%E6%96%B0-%E5%8C%BA%E9%97%B4%E6%9F%A5%E8%AF%A2-1"><span class="toc-text">区间更新 区间查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UPDATE-x-y-v-1"><span class="toc-text">UPDATE(x,y,v)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUM-x-y-1"><span class="toc-text">SUM(x,y)</span></a></li></ol></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h1 id="一维"><a href="#一维" class="headerlink" title="一维"></a>一维</h1><h2 id="component"><a href="#component" class="headerlink" title="component"></a>component</h2><h3 id="LOWBIT-x"><a href="#LOWBIT-x" class="headerlink" title="LOWBIT(x)"></a>LOWBIT(x)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return x&amp;(-x)</span><br></pre></td></tr></table></figure>
+
+<h3 id="UPDATE-i-v"><a href="#UPDATE-i-v" class="headerlink" title="UPDATE(i,v)"></a>UPDATE(i,v)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while i&lt;n</span><br><span class="line">   btree[i]=btree[i]+v</span><br><span class="line">   i=i+lowbit(i)</span><br><span class="line">endwhile</span><br></pre></td></tr></table></figure>
+
+<h3 id="SUM-i"><a href="#SUM-i" class="headerlink" title="SUM(i)"></a>SUM(i)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">res=0</span><br><span class="line">while i&gt;0</span><br><span class="line">   res=res+btree[i]</span><br><span class="line">   i=i-lowbit(i)</span><br><span class="line">endwhile</span><br><span class="line">return res</span><br></pre></td></tr></table></figure>
+
+<h2 id="单点更新-区间查询"><a href="#单点更新-区间查询" class="headerlink" title="单点更新 区间查询"></a>单点更新 区间查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i=1 to n</span><br><span class="line">   update(i,v) endfor</span><br><span class="line">res=sum(r)-sum(l-1)</span><br></pre></td></tr></table></figure>
+
+<h2 id="区间更新-单点查询"><a href="#区间更新-单点查询" class="headerlink" title="区间更新 单点查询"></a>区间更新 单点查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update(l,v)</span><br><span class="line">update(r+1,-v)</span><br><span class="line">res=sum(i)</span><br></pre></td></tr></table></figure>
+
+<h2 id="区间更新-区间查询"><a href="#区间更新-区间查询" class="headerlink" title="区间更新 区间查询"></a>区间更新 区间查询</h2><h3 id="UPDATE-i-v-1"><a href="#UPDATE-i-v-1" class="headerlink" title="UPDATE(i,v)"></a>UPDATE(i,v)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">p=i</span><br><span class="line">while i&lt;n</span><br><span class="line">   sum1[i]=sum1+v</span><br><span class="line">   sum2[i]=sum2+p*v</span><br><span class="line">   i=i+lowbit(i)</span><br><span class="line">endwhile</span><br></pre></td></tr></table></figure>
+
+<h3 id="SUM-i-1"><a href="#SUM-i-1" class="headerlink" title="SUM(i)"></a>SUM(i)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">res=0</span><br><span class="line">p=i</span><br><span class="line">while i&gt;0</span><br><span class="line">   res=res+(p+1)*sum1[i]-sum2[i]</span><br><span class="line">   i=i=lowbit(i)</span><br><span class="line">endwhile</span><br><span class="line">return res</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update(l,v)</span><br><span class="line">update(r+1,-v)</span><br><span class="line">res=sum(r)-sum(l-1)</span><br></pre></td></tr></table></figure>
+
+<h1 id="二维"><a href="#二维" class="headerlink" title="二维"></a>二维</h1><h2 id="component-1"><a href="#component-1" class="headerlink" title="component"></a>component</h2><h3 id="UPDATE-x-y-v"><a href="#UPDATE-x-y-v" class="headerlink" title="UPDATE(x,y,v)"></a>UPDATE(x,y,v)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i=x to n step lowbit(i)</span><br><span class="line">   for j=y to n step lowbit(j)</span><br><span class="line">      btree[i][j]=btree[i][j]+v</span><br></pre></td></tr></table></figure>
+
+<h3 id="SUM-x-y"><a href="#SUM-x-y" class="headerlink" title="SUM(x,y)"></a>SUM(x,y)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">res=0</span><br><span class="line">for i=x to 1 step lowbit(i)</span><br><span class="line">   for j=y to 1 step lowbit(j)</span><br><span class="line">      res=res+btree[i][j]</span><br><span class="line">return res</span><br></pre></td></tr></table></figure>
+
+<h2 id="单点更新-区间查询-1"><a href="#单点更新-区间查询-1" class="headerlink" title="单点更新 区间查询"></a>单点更新 区间查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x=x-1</span><br><span class="line">y=y-1</span><br><span class="line">return sum(xx,yy)+sum(x,y)-query(xx,y)-query(x,yy)</span><br></pre></td></tr></table></figure>
+
+<h2 id="区间更新-单点查询-1"><a href="#区间更新-单点查询-1" class="headerlink" title="区间更新 单点查询"></a>区间更新 单点查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">update(x,y,v)</span><br><span class="line">update(x,yy+1,-v)</span><br><span class="line">update(xx+1,y,-v)</span><br><span class="line">update(xx+1,yy+1,v)</span><br><span class="line">sum(a,b)</span><br></pre></td></tr></table></figure>
+
+<h2 id="区间更新-区间查询-1"><a href="#区间更新-区间查询-1" class="headerlink" title="区间更新 区间查询"></a>区间更新 区间查询</h2><h3 id="UPDATE-x-y-v-1"><a href="#UPDATE-x-y-v-1" class="headerlink" title="UPDATE(x,y,v)"></a>UPDATE(x,y,v)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for i=x to n step lowbit(i)</span><br><span class="line">   for j=y to n step lowbit(j)</span><br><span class="line">      btree1[i][j]=v</span><br><span class="line">      btree2[i][j]=v*x</span><br><span class="line">      btree3[i][j]=v*y</span><br><span class="line">      btree4[i][j]=v*x*y</span><br></pre></td></tr></table></figure>
+
+<h3 id="SUM-x-y-1"><a href="#SUM-x-y-1" class="headerlink" title="SUM(x,y)"></a>SUM(x,y)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">res=0</span><br><span class="line">for i=x to 1 step lowibt(i)</span><br><span class="line">   for j=y to 1 step lowbit(j)</span><br><span class="line">      res=res+(x+1)*(y+1)*btree1[i][j]-(y+1)*btree2[i][j]-(x+1)*btree3[i][j]+btree4[i][j]</span><br><span class="line">return res</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">update(x,y,v)</span><br><span class="line">update(x,yy+1,-v)</span><br><span class="line">update(xx+1,y,-v)</span><br><span class="line">update(xx+1,yy+1,v)</span><br><span class="line">return sum(aa,bb)+sum(a-1,b-1)-sum(a-1,bb)-sum(aa,b-1)</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>红黑树</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="红黑树"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        红黑树
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2019-02-18T05:07:35.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2019-02-18
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/树形结构/">树形结构</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BB%A1%E8%B6%B3%E7%BA%A2%E9%BB%91%E6%80%A7%E8%B4%A8%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="toc-text">满足红黑性质的二叉搜索树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81%E5%B7%A6%E6%97%8BLEFT-ROTATE-T-x"><span class="toc-text">伪代码左旋LEFT-ROTATE(T,x)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81%E6%8F%92%E5%85%A5RB-INSERT-T-z"><span class="toc-text">伪代码插入RB-INSERT(T,z)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81%E7%9D%80%E8%89%B2%E6%97%8B%E8%BD%ACRB-INSERT-FIXUP-T-z"><span class="toc-text">伪代码着色旋转RB-INSERT-FIXUP(T,z)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5"><span class="toc-text">情况</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81%E6%9B%BF%E6%8D%A2RB-TRANSPLANT-T-u-v"><span class="toc-text">伪代码替换RB-TRANSPLANT(T,u,v)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81%E5%88%A0%E9%99%A4RB-DELETE-T-z"><span class="toc-text">伪代码删除RB-DELETE(T,z)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81%E7%9D%80%E8%89%B2%E6%97%8B%E8%BD%ACRB-DELETE-FIXUP-T-x"><span class="toc-text">伪代码着色旋转RB-DELETE-FIXUP(T,x)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5-1"><span class="toc-text">情况</span></a></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <blockquote>
+<p>一颗有n个内部节点的红黑树的高度至多为2lg(n+1)。</p>
+</blockquote>
+<h3 id="满足红黑性质的二叉搜索树"><a href="#满足红黑性质的二叉搜索树" class="headerlink" title="满足红黑性质的二叉搜索树"></a>满足红黑性质的二叉搜索树</h3><ul>
+<li>每个节点或是红，或是黑</li>
+<li>根结点是黑色的</li>
+<li>每个叶节点[NIL]是黑色的</li>
+<li>一个红节点不能有红孩子</li>
+<li>每个节点的黑高[black-height]相同</li>
+</ul>
+<h3 id="伪代码左旋LEFT-ROTATE-T-x"><a href="#伪代码左旋LEFT-ROTATE-T-x" class="headerlink" title="伪代码左旋LEFT-ROTATE(T,x)"></a>伪代码左旋LEFT-ROTATE(T,x)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">y=x.right</span><br><span class="line">x.right=y.left</span><br><span class="line">if y.left!=T.nil</span><br><span class="line">   y.left.p=x</span><br><span class="line">y.p=x.p</span><br><span class="line">if x.p==T.nil</span><br><span class="line">   T.root=u</span><br><span class="line">elseif x==x.p.left</span><br><span class="line">   x.p.left=y</span><br><span class="line">else x.p.right=y</span><br><span class="line">y.left=x</span><br><span class="line">x.p=y</span><br></pre></td></tr></table></figure>
+
+<h3 id="伪代码插入RB-INSERT-T-z"><a href="#伪代码插入RB-INSERT-T-z" class="headerlink" title="伪代码插入RB-INSERT(T,z)"></a>伪代码插入RB-INSERT(T,z)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">y=T.nil</span><br><span class="line">x=T.root</span><br><span class="line">while x!=T.nil</span><br><span class="line">   y=x</span><br><span class="line">   if z.key&lt;x.key</span><br><span class="line">      x=x.left</span><br><span class="line">   else x=x.right</span><br><span class="line">z.p=y</span><br><span class="line">if y==T.nil</span><br><span class="line">   T.root=z</span><br><span class="line">elseif z.key&lt;y.key</span><br><span class="line">   y.left=z</span><br><span class="line">else y.right=z</span><br><span class="line">z.left=T.nil</span><br><span class="line">z.right=T.nil</span><br><span class="line">z.color=RED</span><br><span class="line">RB-INSERT-FIXUP(T,z)</span><br></pre></td></tr></table></figure>
+
+<h3 id="伪代码着色旋转RB-INSERT-FIXUP-T-z"><a href="#伪代码着色旋转RB-INSERT-FIXUP-T-z" class="headerlink" title="伪代码着色旋转RB-INSERT-FIXUP(T,z)"></a>伪代码着色旋转RB-INSERT-FIXUP(T,z)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">while z.p.color==RED</span><br><span class="line">   if z.p==z.p.p.left</span><br><span class="line">      y=z.p.p.p.right</span><br><span class="line">      if y.color==RED</span><br><span class="line">         z.p.color=BLACK</span><br><span class="line">         y.color=BLACK</span><br><span class="line">         z.p.p.color=RED</span><br><span class="line">         z=z.p.p</span><br><span class="line">      elseif z==z.p.right</span><br><span class="line">         z=z.p</span><br><span class="line">         LEFT-ROTATE(T,z)</span><br><span class="line">         z.p.color=BLACK</span><br><span class="line">         z.p.p.color=RED</span><br><span class="line">         RIGHT-ROTATE(T,z.p.p)</span><br><span class="line">      else (same as then clause with &quot;right&quot; and &quot;left&quot; exchanged)</span><br><span class="line">   T.root.color=BLACK</span><br></pre></td></tr></table></figure>
+
+<h4 id="情况"><a href="#情况" class="headerlink" title="情况"></a>情况</h4><ul>
+<li>z的叔节点y是红色的</li>
+<li>z的叔节点y是黑色的</li>
+<li>z是一个右孩子</li>
+<li>z是一个左孩子</li>
+</ul>
+<h3 id="伪代码替换RB-TRANSPLANT-T-u-v"><a href="#伪代码替换RB-TRANSPLANT-T-u-v" class="headerlink" title="伪代码替换RB-TRANSPLANT(T,u,v)"></a>伪代码替换RB-TRANSPLANT(T,u,v)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if u.p==T.nil</span><br><span class="line">   T.root=v</span><br><span class="line">elseif u==u.p.left</span><br><span class="line">   u.p.left=v</span><br><span class="line">else u.p.right=v</span><br><span class="line">v.p=u.p</span><br></pre></td></tr></table></figure>
+
+<h3 id="伪代码删除RB-DELETE-T-z"><a href="#伪代码删除RB-DELETE-T-z" class="headerlink" title="伪代码删除RB-DELETE(T,z)"></a>伪代码删除RB-DELETE(T,z)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">y=z</span><br><span class="line">y-original-color=y.color</span><br><span class="line">if z.left==T.nil</span><br><span class="line">   x=z.right</span><br><span class="line">   RB-TRANSPLANT(T,z,z.right)</span><br><span class="line">elseif z.right==T.nil</span><br><span class="line">   x=z.left</span><br><span class="line">   RB-TRANSPLANT(T,z,z.left)</span><br><span class="line">else</span><br><span class="line">   y=TREE-MINIMUM(z.right)</span><br><span class="line">   y-original-color=y.color</span><br><span class="line">   x=y.right</span><br><span class="line">   if y.p==z</span><br><span class="line">      x.p=y</span><br><span class="line">   else</span><br><span class="line">      RB-TRANSPLANT(T,y,y.right)</span><br><span class="line">      y.right=z.right</span><br><span class="line">      y.right.p=y</span><br><span class="line">   RB-TRANSPLANT(T,z,y)</span><br><span class="line">   y.left=z.left</span><br><span class="line">   y.left.p=y</span><br><span class="line">   y.color=z.color</span><br><span class="line">if y-original-color==BLACK</span><br><span class="line">   RB-DELETE-FIXUP(T,x)</span><br></pre></td></tr></table></figure>
+
+<h3 id="伪代码着色旋转RB-DELETE-FIXUP-T-x"><a href="#伪代码着色旋转RB-DELETE-FIXUP-T-x" class="headerlink" title="伪代码着色旋转RB-DELETE-FIXUP(T,x)"></a>伪代码着色旋转RB-DELETE-FIXUP(T,x)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">while x!=T.root and x.color==BLACK</span><br><span class="line">   if(x==x.p.left)</span><br><span class="line">      w=x.p.right</span><br><span class="line">      if w.color==RED</span><br><span class="line">         w.color=BLACK</span><br><span class="line">         x.p.color=RED</span><br><span class="line">         LEFT-ROTATE(T,x.p)</span><br><span class="line">         w=x.p.right</span><br><span class="line">      if w.left.color==BLACK and w.right.color==BLACK</span><br><span class="line">         w.color=RED</span><br><span class="line">         x=x.p</span><br><span class="line">      else</span><br><span class="line">         if w.right.color==BLACK</span><br><span class="line">            w.left.color=BLACK</span><br><span class="line">            w.color=RED</span><br><span class="line">            RIGHT-ROTATE(T,w)</span><br><span class="line">            w=x.p.right</span><br><span class="line">         w.color=x.p.color</span><br><span class="line">         x.p.color=BLACK</span><br><span class="line">         w.right.color=BLACK</span><br><span class="line">         LEFT-ROTATE(T,x.p)</span><br><span class="line">         x=T.root</span><br><span class="line">   else (same as then clause with &quot;right&quot; and &quot;left&quot; exchanged)</span><br><span class="line">x.color=BLACK</span><br></pre></td></tr></table></figure>
+
+<h4 id="情况-1"><a href="#情况-1" class="headerlink" title="情况"></a>情况</h4><ul>
+<li>x的兄弟节点是w是红色的</li>
+<li>x的兄弟节点w是黑色的</li>
+<li>w的两个子节点都是黑色的</li>
+<li>w的左孩子是红色的，w的右孩子是黑色的</li>
+<li>w的右孩子是红色的</li>
+</ul>
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>数据埋点</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="数据埋点"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        数据埋点
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2021-09-17T14:14:48.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2021-09-17
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/笔记本/">笔记本</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%8F%90"><span class="toc-text">前提</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%81%9A%E5%91%A2"><span class="toc-text">怎么做呢</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E4%B8%9A%E5%8A%A1%E7%A8%8B%E5%BA%8F%E9%87%8C%E5%9F%8B%E4%B8%80%E6%AC%A1%E7%82%B9"><span class="toc-text">在业务程序里埋一次点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">我的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tracker-js"><span class="toc-text">tracker.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tracker-config-js"><span class="toc-text">tracker-config.js</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E5%8E%9F%E5%A7%8B%E5%9F%8B%E7%82%B9%E6%95%B0%E6%8D%AE"><span class="toc-text">检查原始埋点数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%92%8C%E9%A1%B5%E9%9D%A2%E5%85%83%E7%B4%A0-DOM-%E5%85%B3%E8%81%94"><span class="toc-text">和页面元素 DOM 关联</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tracker-tools-js"><span class="toc-text">tracker-tools.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-text">注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%BE%E5%A3%B0"><span class="toc-text">尾声</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>应用变得更受欢迎，了解用户的行为就更迫切，埋点的事就更重要了。前后端都会进行埋点，也有各自适合的场景，例如 api 回调里的埋点显然更适合后端，相比前端，这样更快也更精准。而前端的原住业务代码也很关注侵入的埋点代码，会希望它们能矜持一些，不至于扎堆妨碍业务。把一份<strong>埋点文档</strong>转译成埋点代码，这份代码最好就能像文档一样方便<strong>定位</strong>、<strong>添加</strong>、<strong>修改</strong>、<strong>删除</strong>、<strong>查看</strong>，并且和业务代码<strong>保持距离</strong>。</p>
+<h2 id="怎么做呢"><a href="#怎么做呢" class="headerlink" title="怎么做呢"></a>怎么做呢</h2><p>这里用各个元素<code>DOM</code>的<code>id</code>来区分各个埋点数据，即<strong>用 DOM id 来进行埋点</strong>，这里介绍这种埋点方案。</p>
+<p>根据前端埋点文档看，有<strong>三类</strong>埋点类型：</p>
+<ul>
+<li>点击事件埋点；</li>
+<li>页面进入离开式的绑定埋点；</li>
+<li>元素曝光的统计时长埋点。</li>
+</ul>
+<p>之所以选择<code>DOM id</code>，是因为<code>id</code>和埋点性质相似，上面三类埋点也都是埋在<code>DOM</code>上：</p>
+<ul>
+<li>每个埋点是不同的，<code>DOM id</code>也都是唯一的；</li>
+<li>点击事件点击的是具体某个<code>DOM</code>；</li>
+<li>页面绑定埋点将利用组件，组件是<code>DOM</code>；</li>
+<li>被曝光的元素依然是<code>DOM</code>；</li>
+<li><code>DOM id</code>在<code>DOM 树</code>上，离<code>JS</code>业务代码最远；</li>
+<li>关联<code>DOM</code>更符合<strong>声明式</strong>编码。</li>
+</ul>
+<p>后面的内容会围绕第一种“点击事件埋点”做介绍。</p>
+<h3 id="在业务程序里埋一次点"><a href="#在业务程序里埋一次点" class="headerlink" title="在业务程序里埋一次点"></a>在业务程序里埋一次点</h3><p>所以怎么做呢？下面是业务里的（一次）埋点部分代码（Vue）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// ... 省略</span><br><span class="line">&lt;Icon</span><br><span class="line">	id=&quot;icon&quot;</span><br><span class="line">	@click=&quot;iconClickHandler($event, 0, &#x27;firstTitle&#x27;, 1632028563744)&quot;</span><br><span class="line">/&gt;</span><br><span class="line">// ... 省略</span><br><span class="line">import &#123; sendEventTagByIdClick &#125; from &#x27;./tracker.js&#x27;</span><br><span class="line">function iconClickHandler(e, i, title, time) &#123;</span><br><span class="line">	sendEventTagByIdClick(&#123; id: e.currentTarget.id, iconIdx: i, iconTitle: title, iconTime: time &#125;) // 埋点</span><br><span class="line">	// ... 业务程序</span><br><span class="line">&#125;</span><br><span class="line">// ... 省略</span><br></pre></td></tr></table></figure>
+
+<p>上面是在用户点击 Icon 的时候触发一次埋点，这段埋点代码只是一次埋点流程的一部分，也是这部分和业务最亲密，所以抓住让读写代码费力的发源地，分开它们。</p>
+<p>代码里<code>id</code>值<code>icon</code>被传入到埋点函数<code>sendEventTagByIdClick</code>，这个<code>id</code>将被用来辨识埋点数据（“<strong>用 DOM id 来进行埋点</strong>”），并且该函数的其它入参只传入了最基础的数据（原始埋点数据），例如<code>i</code>、<code>title</code>和时间戳<code>time</code>，不过我想埋点的服务端是不会想收到一份时间戳的，所以格式化时间戳成可读时间的工作会留给整个埋点流程里的其它环节，只是这儿只想解耦埋点和业务。</p>
+<h2 id="我的实现"><a href="#我的实现" class="headerlink" title="我的实现"></a>我的实现</h2><p>像下面这样创建 3 个文件，这 3 个文件拆分流程，<strong>分离</strong>业务和埋点：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">--libs</span><br><span class="line">  |--tracker.js        // 埋点业务</span><br><span class="line">  |--tracker-config.js // 这儿是个埋点数据表，埋点数据都列在这，自文档化</span><br><span class="line">  |--tracker-tools.js  // 处理埋点数据的工具箱</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>接下来通过这仨文件来走过一次埋点的一生。</p>
+<h3 id="tracker-js"><a href="#tracker-js" class="headerlink" title="tracker.js"></a>tracker.js</h3><p><code>tracker.js</code>向用户（业务程序开发者）提供<strong>接口函数</strong>，用户在业务层成功调用函数就完成 1 次埋点。</p>
+<p>这个函数会<strong>接收</strong>入参，入参是<strong>原始</strong>埋点数据，然后<strong>传递</strong>生成<strong>最终</strong>埋点数据，最后将数据发送给服务端。下面是主要代码（js）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; genTrackingFinalData &#125; <span class="keyword">from</span> <span class="string">&#x27;./tracker-config.js&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">sendEventTagByIdClick</span>(<span class="params">data</span>) &#123;</span><br><span class="line">	<span class="keyword">const</span> eventTrackingData = <span class="keyword">await</span> <span class="title function_">genTrackingFinalData</span>(data)</span><br><span class="line">	<span class="keyword">if</span> (eventTrackingData != <span class="literal">null</span>) &#123;</span><br><span class="line">		api.<span class="title function_">trackEvent</span>(eventTrackingData).<span class="title function_">then</span>().<span class="title function_">catch</span>(<span class="function"><span class="params">res</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">error</span>(res))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里之所以使用<code>async/await</code>同步代码，是因为在生成最终埋点数据的过程可能存在异步程序，例如向服务端请求一些数据。</p>
+<p>可以看到这个文件像是一根通向服务端的管道，把埋点数据从业务程序流向服务端。</p>
+<h3 id="tracker-config-js"><a href="#tracker-config-js" class="headerlink" title="tracker-config.js"></a>tracker-config.js</h3><p><code>tracker-config.js</code>是和埋点文档同步的文件，同时向用户（tracker.js 开发者）提供生成<strong>最终</strong>埋点数据的函数。下面是主要代码（js）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; timeFormatter &#125; <span class="keyword">from</span> <span class="string">&#x27;./tracker-tools.js&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">genTrackingFinalData</span>(<span class="params">data</span>) &#123;</span><br><span class="line">	<span class="keyword">const</span> eventTrackingName = <span class="title function_">genEventTrackingName</span>(data) <span class="comment">// 获取代表某一埋点的名称，例如`ICON`</span></span><br><span class="line">	<span class="keyword">await</span> <span class="title function_">genEventTrackingData</span>(data, eventTrackingName)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">genEventTrackingData</span>(<span class="params">data, eventTrackingName</span>) &#123;</span><br><span class="line">	<span class="keyword">const</span> &#123;</span><br><span class="line">		platform,</span><br><span class="line">		iconIdx, iconTitle, iconTime,</span><br><span class="line">		<span class="comment">// ...</span></span><br><span class="line">	&#125; = data</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">switch</span>(eventTrackingName) &#123;</span><br><span class="line">		<span class="comment">// 最终埋点数据，和埋点文档同步的内容</span></span><br><span class="line">		<span class="keyword">case</span> <span class="string">&#x27;ICON&#x27;</span>: <span class="keyword">return</span> &#123;</span><br><span class="line">			<span class="attr">aid</span>: <span class="string">&#x27;按钮点击&#x27;</span>,</span><br><span class="line">			<span class="attr">a_attrs</span>: &#123;</span><br><span class="line">				<span class="string">&#x27;参与渠道&#x27;</span>: platform,</span><br><span class="line">				<span class="string">&#x27;项目名称&#x27;</span>: <span class="string">&#x27;深夜诗人俱乐部&#x27;</span>,</span><br><span class="line">				<span class="string">&#x27;页面名称&#x27;</span>: <span class="string">&#x27;首页&#x27;</span>,</span><br><span class="line">				<span class="string">&#x27;按钮名称&#x27;</span>: <span class="string">`功能区<span class="subst">$&#123;iconIdx&#125;</span>-<span class="subst">$&#123;iconTitle&#125;</span>`</span>,</span><br><span class="line">				<span class="string">&#x27;触发时间&#x27;</span>: <span class="title function_">timeFormatter</span>(iconTime),</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// ...</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码里的<code>case</code>值<code>ICON</code>唯一表示了后面的埋点数据，是根据埋点数据起的名字；另外代码里能看到埋点数据存储使用了<code>switch/case</code>语句，没有使用下面这样的<code>Map</code>数据类型：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ... 省略</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">genEventTrackingData</span>(<span class="params">data, eventTrackingName</span>) &#123;</span><br><span class="line">	<span class="comment">// ...省略</span></span><br><span class="line">	<span class="keyword">const</span> eventTrackingDataMap = <span class="keyword">new</span> <span class="title class_">Map</span>([</span><br><span class="line">		[<span class="string">&#x27;ICON&#x27;</span>, &#123;</span><br><span class="line">			<span class="attr">aid</span>: <span class="string">&#x27;按钮点击&#x27;</span>,</span><br><span class="line">			<span class="attr">a_attrs</span>: &#123;</span><br><span class="line">				<span class="string">&#x27;参与渠道&#x27;</span>: platform,</span><br><span class="line">				<span class="string">&#x27;项目名称&#x27;</span>: <span class="string">&#x27;深夜诗人俱乐部&#x27;</span>,</span><br><span class="line">				<span class="string">&#x27;页面名称&#x27;</span>: <span class="string">&#x27;首页&#x27;</span>,</span><br><span class="line">				<span class="string">&#x27;按钮名称&#x27;</span>: <span class="string">`功能区<span class="subst">$&#123;iconIdx&#125;</span>-<span class="subst">$&#123;iconTitle&#125;</span>`</span>,</span><br><span class="line">				<span class="string">&#x27;触发时间&#x27;</span>: <span class="title function_">timeFormatter</span>(iconTime),</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;],</span><br><span class="line">		<span class="comment">// ...</span></span><br><span class="line">	])</span><br><span class="line">	<span class="keyword">return</span> eventTrackingDataMap.<span class="title function_">get</span>(eventTrackingName)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>相较于<code>switch/case</code>会发现<code>Map</code>更适合陈列数据，更少的关键字读起来是线性的、无逻辑的，但这也带来运行时将加载所有数据的代价。由于<code>tracker.js</code>里向函数<code>genTrackingFinalData</code>传递的是<strong>原始</strong>埋点数据，不免需要在生成<strong>最终</strong>埋点数据前进行一些<strong>加工</strong>，当埋点数据很多、加工很多的时候，<code>Map</code>就浪费了性能。</p>
+<p>就像这里的时间戳<code>iconTime</code>，它需要利用<code>timeFormatter</code>来生成经过排版格式化的可读时间字符串，当面对众多更重量级的加工函数，胜出的会是<code>switch/case</code>语句。</p>
+<h4 id="检查原始埋点数据"><a href="#检查原始埋点数据" class="headerlink" title="检查原始埋点数据"></a>检查原始埋点数据</h4><p>原始埋点数据从业务程序<strong>汇入</strong><code>tracker.js</code>，从<code>tracker.js</code>传递给<code>tracker-config.js</code><strong>分流</strong>开来，就像下图：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">业务   tracker.js  tracker-config.js  </span><br><span class="line"></span><br><span class="line">--&gt;--|          |--&gt;--</span><br><span class="line">     |          |</span><br><span class="line">--&gt;--|-&gt;--[]--&gt;-|--&gt;--</span><br><span class="line">     |          |</span><br><span class="line">--&gt;--|          |--&gt;--</span><br><span class="line">   &gt;  接收 &gt; 传递 &gt; 处理</span><br></pre></td></tr></table></figure>
+
+<p>埋点数据从进入<code>tracker.js</code>起已经经历了<strong>接收</strong>、<strong>传递</strong>和<strong>处理</strong>，然而在最后想要处理得安全还不能少了<strong>检查</strong>。之所以检查，是因为需要处理的埋点数据往往是服务端的返回数据，前端要检查这些数据保证符合埋点文档的规范，检查之后前端再决定怎样继续程序，例如不合规范就不埋点。</p>
+<p>从上图看<code>tracker.js</code>只传递，不了解数据细节，所以业务程序和<code>tracker-config.js</code>都能检查数据，考虑到业务程序要减少接触埋点程序，最后应该在<code>tracker.js</code>之后的程序执行<strong>检查</strong>。上面的代码还没有实现检查的部分。</p>
+<h4 id="和页面元素-DOM-关联"><a href="#和页面元素-DOM-关联" class="headerlink" title="和页面元素 DOM 关联"></a>和页面元素 DOM 关联</h4><p>上面提到过用<code>DOM id</code>来辨别埋点数据，下面就是<code>DOM id</code>和埋点数据关联的主要代码（js）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">genEventTrackingName</span>(<span class="params">data</span>) &#123;</span><br><span class="line">	<span class="keyword">const</span> &#123; id &#125; = data</span><br><span class="line">	<span class="keyword">const</span> trackingCodeVerifierMap = <span class="keyword">new</span> <span class="title class_">Map</span>([</span><br><span class="line">		[<span class="string">&#x27;ICON&#x27;</span>, <span class="function"><span class="params">id</span> =&gt;</span> <span class="regexp">/^icon/</span>.<span class="title function_">test</span>(id)], <span class="comment">// 对应页面以`icon`为前缀的`DOM id`</span></span><br><span class="line">		<span class="comment">// ...</span></span><br><span class="line">	])</span><br><span class="line">	<span class="keyword">const</span> defaultTarget = <span class="string">&#x27;(*ﾟ∀ﾟ*)&#x27;</span></span><br><span class="line">	<span class="keyword">let</span> eventTrackingName = defaultTarget</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">let</span> [code, verifier] <span class="keyword">of</span> trackingCodeVerifierMap) &#123;</span><br><span class="line">		eventTrackingName = <span class="title function_">verifier</span>(id) ? code : eventTrackingName</span><br><span class="line">		<span class="keyword">if</span> (eventTrackingName !== defaultTarget) &#123; <span class="keyword">break</span> &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> eventTrackingName</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在之前埋点数据已经和<code>switch/case</code>的<code>Code</code>映射，这里就让<code>DOM id</code>和<code>Code</code>映射，这样<code>id</code>和埋点数据就映射了，这么做可以<strong>命名自由</strong>，让埋点程序内部使用<code>Code</code>、外部的业务程序使用<code>DOM id</code>，各自规范。</p>
+<p><code>tracker-config.js</code>和页面对<code>DOM id</code>的依赖看似不能并行开发，但只要在开始和服务端约定好原始打点数据，和埋点文档约定好最终打点数据，和页面约定好<code>DOM id</code>，页面、<code>tracker.js</code>和<code>tracker-config.js</code>都是可以并行开发的。</p>
+<h3 id="tracker-tools-js"><a href="#tracker-tools-js" class="headerlink" title="tracker-tools.js"></a>tracker-tools.js</h3><p>这个文件里就放一些奇奇怪怪的埋点工具吧，导出去给其它埋点文件使用。</p>
+<hr>
+<p>上面的各文件拆分了埋点流程，业务程序和埋点程序<strong>保持距离</strong>了之后，相处变得和睦，<strong>定位</strong>、<strong>添加</strong>、<strong>修改</strong>、<strong>删除</strong>、<strong>查看</strong>的事情也更顺心了。</p>
+<ul>
+<li>定位：tracker-config.js -&gt; 埋点数据 -&gt; Code -&gt; DOM id -&gt; 业务</li>
+<li>添加：tracker-config.js -&gt; 业务</li>
+<li>修改：tracker-config.js</li>
+<li>删除：<ul>
+<li>只改 tracker-config.js，断开一环让程序找不到埋点数据<ul>
+<li>改 Code，例如约定好在 Code 前加<code>DELETE:::</code>，例如<code>DELETE:::ICON</code></li>
+<li>改 id，例如约定好在 id 前加<code>DELETE:::</code>，例如<code>DELETE:::icon</code></li>
+<li>页面里改 id，例如约定好在 id 前加<code>DELETE:::</code>，例如<code>DELETE:::icon</code></li>
+</ul>
+</li>
+<li>直接删除对应埋点所有相关代码，改动 tracker.js、tracker-config.js</li>
+</ul>
+</li>
+<li>查看：tracker-config.js</li>
+</ul>
+<p>这么看来，埋点的事情都可以从<code>tracker-config.js</code>里开始。</p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>埋点不能影响正常业务流程，注意浏览器的 tcp 请求限制机制，即时取消超时请求，防止业务请求被挂起。</p>
+<h2 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h2><p>希望收到这样一份埋点代码的开发者，会像收到一封“情书”愉悦，润润色给下一位开发者。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://gaoryrt.com/2017/08-29-event-tracking/">关于数据埋点</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/27659302">基于指令和混合的前端通用埋点方案</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/microsoft-edge/devtools-guide-chromium/network/reference#analyze-requests">网络分析参考-分析请求</a>：“已为同一来源打开了六个（上限）TCP 连接。 仅适用于 HTTP/1.0 和 HTTP/1.1。”</p>
+<p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2017/03/02/mt-mobile-analytics-practice.html">美团点评前端无痕埋点实践</a></p>
+<p><a target="_blank" rel="noopener" href="https://lzw.me/pages/share/ppt/v1/flow.html">数据平台网站埋点统计实现原理与应用</a>：ppt，介绍了异常 js 异常统计。</p>
+</blockquote>
+<p>2021年 9月19日 星期日 20时32分26秒 CST - 我应该写一份「不怂理由清单」，最近反复回荡着一些话，像是“不要犹豫，等着等着时间一晃眼又过去了”、“世界很大，你要说话”、“总是低着头，总是贪生怕死”、“动辄心惊的弱者”之类的。</p>
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

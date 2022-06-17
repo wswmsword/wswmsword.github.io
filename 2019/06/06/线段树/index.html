@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>线段树</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="线段树"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        线段树
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2019-06-06T01:43:08.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2019-06-06
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/树形结构/">树形结构</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%99%E5%AE%9An%E4%B8%AA%E6%95%B0%EF%BC%8Cq%E4%B8%AA%E6%93%8D%E4%BD%9C%EF%BC%8C%E6%9C%89%E7%BB%99%E5%8C%BA%E9%97%B4%E5%90%84%E6%95%B0%E7%B4%AF%E5%8A%A0%E5%92%8C%E6%B1%82%E5%92%8C%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-text">给定n个数，q个操作，有给区间各数累加和求和的操作</span></a></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h3 id="给定n个数，q个操作，有给区间各数累加和求和的操作"><a href="#给定n个数，q个操作，有给区间各数累加和求和的操作" class="headerlink" title="给定n个数，q个操作，有给区间各数累加和求和的操作"></a>给定n个数，q个操作，有给区间各数累加和求和的操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct CNode</span><br><span class="line">&#123;</span><br><span class="line">   int L,R;</span><br><span class="line">   CNode *pLeft,*pRight;</span><br><span class="line">   long long nSum;</span><br><span class="line">   long long Inc;</span><br><span class="line">&#125;;</span><br><span class="line">CNode Tree[200010];</span><br><span class="line">int nCount=0;</span><br><span class="line">int Mid(CNode *pRoot)</span><br><span class="line">&#123;</span><br><span class="line">   return (pRoot-&gt;L+pRoot-&gt;R)/2;</span><br><span class="line">&#125;</span><br><span class="line">void BuildTree(CNode *pRoot,int L,int R)</span><br><span class="line">&#123;</span><br><span class="line">   pRoot-&gt;L=L;</span><br><span class="line">   pRoot-&gt;R=R;</span><br><span class="line">   pRoot-&gt;nSum=0;</span><br><span class="line">   pRoot-&gt;Inc=0;</span><br><span class="line">   if(L==R)</span><br><span class="line">      return ;</span><br><span class="line">   nCount++;</span><br><span class="line">   pRoot-&gt;pLeft=Tree+nCount;</span><br><span class="line">   nCount++;</span><br><span class="line">   pRoot-&gt;pRight=Tree+nCount;</span><br><span class="line">   BuildTree(pRoot-&gt;pLeft,L,(L+R)/2);</span><br><span class="line">   BuildTree(pRoot-&gt;pRight,(L+R)/2+1,R);</span><br><span class="line">&#125;</span><br><span class="line">void Insert(CNode *pRoot,int i,int v)</span><br><span class="line">&#123;</span><br><span class="line">   if(pRoot-&gt;L==i&amp;&amp;pRoot-&gt;R==i)</span><br><span class="line">   &#123;</span><br><span class="line">      pRoot-&gt;nSum=v;</span><br><span class="line">      return ;</span><br><span class="line">   &#125;</span><br><span class="line">   pRoot-&gt;nSum+=v;</span><br><span class="line">   if(i&lt;=Mid(pRoot))</span><br><span class="line">      Insert(pRoot-&gt;pLeft,i,v);</span><br><span class="line">   else</span><br><span class="line">      Insert(pRoot-&gt;pRight,i,v);</span><br><span class="line">&#125;</span><br><span class="line">void Add(CNode *pRoot,int a,int b,long long c)</span><br><span class="line">&#123;</span><br><span class="line">   if(pRoot-&gt;L==a&amp;&amp;pRoot-&gt;R==b)</span><br><span class="line">   &#123;</span><br><span class="line">      pRoot-&gt;Inc+=c;</span><br><span class="line">      return ;</span><br><span class="line">   &#125;</span><br><span class="line">   pRoot-&gt;nSum+=c*(b-a+1);</span><br><span class="line">   if(b&lt;=(pRoot-&gt;L+pRoot-&gt;R)/2)</span><br><span class="line">      Add(pRoot-&gt;pLeft,a,b,c);</span><br><span class="line">   else if(a&gt;=(pRoot-&gt;L+pRoot-&gt;R)/2+1)</span><br><span class="line">      Add(pRoot-&gt;pRight,a,b,c);</span><br><span class="line">   else</span><br><span class="line">   &#123;</span><br><span class="line">      Add(pRoot-&gt;pLeft,a,(pRoot-&gt;L+pRoot-&gt;R)/2,c);</span><br><span class="line">      Add(pRoot-&gt;pRight,(pRoot-&gt;L+pRoot-&gt;R)/2+1,b,c);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">long long QuerySum(CNode *pRoot,int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">   if(pRoot-&gt;L==a&amp;&amp;pRoot-&gt;R==b)</span><br><span class="line">      return pRoot-&gt;nSum+(pRoot-&gt;R-pRoot-&gt;L+1)*pRoot-&gt;Inc;</span><br><span class="line">   pRoot-&gt;nSum+=(pRoot-&gt;R-pRoot-&gt;L+1)*pRoot-&gt;Inc;</span><br><span class="line">   Add(pRoot-&gt;pLeft,pRoot-&gt;L,Mid(pRoot),pRoot-&gt;Inc);</span><br><span class="line">   Add(pRoot-&gt;pRight,Mid(pRoot)+1,pRoot-&gt;R,pRoot-&gt;Inc);</span><br><span class="line">   pRoot-&gt;Inc=0;</span><br><span class="line">   if(b&lt;=Mid(pRoot))</span><br><span class="line">      return QuerySum(pRoot-&gt;pLeft,a,b);</span><br><span class="line">   else if(a&gt;=Mid(pRoot)+1)</span><br><span class="line">      return QuerySum(pRoot-&gt;pRight,a,b);</span><br><span class="line">   else</span><br><span class="line">   &#123;</span><br><span class="line">      return QuerySum(pRoot-&gt;pLeft,a,Mid(pRoot))+QuerySum(pRoot-&gt;pRight,Mid(pRoot)+1,b);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">   int n,q,a,b,c;</span><br><span class="line">   char cmd[10];</span><br><span class="line">   scanf(&quot;%d %d&quot;,&amp;n,&amp;q);</span><br><span class="line">   int i,j,k;</span><br><span class="line">   nCount=0;</span><br><span class="line">   BuildTree(Tree,1,n);</span><br><span class="line">   for(i=1;i&lt;=n;++i)</span><br><span class="line">   &#123;</span><br><span class="line">      scanf(&quot;%d&quot;,&amp;a);</span><br><span class="line">      Insert(Tree,i,a);</span><br><span class="line">   &#125;</span><br><span class="line">   for(i=0;i&lt;q;++i)</span><br><span class="line">   &#123;</span><br><span class="line">      scanf(&quot;%s&quot;,cmd);</span><br><span class="line">      if(cmd[0]==&#x27;C&#x27;)</span><br><span class="line">      &#123;</span><br><span class="line">         scanf(&quot;%d %d %d&quot;,&amp;a,&amp;b,&amp;c);</span><br><span class="line">         Add(Tree,a,b,c);</span><br><span class="line">      &#125;else&#123;</span><br><span class="line">         scanf(&quot;%d %d&quot;,&amp;a,&amp;b);</span><br><span class="line">         printf(&quot;%I64d\n&quot;,QuerySum(Tree,a,b));</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

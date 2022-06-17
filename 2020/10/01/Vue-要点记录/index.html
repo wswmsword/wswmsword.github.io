@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>Vue-要点记录</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="Vue-要点记录"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Vue-要点记录
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2020-09-30T20:25:31.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2020-10-01
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/笔记本/">笔记本</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Document"><span class="toc-text">Document</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="toc-text">应用实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E7%89%88%E8%AF%AD%E6%B3%95"><span class="toc-text">模版语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E5%92%8C%E4%BE%A6%E5%90%AC%E5%99%A8"><span class="toc-text">计算属性和侦听器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-%E4%B8%8E-Style-%E7%BB%91%E5%AE%9A"><span class="toc-text">Class 与 Style 绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93"><span class="toc-text">条件渲染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93"><span class="toc-text">列表渲染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="toc-text">事件处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E5%8D%95%E8%BE%93%E5%85%A5%E7%BB%91%E5%AE%9A"><span class="toc-text">表单输入绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6"><span class="toc-text">组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E5%A4%8D%E7%94%A8%E6%80%A7-amp-%E6%B7%B7%E5%90%88"><span class="toc-text">可复用性&amp;混合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vuex-Document"><span class="toc-text">Vuex Document</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Modules"><span class="toc-text">Modules</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%81%BB%E3%81%97%E3%81%AE%E3%81%8B%E3%81%91%E3%82%89"><span class="toc-text">ほしのかけら</span></a></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>这是一篇我对 Vue3 中文文档等学习资料的复述，其中是对信息的提取和整理，正在完善中。</p>
+<h2 id="Document"><a href="#Document" class="headerlink" title="Document"></a>Document</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>带有前缀“v-”的属性被称为指令，这是 Vue 提供的特殊属性。</p>
+<p>“v-bind”，如“v-bind:title=”message””，表示将 title 属性和当前活跃的 message property 保持一致。</p>
+<p>“v-on”指令添加事件监听器，如“v-on:click=”reverseMessage””，其中 reverseMessage 是在其它地方定义的方法。</p>
+<p>“v-model”指令双向绑定，表单状态和应用状态之间的双向绑定，如“v-model=”message””。</p>
+<p>“v-if”条件指令，“v-for”循环指令，如“v-if=”seen””，“v-for=”todo in todos””。</p>
+<h3 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h3><h3 id="模版语法"><a href="#模版语法" class="headerlink" title="模版语法"></a>模版语法</h3><p>“v-html”输出真正的 HTML，比如：<code>&lt;span v-html=&quot;rawHtml&quot;&gt;&lt;/span&gt;</code>。</p>
+<p>“v-bind”作用 HTML attribute，比如：<code>&lt;button v-bind:disabled=&quot;isButtonDisabled&quot;&gt;按钮&lt;/button&gt;</code>。</p>
+<p>指令：这是带有<code>v-</code>前缀的特殊 attribute，除了<code>v-for</code>和<code>v-on</code>，指令的预期值是<strong>单个 JavaScript 表达式</strong>；</p>
+<ul>
+<li>有的指令接受<code>参数</code>，指令中它从冒号开始，比如，<code>&lt;a v-bind:href=&quot;url&quot;&gt; website &lt;/a&gt;</code>；利用方括号设置<code>动态参数</code>，比如，<code>&lt;a v-bind:[attributeName]=&quot;url&quot;&gt; website &lt;/a&gt;</code>；</li>
+<li><code>修饰符</code>在指令中从半角句号开始，比如，<code>&lt;form v-on:submit.prevent=&quot;onSubmit&quot;&gt; &lt;/form&gt;</code>。</li>
+</ul>
+<p>使用<code>:href=&quot;url&quot;</code>缩写<code>v-bind:href=&quot;url&quot;</code>，使用<code>@click=&quot;doSth&quot;</code>缩写<code>v-on:click=&quot;doSth&quot;</code>；缩写里的参数可以是动态参数。</p>
+<h3 id="计算属性和侦听器"><a href="#计算属性和侦听器" class="headerlink" title="计算属性和侦听器"></a>计算属性和侦听器</h3><p>模版里包含响应式数据的复杂逻辑，模版显得不再是简单的和声明性的，这时使用“计算属性”，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">	export default &#123;</span><br><span class="line">		name: &#x27;IsBooked&#x27;,</span><br><span class="line">		data() &#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				arrived: 3</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		computed: &#123;</span><br><span class="line">			book() &#123;</span><br><span class="line">				return this.arrived &gt; 2 ? &#x27;Yes&#x27; : &#x27;No&#x27;;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		methods: &#123;</span><br><span class="line">			calculateBook() &#123;</span><br><span class="line">				return this.arrived &gt; 2 ? &#x27;Yes&#x27; : &#x27;No&#x27;;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上例中，“方法”的效果和计算属性一样，但是每次重新渲染，方法都会重新执行，而计算属性会根据依赖关系不变来缓存。</p>
+<p>计算属性默认只有 getter，在需要的时候添加 setter：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">		book&#123;</span><br><span class="line">			get() &#123;</span><br><span class="line">				return this.arrived &gt; 2 ? &#x27;Yes&#x27; : &#x27;No&#x27;;</span><br><span class="line">			&#125;,</span><br><span class="line">			set() &#123;</span><br><span class="line">				this.arrived = 0;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>“侦听器”在执行异步或开销大的时候使用，默认浅监听，<code>deep: true</code>开启深度监听。</p>
+<h3 id="Class-与-Style-绑定"><a href="#Class-与-Style-绑定" class="headerlink" title="Class 与 Style 绑定"></a>Class 与 Style 绑定</h3><p>绑定 class 可以使用“对象语法”，指令<code>:class</code>和属性<code>class</code>共存，后者高优先级，对象语法包括返回对象的计算属性，此外也能用“数组语法”绑定 class；如果在组件上添加 class，模版里如果是单个最外层节点，这个节点的 class 会继承，如果并行存在多个最外层节点，使用<code>$attrs.class</code>指定节点继承。</p>
+<p>绑定 style 和上述绑定 class 类似，可以使用“对象语法”、“数组语法”，Vue 会自动添加浏览器前缀，还可以给 property 用数组提供多重值，会得到最后一个被浏览器支持的值。</p>
+<h3 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h3><p><code>v-if</code>、<code>v-else-if</code>、<code>v-else</code>惰性渲染，<code>v-if</code>可以在<code>&lt;template&gt;</code>上使用。<code>v-show</code>也用于条件渲染，但是它使元素切换<code>display</code>。</p>
+<h3 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h3><p>使用“v-for”进行<code>item in items</code>形式的循环渲染，items 可以是数组或对象，对象的时候 item 可以有 3 个参数，<code>value, name, index</code>。</p>
+<p>需要显示过滤后的结果的时候，配合 filter 使用计算属性或者方法。</p>
+<p><code>v-for</code>和<code>v-if</code>一同使用，<code>v-for</code>的优先级更高。</p>
+<h3 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h3><p><em>监听事件：</em>“监听事件”用指令<code>v-on</code>，比如，<code>v-on:click=&quot;methodName&quot;</code>，也可以缩写成<code>@click=&quot;methodName&quot;</code>。</p>
+<p><em>事件处理方法：</em>JavaScript 代码可以写在<code>v-on</code>中，比如，<code>@click=&quot;counter += 1&quot;</code>，但是事件处理的逻辑复杂，那么用<code>v-on</code>接收一个“事件处理方法”，比如<code>&lt;button @click=&quot;greet&quot;&gt;Greet&lt;/button&gt;</code>。</p>
+<p><em>内联处理器中的方法：</em>使用“内联处理器中的方法”，比如，<code>&lt;button @click=&quot;say(&#39;hi&#39;)&quot;&gt;Say hi&lt;/button&gt;</code>，如果要在方法里访问原始 DOM 事件，要传递特殊变量<code>$event</code>，比如<code>&lt;button @click=&quot;warn(&#39;warn&#39;, $event)&quot;&gt; Submit &lt;/button&gt;</code>。</p>
+<p><em>多事件处理器：</em>处理多个方法，用逗号分隔。</p>
+<p><em>修饰符：</em>有事件修饰符、按键修饰符和系统修饰符，形如<code>&lt;div @scroll.passive=&quot;onScroll&quot;&gt;...&lt;/div&gt;</code>。</p>
+<ul>
+<li>传递的特殊变量<code>$event</code>的 event 是原生的；<ul>
+<li><code>console.log(event, event.__proto__.constructor)</code> 查看圆形和构造函数；</li>
+</ul>
+</li>
+<li>事件被挂载在当前元素；<ul>
+<li><code>console.log(event.target)</code>查看事件的挂载点，<code>console.log(event.currentTarget)</code>查看事件的触发点。</li>
+</ul>
+</li>
+</ul>
+<h3 id="表单输入绑定"><a href="#表单输入绑定" class="headerlink" title="表单输入绑定"></a>表单输入绑定</h3><p>为<code>v-model</code>添加修饰符，<code>.lazy</code>、<code>.number</code>、<code>.trim</code>。</p>
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><p><em>Props：</em></p>
+<ul>
+<li>“传递静态或动态 Prop”，以 HTML attribute 的形式传递静态值（字符串），以<code>v-bind</code>带参数的形式传递动态 prop（字符串，数字，布尔，数组，对象，函数）；<code>v-bind</code>不带参数，对于对象，会把它的所有 property 都作为 prop 传入；</li>
+<li>Props 是“单向数据流”，初始化成 data 或 computed；</li>
+<li>“Prop 验证”不使用字符串数组，使用对象，它有特殊属性<code>type, required, default, validator</code>。</li>
+</ul>
+<p><em>非 Prop 的 Attribute：</em></p>
+<ul>
+<li>“Attribute 继承”；</li>
+<li><code>inheritAttrs: false</code>，“禁用 Attribute 继承”，在要把 prop 应用到其它元素上时使用<code>v-bind=&quot;$attrs&quot;</code>；</li>
+<li>使用<code>v-bind=&quot;$attrs&quot;</code>完成“多个根节点上的 Attribute 继承”。</li>
+</ul>
+<p><em>插槽：</em></p>
+<ul>
+<li>基本使用；</li>
+<li>具名插槽；</li>
+<li>作用于插槽；</li>
+<li>动态插槽名。</li>
+</ul>
+<p><em>提供/注入：</em></p>
+<p><em>动态组件 &amp; 异步组件：</em></p>
+<ul>
+<li><code>export default &#123; components: &#123; AsyncDemo: () =&gt; import(&#39;./AsyncDemo&#39;) &#125;, ... &#125;</code></li>
+</ul>
+<h3 id="可复用性-amp-混合"><a href="#可复用性-amp-混合" class="headerlink" title="可复用性&amp;混合"></a>可复用性&amp;混合</h3><p>mixin 的问题：</p>
+<ul>
+<li>变量来源不明确，不利于阅读；</li>
+<li>多 mixin 可能会造成命名冲突；</li>
+<li>mixin 和组件可能出现多对多的关系，复杂度较高。</li>
+</ul>
+<h2 id="Vuex-Document"><a href="#Vuex-Document" class="headerlink" title="Vuex Document"></a>Vuex Document</h2><p>Vuex 基本概念：state, getters, action, mutation；</p>
+<ul>
+<li>dispatch, commit, mapState, mapGetters, mapActions, mapMutations；</li>
+</ul>
+<h3 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h3><h2 id="ほしのかけら"><a href="#ほしのかけら" class="headerlink" title="ほしのかけら"></a>ほしのかけら</h2><p>nextTick：由于异步渲染，data 改变之后，直接获取 DOM 都不是最新的，可以通过<code>$nextTick</code>渲染后回调获取最新 DOM。</p>
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

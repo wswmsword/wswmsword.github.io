@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>排序算法</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="排序算法"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        排序算法
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2019-04-30T19:04:55.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2019-05-01
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/排序/">排序</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="toc-text">快速排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#QSORT"><span class="toc-text">QSORT()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#INI-int-left-int-right"><span class="toc-text">INI(int left,int right)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PAR-int-left-int-right"><span class="toc-text">PAR(int left,int right)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-text">归并排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MSORT"><span class="toc-text">MSORT()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#INI-int-left-int-right-1"><span class="toc-text">INI(int left,int right)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MER-int-left-int-mid-int-right"><span class="toc-text">MER(int left,int mid,int right)</span></a></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><h3 id="QSORT"><a href="#QSORT" class="headerlink" title="QSORT()"></a>QSORT()</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">初始化数组z存放准备排序的序列</span><br><span class="line">n=z.len</span><br><span class="line">INI(0,n-1)</span><br></pre></td></tr></table></figure>
+
+<h3 id="INI-int-left-int-right"><a href="#INI-int-left-int-right" class="headerlink" title="INI(int left,int right)"></a>INI(int left,int right)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if(left&lt;right)</span><br><span class="line">&#123;</span><br><span class="line">   parti=par(left,right);</span><br><span class="line">   INI(left,parti-1);</span><br><span class="line">   INI(parti+1,right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="PAR-int-left-int-right"><a href="#PAR-int-left-int-right" class="headerlink" title="PAR(int left,int right)"></a>PAR(int left,int right)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">i=left</span><br><span class="line">j=right+1</span><br><span class="line">while 1</span><br><span class="line">   do</span><br><span class="line">   &#123;</span><br><span class="line">      j=j-1</span><br><span class="line">   &#125;while z[j]&gt;z[left]</span><br><span class="line">   do</span><br><span class="line">   &#123;</span><br><span class="line">      i=i+1</span><br><span class="line">   &#125;while z[i]&lt;z[left] and i&lt;right</span><br><span class="line">   if j&gt;i</span><br><span class="line">      SWAP(z[i],z[j])</span><br><span class="line">   else</span><br><span class="line">      SWAP(z[j],z[left])</span><br><span class="line">      break</span><br><span class="line">return j</span><br></pre></td></tr></table></figure>
+
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><h3 id="MSORT"><a href="#MSORT" class="headerlink" title="MSORT()"></a>MSORT()</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">初始化数组z存放准备排序的序列</span><br><span class="line">n=z.len</span><br><span class="line">INI(0,n-1)</span><br></pre></td></tr></table></figure>
+
+<h3 id="INI-int-left-int-right-1"><a href="#INI-int-left-int-right-1" class="headerlink" title="INI(int left,int right)"></a>INI(int left,int right)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if(left&lt;right)</span><br><span class="line">&#123;</span><br><span class="line">   mid=(left+right)/2</span><br><span class="line">   INI(left,mid)</span><br><span class="line">   INI(mid+1,right)</span><br><span class="line">   MER(left,mid,right)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MER-int-left-int-mid-int-right"><a href="#MER-int-left-int-mid-int-right" class="headerlink" title="MER(int left,int mid,int right)"></a>MER(int left,int mid,int right)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">i=left</span><br><span class="line">j=mid+1</span><br><span class="line">k=right</span><br><span class="line">while i!=mid+1 and j!=right+1</span><br><span class="line">&#123;</span><br><span class="line">   if z[i]&gt;z[j]</span><br><span class="line">   &#123;</span><br><span class="line">      prez[k]=z[j]</span><br><span class="line">      k=k+1</span><br><span class="line">      j=j+1</span><br><span class="line">   &#125;else</span><br><span class="line">   &#123;</span><br><span class="line">      prez[k]=z[i]</span><br><span class="line">      k=k+1</span><br><span class="line">      i=i+1</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">while i!=mid+1</span><br><span class="line">&#123;</span><br><span class="line">   prez[k]=z[i]</span><br><span class="line">   k=k+1</span><br><span class="line">   i=i+1</span><br><span class="line">&#125;</span><br><span class="line">while j!=right+1</span><br><span class="line">&#123;</span><br><span class="line">   prez[k]=z[j]</span><br><span class="line">   k=k+1</span><br><span class="line">   j=j+1</span><br><span class="line">&#125;</span><br><span class="line">for i=left to right</span><br><span class="line">   z[i]=prez[i]</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
