@@ -94,13 +94,14 @@
 <li>程序逻辑。</li>
 </ul>
 <p>我在俱乐部碰到的埋点可以归结成上面几种场景，下面对每种场景做简单举例。</p>
-<p>按钮点击：登录按钮的点击埋点，不需要知道用户是否同意或拒绝登录，仅点击即打点；广告 banner 的点击埋点；底部导航栏的点击埋点……</p>
-<p>弹窗进入、退出：首次进入时首页的广告弹窗；扫码出现的特殊弹窗……</p>
+<p>按钮点击：登录按钮的点击埋点，不需要知道用户是否同意或拒绝登录，仅点击即埋点；广告 banner 的点击埋点；底部导航栏的点击埋点。</p>
+<p>弹窗进入、退出：首次进入时首页的弹窗；扫码出现的弹窗。</p>
 <p>页面进入、离开、停留：每个页面的进入退出停留埋点；1. 进入首页进行首页进入埋点；2. 点击“会员码”页面，进行首页离开埋点；3. 同时“会员码”页面进行进入埋点；4. 停留在“会员码”页面后每 10s 进行一次停留埋点。</p>
 <p>页面分享出去、分享进入埋点：点击分享进行埋点，分享进入链接会携带分享参数，拿到参数进行分享进入埋点。</p>
 <p>程序逻辑：代码执行到某种条件内进行埋点，如果这种条件通过点击触发可以反映到 ui 上，又可以转换为第一种按钮点击的情况；如果埋点是在后端接口的 api 中，这种埋点就更适合服务端执行。</p>
 <h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><h3 id="埋点的内容"><a href="#埋点的内容" class="headerlink" title="埋点的内容"></a>埋点的内容</h3><p>埋点的内容保存在一个或多个文件中，埋点的组件或者函数会在被执行的时候从这些文件中找到具体的埋点内容。</p>
 <p>可以根据埋点规模和团队习惯来确定埋点内容的保存方式，是分散在每一个埋点处，还是提取到一个文件中，还是分类至多个文件中。</p>
+<p>俱乐部使用的保存方式是把埋点内容分类至多个文件中。</p>
 <h3 id="埋点的执行"><a href="#埋点的执行" class="headerlink" title="埋点的执行"></a>埋点的执行</h3><p>我的实践中具体进行埋点的时候会涉及到的组件和函数：</p>
 <p>组件：<code>clicker-tracking</code>，<code>viewer-tracking</code>。</p>
 <p>函数：<code>sendEventTagByDomId</code>，<code>sendEventTagByHardId</code>。</p>
@@ -125,7 +126,7 @@
 <p>如果不想要停留埋点，就像这样：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;viewer-tracking :sharedData=&quot;&#123; pageName: &#x27;每日签到&#x27; &#125;&quot; disableStay /&gt;</span><br></pre></td></tr></table></figure>
 
-<p>从组件的<code>props</code>可以看到，和组件<code>clicker-tracking</code>差不多，也使用<code>scope</code>和<code>enterId</code>、<code>stayId</code>、<code>leaveId</code>来定位具体的埋点内容，<code>enterData</code>、<code>stayData</code>、<code>leaveData</code>用来传递埋点内容需要的变量，而且有<code>disable</code>属性用来控制关闭进入、停留或离开埋点，这是为了适应有的页面不用记录停留埋点的需求。</p>
+<p>从组件的<code>props</code>可以看到，和组件<code>clicker-tracking</code>差不多，也使用<code>scope</code>和<code>enterId</code>、<code>stayId</code>、<code>leaveId</code>来定位具体的埋点内容，<code>enterData</code>、<code>stayData</code>、<code>leaveData</code>用来传递埋点内容需要的变量，而且有<code>disable</code>属性用来控制关闭进入、停留或离开埋点，这是为了适应有的页面不用记录停留埋点的需求。（代码块中的<code>sharedData</code>是<code>enterData</code>、<code>stayData</code>、<code>leaveData</code>的封装，最后的组件实现中有解释。）</p>
 <p>这个组件还有些特殊的地方，它的执行总会跟随组件的<code>绑定</code>状态。页面进入和离开可以看成是页面的<code>绑定</code>和<code>解绑</code>，弹窗的弹出和关闭可以看成是弹窗的<code>绑定</code>和<code>解绑</code>，所以这个组件要可以监听到这种状态。这就是组件里<code>watch</code>的<code>isBinded</code>的作用，还有生命周期<code>mounted </code>和<code>beforeDestroy</code>的作用，<code>isBinded</code>具体的实现我放在最后。</p>
 <h3 id="函数-sendEventTagByDomId-和-sendEventTagByHardId"><a href="#函数-sendEventTagByDomId-和-sendEventTagByHardId" class="headerlink" title="函数 sendEventTagByDomId 和 sendEventTagByHardId"></a>函数 sendEventTagByDomId 和 sendEventTagByHardId</h3><p>如果我们用有逻辑和无逻辑划分页面，逻辑脚本是属于有逻辑的，页面结构是属于无逻辑的。组件来配合页面结构埋点，而函数就配合逻辑脚本进行埋点。</p>
 <p><code>sendEventTagByDomId</code>和<code>sendEventTagByDomId</code>进行埋点时要传递的参数和组件属性差不多，就像这样：</p>
