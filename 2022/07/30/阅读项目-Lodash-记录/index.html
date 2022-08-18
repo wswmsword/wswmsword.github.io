@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>阅读项目 Lodash 记录</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="阅读项目 Lodash 记录"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        阅读项目 Lodash 记录
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2022-07-30T04:18:09.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2022-07-30
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/笔记本/">笔记本</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#internal"><span class="toc-text">.internal</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#isIndex"><span class="toc-text">isIndex</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getTag"><span class="toc-text">? getTag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isObjectLike"><span class="toc-text">isObjectLike</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isLength"><span class="toc-text">isLength</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isArrayLike"><span class="toc-text">isArrayLike</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isObjectLike-1"><span class="toc-text">isObjectLike</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#public"><span class="toc-text">public</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#isArguments"><span class="toc-text">isArguments</span></a></li></ol></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="internal"><a href="#internal" class="headerlink" title=".internal"></a>.internal</h2><h3 id="isIndex"><a href="#isIndex" class="headerlink" title="isIndex"></a>isIndex</h3><p>Javascript 的数字存储使用了 IEEE 754 中规定的双精度浮点数数据类型，这一数据类型能够安全存储 -(2^53 - 1) 到 2^53 - 1 之间的数值（包含边界值）。超过范围的计算会发生错误。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最大安全整数</span></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">MAX_SAFE_INTEGER</span> = <span class="number">9007199254740991</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><code>?:</code>表示<a target="_blank" rel="noopener" href="https://zh.javascript.info/regexp-groups#fei-bu-huo-zu">非捕获组</a>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 大于等于 0 的整数正则</span></span><br><span class="line"><span class="keyword">const</span> reIsUint = <span class="regexp">/^(?:0|[1-9]\d*)$/</span></span><br></pre></td></tr></table></figure>
+
+<p>非捕获组的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">&quot;Gogogo George!&quot;</span>;</span><br><span class="line"><span class="comment">// ?: 从捕获组中排除 &#x27;go&#x27;</span></span><br><span class="line"><span class="keyword">let</span> regexp = <span class="regexp">/(?:go)+ (\w+)/i</span>;</span><br><span class="line"><span class="keyword">let</span> result = str.<span class="title function_">match</span>(regexp);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &#123;</span></span><br><span class="line"><span class="comment"> *   0: &quot;Gogogo George&quot;,</span></span><br><span class="line"><span class="comment"> *   1: &quot;George&quot;,</span></span><br><span class="line"><span class="comment"> *   groups: undefined,</span></span><br><span class="line"><span class="comment"> *   index: 0,</span></span><br><span class="line"><span class="comment"> *   input: &quot;Gogogo George!&quot;,</span></span><br><span class="line"><span class="comment"> *   length: 2,</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 浮点数的 value 不能通过 value % 1 == 0</span></span><br><span class="line">(value &gt; -<span class="number">1</span> &amp;&amp; value % <span class="number">1</span> == <span class="number">0</span> &amp;&amp; value &lt; length)</span><br></pre></td></tr></table></figure>
+
+<h3 id="getTag"><a href="#getTag" class="headerlink" title="? getTag"></a>? getTag</h3><p><code>toString(null)</code> 可以得到<code>[object Null]</code>，为什么单独判断情况<code>value == null</code>？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> toString = <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getTag</span>(<span class="params">value</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (value == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> value === <span class="literal">undefined</span> ? <span class="string">&#x27;[object Undefined]&#x27;</span> : <span class="string">&#x27;[object Null]&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> toString.<span class="title function_">call</span>(value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="isObjectLike"><a href="#isObjectLike" class="headerlink" title="isObjectLike"></a>isObjectLike</h3><p><code>typeof</code>是<code>object</code>而且不是 null 的时候，定义这个变量是类对象的。</p>
+<p>关于这个函数中判断的顺序：假设返回值为 false，<code>value !== null</code>放在前面，value 需要全等 null 的时候才能满足，这样省去了后面的<code>typeof value === &#39;object&#39;</code>判读。但可以猜测实际中，大部分情况的入参不会是 null，所以<code>value !== null</code>的判断放在了后面。</p>
+<p>结论：多个条件<code>&amp;&amp;</code>的时候，容易失败的放在前面。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">isObjectLike</span>(<span class="params">value</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">&#x27;object&#x27;</span> &amp;&amp; value !== <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="isLength"><a href="#isLength" class="headerlink" title="isLength"></a>isLength</h3><p>基于 ECMA 的 <a target="_blank" rel="noopener" href="https://262.ecma-international.org/7.0/#sec-tolength">ToLength</a> 实现。</p>
+<p>范围是 0 到 2^53 - 1。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typeof value === &#x27;number&#x27; &amp;&amp;</span><br><span class="line">    value &gt; -1 &amp;&amp; value % 1 == 0 &amp;&amp; value &lt;= MAX_SAFE_INTEGER</span><br></pre></td></tr></table></figure>
+
+<h3 id="isArrayLike"><a href="#isArrayLike" class="headerlink" title="isArrayLike"></a>isArrayLike</h3><p>类数组，不是函数类型，有<code>length</code>属性（0 到 2^53 - 1）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value != null &amp;&amp; typeof value !== &#x27;function&#x27; &amp;&amp; isLength(value.length)</span><br></pre></td></tr></table></figure>
+
+<h3 id="isObjectLike-1"><a href="#isObjectLike-1" class="headerlink" title="isObjectLike"></a>isObjectLike</h3><p>类对象，非 null 并且<code>typeof value === &#39;object&#39;</code>。</p>
+<h2 id="public"><a href="#public" class="headerlink" title="public"></a>public</h2><h3 id="isArguments"><a href="#isArguments" class="headerlink" title="isArguments"></a>isArguments</h3><p>入参是<code>arguments</code>类型时，是可以判断的，通过 typeof value === “[object Arguments]”。</p>
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://www.poinotes.com/">
+        Signal
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>Git 学习记录</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="Git 学习记录"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Git 学习记录
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2022-08-18T08:57:04.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2022-08-18
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/笔记本/">笔记本</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF"><span class="toc-text">分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8B%E9%9A%86"><span class="toc-text">克隆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E5%9B%9B%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="toc-text">文件的四种状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%BF%97"><span class="toc-text">日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%EF%BC%8C-gitignore"><span class="toc-text">忽略文件，.gitignore</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#diff-%E5%B7%A5%E5%85%B7"><span class="toc-text">diff 工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E4%B8%81"><span class="toc-text">补丁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%AB%E5%90%8D"><span class="toc-text">别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GUI"><span class="toc-text">GUI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>工作里习惯了通过 Fork（app）使用 Git，这两个月的时间里开始熟悉 Git 的命令行客户端。虽然命令行在视觉上不如 UI 直观，但命令行可以保持双手持续输入不离开键盘，熟悉命令行也更利于寻找最适合自己的 GUI。</p>
+<p>另外，界面的直观指的是个人使用上的直观。鼠标有四面八方的方向，当某个人不熟悉界面的时候，我只能当面告诉他如何执行这些 git 指令：“点这里，这里，这里，往上一点，点顶部菜单栏左侧第二个按钮”，这不如命令行直观。</p>
+<p>Github 新创建仓库的 Git 拉取提示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# git-learning&quot;</span> &gt;&gt; README.md <span class="comment"># 创建一个文件，往里面加入文本</span></span><br><span class="line">git init <span class="comment"># 初始化 git</span></span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git branch -M main <span class="comment"># 重命名默认分支名称</span></span><br><span class="line">git remote add origin git@github.com:wswmsword/git-learning.git</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-show"><code>git show</code></a>，显示最近提交的信息，与之相关的其它命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git show &lt;commit&gt;</span><br><span class="line">git show HEAD^ <span class="comment"># 上次提交</span></span><br><span class="line">git show HEAD@&#123;n&#125; <span class="comment"># 倒数第 n 次提交</span></span><br><span class="line">git show &lt;commit&gt;:&lt;file&gt; <span class="comment"># 查看一次提交的一个文件的变化</span></span><br><span class="line">git show &lt;branch&gt; <span class="comment"># 查看一个分支最近的一次提交</span></span><br><span class="line">git show &lt;branch&gt;@&#123;n&#125; <span class="comment"># 一个分支的倒数第 n 次提交</span></span><br></pre></td></tr></table></figure>
+
+<p><code>git commit</code>，提交，与之相关的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git commit --amend --only <span class="comment"># 打开默认编辑器，修改上次提交信息</span></span><br><span class="line">git commit --amend --only -m <span class="string">&quot;edited first commit&quot;</span> <span class="comment"># 直接修改上次提交信息</span></span><br><span class="line">git commit --amend --author <span class="string">&quot;New Authorname &lt;authoremail@mydomain.com&gt;&quot;</span> <span class="comment"># 修改上次提交的邮箱</span></span><br></pre></td></tr></table></figure>
+
+<p><code>git restore --staged &lt;file&gt;</code>取消暂存。</p>
+<p><code>git reset</code>，回退，相关命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD@&#123;1&#125; <span class="comment"># 回退到上一次提交</span></span><br><span class="line">git reset HEAD^ <span class="comment"># 同上，回退到上一次提交</span></span><br></pre></td></tr></table></figure>
+
+
+<p><code>git rm --cached &lt;file&gt;</code>，撤销跟踪，保留工作区的文件内容。<code>git rm -f &lt;file&gt;</code>，强制删除文件。</p>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>查看分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看所有分支</span></span><br><span class="line">git branch -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看本地分支</span></span><br><span class="line">git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看远程分支</span></span><br><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
+
+<h2 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:wswmsword/git-learning.git</span><br></pre></td></tr></table></figure>
+
+<p>克隆所有分支，并切换到指定分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b main git@github.com:wswmsword/git-learning.git</span><br></pre></td></tr></table></figure>
+
+<p>克隆指定分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b main --single-branch git@github.com:wswmsword/git-learning.git</span><br></pre></td></tr></table></figure>
+
+<p>克隆指定文件夹（git 2.25+ (Q1 2020)）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> git-sparse-checkout &amp;&amp; <span class="built_in">cd</span> git-sparse-checkout</span><br><span class="line">git init -q</span><br><span class="line">git remote add origin git@github.com:wswmsword/git-learning.git</span><br><span class="line">git sparse-checkout <span class="built_in">set</span> asssets <span class="comment"># 设置指定文件夹</span></span><br><span class="line">git pull origin main</span><br><span class="line"><span class="built_in">ls</span> <span class="comment"># assets</span></span><br><span class="line">git sparse-checkout <span class="built_in">disable</span> <span class="comment"># 关闭 sparse-checkout</span></span><br></pre></td></tr></table></figure>
+
+<p>旧版本的 git 克隆指定文件夹：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> git-sparse-checkout-old &amp;&amp; <span class="built_in">cd</span> git-sparse-checkout-old</span><br><span class="line">git init -q</span><br><span class="line">git remote add origin git@github.com:wswmsword/git-learning.git</span><br><span class="line">git config --global core.sparseCheckout <span class="literal">true</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;assets&quot;</span> &gt;&gt; .git/info/sparse-checkout</span><br><span class="line">git pull origin main</span><br></pre></td></tr></table></figure>
+
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/36190800/how-to-disable-sparse-checkout-after-enabled">How to disable sparse checkout after enabled?</a>：打开稀疏检出后如何关闭？回答中有使用老版本的 git 关闭答案。回答中提到了一个脚本。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/trilinos/Trilinos/blob/master/sparse_checkout.sh">sparse_checkout.sh</a>：第一条中提到的脚本。</li>
+<li><a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-sparse-checkout">sparse-checkout</a>：git 的稀疏检出官方文档。</li>
+</ul>
+<h2 id="文件的四种状态"><a href="#文件的四种状态" class="headerlink" title="文件的四种状态"></a>文件的四种状态</h2><p><code>Untracked</code>、<code>Staged</code>、<code>Unmodified</code>、<code>Modified</code></p>
+<ul>
+<li>Untracked（未跟踪）<ul>
+<li>第一次新建的文件，没有<code>git add</code>过的文件，或者<code>git rm --cached</code>过的文件；</li>
+</ul>
+</li>
+<li>Staged（暂存）<ul>
+<li><code>git add</code>过的文件都是<code>staged</code>状态；</li>
+</ul>
+</li>
+<li>Unmodified（未修改）<ul>
+<li><code>git commit</code>后的文件是未修改状态；</li>
+</ul>
+</li>
+<li>Modified（已修改）<ul>
+<li><code>git commit</code>之后，对文件进行修改，当前为已修改状态。</li>
+</ul>
+</li>
+</ul>
+<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p><code>git log</code>，查看提交记录，与之相关的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> -g <span class="comment"># 查看所有提交记录，包括 amend 的</span></span><br><span class="line">git <span class="built_in">log</span> --pretty=oneline <span class="comment"># 一行显示提交信息</span></span><br><span class="line">git <span class="built_in">log</span> --pretty=short</span><br><span class="line">git <span class="built_in">log</span> --pretty=medium</span><br><span class="line">git <span class="built_in">log</span> --pretty=full</span><br><span class="line">git <span class="built_in">log</span> --pretty=fuller</span><br><span class="line">git <span class="built_in">log</span> --pretty=reference</span><br><span class="line">git <span class="built_in">log</span> --pretty=email</span><br><span class="line">git <span class="built_in">log</span> --pretty=raw</span><br><span class="line">git reflog <span class="comment"># 更多的记录</span></span><br><span class="line">git <span class="built_in">log</span> --oneline <span class="comment"># 一行显示，更紧凑，哈希更短</span></span><br><span class="line">git <span class="built_in">log</span> --graph</span><br><span class="line">git <span class="built_in">log</span> --graph -- oneline</span><br><span class="line">git <span class="built_in">log</span> --pretty=<span class="string">&quot;%C(yellow) Hash: %h %C(blue)Date: %ad %C(red) Message: %s &quot;</span> --<span class="built_in">date</span>=human</span><br><span class="line">git <span class="built_in">log</span> --pretty=<span class="string">&quot;%C(yellow) Hash: %h %C(blue)Date: %ad %C(red) Message: %s &quot;</span> --<span class="built_in">date</span>=short</span><br><span class="line">git <span class="built_in">log</span> --relative-date <span class="comment"># 相对时间</span></span><br><span class="line">git shortlog <span class="comment"># 按作者，只展示注释日志</span></span><br><span class="line">git <span class="built_in">log</span> --author=wswmsword <span class="comment"># 只看某人（wswmsword）的提交</span></span><br><span class="line">git <span class="built_in">log</span> --pretty=format:<span class="string">&#x27;%h %ad %an %s&#x27;</span> --<span class="built_in">date</span>=<span class="built_in">local</span> <span class="comment"># hash、日期、作者、信息，短格式的日期</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+ &quot;comment&quot;: &quot;Who&#x27;s your daddy?&quot;</span><br><span class="line">git commit -m &quot;junior commit&quot;</span><br></pre></td></tr></table></figure>
+
+<p><code>format</code> 的参数：</p>
+<ul>
+<li>%h：commit hash</li>
+<li>%ai: author date</li>
+<li>%an: author name</li>
+<li>%ci: commit date</li>
+<li>%cn: commit name</li>
+<li>%s: log message</li>
+</ul>
+<h2 id="忽略文件，-gitignore"><a href="#忽略文件，-gitignore" class="headerlink" title="忽略文件，.gitignore"></a>忽略文件，<code>.gitignore</code></h2><p>创建<code>.gitignore</code>文件，在其中加入要忽略的文件或文件夹。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br></pre></td></tr></table></figure>
+
+<h2 id="diff-工具"><a href="#diff-工具" class="headerlink" title="diff 工具"></a>diff 工具</h2><ul>
+<li>下载 diff 前端，这里是 <a target="_blank" rel="noopener" href="http://meldmerge.org/">Meld</a>（其它 diff 工具：<a target="_blank" rel="noopener" href="https://www.scootersoftware.com/">Beyond Compare</a>、<a target="_blank" rel="noopener" href="https://www.araxis.com/">Araxis Merge</a>、<a target="_blank" rel="noopener" href="http://www.sourcegear.com/diffmerge/downloads.php">DiffMerge</a>）</li>
+<li>添加配置，编辑<code>~/.gitconfig</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[diff]</span><br><span class="line">  tool = meld</span><br><span class="line">[difftool]</span><br><span class="line">  prompt = false</span><br><span class="line">[difftool &quot;meld&quot;]</span><br><span class="line">  trustExitCode = true</span><br><span class="line">  cmd = open -W -a Meld --args \&quot;$LOCAL\&quot; \&quot;$PWD/$REMOTE\&quot;</span><br><span class="line">[merge]</span><br><span class="line">  tool = meld</span><br><span class="line">[mergetool]</span><br><span class="line">  prompt = false</span><br><span class="line">[mergetool &quot;meld&quot;]</span><br><span class="line">  trustExitCode = true</span><br><span class="line">  cmd = open -W -a Meld --args --auto-merge \&quot;$PWD/$LOCAL\&quot; \&quot;$PWD/$BASE\&quot; \&quot;$PWD/$REMOTE\&quot; --output=\&quot;$PWD/$MERGED\&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="补丁"><a href="#补丁" class="headerlink" title="补丁"></a>补丁</h2><p>生成一个补丁文件，自己或者分享其他人使用，举例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD~ HEAD &gt; patch-abc <span class="comment"># 上次提交和倒数第二次提交的变更，生成补丁</span></span><br></pre></td></tr></table></figure>
+
+<p>这是生成的补丁文件，名称<code>patch-abc</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/.gitignore b/.gitignore</span><br><span class="line">new file mode 100644</span><br><span class="line">index 0000000..5ca0973</span><br><span class="line">--- /dev/null</span><br><span class="line">+++ b/.gitignore</span><br><span class="line">@@ -0,0 +1,2 @@</span><br><span class="line">+.DS_Store</span><br><span class="line">+</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout HEAD~ <span class="comment"># 把头移动到倒数第二次提交</span></span><br><span class="line">git apply --check patch-abc <span class="comment"># 检查能不能添加补丁</span></span><br><span class="line">git apply patch-abc <span class="comment"># 添加补丁，如果不能添加会提示失败</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>查看配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global --list <span class="comment"># 查看配置表</span></span><br><span class="line">git config --global --get user.name <span class="comment"># 查看用户名</span></span><br><span class="line">git config --global --get user.email <span class="comment"># 查看用户邮箱</span></span><br></pre></td></tr></table></figure>
+
+<p>配置文件的级别：<code>system</code>、<code>global</code>、<code>local</code>。</p>
+<p>配置默认编辑器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 常用编辑器：emacs / nano / vim / vi</span></span><br><span class="line">git config --global core.editor emacs</span><br></pre></td></tr></table></figure>
+
+<p>编辑配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config -e <span class="comment"># 等价 vim .git/config</span></span><br><span class="line"><span class="comment"># 可加 --global，--system</span></span><br></pre></td></tr></table></figure>
+
+<p>设置文件大小写敏感：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.ignorecase <span class="literal">false</span> <span class="comment"># git 默认忽略大小写</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h2><p>设置命令的别名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.haha  <span class="string">&quot;status -sb&quot;</span> <span class="comment"># 相当于 git status -sb</span></span><br><span class="line">git config --global alias.ci  <span class="string">&quot;commit&quot;</span> <span class="comment"># 相当于 git commit</span></span><br></pre></td></tr></table></figure>
+
+<p>删除命令的别名：删除<code>.git/config</code>里对应别名所在行，如果是全局的别名，删除<code>~/.gitconfig</code>里对应别名所在行，或者：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global --<span class="built_in">unset</span> alias.haha <span class="comment"># unset</span></span><br></pre></td></tr></table></figure>
+
+<p>自定义简短 log msg：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global --replace-all alias.lg <span class="string">&quot;log --pretty=format:&#x27;%h %ad %an %s&#x27; --date=local&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/magit/magit">magit</a>：Emacs git 客户端</li>
+<li><a target="_blank" rel="noopener" href="https://git-fork.com/">fork</a>：Mac git 客户端，简洁，方便，反应快</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/jesseduffield/lazygit">lazygit</a>：命令行 git 客户端</li>
+</ul>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>资料：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md">Git 飞行指南</a><br><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">Git Book</a><br><a target="_blank" rel="noopener" href="http://wkevin.github.io/GitChat/gitchat.html">Git 聊天入门</a><br><a target="_blank" rel="noopener" href="https://www.kancloud.cn/kancloud/progit/70158">Pro Git</a><br><a target="_blank" rel="noopener" href="https://github.com/xjh22222228/git-manual">Git常用命令参考手册</a></p>
+</blockquote>
+<p>其它链接：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/43868889">Setting up and using Meld as your git difftool and mergetool on a Mac</a></p>
+</blockquote>
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://www.poinotes.com/">
+        Signal
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
