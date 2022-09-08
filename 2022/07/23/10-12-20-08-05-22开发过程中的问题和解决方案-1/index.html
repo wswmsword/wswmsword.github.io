@@ -79,20 +79,33 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A9-uniapp-%E9%A1%B9%E7%9B%AE%E9%87%8C%E4%BD%BF%E7%94%A8%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B5%84%E6%BA%90%E5%92%8C%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%90%88%E4%B8%BA%E4%B8%80%E5%A5%97%E9%A1%B9%E7%9B%AE"><span class="toc-text">让 uniapp 项目里使用的远程资源和项目代码合为一套项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%8B%E7%82%B9"><span class="toc-text">埋点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%A6%BB%E5%9F%8B%E7%82%B9%E5%86%85%E5%AE%B9%E5%92%8C%E9%A1%B5%E9%9D%A2%E9%80%BB%E8%BE%91"><span class="toc-text">分离埋点内容和页面逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%B6%E8%BF%9F%E5%9F%8B%E7%82%B9%E8%AF%B7%E6%B1%82%E4%B8%8D%E9%98%BB%E7%A2%8D%E4%B8%9A%E5%8A%A1%E8%AF%B7%E6%B1%82"><span class="toc-text">延迟埋点请求不阻碍业务请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%87%8C%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AF%BC%E8%88%AA%E6%A0%8F"><span class="toc-text">小程序里的自定义导航栏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E5%8F%B0%E7%9A%84%E9%85%8D%E7%BD%AE%E8%B7%B3%E8%BD%AC"><span class="toc-text">后台的配置跳转</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E5%90%88-uniapp-%E9%A1%B9%E7%9B%AE%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%B5%84%E6%BA%90"><span class="toc-text">整合 uniapp 项目和远程资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%8B%E7%82%B9"><span class="toc-text">埋点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%A6%BB%E5%9F%8B%E7%82%B9%E5%86%85%E5%AE%B9%E5%92%8C%E9%A1%B5%E9%9D%A2%E9%80%BB%E8%BE%91"><span class="toc-text">分离埋点内容和页面逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%B6%E8%BF%9F%E5%9F%8B%E7%82%B9%E8%AF%B7%E6%B1%82%E4%B8%8D%E9%98%BB%E7%A2%8D%E4%B8%9A%E5%8A%A1%E8%AF%B7%E6%B1%82"><span class="toc-text">延迟埋点请求不阻碍业务请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%87%8C%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AF%BC%E8%88%AA%E6%A0%8F"><span class="toc-text">小程序里的自定义导航栏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E5%8F%B0%E7%9A%84%E9%85%8D%E7%BD%AE%E8%B7%B3%E8%BD%AC"><span class="toc-text">后台的配置跳转</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
     </div>
-    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="让-uniapp-项目里使用的远程资源和项目代码合为一套项目"><a href="#让-uniapp-项目里使用的远程资源和项目代码合为一套项目" class="headerlink" title="让 uniapp 项目里使用的远程资源和项目代码合为一套项目"></a>让 uniapp 项目里使用的远程资源和项目代码合为一套项目</h2><p>问题:</p>
-<p>（uniapp）开发小程序时，因为小程序的<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages.html">体积限制</a>，大型资源只能放在服务器。资源放到服务器后，代码里用硬编码的链接引用，但是服务器的资源和项目代码同属于一个项目，却不能在项目结构里体现，远程的资源不能用 git 管理，因此不能跟踪资源的变化。</p>
+    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="整合-uniapp-项目和远程资源"><a href="#整合-uniapp-项目和远程资源" class="headerlink" title="整合 uniapp 项目和远程资源"></a>整合 uniapp 项目和远程资源</h2><p>问题:</p>
+<p>（uniapp）开发小程序时，小程序有<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages.html">体积限制</a>，例如微信小程序的体积不能超过 20M，所以如果项目中需要使用许多静态资源，静态资源就不能放在小程序的产包中，必须放在存储静态资源的服务器中。可是，放在服务器中的资源不能体现在小程序项目结构里，代码只会硬编码引用这些资源的链接。如果队友误删了服务器中某个资源，代码里引用的该链接将失效，也不能复原；如果删除了代码里的引用链接，又忘了删除服务器资源，会让服务器资源冗余。所以需要一种方法来跟踪资源的变化，同步引用链接和服务器资源。</p>
 <p>方案:</p>
-<p>资源也放在项目结构中，使用 git 托管。在热重载的环境（此时不需要上传至小程序服务器，只是前端工程师本地运行、开发），项目内的链接指向本地。在打包的环境（此时上传小程序服务器，有体积限制，可能用于给测试工程师测试、项目上线），项目内的资源链接指向远程的服务器上的资源链接。</p>
-<p>热重载环境把资源复制到产出包内，链接指向产出包内资源所在路径（如<code>/static/img-large/index/demo.png</code>）；打包环境不复制资源到产出包，否则体积过大，链接指向服务器（如<code>https://demo.com/static/img-large/index/demo.png</code>）。</p>
+<p>资源放在项目结构中，并且同步至服务器。在代码里，设置一个路径前缀，用于引用资源。在项目的打包阶段，检测产包的环境，如果产包用于生产环境，替换路径前缀为资源在服务器上的路径；如果产包用于开发环境（热重载环境），替换路径前缀为资源在本地项目中的路径。</p>
 <p>解释：</p>
-<p>热重载环境指向本地链接是为了：使用项目中的资源；使用 git 托管资源。</p>
-<p>打包环境指向服务器资源链接是为了：同步本地项目的资源，强制要求上传资源，并且和本地资源结构一致。</p>
-<p>如果热重载和打包的环境都指向远程资源路径，那本地的资源只能起到 git 托管作用，在开发过程中想引用资源的时候会执行两个步骤：首先将资源拖到项目中，再将资源拖到服务器中。由于 git 托管原来是静默的行为，现在需要主动拖到项目中，整个过程不自然，且不能确定项目资源和服务器资源能够同步，可能遗漏。</p>
+<p>同步本地资源和远程资源是为了 git 管理，为了可以跟踪文件变化，为了可以在远程资源被误删的时候还能从本地资源复制到服务器，达到还原的效果。</p>
+<p>同步最简单的方法是，在需要添加资源的时候，把资源复制到项目里用于 git 管理，再把资源复制到服务器用于引用。当远程资源被误删的时候，就可以把本地 git 管理的所有资源完整复制到服务器。</p>
+<p>但是在实际操作的时候这样执行还会遇到一个问题，不能保证不会在把资源传输到服务器之后忘记把资源同时也复制到项目中。这是因为</p>
+<ul>
+<li>代码中实际引用的是远程资源，而本地项目资源只用于 git 管理，没有其它作用；</li>
+<li>同步是人工的，如果要同步到 10 个服务器，很可能在同步的时候遗漏；</li>
+<li>如果每次先上传远程资源，开发进度紧张，虽然遗漏了本地资源，但开发预览的时候还是正常，会造成更容易忽略复制本地资源的步骤。</li>
+</ul>
+<p>这里通过让本地资源被运用到开发过程里的一环来解决上面的问题。</p>
+<p>开发过程可以被分成“开发环境”和“生成环境”，生产环境定义为测试、验收和上线的环境，开发环境定义为正在本地开发时的环境。回到上面的问题，项目里需要引用资源，而在开发环境可以不依赖服务器上的资源，也就是可以不引用远程资源，因此可以在本地开发的时候，引用本地资源，在生产环境的时候，引用远程资源。</p>
+<p>这样在开发环境顺利开发完成后，从开发环境切换到生成环境，如果服务器上没有和本地项目里对应的资源，生产环境的产包就不能正确加载资源，所以这时一定会把本地项目里的资源同步复制到服务器中。这就解决了两次复制造成冗余的问题。</p>
+<p>这其中相比最简单的方法有两个变化：</p>
+<ul>
+<li>测试环境使用本地资源进行引用；</li>
+<li>强制首先复制到项目本地资源，最后统一同步复制到远程服务器。</li>
+</ul>
+<p>至于怎样在开发的时候引用本地，在生产的时候引用服务器，一定不是全局手动替换，例如把所有“<code>/assets/logo.png</code>”替换为“<code>https://demo.com/assets/logo.png</code>”。可以利用代码打包工具，例如在打包阶段，设置遇到了“<code>%img-path/</code>”就根据当前的环境进行替换，如果是开发环境，就把“<code>%img-path/assets/logo.png</code>”替换为“/assets/logo.png”，如果是生产环境，就把“<code>%img-path/assets/logo.png</code>”替换为“<code>https://demo.com/assets/logo.png</code>”。</p>
 <h2 id="埋点"><a href="#埋点" class="headerlink" title="埋点"></a>埋点</h2><h3 id="分离埋点内容和页面逻辑"><a href="#分离埋点内容和页面逻辑" class="headerlink" title="分离埋点内容和页面逻辑"></a>分离埋点内容和页面逻辑</h3><p>问题：</p>
 <p>埋点内容和页面逻辑无关，直接添加在逻辑代码的首行或者末行会让代码更混乱。</p>
 <p>方案：</p>
