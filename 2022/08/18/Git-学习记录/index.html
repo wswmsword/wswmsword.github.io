@@ -290,6 +290,9 @@
 
 <img src="git-log-graph.png" style="max-width:100%;" title="git log --graph"/>
 
+<p>用关键字过滤日志：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git log --all --grep=&quot;microsoft&quot; # 查询包含“microsoft”的提交记录</span><br><span class="line">git log --all --oneline --grep=&quot;microsoft&quot; # 查询包含“microsoft”的提交记录，查询结果只包含 8 位 hash 和提交信息</span><br></pre></td></tr></table></figure>
+
 <p>使用<code>reflog</code>查看操作历史（<code>reflog</code>是本地的，无法通过<code>git pull</code>得到）：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
 
