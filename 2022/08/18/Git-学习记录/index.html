@@ -144,6 +144,9 @@
 <p>提交：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提交，添加信息</span></span><br><span class="line">git commit -m <span class="string">&quot;junior commit&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交指定文件（这里的文件是 file-abc）</span></span><br><span class="line">git commit file-abc -m <span class="string">&quot;add single file&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交，打开默认编辑器编辑提交信息</span></span><br><span class="line">git commit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 暂存已跟踪的文件，同时提交（省略了 git add 命令，但是这里只能暂存已跟踪文件）</span></span><br><span class="line">git commit -am <span class="string">&quot;junior commit&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交，打开默认编辑器编辑提交信息，包含 diff 信息</span></span><br><span class="line">git commit -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交，允许空提交信息</span></span><br><span class="line">git commit --allow-empty-message</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改上一次提交</span></span><br><span class="line">git commit --amend -m <span class="string">&quot;better message was committed&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开默认编辑器，修改上次提交信息</span></span><br><span class="line">git commit --amend</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改上次提交的邮箱</span></span><br><span class="line">git commit --amend --author <span class="string">&quot;New Authorname &lt;authoremail@mydomain.com&gt;&quot;</span></span><br></pre></td></tr></table></figure>
 
+<p>检出某一条提交记录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;commit-hash&gt;</span><br></pre></td></tr></table></figure>
+
 <p><code>git add -A</code>、<code>git add .</code>、<code>git add -u</code>的区别（Git 2.x）：</p>
 <table>
 <thead>
@@ -286,15 +289,18 @@
 <p>也有文档解释中多出第五种状态—：“<a target="_blank" rel="noopener" href="http://wkevin.github.io/GitChat/gitchat.html#%E4%BF%AE%E6%94%B9%E5%AE%8C%E4%BA%86%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF%E7%9B%B4%E6%8E%A5%E6%8F%90%E4%BA%A4%E8%80%8C%E6%98%AF-git-add">已提交（committed）</a>”，已提交相当于<code>Unmodified</code>未修改状态。</p>
 <h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p>简洁日志，包括短 id 和提交信息：“<code>git log --oneline</code>”。</p>
 <p>图形形式的提交记录，包括短 id，提交信息，相对时间，作者名称：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --pretty=format:&#x27;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#x27; --abbrev-commit</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --graph --pretty=format:<span class="string">&#x27;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#x27;</span> --abbrev-commit <span class="comment"># 这一段命令很长，为了方便，下面介绍了用别名代替这条命令的方法</span></span><br></pre></td></tr></table></figure>
 
 <img src="git-log-graph.png" style="max-width:100%;" title="git log --graph"/>
 
 <p>用关键字过滤日志：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git log --all --grep=&quot;microsoft&quot; # 查询包含“microsoft”的提交记录</span><br><span class="line">git log --all --oneline --grep=&quot;microsoft&quot; # 查询包含“microsoft”的提交记录，查询结果只包含 8 位 hash 和提交信息</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --all --grep=<span class="string">&quot;microsoft&quot;</span> <span class="comment"># 查询包含“microsoft”的提交记录</span></span><br><span class="line">git <span class="built_in">log</span> --all --oneline --grep=<span class="string">&quot;microsoft&quot;</span> <span class="comment"># 查询包含“microsoft”的提交记录，查询结果只包含 8 位 hash 和提交信息</span></span><br></pre></td></tr></table></figure>
 
 <p>使用<code>reflog</code>查看操作历史（<code>reflog</code>是本地的，无法通过<code>git pull</code>得到）：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+
+<p>查看某一个文件的提交记录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log -p &lt;file&gt; # -p 查看具体的 diff</span><br></pre></td></tr></table></figure>
 
 <p><code>git log</code>其它配置的命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> -p [&lt;file-name&gt; | &lt;commit&gt;]<span class="comment"># 显示差异</span></span><br><span class="line">git <span class="built_in">log</span> -g <span class="comment"># 查看所有提交记录，包括 amend 的</span></span><br><span class="line">git <span class="built_in">log</span> --<span class="built_in">stat</span> <span class="comment"># 显示文件更改列表</span></span><br><span class="line">git <span class="built_in">log</span> --pretty=oneline <span class="comment"># 一行显示提交信息</span></span><br><span class="line">git <span class="built_in">log</span> --pretty=short</span><br><span class="line">git <span class="built_in">log</span> --pretty=medium</span><br><span class="line">git <span class="built_in">log</span> --pretty=full</span><br><span class="line">git <span class="built_in">log</span> --pretty=fuller</span><br><span class="line">git <span class="built_in">log</span> --pretty=reference</span><br><span class="line">git <span class="built_in">log</span> --pretty=email</span><br><span class="line">git <span class="built_in">log</span> --pretty=raw</span><br><span class="line">git reflog <span class="comment"># 更多的记录</span></span><br><span class="line">git <span class="built_in">log</span> --oneline <span class="comment"># 一行显示，更紧凑，哈希更短</span></span><br><span class="line">git <span class="built_in">log</span> --graph</span><br><span class="line">git <span class="built_in">log</span> --graph --oneline <span class="comment"># 紧凑，短 commit-id</span></span><br><span class="line">git <span class="built_in">log</span> --pretty=<span class="string">&quot;%C(yellow) Hash: %h %C(blue)Date: %ad %C(red) Message: %s &quot;</span> --<span class="built_in">date</span>=human</span><br><span class="line">git <span class="built_in">log</span> --pretty=<span class="string">&quot;%C(yellow) Hash: %h %C(blue)Date: %ad %C(red) Message: %s &quot;</span> --<span class="built_in">date</span>=short</span><br><span class="line">git <span class="built_in">log</span> --relative-date <span class="comment"># 相对时间</span></span><br><span class="line">git shortlog <span class="comment"># 按作者，只展示注释日志</span></span><br><span class="line">git <span class="built_in">log</span> --author=wswmsword <span class="comment"># 只看某人（wswmsword）的提交</span></span><br><span class="line">git <span class="built_in">log</span> --pretty=format:<span class="string">&#x27;%h %ad %an %s&#x27;</span> --<span class="built_in">date</span>=<span class="built_in">local</span> <span class="comment"># hash、日期、作者、信息，短格式的日期</span></span><br></pre></td></tr></table></figure>
@@ -334,6 +340,12 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[diff]</span><br><span class="line">  tool = meld</span><br><span class="line">[difftool]</span><br><span class="line">  prompt = false</span><br><span class="line">[difftool &quot;meld&quot;]</span><br><span class="line">  trustExitCode = true</span><br><span class="line">  cmd = open -W -a Meld --args \&quot;$LOCAL\&quot; \&quot;$PWD/$REMOTE\&quot;</span><br><span class="line">[merge]</span><br><span class="line">  tool = meld</span><br><span class="line">[mergetool]</span><br><span class="line">  prompt = false</span><br><span class="line">[mergetool &quot;meld&quot;]</span><br><span class="line">  trustExitCode = true</span><br><span class="line">  cmd = open -W -a Meld --args --auto-merge \&quot;$PWD/$LOCAL\&quot; \&quot;$PWD/$BASE\&quot; \&quot;$PWD/$REMOTE\&quot; --output=\&quot;$PWD/$MERGED\&quot;</span><br></pre></td></tr></table></figure>
 
 <p>这样设置后，执行<code>git difftool</code>打开 diff 工具进行文件比较。</p>
+<p>对比暂存区差异：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --staged</span><br></pre></td></tr></table></figure>
+
+<p>对比工作区差异：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></table></figure>
+
 <h2 id="补丁"><a href="#补丁" class="headerlink" title="补丁"></a>补丁</h2><p>生成一个补丁文件，自己或者分享其他人使用，举例：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD~ HEAD &gt; patch-abc <span class="comment"># 上次提交和倒数第二次提交的变更，生成补丁</span></span><br></pre></td></tr></table></figure>
 
@@ -359,10 +371,13 @@
 <li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html">git cherry-pick 教程</a>。</li>
 </ul>
 <h2 id="回滚、撤销、重置"><a href="#回滚、撤销、重置" class="headerlink" title="回滚、撤销、重置"></a>回滚、撤销、重置</h2><p><code>git reset</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD@&#123;1&#125;</span><br><span class="line">git reset --soft &lt;commit-id&gt;</span><br><span class="line">git reset <span class="comment"># 所有暂存区的文件回到工作区</span></span><br><span class="line">git reset --keep &lt;commit-id&gt; <span class="comment"># ?</span></span><br><span class="line">git reset --merge &lt;commit-id&gt; <span class="comment"># ?</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD@&#123;1&#125; <span class="comment"># HEAD@&#123;1&#125; 指的是执行`git reflog`后看到的记录 id，HEAD@&#123;1&#125; 是倒数第二条，HEAD@&#123;0&#125; 是倒数第一条，以此类推</span></span><br><span class="line">git reset --soft &lt;commit-hash&gt; <span class="comment"># 回退至 commit-hash 处，commit-hash 和当前的差异被放在暂存区</span></span><br><span class="line">git reset <span class="comment"># 所有暂存区的文件回到工作区</span></span><br><span class="line">git reset --keep &lt;commit-hash&gt; <span class="comment"># ?</span></span><br><span class="line">git reset --merge &lt;commit-hash&gt; <span class="comment"># ?</span></span><br></pre></td></tr></table></figure>
 
 <p><code>git revert</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git revert &lt;commit-id&gt; <span class="comment"># 反转并提交</span></span><br><span class="line">git revert -n &lt;commit-id&gt; <span class="comment"># 反转，不提交，需要继续执行 git revert --continue，或者终止反转，git revert --abort</span></span><br><span class="line">git revert -n &lt;commit-id-start&gt;..&lt;commit-id-end&gt; <span class="comment"># 前开后闭，反转几个（一段）提交</span></span><br><span class="line">git revert HEAD@&#123;1&#125; <span class="comment"># 反转最近提交</span></span><br></pre></td></tr></table></figure>
+
+<p>撤销某个文件至指定 commit 时的状态：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;commit-hash&gt; -- &lt;path/to/file&gt;</span><br></pre></td></tr></table></figure>
 
 <p>关于<code>git reset</code>中的<code>soft</code>、<code>mixed</code>和<code>hard</code>：</p>
 <ul>
@@ -371,6 +386,7 @@
 <li><code>--hard</code>：清空工作区和暂存区的改动，直接将 HEAD 指向<code>reset</code>的指向，使用时要注意。</li>
 </ul>
 <p>关于工作区、暂存区、History：工作区修改，<code>add</code>至暂存区，<code>commit</code>至 History。</p>
+<p>一些名词：</p>
 <ul>
 <li>工作区：Working directory，Working Copy；</li>
 <li>暂存区：Index，索引，Staging area，Stage/Index；</li>
@@ -403,7 +419,23 @@
 <p>自定义简短 log msg：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global --replace-all alias.lg <span class="string">&quot;log --pretty=format:&#x27;%h %ad %an %s&#x27; --date=local&quot;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="子模块"><a href="#子模块" class="headerlink" title="子模块"></a>子模块</h2><h2 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h2><ul>
+<h2 id="子模块"><a href="#子模块" class="headerlink" title="子模块"></a>子模块</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git submodule add https://github.com/wswmsword/git-submodule lyrics <span class="comment"># 添加一个子模块，路径是 ./lyrics</span></span><br><span class="line">git pull --recurse-submodules <span class="comment"># 递归子模块拉取</span></span><br><span class="line">git config submodule.recurse <span class="literal">true</span></span><br><span class="line">git submodule update --init <span class="comment"># git pull 后拉取子模块内容</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git submodule add ./submarines # 本地仓库添加子模块</span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br><span class="line">git submodule update --remote # 更新子模块至远程最新的提交记录</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule foreach &quot;&lt;git command&gt;&quot; # 对每个子模块执行 git 命令</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone --recursive https://github.com/wswmsword/git-learning # 克隆项目，递归克隆子项目</span><br></pre></td></tr></table></figure>
+
+<p>删除子模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># step 1</span></span><br><span class="line">git <span class="built_in">rm</span> submarines <span class="comment"># 删除文件夹 submarines（submarines 是子模块仓库）</span></span><br><span class="line"><span class="comment"># step 2</span></span><br><span class="line"><span class="built_in">rm</span> -rf .git/modules/submarines</span><br><span class="line"><span class="comment"># step 3</span></span><br><span class="line">vim .git/config <span class="comment"># 删除 config 文件里的 submodule 配置，形如下面这一段</span></span><br><span class="line"><span class="comment"># [submodule &quot;submarines&quot;]</span></span><br><span class="line"><span class="comment">#     active = true</span></span><br><span class="line"><span class="comment">#     url = https://github.com/xxxxxxx.git</span></span><br></pre></td></tr></table></figure>
+
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ZYq3NJnO08U">How to git submodule tutorial</a>—— YouTube 视频；</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37015703/article/details/123978159">Git子模块</a>—— CSDN 文章，提到了子模块更新父模块为更新的情况。</li>
+</ul>
+<h2 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/magit/magit">magit</a>：Emacs git 客户端</li>
 <li><a target="_blank" rel="noopener" href="https://git-fork.com/">fork</a>：Mac git 客户端，简洁，方便，反应快</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/jesseduffield/lazygit">lazygit</a>：命令行 git 客户端</li>
@@ -430,12 +462,15 @@
 <p>切换上一次的分支：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout - <span class="comment"># 只需添加一个短杠，其它命令兴许也能用</span></span><br></pre></td></tr></table></figure>
 
+<p>查看文件的 SHA1 值：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git ls-files --stage <span class="comment"># 查看所有文件的 SHA1 值</span></span><br><span class="line">git hash-data &lt;file-name&gt; <span class="comment"># 查看单文件的 SHA1 值</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>资料：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md">Git 飞行指南</a></li>
 <li><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">Git Book</a></li>
 <li><a target="_blank" rel="noopener" href="http://wkevin.github.io/GitChat/gitchat.html">Git 聊天入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.kancloud.cn/kancloud/progit/70158">Pro Git</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.progit.cn/">Pro Git</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/xjh22222228/git-manual">Git常用命令参考手册</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600">廖雪峰 git 教程</a></li>
 <li><a target="_blank" rel="noopener" href="https://cs-cjl.com/2014/05/06/learn_git_with_me_12">跟我一起学 Git</a></li>
