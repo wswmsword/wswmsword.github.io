@@ -75,7 +75,11 @@
     <div class="picture-container">
       
     </div>
-    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2><p>練習問題：构建和打包的原因；module, chunk, bundle 的含义；loader 和 plugin 的区别；webpack 实现懒加载的方法；常见性能优化；babel-runtime, babel-polyfill 的区别。</p>
+    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2><p>修改服务器的根目录展示路径：修改 publickPath，例如这里我要访问<code>www.demo.com/resume/xxx</code>，项目在路径<code>resume</code>文件夹里，就这样配置，</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">output<span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">   filename<span class="punctuation">:</span> &#x27;<span class="punctuation">[</span>name<span class="punctuation">]</span>.<span class="punctuation">[</span>contentHash<span class="punctuation">:</span><span class="number">8</span><span class="punctuation">]</span>.js&#x27;<span class="punctuation">,</span></span><br><span class="line">   path<span class="punctuation">:</span> distPath<span class="punctuation">,</span></span><br><span class="line">   publicPath<span class="punctuation">:</span> &#x27;/resume&#x27;</span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>練習問題：构建和打包的原因；module, chunk, bundle 的含义；loader 和 plugin 的区别；webpack 实现懒加载的方法；常见性能优化；babel-runtime, babel-polyfill 的区别。</p>
 <p>webpack-merge：组合多个 webpack 配置文件，例如组合公共配置文件 webpack.common.js，<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/webpack-merge%E3%80%82">https://www.npmjs.com/package/webpack-merge。</a></p>
 <p>DefinePlugin：<a target="_blank" rel="noopener" href="https://www.webpackjs.com/plugins/define-plugin/%E3%80%82">https://www.webpackjs.com/plugins/define-plugin/。</a></p>
 <p>webpack-dev-server：开发环境中配置，常用属性有 port 服务端口、progress 打包进度条开关、contentBase 根目录、open 自动打开浏览器开关、compress 启动 gzip 压缩开关、proxy 设置代理（跨域请求）。</p>
