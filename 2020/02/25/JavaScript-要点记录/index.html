@@ -136,10 +136,12 @@
 <h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="模拟继承"><a href="#模拟继承" class="headerlink" title="模拟继承"></a>模拟继承</h3><p><em>这样继承不会出现子类的构造器是父类的错误：</em></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">dance</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Ninja</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line"><span class="title class_">Ninja</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(<span class="title class_">Ninja</span>.<span class="property"><span class="keyword">prototype</span></span>, <span class="string">&quot;constructor&quot;</span>, &#123;</span><br><span class="line">  <span class="attr">enumberable</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">value</span>: <span class="title class_">Ninja</span>,</span><br><span class="line">  <span class="attr">writable</span>: <span class="literal">true</span> <span class="comment">// 定义一个不可枚举的 constructor 属性 Ninja</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ninja = <span class="keyword">new</span> <span class="title class_">Ninja</span>();</span><br><span class="line"><span class="comment">// ninja.constructor === Ninja // true。</span></span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>扎实前端系列：JavaScript实现继承 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/af39457e7722">https://www.jianshu.com/p/af39457e7722</a></p>
-<p>Javascript实现继承的6种方式 <a target="_blank" rel="noopener" href="https://blog.csdn.net/Tokki_/article/details/91357384">https://blog.csdn.net/Tokki_/article/details/91357384</a></p>
-</blockquote>
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/af39457e7722">扎实前端系列：JavaScript实现继承</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Tokki_/article/details/91357384">Javascript实现继承的6种方式</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create#%E7%94%A8_object.create_%E5%AE%9E%E7%8E%B0%E7%B1%BB%E5%BC%8F%E7%BB%A7%E6%89%BF">用 Object.create() 实现类式继承</a></li>
+</ul>
 <p>instanceof 的警告：构造函数原型的改变会导致 instanceof 返回否。</p>
 <p><code>Object.create(null)</code>和<code>&#123;&#125;</code>：{} 创建的对象继承了 Object 自身，OCN 创建的对象则是干净的对象，可以使用<code>Object.create(Object.prototype)</code>达到和<code>&#123;&#125;</code>相同的效果。</p>
 <p>关联博文：<a target="_blank" rel="noopener" href="https://juejin.im/post/5acd8ced6fb9a028d444ee4e">详解Object.create(null)</a>；<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create">Object.create()</a>。</p>
@@ -724,7 +726,11 @@
 <p><a target="_blank" rel="noopener" href="https://hijiangtao.github.io/posts">Joe’s Blog</a>：有翻译文章，总结常见问题，回顾基础知识。</p>
 <p><a target="_blank" rel="noopener" href="https://web.dev/learn/">web.dev</a>：谷歌的 Web 学习文章，系统有深度。</p>
 <p><a target="_blank" rel="noopener" href="https://musicfe.dev/">云音乐大前端专栏</a></p>
-<h2 id="ほしのかけら"><a href="#ほしのかけら" class="headerlink" title="ほしのかけら"></a>ほしのかけら</h2><p><a target="_blank" rel="noopener" href="https://hijiangtao.github.io/2017/06/13/Cross-Origin-Resource-Sharing-Solutions/">前端跨域请求解决方案汇总</a>。</p>
+<h2 id="ほしのかけら"><a href="#ほしのかけら" class="headerlink" title="ほしのかけら"></a>ほしのかけら</h2><p>为什么不能用<code>Object.prototype.toString.call(null)</code>代替<code>[object Null]</code>：因为早期的浏览器环境通过 toString 得到的结果是<code>[object Object]</code>，所以当需要检查 null 的类型时最好直接用<code>[object Null]</code>，查看<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof#real-world_usage">链接</a>。</p>
+<blockquote>
+<p>Early JS environments return ‘[object Object]’ for null, so it’s best to directly check for it.</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://hijiangtao.github.io/2017/06/13/Cross-Origin-Resource-Sharing-Solutions/">前端跨域请求解决方案汇总</a>。</p>
 <p><a target="_blank" rel="noopener" href="https://hijiangtao.github.io/2020/02/15/Safely-Download-Image-Resource-With-JavaScript/">组合 a 标签与 canvas 实现图片资源的安全下载</a>。</p>
 <p>单页应用使用 hash 作为路由的原因：对于浏览器，域名、路径、后缀、参数的不同，浏览器会视为全新 URL，而 Hash 不同，对于浏览器无差别。</p>
 <p>使用 console like a pro: <a target="_blank" rel="noopener" href="https://medium.com/javascript-in-plain-english/mastering-js-console-log-like-a-pro-1c634e6393f9%EF%BC%9Bhttps://denic.hashnode.dev/use-consolelog-like-a-pro%E3%80%82">https://medium.com/javascript-in-plain-english/mastering-js-console-log-like-a-pro-1c634e6393f9；https://denic.hashnode.dev/use-consolelog-like-a-pro。</a></p>

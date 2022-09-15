@@ -79,13 +79,32 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#internal"><span class="toc-text">.internal</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#isIndex"><span class="toc-text">isIndex</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getTag"><span class="toc-text">? getTag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isObjectLike"><span class="toc-text">isObjectLike</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isLength"><span class="toc-text">isLength</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isArrayLike"><span class="toc-text">isArrayLike</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isObjectLike-1"><span class="toc-text">isObjectLike</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#public"><span class="toc-text">public</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#isArguments"><span class="toc-text">isArguments</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#internal"><span class="toc-text">.internal</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hash"><span class="toc-text">Hash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MapCache"><span class="toc-text">MapCache</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SetCache"><span class="toc-text">SetCache</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isIndex"><span class="toc-text">isIndex</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getTag"><span class="toc-text">getTag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isObjectLike"><span class="toc-text">isObjectLike</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isLength"><span class="toc-text">isLength</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isArrayLike"><span class="toc-text">isArrayLike</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isObjectLike-1"><span class="toc-text">isObjectLike</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#public"><span class="toc-text">public</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#isArguments"><span class="toc-text">isArguments</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TODO"><span class="toc-text">TODO</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
     </div>
     <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>Lodash 是一个工具库。它有对数据更严格的处理，阅读它利于加深我对 javascript 的理解，作为大型开源项目，编码也很规范，阅读它会提高我的编码水平。Lodash 最新（08/22/22）主分支上的版本中，每个函数按模块单独分开，每个模块不长，十分利于阅读。</p>
-<h2 id="internal"><a href="#internal" class="headerlink" title=".internal"></a>.internal</h2><h3 id="isIndex"><a href="#isIndex" class="headerlink" title="isIndex"></a>isIndex</h3><p>Javascript 的数字存储使用了 IEEE 754 中规定的双精度浮点数数据类型，这一数据类型能够安全存储 -(2^53 - 1) 到 2^53 - 1 之间的数值（包含边界值）。超过范围的计算会发生错误。</p>
+<h2 id="internal"><a href="#internal" class="headerlink" title=".internal"></a>.internal</h2><h3 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h3><p>Hash 维护一个数组 __data__，维护一个长度 size，包含 5 个方法，</p>
+<ul>
+<li>用于清空的 clear，</li>
+<li>用于删除的 delete，</li>
+<li>用于获取的 get，</li>
+<li>用于判断是否存在的 has，</li>
+<li>用于添加数据的 set，</li>
+</ul>
+<p>Lodash 会用常量<code>__lodash_hash_undefined__</code>来表示设置某个键的值为<code>undefined</code>。</p>
+<h3 id="MapCache"><a href="#MapCache" class="headerlink" title="MapCache"></a>MapCache</h3><p>MapCache 是一个包装类型，包含了三类数据——<code>string</code>、<code>hash</code>和<code>map</code>，</p>
+<ul>
+<li>如果键是 string，用 string 类型存储，</li>
+<li>如果键是 number、symbol、boolean、null，用 hash 类型存储，</li>
+<li>其他情况用 map 存储，</li>
+</ul>
+<p>Hash 类型就是<code>.internal/Hash</code>。</p>
+<h3 id="SetCache"><a href="#SetCache" class="headerlink" title="SetCache"></a>SetCache</h3><p>Set 是一种数据结构类型，这种类型存储唯一的值。</p>
+<p>在 Lodash 的实现中，SetCash 是 MapCache 的特殊情况。SetCache 有两个方法，<code>add</code>和<code>has</code>，要添加一个 set 值时，把这个值当作 MapCache 的键，并把这个键的值设置为<code>__lodash_hash_undefined__</code>。</p>
+<p>相关链接：<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Set_(abstract_data_type)">Set (abstract data type)</a></p>
+<h3 id="isIndex"><a href="#isIndex" class="headerlink" title="isIndex"></a>isIndex</h3><p>Javascript 的数字存储使用了 IEEE 754 中规定的双精度浮点数数据类型，这一数据类型能够安全存储 -(2^53 - 1) 到 2^53 - 1 之间的数值（包含边界值）。超过范围的计算会发生错误。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最大安全整数</span></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">MAX_SAFE_INTEGER</span> = <span class="number">9007199254740991</span></span><br></pre></td></tr></table></figure>
 
 <hr>
@@ -98,9 +117,10 @@
 <hr>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 浮点数的 value 不能通过 value % 1 == 0</span></span><br><span class="line">(value &gt; -<span class="number">1</span> &amp;&amp; value % <span class="number">1</span> == <span class="number">0</span> &amp;&amp; value &lt; length)</span><br></pre></td></tr></table></figure>
 
-<h3 id="getTag"><a href="#getTag" class="headerlink" title="? getTag"></a>? getTag</h3><p><code>toString(null)</code> 可以得到<code>[object Null]</code>，为什么单独判断情况<code>value == null</code>？</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> toString = <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getTag</span>(<span class="params">value</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (value == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> value === <span class="literal">undefined</span> ? <span class="string">&#x27;[object Undefined]&#x27;</span> : <span class="string">&#x27;[object Null]&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> toString.<span class="title function_">call</span>(value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="getTag"><a href="#getTag" class="headerlink" title="getTag"></a>getTag</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> toString = <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getTag</span>(<span class="params">value</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (value == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> value === <span class="literal">undefined</span> ? <span class="string">&#x27;[object Undefined]&#x27;</span> : <span class="string">&#x27;[object Null]&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> toString.<span class="title function_">call</span>(value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>这里的 <code>toString(null)</code>同样可以得到<code>[object Null]</code>，但是在第 4 行单独对 null 的情况返回了硬编码的字符串<code>[object Null]</code>，这是因为在旧版本的 js 环境，<code>toString(null)</code>的结果是[object Object]。</p>
+<p>相关链接：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof#real-world_usage">typeof-Real-world usage</a>——在 mdn 的 typeof 文档里，有一条注释说明了老的 js 环境的<code>toString(null)</code>的结果，“Early JS environments return ‘[object Object]’ for null, so it’s best to directly check for it.”。</p>
 <h3 id="isObjectLike"><a href="#isObjectLike" class="headerlink" title="isObjectLike"></a>isObjectLike</h3><p><code>typeof</code>是<code>object</code>而且不是 null 的时候，定义这个变量是类对象的。</p>
 <p>关于这个函数中判断的顺序：假设返回值为 false，<code>value !== null</code>放在前面，value 需要全等 null 的时候才能满足，这样省去了后面的<code>typeof value === &#39;object&#39;</code>判读。但可以猜测实际中，大部分情况的入参不会是 null，所以<code>value !== null</code>的判断放在了后面。</p>
 <p>结论：多个条件<code>&amp;&amp;</code>的时候，容易失败的放在前面。</p>
@@ -115,7 +135,7 @@
 
 <h3 id="isObjectLike-1"><a href="#isObjectLike-1" class="headerlink" title="isObjectLike"></a>isObjectLike</h3><p>类对象，非 null 并且<code>typeof value === &#39;object&#39;</code>。</p>
 <h2 id="public"><a href="#public" class="headerlink" title="public"></a>public</h2><h3 id="isArguments"><a href="#isArguments" class="headerlink" title="isArguments"></a>isArguments</h3><p>入参是<code>arguments</code>类型时，是可以判断的，通过 typeof value === “[object Arguments]”。</p>
-
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2>
 
   </article>
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
