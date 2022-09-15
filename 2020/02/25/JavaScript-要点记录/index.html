@@ -726,7 +726,8 @@
 <p><a target="_blank" rel="noopener" href="https://hijiangtao.github.io/posts">Joe’s Blog</a>：有翻译文章，总结常见问题，回顾基础知识。</p>
 <p><a target="_blank" rel="noopener" href="https://web.dev/learn/">web.dev</a>：谷歌的 Web 学习文章，系统有深度。</p>
 <p><a target="_blank" rel="noopener" href="https://musicfe.dev/">云音乐大前端专栏</a></p>
-<h2 id="ほしのかけら"><a href="#ほしのかけら" class="headerlink" title="ほしのかけら"></a>ほしのかけら</h2><p>为什么不能用<code>Object.prototype.toString.call(null)</code>代替<code>[object Null]</code>：因为早期的浏览器环境通过 toString 得到的结果是<code>[object Object]</code>，所以当需要检查 null 的类型时最好直接用<code>[object Null]</code>，查看<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof#real-world_usage">链接</a>。</p>
+<h2 id="ほしのかけら"><a href="#ほしのかけら" class="headerlink" title="ほしのかけら"></a>ほしのかけら</h2><p><a target="_blank" rel="noopener" href="https://2ality.com/2013/10/typeof-null.html">The history of “typeof null”</a></p>
+<p>为什么不能用<code>Object.prototype.toString.call(null)</code>代替<code>[object Null]</code>：因为早期的浏览器环境通过 toString 得到的结果是<code>[object Object]</code>，所以当需要检查 null 的类型时最好直接用<code>[object Null]</code>，查看<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof#real-world_usage">链接</a>。</p>
 <blockquote>
 <p>Early JS environments return ‘[object Object]’ for null, so it’s best to directly check for it.</p>
 </blockquote>
