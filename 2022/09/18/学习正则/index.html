@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>学习正则</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="学习正则"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        学习正则
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2022-09-18T14:31:26.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2022-09-18
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/笔记本/">笔记本</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#replace"><span class="toc-text">replace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%8D%E8%BE%B9%E7%95%8C%E5%92%8C%E9%94%9A%E7%82%B9"><span class="toc-text">词边界和锚点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RegExp-lastIndex"><span class="toc-text">RegExp.lastIndex</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-text">修饰符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E9%87%8D"><span class="toc-text">加重</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-text">练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>正则的相关方法：</p>
+<ul>
+<li>字符串—— search、match、replace、split；</li>
+<li>正则—— exec、test。</li>
+</ul>
+<h2 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h2><p>第二个参数是字符串时，可以利用一些模版变量来替换。</p>
+<table>
+<thead>
+<tr>
+<th align="left">变量名</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$$</td>
+<td align="left">插入一个 “$”。</td>
+</tr>
+<tr>
+<td align="left">$&amp;</td>
+<td align="left">插入匹配的子串。</td>
+</tr>
+<tr>
+<td align="left">$`</td>
+<td align="left">插入当前匹配的子串左边的内容。</td>
+</tr>
+<tr>
+<td align="left">$’</td>
+<td align="left">插入当前匹配的子串右边的内容。</td>
+</tr>
+<tr>
+<td align="left">$n</td>
+<td align="left">插入第 n 个分组。</td>
+</tr>
+<tr>
+<td align="left">$&lt;Name&gt;</td>
+<td align="left">插入有名称的分组。</td>
+</tr>
+</tbody></table>
+<p>交换分组的单词，这里用到了修饰符<code>g</code>，代表会交换所有的匹配：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> re = <span class="regexp">/(\w+)\s(\w+)/g</span>;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;John Smith David Martinez&quot;</span>;</span><br><span class="line">str.<span class="title function_">replace</span>(re, <span class="string">&quot;$2, $1&quot;</span>); <span class="comment">// 交换匹配到的 John Smith，再交换匹配到的 David Martinez</span></span><br><span class="line"><span class="comment">// &#x27;Smith, John Martinez, David&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace">MDN-String.prototype.replace()</a></li>
+</ul>
+<h2 id="词边界和锚点"><a href="#词边界和锚点" class="headerlink" title="词边界和锚点"></a>词边界和锚点</h2><p>关于词边界<code>\b</code>：词边界指的是<code>\w</code>和<code>\W</code>之间的位置，<code>\w</code>和<code>$</code>之间的位置，<code>\w</code>和<code>^</code>之间的位置，也就是说<code>\b</code>找的是字母的旁边不是字母的位置。</p>
+<p>下面是词边界的例子，可以观察词边界被替换成“🤔”的位置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;So what do you wanna do, what&#x27;s your point-of-view.&quot;</span>.<span class="title function_">replace</span>(<span class="regexp">/\b/g</span>, <span class="function">() =&gt;</span> <span class="string">&quot;🤔&quot;</span>);</span><br><span class="line"><span class="comment">// &quot;🤔So🤔 🤔what🤔 🤔do🤔 🤔you🤔 🤔wanna🤔 🤔do🤔, 🤔what🤔&#x27;🤔s🤔 🤔your🤔 🤔point🤔-🤔of🤔-🤔view🤔.&quot;</span></span><br><span class="line"><span class="string">&quot;Oh，你好Lucy，我是David。&quot;</span>.<span class="title function_">replace</span>(<span class="regexp">/\b/g</span>, <span class="function">() =&gt;</span> <span class="string">&quot;🤔&quot;</span>);</span><br><span class="line"><span class="comment">// &#x27;🤔Oh🤔，你好🤔Lucy🤔，我是🤔David🤔。&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="RegExp-lastIndex"><a href="#RegExp-lastIndex" class="headerlink" title="RegExp.lastIndex"></a>RegExp.lastIndex</h2><blockquote>
+<p>lastIndex 是正则表达式的一个可读可写的整型属性，用来指定下一次匹配的起始索引。 —— MDN</p>
+</blockquote>
+<p><code>regexp.test</code>或<code>regexp.exec</code>每执行一次，都会重新赋值 lastIndex，这会导致每次执行<code>test</code>或<code>exec</code>进行校验的时候，得到的结果不一致。另外还有一个条件是，正则表达式需要包含<code>y</code>或者<code>g</code>修饰符。</p>
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.lcs.show/blog/common/an-overlooked-regular-knowledge">一个比较容易被忽略的正则问题</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/lastIndex">MDN-RegExp.lastIndex</a>—— MDN 的 RegExp.lastIndex 文档。</li>
+</ul>
+<h2 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h2><p>下面是粘性修饰符<code>y</code>的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;So, get away.&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\w+/y</span>;</span><br><span class="line">reg.<span class="property">lastIndex</span>; <span class="comment">// 0</span></span><br><span class="line">reg.<span class="title function_">exec</span>(str); <span class="comment">// [&#x27;So&#x27;, index: 0, input: &#x27;So, get away.&#x27;, groups: undefined]</span></span><br><span class="line">reg.<span class="property">lastIndex</span>; <span class="comment">// 2</span></span><br><span class="line">reg.<span class="title function_">exec</span>(str); <span class="comment">// null</span></span><br><span class="line">reg.<span class="property">lastIndex</span>; <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<p>带<code>y</code>的正则，在形式上很像每执行一次就把已经匹配的部分截去，并且给正则添加锚点<code>^</code>。体现出的效果就像是被 lastIndex 粘住了。</p>
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zh.javascript.info/regexp-sticky">粘性修饰符 “y”，在位置处搜索</a>。</li>
+</ul>
+<h2 id="加重"><a href="#加重" class="headerlink" title="加重"></a>加重</h2><p>url 参数转对象</p>
+<p>m 多行匹配</p>
+<p>非贪婪匹配，<code>?</code>，例如<code>/.+?\s/.exec(&quot;Your time is limited.&quot;)</code>匹配“Your ”</p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>24 小时制：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg1 = <span class="regexp">/[0-1]\d|2[0-3]/</span>; <span class="comment">// 方法 1</span></span><br><span class="line">reg1.<span class="title function_">test</span>(<span class="string">&#x27;9&#x27;</span>); <span class="comment">// false</span></span><br><span class="line"><span class="keyword">var</span> reg2 = <span class="regexp">/[0-1][0-9]|2[0-3]/</span>; <span class="comment">// 方法 2</span></span><br></pre></td></tr></table></figure>
+
+<p>千分位：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/(?!^)(?=(\d&#123;3&#125;)+$)/g</span>; <span class="comment">// (?!) 表示否定前瞻断言，(?=)表示前瞻断言</span></span><br><span class="line"><span class="string">&quot;123456789&quot;</span>.<span class="title function_">replace</span>(reg, <span class="string">&#x27;,&#x27;</span>)</span><br><span class="line"><span class="comment">// 123,456,789</span></span><br></pre></td></tr></table></figure>
+
+<p>URL 转对象（对象转 URL，压缩 URL）</p>
+<ul>
+<li>检查正则正确性；</li>
+<li>默认对象；</li>
+<li>重复参数的数组对象。</li>
+</ul>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://ihateregex.io/">iHateRegex</a>——一个常用正则表达式网站（“Now you have two problems.”）；</li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903487155732494">JS正则表达式完整教程（略长）</a>——正则迷你书；</li>
+<li><a target="_blank" rel="noopener" href="https://tool.oschina.net/uploads/apidocs/jquery/regexp.html">oschina 正则表格</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://regex101.com/">regex101: build, test, and debug regex</a>——正则表达式校验网站；</li>
+<li><a target="_blank" rel="noopener" href="https://zh.javascript.info/regular-expressions">JAVASCRIPT.INFO 正则表达式</a>—— JAVASCRIPT.INFO 的正则表达式教程。</li>
+</ul>
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/139711396">javascript正则深入以及10个非常有意思的正则实战</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.alloyteam.com/2016/10/implement-a-simple-template-engine/">实现一个简单的模板引擎</a></li>
+<li><a target="_blank" rel="noopener" href="https://regexper.com/">网站 regexper</a>——以图形形式展示正则；</li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/people/qdlaoyao/posts">老姚丨洞见生产者</a>——常发布正则相关文章的知乎账户；</li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903487059263502">正则表达式案例分析 （一）</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7119242343798013959">🍩想要白嫖正则是吧？这一次给你个够！</a>——案例列表；</li>
+<li><a target="_blank" rel="noopener" href="https://any86.github.io/any-rule/">🦕正则大全</a>——案例列表；</li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6914843961408356360">日常开发提升效率之常用正则实例</a>——案例列表。</li>
+</ul>
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://www.poinotes.com/">
+        Signal
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

@@ -79,16 +79,128 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%96%AD%E5%BC%80"><span class="toc-text">连接和断开</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#keep-alive"><span class="toc-text">keep-alive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98"><span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F"><span class="toc-text">跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS%EF%BC%88Domain-Name-System%EF%BC%89"><span class="toc-text">DNS（Domain Name System）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS"><span class="toc-text">HTTPS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-text">其它</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
     </div>
-    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1418457">终于有人把正向代理和反向代理解释的明明白白了！</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/08/dns-query.html">DNS 查询原理详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://http.cat/">HTTP Cats</a></li>
-<li><a target="_blank" rel="noopener" href="https://http.devtool.tech/">HTTP 状态码速查大全</a></li>
+    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>阅读《网络是怎样连接的》，入门计算机网络，并进行记录。</p>
+<h2 id="连接和断开"><a href="#连接和断开" class="headerlink" title="连接和断开"></a>连接和断开</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/67013338/answer/1032098712">为什么TCP4次挥手时等待为2MSL？ - 知乎用户的回答 - 知乎</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaofei0859/article/details/6044694/">什么是2MSL</a></li>
+</ul>
+<h2 id="keep-alive"><a href="#keep-alive" class="headerlink" title="keep-alive"></a>keep-alive</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.pudn.com/news/628f8293bf399b7f351e3286.html">HTTP协议头部与Keep-Alive模式详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/388270712">HTTP保持长连接的操作</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/0201zcr/p/4694945.html">HTTP长连接和短连接</a></li>
+</ul>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>强制缓存：直接从客户端本地获取，不向服务端请求，即使断网也能获取；这种情况下，状态码 200，在浏览器开发者工具可以看到<code>Status Code: 200  (from memory cache)</code>或者<code>Status Code: 200  (from disk cache)</code>。</p>
+<p>协商缓存：客户端会向服务端请求，但不从服务端直接获取资源，而是先询问自己是否能使用缓存，“我的缓存过期了吗”，服务端会告诉客户端结果，如果没过期，客户端将直接使用缓存，如果过期了，服务端会把最新的资源送给客户端，这个过程叫协商；这种情况，状态码 304，<code>Status Code: 304</code>。</p>
+<p>和强制缓存相关的字段：Expires 和 Cache-Control；其中 Cache-Control 的值可以有很多组合，但是当值包含<code>max-age=t1</code>的时候，就会在 t1 时间内不向服务端请求，而直接取缓存，t1 时间内走的是强制缓存。</p>
+<p>和协商缓存相关的字段：ETag/If-None-Match 和 Last-Modified/If-Modified-Since。</p>
+<p>Expires：</p>
+<ul>
+<li>HTTP1.0 字段，如果设置了 Cache-Control 的 max-age 字段，Expires 会被忽略；</li>
+<li>设置具体的时间值（首次请求时服务端返回）作为缓存的过期时间，例如“<code>expires: Tue, 20 Sep 2022 00:47:28 GMT</code>”；</li>
+<li>过期时间由服务端确定，而客户端时间并非一致（时区、用户主动调节时间），缓存无法预期，只要客户端时间以任何理由超过 expires，缓存将失效。</li>
+</ul>
+<p>关于用户主动调时，因为技术透明，用户介入主动受害（缓存失效）；关于时区，技术结果，用户被动受害（缓存失效）。</p>
+<p>Cache-Control：</p>
+<ul>
+<li>HTTP1.1 字段，设置相对时间控制缓存过期时间；</li>
+<li>public（任何地方缓存，客户端或者代理）；</li>
+<li>private（只允许客户端缓存）；</li>
+<li>no-cache（协商缓存，使用缓存前问服务端自己的缓存过期了没）；</li>
+<li>no-store（禁用缓存，机密文件不想客户端缓存）</li>
+<li>max-age=（单位是秒）, s-maxage=（优先级高于 max-age= 和 expires，仅适用共享缓存）；</li>
+<li>max-stale[=]（表示客户端愿意接受已过期资源，但是不能超过给定时间）；</li>
+<li><code>cache-control: max-age=315360000</code>表示过期时间（新鲜度）一年，一年内内，可以绕过请求服务端，直接使用缓存；</li>
+<li><code>Cache-Control: no-cache</code>——使用缓存之前要请求服务端，验证缓存是否仍然有效，不能绕过服务端，另外<code>Cache-Control: max-age=0, must-revalidate</code>相当于 no-cache。</li>
+</ul>
+<blockquote>
+<p>If a response includes both an Expires header and a max-age directive, the max-age directive overrides the Expires header, even if the Expires header is more restrictive — <a target="_blank" rel="noopener" href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.3">RFC2016</a>，同时有 max-age 和 expires，expires 将被覆盖</p>
+</blockquote>
+<p>Last-Modified / If-Modified-Since：</p>
+<ul>
+<li>第一次请求服务器返回 Last-Modefied 后浏览器保存为 If-Modified-Since；</li>
+<li>之后浏览器每次发出请求，若未命中强制缓存，则携带 IMS；</li>
+<li>服务器对比最后修改时间，如果修改时间一致，返回 304，否则返回最新资源和 200 状态码；</li>
+<li>弊端一，秒级精确度，如果客户端请求的时候，服务端在同一秒修改了文件很多次，客户端只拿到了其中一个版本并缓存了下来，结果可能让缓存不是最新的；</li>
+<li>弊端二，Last-Modified 的改变不代表资源内容的改变，例如使用服务端使用编辑器打开某资源，也可能导致 Last-Modified 更新，结果导致客户端缓存失效。</li>
+</ul>
+<p>Etag / If-None-Match：流程和 Last-Modifed/If-Modified-Since 一致；使用 Hash 判断资源是否被修改，因此不受秒级准确度限制，更精准。</p>
+<p>缓存改进方案：md5 / hash 缓存和 CDN 缓存。</p>
+<p>DNS Prefetch：打开后，浏览器提前将域名转为 IP 地址到浏览器 DNS 缓存中；<code>&lt;meta http-equiv=&quot;x-dns-prefetch-control&quot; content=&quot;on&quot;&gt;&lt;link rel=&quot;dns-prefetch&quot; href=&quot;//www.imooc.com&quot;&gt;</code></p>
+<p>不能被缓存的请求：</p>
+<ul>
+<li>HTTPS 请求；</li>
+<li>POST 请求；</li>
+<li>HTTP 响应头中不包含 Last-Modified/Etag，不包含 Cache-Control/Expires 的请求；</li>
+<li>HTTP 响应头中包含 Cache-Control:no-store（pragma:no-cache 不确定） 等告诉浏览器不用缓存的请求。</li>
+</ul>
+<p>对经常更新的文件使用<code>max-age</code>的问题：</p>
+<ul>
+<li>请求时间不一致问题——如果资源之间时相互依赖的，而请求时并不一定同时请求，就会造成过期时间不一致，当其中某个文件进行了更新，就可能破坏原有的依赖，导致客户端出现错误；</li>
+<li>缓存丢失问题——如果丢失了某个经常被更新的文件的缓存，就会重新获取最新的该文件版本，这时可能破坏原有的依赖，和其它资源的过期时间不一样了，同样导致客户端出现错误；</li>
+<li>如果某个资源不依赖其它资源，尽管经常更新，也可以使用<code>max-age</code>来减轻服务端的负担。</li>
+</ul>
+<p>问题：通过哪个字段反应第一次设置 max-age 的时间？</p>
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://create-react-app.dev/docs/production-build/#static-file-caching">Static File Caching</a>——CRA 上介绍的 cache-control 缓存，当开启文件名哈希，为 index.html 不设置缓存，为静态资源设置缓存，例如 Cache-Control: max-age=31536000；</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/i13738612458/article/details/80383390">js 浏览器缓存机制</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://web.dev/http-cache/#flowchart">使用 HTTP 缓存避免不必要的网络请求</a>——有一张使用 cache-control 的流程图；</li>
+<li>“<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1046966/whats-the-difference-between-cache-control-max-age-0-and-no-cache">What’s the difference between Cache-Control: max-age=0 and no-cache?</a>”——<code>max-age=0 和 no-cache</code>的区别;</li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/54cc04190252">深入理解浏览器的缓存机制</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/44596937/chrome-memory-cache-vs-disk-cache">Chrome memory cache vs disk cache</a>——关于浏览器缓存的“memory cache”和“disk cache”；</li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Pragma%EF%BC%9Bhttps://stackoverflow.com/questions/7376515/what-are-the-valid-values-for-http-pragma">MDN-Pragma</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://jakearchibald.com/2016/caching-best-practices/">Caching best practices &amp; max-age gotchas</a>—— max-age 最佳实践。</li>
+</ul>
+<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><p>关于 CORS（cross-origin resource sharing）：</p>
+<p>关于 jsonp：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">jsonp</span>(<span class="params">&#123; url, params, callback &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;script&quot;</span>);</span><br><span class="line">    <span class="variable language_">window</span>[callback] = <span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">      <span class="title function_">resolve</span>(data);</span><br><span class="line">      <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">removeChild</span>(script);</span><br><span class="line">    &#125;;</span><br><span class="line">    params = &#123; ...params, callback &#125;; <span class="comment">// wd=b&amp;callback=show</span></span><br><span class="line">    <span class="keyword">let</span> arrs = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> params) &#123;</span><br><span class="line">      arrs.<span class="title function_">push</span>(<span class="string">`<span class="subst">$&#123;key&#125;</span>=<span class="subst">$&#123;params[key]&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    script.<span class="property">src</span> = <span class="string">`<span class="subst">$&#123;url&#125;</span>?<span class="subst">$&#123;arrs.join(<span class="string">&quot;&amp;&quot;</span>)&#125;</span>`</span>;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(script);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">jsonp</span>(&#123;</span><br><span class="line">  <span class="attr">url</span>: <span class="string">&quot;http://localhost:3000/say&quot;</span>,</span><br><span class="line">  <span class="attr">params</span>: &#123; <span class="attr">wd</span>: <span class="string">&quot;Iloveyou&quot;</span> &#125;,</span><br><span class="line">  <span class="attr">callback</span>: <span class="string">&quot;show&quot;</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/04/cors.html">跨域资源共享 CORS 详解</a></li>
+</ul>
+<h2 id="DNS（Domain-Name-System）"><a href="#DNS（Domain-Name-System）" class="headerlink" title="DNS（Domain Name System）"></a>DNS（Domain Name System）</h2><p>53 端口，域名解析时 UDP，区域同步传输 TCP。</p>
+<p>相关链接：<br>-<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/08/dns-query.html">DNS 查询原理详解</a></p>
+<h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>CA 证书，443 端口，SSL 加密传输。</p>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>关于状态码 304：请求协商缓存的时候服务端返回 304；搜索引擎会频繁抓取经常更新的网站，所以 304 可能降低网站曝光率。</p>
+<p>Get 请求的长度限制：由客户端和服务端决定，Chrome 限制 8182 比特，NGINX 默认限制 8k；IE 支持的长度最短，所以要兼容所有浏览器只要兼容 IE 就行了。</p>
+<p>关于浏览器访问网站流程：解析URL &gt; 缓存判断 &gt; DNS &gt; 获取 MAC 地址 &gt; TCP 握手 &gt; HTTPS 握手 &gt; 响应 &gt; 页面渲染 &gt; 挥手</p>
+<p>避免 HTTP1.1 中 6 个 TCP 连接限制：多域名部署。</p>
+<p>HTTP 的请求消息和响应消息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;方法&gt;&lt;空格&gt;&lt;URI&gt;&lt;空格&gt;&lt;HTTP 版本&gt;</span><br><span class="line">&lt;key&gt;:&lt;value&gt;</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">&lt;空行&gt;</span><br><span class="line">&lt;body&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;HTTP 版本&gt;&lt;空格&gt;&lt;状态码&gt;&lt;空格&gt;&lt;响应短语&gt;</span><br><span class="line">&lt;key&gt;:&lt;value&gt;</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">&lt;空行&gt;</span><br><span class="line">&lt;body&gt;</span><br></pre></td></tr></table></figure>
+
+<p>关于 HTTP3.0：基于 UDP 实现了类似 TCP 的多路复用数据流、传输可靠性的功能，这套功能称为 QUIC 协议。</p>
+<p>URL 的组成：协议 + 域名 + 端口 + 路径 + 文件 + 锚 + 参数</p>
+<p>常见协议：HTTP、HTTPS、FTP、POP3、SMTP。</p>
+<p>TCP 和 UDP 的场景：TCP 要准确度高的，如文件传输，UDP 视频、通话。</p>
+<p>OSI 七层：应用层、表示层、会话层、传输层、网络层、数据链路层、物理层。</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>资料：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/08/http.html">HTTP 协议入门</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html">图解SSL/TLS协议</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1418457">终于有人把正向代理和反向代理解释的明明白白了！</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/08/dns-query.html">DNS 查询原理详解</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://http.cat/">HTTP Cats</a>：用猫表示状态码。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://http.devtool.tech/">HTTP 状态码速查大全</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP">MDN-HTTP 文档</a></p>
+</li>
+</ul>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=HT0xVY7i_DU">NGINX Max URL Length - 414 URI Too Large</a>：NGINX 默认 8k url 长度；</li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2014/09/ssl-latency.html">SSL延迟有多大？</a>。</li>
 </ul>
 
 
