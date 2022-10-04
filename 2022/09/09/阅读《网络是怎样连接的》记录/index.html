@@ -79,12 +79,12 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%96%AD%E5%BC%80"><span class="toc-text">连接和断开</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#keep-alive"><span class="toc-text">keep-alive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98"><span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F"><span class="toc-text">跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS%EF%BC%88Domain-Name-System%EF%BC%89"><span class="toc-text">DNS（Domain Name System）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS"><span class="toc-text">HTTPS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-text">其它</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%96%AD%E5%BC%80"><span class="toc-text">连接和断开</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#keep-alive"><span class="toc-text">keep-alive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98"><span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F"><span class="toc-text">跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS%EF%BC%88Domain-Name-System%EF%BC%89"><span class="toc-text">DNS（Domain Name System）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS"><span class="toc-text">HTTPS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%94%B6%E5%8F%91"><span class="toc-text">数据收发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-text">其它</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
     </div>
-    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>阅读《网络是怎样连接的》，入门计算机网络，并进行记录。</p>
+    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>结合网络阅读《网络是怎样连接的》，进行记录。</p>
 <h2 id="连接和断开"><a href="#连接和断开" class="headerlink" title="连接和断开"></a>连接和断开</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/67013338/answer/1032098712">为什么TCP4次挥手时等待为2MSL？ - 知乎用户的回答 - 知乎</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaofei0859/article/details/6044694/">什么是2MSL</a></li>
@@ -165,8 +165,49 @@
 <li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/04/cors.html">跨域资源共享 CORS 详解</a></li>
 </ul>
 <h2 id="DNS（Domain-Name-System）"><a href="#DNS（Domain-Name-System）" class="headerlink" title="DNS（Domain Name System）"></a>DNS（Domain Name System）</h2><p>53 端口，域名解析时 UDP，区域同步传输 TCP。</p>
+<p>使用名称而不是域名来确定通信对象的网络：Windows 网络的原型 PC-Network。</p>
+<p>向 DNS 服务器发送的消息中包含三种：域名、Class 和记录类型。</p>
+<p>记录类型：</p>
+<ul>
+<li>A，Address；</li>
+<li>MX，Mail-Exchange，邮件交换；</li>
+<li>PTR，根据 IP 地址反查域名；</li>
+<li>CNAME，查询域名相关别名；</li>
+<li>NS，查询 DNS 服务器的 IP 地址；</li>
+<li>SOA，查询域名属性信息（P38）。</li>
+</ul>
+<p>域名用点分隔每个域，一个域的信息作为一个整体放在 DNS 服务器中，一个域不会拆开放在多台 DNS 服务器中。</p>
+<p>DNS 服务器有缓存功能。</p>
 <p>相关链接：<br>-<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/08/dns-query.html">DNS 查询原理详解</a></p>
 <h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>CA 证书，443 端口，SSL 加密传输。</p>
+<h2 id="数据收发"><a href="#数据收发" class="headerlink" title="数据收发"></a>数据收发</h2><p>MTU：Maximum Transmission Unit，最大传输单元。以太网中一般 1500 字节。</p>
+<p>MSS：Maximum Segment Size，最大分段大小。MSS 减去 40 字节的 TCP 和 IP 头部大小，结果就是 MSS。也可以说一个网络包能容纳的最大数据长度就是 MSS。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">                      |-----------MTU-----------|</span><br><span class="line">报头/SFD   MAC 头部     IP头部      TCP 头部     数据       FCS</span><br><span class="line">                                        |--MSS--|</span><br></pre></td></tr></table></figure>
+
+<p>SFD：Start Frame Delimiter，起始帧分界符。</p>
+<p>FCS：</p>
+<ul>
+<li>Frame Check Sequence，帧校验序列；</li>
+<li>用来检查传输过程中因噪声导致的波形紊乱，数据错误，长度为 32 比特；</li>
+<li>计算公式相当于磁盘中使用的 CRC 错误校验码，Cyclic Redundancy check，循环冗余校验；</li>
+<li>接收方计算的 FCS 和电信号里的 FCS 如果相同，代表数据正确。</li>
+</ul>
+<p>Mac 系统使用<code>netstat -rn</code>查看路由表。</p>
+<p>MacOS 使用<code>arp -a</code>查询 ARP 缓存。</p>
+<p>MAC：Media Access Control（p115）。</p>
+<p>网卡发送数据包电信号的时候，通过“时钟信号+数据信号”的方式叠加发送（10BASE-T 的方式），接收方通过报头找到时钟信号的发送频率后，再通过异或计算，就能求出数据信号。</p>
+<p>PHY/MAU：</p>
+<ul>
+<li>Physical Layer Device，物理层装置，Medium Attachment Unit，介质连接单元；</li>
+<li>MAC 模块把数字信号转为电信号后，由称为 PHY 或 MAU 的信号收发模块发送出去；</li>
+<li>PHY/MAU 的功能是对 MAC 模块产生的信号进行格式转换，以支持网线的传输格式。</li>
+</ul>
+<p>PnP：Plug and Play，即插即用（p124）。</p>
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.wawajohn.net/12206.html">Mac 路由表相關筆記</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2021/01/_xor.html">异或运算 XOR 教程</a>——“可以理解为 XOR 是更单纯的 OR 运算”。</li>
+</ul>
 <h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>关于状态码 304：请求协商缓存的时候服务端返回 304；搜索引擎会频繁抓取经常更新的网站，所以 304 可能降低网站曝光率。</p>
 <p>Get 请求的长度限制：由客户端和服务端决定，Chrome 限制 8182 比特，NGINX 默认限制 8k；IE 支持的长度最短，所以要兼容所有浏览器只要兼容 IE 就行了。</p>
 <p>关于浏览器访问网站流程：解析URL &gt; 缓存判断 &gt; DNS &gt; 获取 MAC 地址 &gt; TCP 握手 &gt; HTTPS 握手 &gt; 响应 &gt; 页面渲染 &gt; 挥手</p>
@@ -181,6 +222,48 @@
 <p>常见协议：HTTP、HTTPS、FTP、POP3、SMTP。</p>
 <p>TCP 和 UDP 的场景：TCP 要准确度高的，如文件传输，UDP 视频、通话。</p>
 <p>OSI 七层：应用层、表示层、会话层、传输层、网络层、数据链路层、物理层。</p>
+<p>URL 的各种形式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="string">&quot;http://user:password@www.a.com:90/dir/file1.htm&quot;</span> <span class="comment">// 用 HTTP 协议访问 Web 服务器</span></span><br><span class="line"><span class="keyword">var</span> url = <span class="attr">ftp</span>:<span class="comment">//user:password@ftp.a.com:21/dir/file1.html; // 用 FTP 协议下载和上传文件</span></span><br><span class="line"><span class="keyword">var</span> url = <span class="attr">file</span>:<span class="comment">//localhost/C:/path/file1.zip; // 读取客户端计算机本地文件</span></span><br><span class="line"><span class="keyword">var</span> url = <span class="attr">mailto</span>:tone@a.<span class="property">com</span>; <span class="comment">// 发送电子邮件</span></span><br><span class="line"><span class="keyword">var</span> url = <span class="attr">news</span>:comp.<span class="property">protocols</span>.<span class="property">tcp</span>-ip; <span class="comment">// 阅读新闻组的文章</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">状态码</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1xx</td>
+<td align="left">告知请求的处理进度和情况</td>
+</tr>
+<tr>
+<td align="left">2xx</td>
+<td align="left">成功</td>
+</tr>
+<tr>
+<td align="left">3xx</td>
+<td align="left">表示需要进一步操作</td>
+</tr>
+<tr>
+<td align="left">4xx</td>
+<td align="left">客户端错误</td>
+</tr>
+<tr>
+<td align="left">5xx</td>
+<td align="left">服务端错误</td>
+</tr>
+</tbody></table>
+<p>IP 地址有网络号和主机号，但是 32 比特的 IP 不能直接区分，所以使用子网掩码来区分，子网掩码为 1 的部分是网络号，0 的部分是主机号。IP 地址的主机号为 0 表示子网，为 1 表示对子网进行广播。</p>
+<p>子网掩码的形式：</p>
+<ul>
+<li>和 IP 格式相同，例如 255.255.255.0；</li>
+<li>用比特数表示，例如 24（一个 255 占 8 比特，三个 255 就是 24 比特）。</li>
+</ul>
+<p>端口号和 IP 地址一样都是由 IANA（Internet Assigned Number Authority，互联网编号管理局）来管理的。</p>
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://support.microsoft.com/en-us/topic/maximum-url-length-is-2-083-characters-in-internet-explorer-174e7c8a-6666-f4e0-6fd6-908b53c12246">Maximum URL length is 2,083 characters in Internet Explorer</a>：IE GET 请求最长 2083 个字符。</li>
+</ul>
 <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>资料：</p>
 <ul>
 <li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/08/http.html">HTTP 协议入门</a></p>
@@ -193,9 +276,17 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://http.cat/">HTTP Cats</a>：用猫表示状态码。</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://http.devtool.tech/">HTTP 状态码速查大全</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://http.devtool.tech/">HTTP 状态码速查大全</a>；</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP">MDN-HTTP 文档</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP">MDN-HTTP 文档</a>；</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html">互联网协议入门（一）</a>；</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2012/06/internet_protocol_suite_part_ii.html">互联网协议入门（二）</a>；</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/08/http.html">HTTP 协议入门</a>；</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2017/06/tcp-protocol.html">TCP 协议简介</a>。</p>
 </li>
 </ul>
 <ul>
