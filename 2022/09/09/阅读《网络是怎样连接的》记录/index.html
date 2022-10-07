@@ -79,7 +79,7 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%96%AD%E5%BC%80"><span class="toc-text">连接和断开</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#keep-alive"><span class="toc-text">keep-alive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98"><span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F"><span class="toc-text">跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS%EF%BC%88Domain-Name-System%EF%BC%89"><span class="toc-text">DNS（Domain Name System）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS"><span class="toc-text">HTTPS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%94%B6%E5%8F%91"><span class="toc-text">数据收发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-text">其它</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%96%AD%E5%BC%80"><span class="toc-text">连接和断开</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#keep-alive"><span class="toc-text">keep-alive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98"><span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F"><span class="toc-text">跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS%EF%BC%88Domain-Name-System%EF%BC%89"><span class="toc-text">DNS（Domain Name System）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS"><span class="toc-text">HTTPS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%94%B6%E5%8F%91"><span class="toc-text">数据收发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http-2"><span class="toc-text">http&#x2F;2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-text">其它</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
@@ -178,7 +178,10 @@
 </ul>
 <p>域名用点分隔每个域，一个域的信息作为一个整体放在 DNS 服务器中，一个域不会拆开放在多台 DNS 服务器中。</p>
 <p>DNS 服务器有缓存功能。</p>
-<p>相关链接：<br>-<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/08/dns-query.html">DNS 查询原理详解</a></p>
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/08/dns-query.html">DNS 查询原理详解</a></li>
+</ul>
 <h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>CA 证书，443 端口，SSL 加密传输。</p>
 <h2 id="数据收发"><a href="#数据收发" class="headerlink" title="数据收发"></a>数据收发</h2><p>MTU：Maximum Transmission Unit，最大传输单元。以太网中一般 1500 字节。</p>
 <p>MSS：Maximum Segment Size，最大分段大小。MSS 减去 40 字节的 TCP 和 IP 头部大小，结果就是 MSS。也可以说一个网络包能容纳的最大数据长度就是 MSS。</p>
@@ -207,6 +210,10 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.wawajohn.net/12206.html">Mac 路由表相關筆記</a>；</li>
 <li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2021/01/_xor.html">异或运算 XOR 教程</a>——“可以理解为 XOR 是更单纯的 OR 运算”。</li>
+</ul>
+<h2 id="http-2"><a href="#http-2" class="headerlink" title="http/2"></a>http/2</h2><ul>
+<li>SPDY 协议和 http/2；</li>
+<li>http/2 仍然是无状态的，但是引入了索引表，索引表存储了字段信息。</li>
 </ul>
 <h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>关于状态码 304：请求协商缓存的时候服务端返回 304；搜索引擎会频繁抓取经常更新的网站，所以 304 可能降低网站曝光率。</p>
 <p>Get 请求的长度限制：由客户端和服务端决定，Chrome 限制 8182 比特，NGINX 默认限制 8k；IE 支持的长度最短，所以要兼容所有浏览器只要兼容 IE 就行了。</p>
@@ -266,29 +273,19 @@
 </ul>
 <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>资料：</p>
 <ul>
-<li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/08/http.html">HTTP 协议入门</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html">图解SSL/TLS协议</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1418457">终于有人把正向代理和反向代理解释的明明白白了！</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/08/dns-query.html">DNS 查询原理详解</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://http.cat/">HTTP Cats</a>：用猫表示状态码。</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://http.devtool.tech/">HTTP 状态码速查大全</a>；</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP">MDN-HTTP 文档</a>；</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html">互联网协议入门（一）</a>；</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2012/06/internet_protocol_suite_part_ii.html">互联网协议入门（二）</a>；</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/08/http.html">HTTP 协议入门</a>；</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2017/06/tcp-protocol.html">TCP 协议简介</a>。</p>
-</li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/08/http.html">HTTP 协议入门</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html">图解SSL/TLS协议</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1418457">终于有人把正向代理和反向代理解释的明明白白了！</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/08/dns-query.html">DNS 查询原理详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://http.cat/">HTTP Cats</a>：用猫表示状态码。</li>
+<li><a target="_blank" rel="noopener" href="https://http.devtool.tech/">HTTP 状态码速查大全</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP">MDN-HTTP 文档</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html">互联网协议入门（一）</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2012/06/internet_protocol_suite_part_ii.html">互联网协议入门（二）</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/08/http.html">HTTP 协议入门</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2017/06/tcp-protocol.html">TCP 协议简介</a>。</li>
 </ul>
+<p>相关链接：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=HT0xVY7i_DU">NGINX Max URL Length - 414 URI Too Large</a>：NGINX 默认 8k url 长度；</li>
 <li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2014/09/ssl-latency.html">SSL延迟有多大？</a>。</li>

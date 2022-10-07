@@ -79,13 +79,12 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#replace"><span class="toc-text">replace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%8D%E8%BE%B9%E7%95%8C%E5%92%8C%E9%94%9A%E7%82%B9"><span class="toc-text">词边界和锚点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RegExp-lastIndex"><span class="toc-text">RegExp.lastIndex</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-text">修饰符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E9%87%8D"><span class="toc-text">加重</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-text">练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%B9%E9%85%8D-URL"><span class="toc-text">匹配 URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E7%9B%B8%E5%85%B3%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">正则相关的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#replace"><span class="toc-text">replace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%8D%E8%BE%B9%E7%95%8C%E5%92%8C%E9%94%9A%E7%82%B9"><span class="toc-text">词边界和锚点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RegExp-lastIndex"><span class="toc-text">RegExp.lastIndex</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-text">修饰符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E7%B1%BB"><span class="toc-text">字符类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%B9%E9%85%8D-URL"><span class="toc-text">匹配 URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-text">练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TODO"><span class="toc-text">TODO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
     </div>
-    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>正则的相关方法：</p>
-<ul>
+    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="正则相关的方法"><a href="#正则相关的方法" class="headerlink" title="正则相关的方法"></a>正则相关的方法</h2><ul>
 <li>字符串—— search、match、replace、split；</li>
 <li>正则—— exec、test。</li>
 </ul>
@@ -129,9 +128,9 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace">MDN-String.prototype.replace()</a></li>
 </ul>
-<h2 id="词边界和锚点"><a href="#词边界和锚点" class="headerlink" title="词边界和锚点"></a>词边界和锚点</h2><p>关于词边界<code>\b</code>：词边界指的是<code>\w</code>和<code>\W</code>之间的位置，<code>\w</code>和<code>$</code>之间的位置，<code>\w</code>和<code>^</code>之间的位置，也就是说<code>\b</code>找的是字母的旁边不是字母的位置。</p>
+<h2 id="词边界和锚点"><a href="#词边界和锚点" class="headerlink" title="词边界和锚点"></a>词边界和锚点</h2><p>关于词边界<code>\b</code>：词边界指的是<code>\w</code>和<code>\W</code>之间的位置，<code>\w</code>和<code>$</code>之间的位置，<code>\w</code>和<code>^</code>之间的位置，也就是说<code>\b</code>找的是字母（数字下划线）的旁边不是字母（数字下划线）的位置，或者说找的是<code>\w</code>旁边不是<code>\w</code>的位置。</p>
 <p>下面是词边界的例子，可以观察词边界被替换成“🤔”的位置：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;So what do you wanna do, what&#x27;s your point-of-view.&quot;</span>.<span class="title function_">replace</span>(<span class="regexp">/\b/g</span>, <span class="function">() =&gt;</span> <span class="string">&quot;🤔&quot;</span>);</span><br><span class="line"><span class="comment">// &quot;🤔So🤔 🤔what🤔 🤔do🤔 🤔you🤔 🤔wanna🤔 🤔do🤔, 🤔what🤔&#x27;🤔s🤔 🤔your🤔 🤔point🤔-🤔of🤔-🤔view🤔.&quot;</span></span><br><span class="line"><span class="string">&quot;Oh，你好Lucy，我是David。&quot;</span>.<span class="title function_">replace</span>(<span class="regexp">/\b/g</span>, <span class="function">() =&gt;</span> <span class="string">&quot;🤔&quot;</span>);</span><br><span class="line"><span class="comment">// &#x27;🤔Oh🤔，你好🤔Lucy🤔，我是🤔David🤔。&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;So what do you wanna do, what&#x27;s your point-of-view.&quot;</span>.<span class="title function_">replace</span>(<span class="regexp">/\b/g</span>, <span class="function">() =&gt;</span> <span class="string">&quot;🤔&quot;</span>);</span><br><span class="line"><span class="comment">// &quot;🤔So🤔 🤔what🤔 🤔do🤔 🤔you🤔 🤔wanna🤔 🤔do🤔, 🤔what🤔&#x27;🤔s🤔 🤔your🤔 🤔point🤔-🤔of🤔-🤔view🤔.&quot;</span></span><br><span class="line"><span class="string">&quot;Oh，你好Lucy，我是David。&quot;</span>.<span class="title function_">replace</span>(<span class="regexp">/\b/g</span>, <span class="function">() =&gt;</span> <span class="string">&quot;🤔&quot;</span>);</span><br><span class="line"><span class="comment">// &#x27;🤔Oh🤔，你好🤔Lucy🤔，我是🤔David🤔。&#x27;</span></span><br><span class="line"><span class="string">&#x27;&#x27;</span>.<span class="title function_">replace</span>(<span class="regexp">/\b/g</span>, <span class="string">&#x27;🤔&#x27;</span>);</span><br><span class="line"><span class="comment">// &#x27;&#x27;</span></span><br><span class="line"><span class="string">&#x27;爱&#x27;</span>.<span class="title function_">replace</span>(<span class="regexp">/\b/g</span>, <span class="string">&#x27;🤔&#x27;</span>);</span><br><span class="line"><span class="comment">// &#x27;爱&#x27;</span></span><br></pre></td></tr></table></figure>
 
 
 <h2 id="RegExp-lastIndex"><a href="#RegExp-lastIndex" class="headerlink" title="RegExp.lastIndex"></a>RegExp.lastIndex</h2><blockquote>
@@ -147,38 +146,53 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;So, get away.&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\w+/y</span>;</span><br><span class="line">reg.<span class="property">lastIndex</span>; <span class="comment">// 0</span></span><br><span class="line">reg.<span class="title function_">exec</span>(str); <span class="comment">// [&#x27;So&#x27;, index: 0, input: &#x27;So, get away.&#x27;, groups: undefined]</span></span><br><span class="line">reg.<span class="property">lastIndex</span>; <span class="comment">// 2</span></span><br><span class="line">reg.<span class="title function_">exec</span>(str); <span class="comment">// null</span></span><br><span class="line">reg.<span class="property">lastIndex</span>; <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
 
 <p>带<code>y</code>的正则，在形式上很像每执行一次就把已经匹配的部分截去，并且给正则添加锚点<code>^</code>。体现出的效果就像是被 lastIndex 粘住了。</p>
+<p>修饰符<code>s</code>：修饰符<code>s</code>让字符类<code>.</code>可以匹配包括换行<code>\n</code>的所有字符，否则<code>.</code>只能表示除换行外的所有字符。</p>
+<p>关于修饰符<code>u</code>：添加了修饰符<code>u</code>之后，正则可以正确处理 4 字节长度的字符，也可以使用<code>\p&#123;...&#125;</code>表示 unicode 属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;😄&#x27;</span>.<span class="title function_">match</span>(<span class="regexp">/./</span>); <span class="comment">// 不用修饰符 u，可以看到获取到的是 4 字节字符代理对的左半部分“\uD83D”，而不是期望的“😄”</span></span><br><span class="line"><span class="comment">// [&#x27;\uD83D&#x27;, index: 0, input: &#x27;😄&#x27;, groups: undefined]</span></span><br><span class="line"><span class="string">&#x27;😄&#x27;</span>.<span class="title function_">match</span>(<span class="regexp">/./u</span>); <span class="comment">// 使用修饰符 u，可以看到获取到了期望的“😄”</span></span><br><span class="line"><span class="comment">// [&#x27;😄&#x27;, index: 0, input: &#x27;😄&#x27;, groups</span></span><br></pre></td></tr></table></figure>
+
+<p>关于修饰符<code>m</code>：在多行模式<code>m</code>的正则里，<code>\n</code>和<code>$</code>是有区别的，<code>\n</code>会匹配除最后一行之外的每行末尾的字符<code>\n</code>，而<code>$</code>表示每一行末尾的位置，包括最后一行，且<code>$</code>匹配的是无宽度的位置，而不是字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">`- Naruto</span></span><br><span class="line"><span class="string">- Sasuke</span></span><br><span class="line"><span class="string">- Sakura`</span>;</span><br><span class="line">str.<span class="title function_">match</span>(<span class="regexp">/\n/g</span>); <span class="comment">// 匹配第一、第二行的末尾换行符</span></span><br><span class="line"><span class="comment">// [&#x27;\n&#x27;, &#x27;\n&#x27;]</span></span><br><span class="line">str.<span class="title function_">match</span>(<span class="regexp">/$/gm</span>); <span class="comment">// 匹配每一行的末尾位置</span></span><br><span class="line"><span class="comment">// [&#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;]</span></span><br></pre></td></tr></table></figure>
+
 <p>相关链接：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://zh.javascript.info/regexp-sticky">粘性修饰符 “y”，在位置处搜索</a>。</li>
+<li><a target="_blank" rel="noopener" href="https://zh.javascript.info/regexp-sticky">粘性修饰符 “y”，在位置处搜索</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://zh.javascript.info/regexp-unicode">Unicode 属性 \p{…}</a>—— Unicode 属性和它的子类别。</li>
 </ul>
-<h2 id="加重"><a href="#加重" class="headerlink" title="加重"></a>加重</h2><p>url 参数转对象</p>
-<p>m 多行匹配</p>
-<p>非贪婪匹配，<code>?</code>，例如<code>/.+?\s/.exec(&quot;Your time is limited.&quot;)</code>匹配“Your ”</p>
-<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>24 小时制：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg1 = <span class="regexp">/[0-1]\d|2[0-3]/</span>; <span class="comment">// 方法 1</span></span><br><span class="line">reg1.<span class="title function_">test</span>(<span class="string">&#x27;9&#x27;</span>); <span class="comment">// false</span></span><br><span class="line"><span class="keyword">var</span> reg2 = <span class="regexp">/[0-1][0-9]|2[0-3]/</span>; <span class="comment">// 方法 2</span></span><br></pre></td></tr></table></figure>
-
-<p>千分位：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/(?!^)(?=(\d&#123;3&#125;)+$)/g</span>; <span class="comment">// (?!) 表示否定前瞻断言，(?=)表示前瞻断言</span></span><br><span class="line"><span class="string">&quot;123456789&quot;</span>.<span class="title function_">replace</span>(reg, <span class="string">&#x27;,&#x27;</span>)</span><br><span class="line"><span class="comment">// 123,456,789</span></span><br></pre></td></tr></table></figure>
-
-
-<p><em>URL query 参数获取：</em></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function query(name)</span><br><span class="line">&#123;</span><br><span class="line">	const search = location.search.substr(1) // 跳过头部符号“?”</span><br><span class="line">	const reg = new RegExp(`(^|&amp;)$&#123;name&#125;=([^&amp;]*)(&amp;|$)`, &#x27;i&#x27;)</span><br><span class="line">	const res = search.match(reg)</span><br><span class="line">	if (res === null) &#123; return null &#125;</span><br><span class="line">	return res[2] // res 是类数组，有可枚举属性 groups, index, input 以及数字下标，某个数字下标 i 的值是第 i 对括号匹配的字符串，数字下标 0 正则匹配的字符串</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><em>删除头尾空格：</em></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">zTrim</span>(<span class="params">z</span>)</span><br><span class="line">&#123; <span class="keyword">return</span> z.<span class="title function_">replace</span>(<span class="regexp">/^\s+|\s+$/gm</span>, <span class="string">&#x27;&#x27;</span>) &#125; <span class="comment">// 多行全局匹配 gm</span></span><br></pre></td></tr></table></figure>
-
-<p><em>补全非自闭合标签：</em></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> tags = <span class="regexp">/^(area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)$/i</span>; <span class="comment">// 这些是自闭合标签</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">convert</span>(<span class="params">html</span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> html.<span class="title function_">replace</span>(<span class="regexp">/(&lt;(\w+)[^&gt;]*?)\/&gt;/g</span>,</span><br><span class="line">	  <span class="function">(<span class="params">all, front, tag</span>) =&gt;</span> (tags.<span class="title function_">test</span>(tag) ? all : front + <span class="string">&quot;&gt;&lt;/&quot;</span> + tag + <span class="string">&quot;&gt;&quot;</span>)</span><br><span class="line">  ); <span class="comment">// 这里的“*?”，表示遇到“&gt;”匹配失败，遇到其它则忽略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><em>中线转驼峰：</em></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">style</span>(<span class="params">element, name, value</span>)</span><br><span class="line">&#123;</span><br><span class="line">  name = name.<span class="title function_">replace</span>(<span class="regexp">/-([a-z])/ig</span>,</span><br><span class="line">	  <span class="function">(<span class="params">all, letter</span>) =&gt;</span> (letter.<span class="title function_">toUpperCase</span>())</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> value !== <span class="string">&#x27;undefined&#x27;</span>) &#123;</span><br><span class="line">    element.<span class="property">style</span>[name] = value;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> element.<span class="property">style</span>[name];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>URL 转对象（对象转 URL，压缩 URL）</p>
-<ul>
-<li>检查正则正确性；</li>
-<li>默认对象；</li>
-<li>重复参数的数组对象。</li>
-</ul>
+<h2 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h2><table>
+<thead>
+<tr>
+<th align="left">字符类</th>
+<th align="left">来源</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>\d</code></td>
+<td align="left">digit</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>\w</code></td>
+<td align="left">word</td>
+<td align="left">字母、数字、<strong>下划线</strong></td>
+</tr>
+<tr>
+<td align="left"><code>\s</code></td>
+<td align="left">space</td>
+<td align="left">空格、制表符<code>\t</code>、换行<code>\n</code></td>
+</tr>
+<tr>
+<td align="left"><code>.</code></td>
+<td align="left"></td>
+<td align="left">点表示除换行<code>\n</code>之外的任意字符</td>
+</tr>
+<tr>
+<td align="left">反向类</td>
+<td align="left"></td>
+<td align="left">小写的字符类的大写形式，表示和对应的字符类互补的字符</td>
+</tr>
+</tbody></table>
+<p>类似<code>[\d\D]</code>，包括大小写的字符类可以表示所有字符，<code>[^]</code>也可以表示所有字符，意思是“匹配除了什么都没有之外其他情况的字符”。</p>
 <h2 id="匹配-URL"><a href="#匹配-URL" class="headerlink" title="匹配 URL"></a>匹配 URL</h2><ul>
 <li>检查合法性；</li>
 <li>合并参数；</li>
@@ -202,8 +216,50 @@
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams">URLSearchParams</a>——MDN 文档；</li>
 <li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/27745/getting-parts-of-a-url-regex#27755">Getting parts of a URL (Regex)</a>；</li>
 <li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/10126956/capture-value-out-of-query-string-with-regex?a=b?c=d&d=e">Capture value out of query string with regex?</a>；</li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/161738/what-is-the-best-regular-expression-to-check-if-a-string-is-a-valid-url?answertab=scoredesc#tab-top">What is the best regular expression to check if a string is a valid URL?</a>。</li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/161738/what-is-the-best-regular-expression-to-check-if-a-string-is-a-valid-url?answertab=scoredesc#tab-top">What is the best regular expression to check if a string is a valid URL?</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2010/02/url_encoding.html">关于URL编码</a>。</li>
 </ul>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>24 小时制：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg1 = <span class="regexp">/[0-1]\d|2[0-3]/</span>; <span class="comment">// 方法 1</span></span><br><span class="line">reg1.<span class="title function_">test</span>(<span class="string">&#x27;9&#x27;</span>); <span class="comment">// false</span></span><br><span class="line"><span class="keyword">var</span> reg2 = <span class="regexp">/[0-1][0-9]|2[0-3]/</span>; <span class="comment">// 方法 2</span></span><br></pre></td></tr></table></figure>
+
+<p>千分位：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/(?!^)(?=(\d&#123;3&#125;)+$)/g</span>; <span class="comment">// (?!) 表示否定前瞻断言，(?=)表示前瞻断言</span></span><br><span class="line"><span class="string">&quot;123456789&quot;</span>.<span class="title function_">replace</span>(reg, <span class="string">&#x27;,&#x27;</span>)</span><br><span class="line"><span class="comment">// 123,456,789</span></span><br></pre></td></tr></table></figure>
+
+
+<p>URL query 参数获取：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function query(name)</span><br><span class="line">&#123;</span><br><span class="line">	const search = location.search.substr(1) // 跳过头部符号“?”</span><br><span class="line">	const reg = new RegExp(`(^|&amp;)$&#123;name&#125;=([^&amp;]*)(&amp;|$)`, &#x27;i&#x27;)</span><br><span class="line">	const res = search.match(reg)</span><br><span class="line">	if (res === null) &#123; return null &#125;</span><br><span class="line">	return res[2] // res 是类数组，有可枚举属性 groups, index, input 以及数字下标，某个数字下标 i 的值是第 i 对括号匹配的字符串，数字下标 0 正则匹配的字符串</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>删除头尾空格：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">zTrim</span>(<span class="params">z</span>)</span><br><span class="line">&#123; <span class="keyword">return</span> z.<span class="title function_">replace</span>(<span class="regexp">/^\s+|\s+$/gm</span>, <span class="string">&#x27;&#x27;</span>) &#125; <span class="comment">// 多行全局匹配 gm</span></span><br></pre></td></tr></table></figure>
+
+<p>补全非自闭合标签：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> tags = <span class="regexp">/^(area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)$/i</span>; <span class="comment">// 这些是自闭合标签</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">convert</span>(<span class="params">html</span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> html.<span class="title function_">replace</span>(<span class="regexp">/(&lt;(\w+)[^&gt;]*?)\/&gt;/g</span>,</span><br><span class="line">	  <span class="function">(<span class="params">all, front, tag</span>) =&gt;</span> (tags.<span class="title function_">test</span>(tag) ? all : front + <span class="string">&quot;&gt;&lt;/&quot;</span> + tag + <span class="string">&quot;&gt;&quot;</span>)</span><br><span class="line">  ); <span class="comment">// 这里的“*?”，表示遇到“&gt;”匹配失败，遇到其它则忽略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>中线转驼峰：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">style</span>(<span class="params">element, name, value</span>)</span><br><span class="line">&#123;</span><br><span class="line">  name = name.<span class="title function_">replace</span>(<span class="regexp">/-([a-z])/ig</span>,</span><br><span class="line">	  <span class="function">(<span class="params">all, letter</span>) =&gt;</span> (letter.<span class="title function_">toUpperCase</span>())</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> value !== <span class="string">&#x27;undefined&#x27;</span>) &#123;</span><br><span class="line">    element.<span class="property">style</span>[name] = value;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> element.<span class="property">style</span>[name];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>把带符号的号码转换成数字：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;+7(903)-123-45-67&quot;</span>;</span><br><span class="line">str.<span class="title function_">replace</span>(<span class="regexp">/\D/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line">str.<span class="title function_">match</span>(<span class="regexp">/\d/g</span>).<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>提取字符串里的中文：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;你好吗，David？&quot;</span>;</span><br><span class="line">str.<span class="title function_">match</span>(<span class="regexp">/\p&#123;sc=Han&#125;/gu</span>); <span class="comment">// [&#x27;你&#x27;, &#x27;好&#x27;, &#x27;吗&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<p>匹配空字符串：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 锚点表示位置，对于空字符串，开头就是结尾，结尾就是开头</span></span><br><span class="line">/^$/.<span class="title function_">test</span>(<span class="string">&#x27;&#x27;</span>); <span class="comment">// true</span></span><br><span class="line"><span class="regexp">/$^/</span>.<span class="title function_">test</span>(<span class="string">&#x27;&#x27;</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>查找时间，从给定的字符串中找到时间：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://zh.javascript.info/task/find-time-hh-mm</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;Breakfast at 09:00 in the room 123:456.&quot;</span>;</span><br><span class="line">str.<span class="title function_">match</span>(<span class="regexp">/\b(?:[01]\d|2[0-4]):[0-5]\d\b/g</span>); <span class="comment">// 注意前后的词边界，用于确保时和分是两位的格式，“?:”表示非捕获组</span></span><br><span class="line"><span class="comment">// [&#x27;09:00&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<p>URL 转对象（对象转 URL，压缩 URL）</p>
+<ul>
+<li>检查正则正确性；</li>
+<li>默认对象；</li>
+<li>重复参数的数组对象。</li>
+</ul>
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// var X = &#x27;[a-z0-9]&#x27;</span></span><br><span class="line"><span class="comment">// var y = &#x27;[a-z0-9-]&#123;0,61&#125;&#x27;</span></span><br><span class="line"><span class="comment">// var Z = &#x27;a-z_\/0-9\-#&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// var a = /(https?:\/\/(?:X(?:YX)?\.)+XYX)(:?\d*)\/?([Z.]*)\??([Z=&amp;]*)/g</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="regexp">/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/</span></span><br></pre></td></tr></table></figure>
+
+<p>url 参数转对象</p>
+<p>非贪婪匹配，<code>?</code>，例如<code>/.+?\s/.exec(&quot;Your time is limited.&quot;)</code>匹配“Your ”</p>
 <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>资料：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://ihateregex.io/">iHateRegex</a>——一个常用正则表达式网站（“Now you have two problems.”）；</li>
@@ -211,7 +267,8 @@
 <li><a target="_blank" rel="noopener" href="https://tool.oschina.net/uploads/apidocs/jquery/regexp.html">oschina 正则表格</a>；</li>
 <li><a target="_blank" rel="noopener" href="https://regex101.com/">regex101: build, test, and debug regex</a>——正则表达式校验网站；</li>
 <li><a target="_blank" rel="noopener" href="https://zh.javascript.info/regular-expressions">JAVASCRIPT.INFO 正则表达式</a>—— JAVASCRIPT.INFO 的正则表达式教程；</li>
-<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions">正则表达式</a>——MDN 的正则教程。</li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions">正则表达式</a>——MDN 的正则教程；</li>
+<li><a target="_blank" rel="noopener" href="https://es6.ruanyifeng.com/?search=%E6%AD%A3%E5%88%99&x=0&y=0#docs/regex">正则的扩展</a>——阮一峰《ECMAScript 6 入门》</li>
 </ul>
 <p>相关链接：</p>
 <ul>
