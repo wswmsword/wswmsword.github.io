@@ -182,9 +182,14 @@
 <li>两个相同组件产生类似的 DOM 结构，不同组件产生不同 DOM 结构（component diff）；</li>
 <li>对于同一层次的一组子节点，可以通过唯一的 id 进行区分（element diff）。</li>
 </ul>
-<h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><p>使用 Redux 管理数据（状态），Redux 有一个根数据库被称为 store，</p>
-<p>关键词：reducer、store、state、subscribe、dispatch、action。</p>
-<p>Redux 应用总数据的生命周期：调用 store.dispatch(action)；Redux store 调用传入的 reducer 函数；根 reducer 把多个子 reducer 合并成一个单一的 state 树；Redux store 保存了根 reducer 返回的完整 state 树。</p>
+<h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><p>关键词：reducer、store、state、subscribe、dispatch、action。</p>
+<p>Redux 应用总数据的生命周期：</p>
+<ul>
+<li>调用 store.dispatch(action)；</li>
+<li>Redux store 调用传入的 reducer 函数；</li>
+<li>根 reducer 把多个子 reducer 合并成一个单一的 state 树；</li>
+<li>Redux store 保存了根 reducer 返回的完整 state 树。</li>
+</ul>
 <p>mapStateToProps：这个函数指定如何把当前 Redux store state 映射到展示组件的 props 中。</p>
 <p>mapDispatchToProps：分发 action，这个函数接收 dispatch 方法并返回期望注入到展示组件的 props 中的回调方法。</p>
 <p><em>中间件要点：</em></p>
@@ -201,9 +206,21 @@
 <li>应用状态 App state，行为数据，如某条数据被选择了；</li>
 <li>UI 状态 UI state，展示数据，如某个面板被展开了；</li>
 </ul>
-<blockquote>
-<p>Redux 中间件和异步操作 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/SamWeb/p/11332484.html">https://www.cnblogs.com/SamWeb/p/11332484.html</a></p>
-</blockquote>
+<p>关于 shallowEqual：……</p>
+<p>关于 FSA：</p>
+<ul>
+<li>Flux Standard Actions 约定；</li>
+<li>包含 payload 字段，表示实际数据；</li>
+<li>包含 error 字段， 表示错误信息；</li>
+<li>包含 meta 字段，表示描述性数据；</li>
+<li>必须包含 type 字段。</li>
+</ul>
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2015/05/thunk.html">Thunk 函数的含义和用法</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/SamWeb/p/11332484.html">Redux 中间件和异步操作</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/redux-utilities/flux-standard-action#motivation">Flux Standard Actions 约定</a></li>
+</ul>
 <h2 id="React-Router"><a href="#React-Router" class="headerlink" title="React Router"></a>React Router</h2><p>多页应用的 URL 跳转不同 html 文件，单页应用的则跳转不同组件，URL 对应路由，React Router 在 React App 中实现路由功能。</p>
 <p>Quick Start:</p>
 <ul>
@@ -216,7 +233,8 @@
 <ul>
 <li></li>
 </ul>
-<h2 id="ほしのかけら"><a href="#ほしのかけら" class="headerlink" title="ほしのかけら"></a>ほしのかけら</h2><p><em>组件之间数据的传递和更新：</em></p>
+<h2 id="ほしのかけら"><a href="#ほしのかけら" class="headerlink" title="ほしのかけら"></a>ほしのかけら</h2><p>Reselect 库解决了从 selector 派生数据会导致重新生成数据，进而导致重复渲染的问题。</p>
+<p><em>组件之间数据的传递和更新：</em></p>
 <ul>
 <li>父组件向子组件，通过 props 进行传递；</li>
 <li>子组件向父组件，先在父组件向子组件传递函数 props，然后在子组件调用时设置入参即可使父组件获得设置的参数；</li>
@@ -240,6 +258,11 @@
 <p><em>import 图片方式：</em>webpack 把图片当资源文件打包，可以配置 url-loader 进行图片压缩。</p>
 <p><em>React 阻止默认事件：</em>显式调用对象的 preventDefault 方法阻止。</p>
 <p><em>类组件里常用的定义事件函数方法：</em>ES7 的属性初始化语法，无需手动绑定 this。</p>
+<p>官方文档的问题：</p>
+<ul>
+<li>有很多固定的范式，没有说明原因；</li>
+<li>提供了自由的选择，没有说明每个选择的不同。</li>
+</ul>
 <h2 id="猫の餌えさ"><a href="#猫の餌えさ" class="headerlink" title="猫の餌えさ"></a>猫の餌<small style="color: salmon">えさ</small></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">https://www.zhihu.com/question/24925709/answer/130708066</span><br><span class="line"></span><br><span class="line">猫咪怀孕，产前准备及生产后护理全攻略：https://zhuanlan.zhihu.com/p/180313588</span><br><span class="line"></span><br><span class="line">母猫产后吃什么？该怎样护理？ https://zhuanlan.zhihu.com/p/34534366</span><br><span class="line"></span><br><span class="line">Python 编程快速上手：让繁琐工作自动化：https://automatetheboringstuff.com/</span><br></pre></td></tr></table></figure>
 
 <h2 id="学習がくしゅうサイト"><a href="#学習がくしゅうサイト" class="headerlink" title="学習がくしゅうサイト"></a>学習<small style="color: salmon">がくしゅう</small>サイト</h2><ul>
@@ -249,10 +272,11 @@
 <p>Dan Abramov 的网站：<a target="_blank" rel="noopener" href="https://overreacted.io/zh-hans/making-setinterval-declarative-with-react-hooks/">https://overreacted.io/zh-hans/making-setinterval-declarative-with-react-hooks/</a></p>
 <p>React v17 rc 介绍：<a target="_blank" rel="noopener" href="https://reactjs.org/blog/2020/08/10/react-v17-rc.html%E3%80%82">https://reactjs.org/blog/2020/08/10/react-v17-rc.html。</a></p>
 <p>React 路由中文网：<a target="_blank" rel="noopener" href="http://react-router.docschina.org/web/example/route-config%EF%BC%9Bhttps://reactrouter.com/web/guides/quick-start">http://react-router.docschina.org/web/example/route-config；https://reactrouter.com/web/guides/quick-start</a></p>
-<p>ライフサイクル図：<a target="_blank" rel="noopener" href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/</a></p>
+<p>ライフサイクル図（React 生命周期）：<a target="_blank" rel="noopener" href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/</a></p>
 <p>动画实现方式：<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000012783439">https://segmentfault.com/a/1190000012783439</a></p>
 <p>林纳斯的程序时间：<a target="_blank" rel="noopener" href="https://linux.slashdot.org/story/20/07/03/2133201/linus-torvalds-i-do-no-coding-any-more">https://linux.slashdot.org/story/20/07/03/2133201/linus-torvalds-i-do-no-coding-any-more</a></p>
 <p>试题材料：<a target="_blank" rel="noopener" href="https://q.shanyue.tech/interviews/2017.html%EF%BC%9B">https://q.shanyue.tech/interviews/2017.html；</a></p>
+<p><a target="_blank" rel="noopener" href="https://linjuncheng.cn/pages/react/hard/readme.html">React 源码解析</a>——作者结合掘金小册等资料的总结</p>
 
 
   </article>
