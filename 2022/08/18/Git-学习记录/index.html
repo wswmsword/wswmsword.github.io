@@ -85,7 +85,7 @@
       
     </div>
     <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>工作里习惯了通过 Fork（app）使用 Git，这两个月的时间里开始熟悉 Git 的命令行客户端。虽然命令行在视觉上不如 UI 直观，但命令行可以保持双手持续输入不离开键盘，熟悉命令行也更利于寻找最适合自己的 GUI。</p>
-<p>另外，界面的直观指的是个人使用上的直观。界面有琳琅满目的信息，鼠标有四面八方的方向，当某个人不熟悉界面的时候，我只能当面告诉他如何执行这些 git 指令：“点这里，这里，这里，往上一点，点顶部菜单栏左侧第二个按钮”，这不如命令行直观。</p>
+<p>另外，界面的直观指的是个人使用上的直观。界面上的信息琳琅满目，鼠标指向四面八方，当某个人不熟悉界面的时候，我只能当面告诉他如何执行这些 git 指令：“点这里，这里，这里，往上一点，点顶部菜单栏左侧第二个按钮”，这不如命令行直观。</p>
 <p>下面的内容包括了 Git 常用的命令，以及各命令或详或简但有必要的解释说明，其中也包括了很多相关的引用链接用于扩展阅读。</p>
 <h2 id="推送和拉取"><a href="#推送和拉取" class="headerlink" title="推送和拉取"></a>推送和拉取</h2><p>推送：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 推送远程，并设置当前分支的 upstream 为 main，设置之后每次推送当前分支只需要 git push 即可</span></span><br><span class="line">git push -u origin main</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送远程至 upstream，如果没有设置，在 git 2.0 之前，所有同名分支被推送，git 2.0 之后，报错</span></span><br><span class="line">git push</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制推送</span></span><br><span class="line">git push -f</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送至远程，但是设置远程分支名称</span></span><br><span class="line">git push origin hehe:haha</span><br></pre></td></tr></table></figure>
@@ -503,6 +503,9 @@
 <p>获取提交的数量：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git rev-list --count HEAD</span><br><span class="line">git rev-list --count HEAD --since=<span class="string">&quot;Dec 3 2015&quot;</span>  --before=<span class="string">&quot;Jan 3 2016&quot;</span> <span class="comment"># 一段时间</span></span><br><span class="line">git shortlog -s</span><br><span class="line">git shortlog -s --all <span class="comment"># -all 所有分支</span></span><br></pre></td></tr></table></figure>
 
+<p>获取所有分支数量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch --all | <span class="built_in">wc</span> -l</span><br></pre></td></tr></table></figure>
+
 <p>切换上一次的分支：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout - <span class="comment"># 只需添加一个短杠，其它命令兴许也能用</span></span><br></pre></td></tr></table></figure>
 
@@ -538,7 +541,8 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/wswmsword/git-learning">Git 实验仓库 - git-learning</a>——我创建的用于执行本学习记录里每一条命令的 git 仓库；</li>
 <li><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/43868889">Setting up and using Meld as your git difftool and mergetool on a Mac</a>；</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/qw3rtman/git-fire">git-fire</a>——在紧急情况下保存代码。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/qw3rtman/git-fire">git-fire</a>——在紧急情况下保存代码；</li>
+<li><a target="_blank" rel="noopener" href="https://docs.github.com/cn/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH key and adding it to the ssh-agent</a>——GitHub 创建 SSH 文档。</li>
 </ul>
 
 
