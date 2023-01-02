@@ -79,7 +79,7 @@
     </div>
     <hr>
     
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%96%AD%E5%BC%80"><span class="toc-text">连接和断开</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#keep-alive"><span class="toc-text">keep-alive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98"><span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">状态码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F"><span class="toc-text">跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS%EF%BC%88Domain-Name-System%EF%BC%89"><span class="toc-text">DNS（Domain Name System）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS"><span class="toc-text">HTTPS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%94%B6%E5%8F%91"><span class="toc-text">数据收发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-text">HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SEO"><span class="toc-text">SEO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8"><span class="toc-text">安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-text">其它</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%96%AD%E5%BC%80"><span class="toc-text">连接和断开</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#keep-alive"><span class="toc-text">keep-alive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98"><span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">状态码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F"><span class="toc-text">跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS%EF%BC%88Domain-Name-System%EF%BC%89"><span class="toc-text">DNS（Domain Name System）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS"><span class="toc-text">HTTPS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%94%B6%E5%8F%91"><span class="toc-text">数据收发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-text">HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-%E6%96%B9%E6%B3%95"><span class="toc-text">HTTP 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SEO"><span class="toc-text">SEO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8"><span class="toc-text">安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-text">其它</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li></ol></li></ol>
     
     <div class="picture-container">
       
@@ -250,6 +250,7 @@
 <p>第四步，鲍勃<strong>使用自己的私钥，获取爱丽丝发来的随机数</strong>（即Premaster secret）。</p>
 <p>第五步，爱丽丝和鲍勃<strong>根据约定的加密方法</strong>，使用前面的三个随机数，**生成”对话密钥”**（session key），用来加密接下来的整个对话过程。</p>
 </blockquote>
+<p>其中的协议版本号：94 年的 SSL 1.0，95 年的 SSL 2.0，96 年的 SSL 3.0，99 年的 TLS 1.0，06 年的 TLS 1.1，08 年的 TLS 1.2。</p>
 <p>相关链接：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2014/02/ssl_tls.html">SSL/TLS协议运行机制的概述</a>——阮一峰教程；</li>
@@ -304,7 +305,12 @@
 <li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/08/http.html">HTTP 协议入门</a>——阮一峰的 Http 教程；</li>
 <li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/04/cors.html">跨域资源共享 CORS 详解</a>——阮一峰的跨域资源共享教程；</li>
 <li><a target="_blank" rel="noopener" href="https://runwei.blog.csdn.net/article/details/104179224">正向代理与反向代理的区别</a>；</li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26559480">一文读懂 HTTP/2 特性</a>——又拍云知乎教程。</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26559480">一文读懂 HTTP/2 特性</a>——又拍云知乎教程；</li>
+<li><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2010/02/url_encoding.html">关于URL编码</a>——阮一峰的 URL 编码文章。</li>
+</ul>
+<h2 id="HTTP-方法"><a href="#HTTP-方法" class="headerlink" title="HTTP 方法"></a>HTTP 方法</h2><p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28586791/answer/767316172">GET 和 POST 到底有什么区别？</a>——知乎回答，对 GET POST 在浏览器和接口中的解释。</li>
 </ul>
 <h2 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h2><p>相关链接：</p>
 <ul>
@@ -312,7 +318,10 @@
 <li><a target="_blank" rel="noopener" href="https://ahrefs.com/zh/seo">搜索引擎优化</a>—— ahrefs 的 SEO 教程；</li>
 <li><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/886746#reply4">发现了不错的 SEO 教程</a>—— V2EX 关于 SEO 的帖子。</li>
 </ul>
-<h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><p>相关链接：</p>
+<h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><blockquote>
+<p>“返回私密数据的mask，XSS，CSRF，跨域安全，前端加密，钓鱼，salt，……”——GET 和 POST 到底有什么区别？ - 大宽宽的回答 - 知乎<br><em><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28586791/answer/767316172">https://www.zhihu.com/question/28586791/answer/767316172</a></em></p>
+</blockquote>
+<p>相关链接：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://ruby-china.org/topics/42753">【白话科普】从“熊猫烧香”聊聊计算机病毒</a>——又拍云在 Ruby 社区发布的系列文章。</li>
 </ul>

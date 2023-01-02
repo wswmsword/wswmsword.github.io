@@ -633,7 +633,11 @@
 </ul>
 <p>常见触发回流的情况：初次渲染；元素大小变化；元素位置变化；窗口变化；插删 DOM 元素；激活伪类；改变字体。</p>
 <p>减少重绘与回流的方法：避免 table；读写分离，批处理写；scrollWidth, scrollHeight, scrollTop, scrollLeft, getBoundingClientRect()…，把这些任务缓存；使用类名修改样式，避免 style 属性；复杂动画的 absolute 和 fixed。</p>
-<p>关于 drawTextBlob：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/33173919/timeline-paint-profiler-in-devtools-suggests-everything-is-being-painted%EF%BC%9Bhttps://zhuanlan.zhihu.com/p/63318397%E3%80%82">https://stackoverflow.com/questions/33173919/timeline-paint-profiler-in-devtools-suggests-everything-is-being-painted；https://zhuanlan.zhihu.com/p/63318397。</a></p>
+<p>关于 drawTextBlob：</p>
+<ul>
+<li><em><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/33173919/timeline-paint-profiler-in-devtools-suggests-everything-is-being-painted">https://stackoverflow.com/questions/33173919/timeline-paint-profiler-in-devtools-suggests-everything-is-being-painted</a></em>——关于 drawTextBlob；</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/63318397">浏览器渲染过程概述</a>——知乎文章。</li>
+</ul>
 <hr>
 <p>使用 defer 和 async：</p>
 <ul>
