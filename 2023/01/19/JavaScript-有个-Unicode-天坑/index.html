@@ -1,0 +1,361 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>JavaScript 有个 Unicode 天坑</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="JavaScript 有个 Unicode 天坑"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        JavaScript 有个 Unicode 天坑
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2023-01-19T11:07:18.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2023-01-19
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/翻译/">翻译</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Unicode-%E5%9F%BA%E7%A1%80"><span class="toc-text">Unicode 基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97"><span class="toc-text">转义序列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E6%95%B0%E9%87%8F"><span class="toc-text">计算字符串中的字符数量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E8%BE%85%E5%8A%A9%E7%AC%A6%E5%8F%B7"><span class="toc-text">解释辅助符号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E8%A7%84%E8%8C%83%E5%8C%96"><span class="toc-text">解释规范化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E5%85%B6%E5%AE%83%E7%BB%84%E5%90%88%E6%A0%87%E5%BF%97"><span class="toc-text">解释其它组合标志</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E5%85%B6%E4%BB%96%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AD%97%E5%9E%8B%E6%97%8F"><span class="toc-text">解释其他类型的字型族</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%86%E8%BD%AC-JS-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">逆转 JS 字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95%E9%87%8C%E7%9A%84-Unicode-%E9%97%AE%E9%A2%98"><span class="toc-text">关于字符串方法里的 Unicode 问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E5%8F%98%E7%A0%81%E7%82%B9%E8%87%B3%E7%AC%A6%E5%8F%B7"><span class="toc-text">转变码点至符号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E8%8E%B7%E5%8F%96%E7%AC%A6%E5%8F%B7%E5%AD%97%E7%AC%A6"><span class="toc-text">从字符串里获取符号字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%8E%B7%E5%8F%96%E7%A0%81%E7%82%B9"><span class="toc-text">从字符串获取码点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%89%80%E6%9C%89%E7%AC%A6%E5%8F%B7%E5%AD%97%E7%AC%A6"><span class="toc-text">遍历字符串的所有符号字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%AB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">别的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E9%87%8C%E7%9A%84-Unicode-%E9%97%AE%E9%A2%98"><span class="toc-text">正则里的 Unicode 问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%B9%E9%85%8D%E7%A0%81%E7%82%B9%E5%92%8C-Unicode-scalar-%E5%80%BC"><span class="toc-text">匹配码点和 Unicode scalar 值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84%E8%BE%85%E5%8A%A9%E7%AC%A6%E5%8F%B7"><span class="toc-text">字符集合中的辅助符号</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84-bug%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D"><span class="toc-text">生活中的 bug，以及如何避免</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D%E2%80%A6%E2%80%A6The-Pile-of-Poo-Test%E2%84%A2"><span class="toc-text">介绍……The Pile of Poo Test™</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Slides"><span class="toc-text">Slides</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Translations"><span class="toc-text">Translations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Comments"><span class="toc-text">Comments</span></a></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <p>原文：<em><a target="_blank" rel="noopener" href="https://mathiasbynens.be/notes/javascript-unicode">https://mathiasbynens.be/notes/javascript-unicode</a></em></p>
+<p>来源：<em>‌<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/54369513/how-to-count-the-correct-length-of-a-string-with-emojis-in-javascript">https://stackoverflow.com/questions/54369513/how-to-count-the-correct-length-of-a-string-with-emojis-in-javascript</a></em></p>
+<p>原文日期：20th October 2013</p>
+<p>原文作者：<a target="_blank" rel="noopener" href="https://twitter.com/mathias">Mathias</a></p>
+<p>翻译日期：01/16/23 00:15:24 CST</p>
+<p>JS 处理 Unicode 的方法非常的……惊吓。本文解释了 JS 里和 Unicode 相关的痛点，提供了常见问题的解决方案，也解释了 ES6 标准是怎样改善现阶段的。</p>
+<h2 id="Unicode-基础"><a href="#Unicode-基础" class="headerlink" title="Unicode 基础"></a>Unicode 基础</h2><p>在我们深入 JS 前，我们要保证我们对 Unicode 的理解在同一次元。</p>
+<p>我们很容易把 Unicode 想像成一个数据库，它把所有符号都映射成了被称为<strong>码点</strong>的数字和一个唯一名称。这就能很简单地引用一个特定符号而不使用符号本身。例如：</p>
+<ul>
+<li><code>A</code> is <a target="_blank" rel="noopener" href="https://codepoints.net/U+0041">U+0041 LATIN CAPITAL LETTER A</a>. “A”使用“U+0041”引用拉丁大写字母 A。</li>
+<li><code>a</code> is <a target="_blank" rel="noopener" href="https://codepoints.net/U+0061">U+0061 LATIN SMALL LETTER A</a>. “a”使用“U+0061”引用拉丁小写字母 A。</li>
+<li><code>©</code> is <a target="_blank" rel="noopener" href="https://codepoints.net/U+00A9">U+00A9 COPYRIGHT SIGN</a>. “©”使用“U+00A9”引用版权符号。</li>
+<li><code>☃</code> is <a target="_blank" rel="noopener" href="https://codepoints.net/U+2603">U+2603 SNOWMAN</a>. “☃”使用“U+2603”引用雪人。</li>
+<li><code>💩</code> is <a target="_blank" rel="noopener" href="https://codepoints.net/U+1F4A9">U+1F4A9 PILE OF POO</a>. “💩”使用“U+1F4A9”引用一坨便便。</li>
+</ul>
+<p>码点通常被展示成十六进制数字，“零填充”至少四位，携带“U+”前缀。</p>
+<p>码点的范围是从 U+0000 到 U+10FFFF 之间，大概有 110 万（1114095）个字符。为了井然有序不失控，Unicode 把码点分成了 17 个平面（17 等份），每个平面有 65000（65535）个码点。</p>
+<p>第一个平面（U+0000 → U+FFFF）被称为<strong>基本多文种平面</strong>或 <strong>BMP</strong>，也是最重要的一个平面，因为它囊括了所有最常用的字符。在英语文档里，大部分情况你不再需要 BMP 平面外的其它平面的字符了。和别的平面一样，BMP 里有 65000 个符号。</p>
+<p>剩下的约 100 万个码点（U+010000 → U+10FFFF）分布在 BMP 之外。属于这些码点的平面被称为<strong>补充（辅助）平面</strong>，或<strong>星星平面</strong>（后文统一称为辅助平面，辅助平面中的字符称为辅助字符，辅助字符的码点称为辅助码点）。</p>
+<p><strong>辅助码点</strong>很好识别：如果某个字符需要你用大于 4 位的十六进制数来表示码点，那它就是辅助码点。</p>
+<p>现在我们对 Unicode 有了基本认识，让我们看看它是怎么应用在 JavaScript 的字符串里的。</p>
+<h2 id="转义序列"><a href="#转义序列" class="headerlink" title="转义序列"></a>转义序列</h2><p>你可能以前看过<a target="_blank" rel="noopener" href="https://mathiasbynens.be/notes/javascript-escapes">这样的东西</a>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="string">&#x27;\x41\x42\x43&#x27;</span></span><br><span class="line"><span class="string">&#x27;ABC&#x27;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="string">&#x27;\x61\x62\x63&#x27;</span></span><br><span class="line"><span class="string">&#x27;abc&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>这是<a target="_blank" rel="noopener" href="https://mathiasbynens.be/notes/javascript-escapes#hexadecimal">十六进制转义序列</a>。他们由两位十六进制数字组成，用来引用匹配到的码点。例如，<code>\x41</code>表示 <a target="_blank" rel="noopener" href="https://codepoints.net/U+0041">U+0041 大写字母 A</a>。这种转义序列可以表示在 U+0000 到 U+00FF 间的码点。</p>
+<p>下面这种转义也很常见：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="string">&#x27;\u0041\u0042\u0043&#x27;</span></span><br><span class="line"><span class="string">&#x27;ABC&#x27;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="string">&#x27;I \u2661 JavaScript!&#x27;</span></span><br><span class="line"><span class="string">&#x27;I ♡ JavaScript!&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>这是 <a target="_blank" rel="noopener" href="https://mathiasbynens.be/notes/javascript-escapes#unicode">Unicode 转义序列</a>。他们用 4 位十六进制数字表示码点。例如，<code>\u2661</code>表示 <a target="_blank" rel="noopener" href="https://codepoints.net/U+2661">U+2661 白色心形</a>。这些转移序列可以表示 U+0000 到 U+FFFF 范围内的码点，也就是完整的基本多文种平面（BMP）。</p>
+<p>其它平面的码点如何表示——辅助平面呢？我们还需要添加 4 位十六进制数字（共 8 位）来表示这些码点……所以该怎么转义它们？</p>
+<p>在 ES6 中很容易，因为 ES6 引入了一种新的转义序列方法：<a target="_blank" rel="noopener" href="https://mathiasbynens.be/notes/javascript-escapes#unicode-code-point">Unicode 码点转义</a>。例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="string">&#x27;\u&#123;41&#125;\u&#123;42&#125;\u&#123;43&#125;&#x27;</span></span><br><span class="line"><span class="string">&#x27;ABC&#x27;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="string">&#x27;\u&#123;1F4A9&#125;&#x27;</span></span><br><span class="line"><span class="string">&#x27;💩&#x27;</span> // U+1F4A9 PILE OF POO</span><br></pre></td></tr></table></figure>
+
+<p>你可以在花括号之间写十六进制数字，这样能够表示所有的码点。这不会像上面的十六进制转移序列和 Unicode 转移序列，没有限制花括号内数字的位数，所以可以很容易转义所有字符的码点。</p>
+<p>如果要向后兼容 ES5 和更老的环境，不好意思只能用代理对的方式（来表示辅助平面的字符）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="string">&#x27;\uD83D\uDCA9&#x27;</span></span><br><span class="line"><span class="string">&#x27;💩&#x27;</span> // U+1F4A9 PILE OF POO</span><br></pre></td></tr></table></figure>
+
+<p>这个例子里，每个转义字符表示半个代理对的码点。两个一半的代理对组成一个辅助平面的字符。</p>
+<p>请注意代理对由两部分组成，代理对是由原始码点计算出来的，已经和原始码点不一样了。有<a target="_blank" rel="noopener" href="https://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae">公式</a>可以通过辅助码点计算出代理对，也可以通过代理对计算出辅助码点。</p>
+<p>使用代理对能表示所有的辅助码点（从 U+010000 到 U+10FFFF）……可是像这样用单个转义字符表示 BMP 符号，用两个转义字符表示辅助符号，会让人觉得困惑了，最终也会产生很多混乱的问题。</p>
+<h2 id="计算字符串中的字符数量"><a href="#计算字符串中的字符数量" class="headerlink" title="计算字符串中的字符数量"></a>计算字符串中的字符数量</h2><p>如果你要计算字符串长度，该怎么做？</p>
+<p>我的第一反应很简单，通过 <code>length</code> 属性得到字符串长度。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="string">&#x27;A&#x27;</span>.length // U+0041 LATIN CAPITAL LETTER A</span><br><span class="line">1</span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="string">&#x27;A&#x27;</span> == <span class="string">&#x27;\u0041&#x27;</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="string">&#x27;B&#x27;</span>.length // U+0042 LATIN CAPITAL LETTER B</span><br><span class="line">1</span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="string">&#x27;B&#x27;</span> == <span class="string">&#x27;\u0042&#x27;</span></span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子里，<code>length</code> 属性实际反映了字符数量。很容易理解：如果用转移序列表示符号，很明显对于每个符号，我们只需要一个转义字符。可是，事情不会一直顺利！下面是个稍微不同的例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="string">&#x27;𝐀&#x27;</span>.length // U+1D400 MATHEMATICAL BOLD CAPITAL A</span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="string">&#x27;𝐀&#x27;</span> == <span class="string">&#x27;\uD835\uDC00&#x27;</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="string">&#x27;𝐁&#x27;</span>.length // U+1D401 MATHEMATICAL BOLD CAPITAL B</span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="string">&#x27;𝐁&#x27;</span> == <span class="string">&#x27;\uD835\uDC01&#x27;</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="string">&#x27;💩&#x27;</span>.length // U+1F4A9 PILE OF POO</span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="string">&#x27;💩&#x27;</span> == <span class="string">&#x27;\uD83D\uDCA9&#x27;</span></span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>JavaScript 在内部用代理对表示辅助符号，且把代理对的两部分当成成分开的两个“字符”。如果你只能用兼容 ES5 的转义序列表示符号，你会看到辅助符号都需要两个转义符号表示。让人难懂，因为我实际看见的字符数量和计算机告诉我的数量不一样。</p>
+<h3 id="解释辅助符号"><a href="#解释辅助符号" class="headerlink" title="解释辅助符号"></a>解释辅助符号</h3><p>回到问题：该怎样在 JS 里准确地获取符号字符数量？答案是计算代理对的数量，把每个代理对当成单个字符。就像下面这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regexAstralSymbols = <span class="regexp">/[\uD800-\uDBFF][\uDC00-\uDFFF]/g</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">countSymbols</span>(<span class="params">string</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> string</span><br><span class="line">		<span class="comment">// Replace every surrogate pair with a BMP symbol.</span></span><br><span class="line">		.<span class="title function_">replace</span>(regexAstralSymbols, <span class="string">&#x27;_&#x27;</span>)</span><br><span class="line">		<span class="comment">// …and *then* get the length.</span></span><br><span class="line">		.<span class="property">length</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者如果你用 <a target="_blank" rel="noopener" href="https://mths.be/punycode">Punycode.js</a>（<a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a> 内置），可以用它的工具方法在 JS 字符串和 Unicode 码点间转换。<code>punycode.ucs2.decode</code> 方法把一个字符串转换成一个 Unicode 码点数组；每一个元素对应了每个符号。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">countSymbols</span>(<span class="params">string</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> punycode.<span class="property">ucs2</span>.<span class="title function_">decode</span>(string).<span class="property">length</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ES6 中，你可以利用 <a target="_blank" rel="noopener" href="https://mths.be/array-from"><code>Array.from</code></a>来计算字符串长度，它使用<a target="_blank" rel="noopener" href="https://mathiasbynens.be/notes/javascript-unicode#iterating-over-symbols">字符串迭代器</a>来把字符串按单个符号字符分割成数组。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">countSymbols</span>(<span class="params">string</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="title class_">Array</span>.<span class="title function_">from</span>(string).<span class="property">length</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者也可以使用解构符号 <code>...</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">countSymbols</span>(<span class="params">string</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> [...string].<span class="property">length</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用以上的任意一个 ES6 方法，我们的结果都更准确了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; countSymbols(<span class="string">&#x27;A&#x27;</span>) // U+0041 LATIN CAPITAL LETTER A</span><br><span class="line">1</span><br><span class="line"></span><br><span class="line">&gt;&gt; countSymbols(<span class="string">&#x27;𝐀&#x27;</span>) // U+1D400 MATHEMATICAL BOLD CAPITAL A</span><br><span class="line">1</span><br><span class="line"></span><br><span class="line">&gt;&gt; countSymbols(<span class="string">&#x27;💩&#x27;</span>) // U+1F4A9 PILE OF POO</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<h3 id="解释规范化"><a href="#解释规范化" class="headerlink" title="解释规范化"></a>解释规范化</h3><p>但如果我们更考究一点，计算字符串字符数量有更复杂的场景。考虑下面的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; &#x27;mañana&#x27; == &#x27;mañana&#x27;</span><br><span class="line">false</span><br></pre></td></tr></table></figure>
+
+<p>JS 说这两个串不同，但我们看上去是一摸一样！所以又出了什么问题？</p>
+<!-- ![js-escapes-manana.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a670754e2e0345f7935028924742bff3~tplv-k3u1fbpfcp-watermark.image?) -->
+<img src="js-escapes-manana.png" style="max-width:100%;" title="js-escapes-manana.png" />
+
+<p>我的 <a target="_blank" rel="noopener" href="https://mothereff.in/js-escapes#1ma%C3%B1ana%20man%CC%83ana">JS 转义工具</a>会告诉你，原来是下面这样：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="string">&#x27;ma\xF1ana&#x27;</span> == <span class="string">&#x27;man\u0303ana&#x27;</span></span><br><span class="line"><span class="literal">false</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="string">&#x27;ma\xF1ana&#x27;</span>.length</span><br><span class="line">6</span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="string">&#x27;man\u0303ana&#x27;</span>.length</span><br><span class="line">7</span><br></pre></td></tr></table></figure>
+
+<p>第一个字符串包括了 <a target="_blank" rel="noopener" href="https://codepoints.net/U+00F1">U+00F1 带颚化符的拉丁小写字母 N</a>，第二个字符串使用两个单独的码点（<a target="_blank" rel="noopener" href="https://codepoints.net/U+006E">U+006E 拉丁小写字母 N</a> 和 <a target="_blank" rel="noopener" href="https://codepoints.net/U+0303">U+0303 组合颚化符</a>）来创建相同的字型。这就解释了为什么它们不等，为什么有不同的 <code>length</code>。</p>
+<p>可如果我们想拿到我们实际看到的字符数量，我们预期的答案是两个长度为 <code>6</code> 的字符串，因为这是视觉上能够区分的数量。该怎样实现呢？</p>
+<p>ES6 的方案很简单：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">countSymbolsPedantically</span>(<span class="params">string</span>) &#123;</span><br><span class="line">	<span class="comment">// Unicode Normalization, NFC form, to account for lookalikes:</span></span><br><span class="line">	<span class="keyword">var</span> normalized = string.<span class="title function_">normalize</span>(<span class="string">&#x27;NFC&#x27;</span>);</span><br><span class="line">	<span class="comment">// Account for astral symbols / surrogates, just like we did before:</span></span><br><span class="line">	<span class="keyword">return</span> punycode.<span class="property">ucs2</span>.<span class="title function_">decode</span>(normalized).<span class="property">length</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>String.prototype</code> 上的 <code>normalize</code> 方法执行 <a target="_blank" rel="noopener" href="http://unicode.org/reports/tr15/">Unicode 规范化</a>。如果某个单个码点和另一个通过组合标志（combining mark）组合的码点，形成了相同的字型，他会被规范化成一个单独的码点形式。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; countSymbolsPedantically(<span class="string">&#x27;mañana&#x27;</span>) // U+00F1</span><br><span class="line">6</span><br><span class="line">&gt;&gt; countSymbolsPedantically(<span class="string">&#x27;mañana&#x27;</span>) // U+006E + U+0303</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
+
+<p>如果要向后兼容 ES5 和更老的环境，可以使用<a target="_blank" rel="noopener" href="http://git.io/unorm">一个 String.prototype.normalize 的 polyfill</a>。</p>
+<h3 id="解释其它组合标志"><a href="#解释其它组合标志" class="headerlink" title="解释其它组合标志"></a>解释其它组合标志</h3><p>目前为止还不够完美——应用多个组合符号的码点总会得到一个视觉上是单个字型的字符，但这个字符可能没有规范化的形式，这种情况规范化也没有帮助。例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="string">&#x27;q\u0307\u0323&#x27;</span>.normalize(<span class="string">&#x27;NFC&#x27;</span>) // `q̣̇`</span><br><span class="line"><span class="string">&#x27;q\u0307\u0323&#x27;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; countSymbolsPedantically(<span class="string">&#x27;q\u0307\u0323&#x27;</span>)</span><br><span class="line">3 // not 1</span><br><span class="line"></span><br><span class="line">&gt;&gt; countSymbolsPedantically(<span class="string">&#x27;Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞&#x27;</span>)</span><br><span class="line">74 // not 6</span><br></pre></td></tr></table></figure>
+
+<p>如果你需要一个更准确的结果，你可以用<a target="_blank" rel="noopener" href="https://github.com/mathiasbynens/esrever/blob/master/scripts/export-data.js">一个正则</a>来移除组合标志。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Note: replace the following regular expression with its transpiled equivalent</span></span><br><span class="line"><span class="comment">// to make it work in old environments. https://mths.be/bwm</span></span><br><span class="line"><span class="keyword">var</span> regexSymbolWithCombiningMarks = <span class="regexp">/(\P&#123;Mark&#125;)(\p&#123;Mark&#125;+)/gu</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">countSymbolsIgnoringCombiningMarks</span>(<span class="params">string</span>) &#123;</span><br><span class="line">	<span class="comment">// Remove any combining marks, leaving only the symbols they belong to:</span></span><br><span class="line">	<span class="keyword">var</span> stripped = string.<span class="title function_">replace</span>(regexSymbolWithCombiningMarks, <span class="keyword">function</span>(<span class="params">$<span class="number">0</span>, symbol, combiningMarks</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> symbol;</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="comment">// Account for astral symbols / surrogates, just like we did before:</span></span><br><span class="line">	<span class="keyword">return</span> punycode.<span class="property">ucs2</span>.<span class="title function_">decode</span>(stripped).<span class="property">length</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数移除所有组合标志，只留下原字符本身。（未匹配到的组合标志被完好地保留下来？）。这个方案甚至能在 ES3 的环境工作，它提供了目前为止最准确的结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="title function_">countSymbolsIgnoringCombiningMarks</span>(<span class="string">&#x27;q\u0307\u0323&#x27;</span>)</span><br><span class="line"><span class="number">1</span></span><br><span class="line">&gt;&gt; <span class="title function_">countSymbolsIgnoringCombiningMarks</span>(<span class="string">&#x27;Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞&#x27;</span>)</span><br><span class="line"><span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="解释其他类型的字型族"><a href="#解释其他类型的字型族" class="headerlink" title="解释其他类型的字型族"></a>解释其他类型的字型族</h3><p>上面的算法还是太简单了——它不能处理类似 <code>நி </code>(<a target="_blank" rel="noopener" href="https://codepoints.net/U+0BA8">ந</a> +<a target="_blank" rel="noopener" href="https://codepoints.net/U+0BBF"> ி</a>)的字型族，由 conjoining Jamo 构成的韩文，例如 <code>깍</code>（<a target="_blank" rel="noopener" href="https://codepoints.net/U+1101">ᄁ</a> + <a target="_blank" rel="noopener" href="https://codepoints.net/U+1161">ᅡ</a> + <a target="_blank" rel="noopener" href="https://codepoints.net/U+11A8">ᆨ</a>），emoji 序列，例如 <code>👨‍👩‍👧‍👦</code>（<a target="_blank" rel="noopener" href="https://codepoints.net/U+1F468">👨</a> + <a target="_blank" rel="noopener" href="https://codepoints.net/U+200D">U+200D ZERO WIDTH JOINER</a> + <a target="_blank" rel="noopener" href="https://codepoints.net/U+1F469">👩</a> + <a target="_blank" rel="noopener" href="https://codepoints.net/U+200D">U+200D ZERO WIDTH JOINER</a> + <a target="_blank" rel="noopener" href="https://codepoints.net/U+1F467">👧</a> + <a target="_blank" rel="noopener" href="https://codepoints.net/U+200D">U+200D ZERO WIDTH JOINER</a> + <a target="_blank" rel="noopener" href="https://codepoints.net/U+1F466">👦</a>），以及其它类似的符号。</p>
+<p><em>Unicode Text Segmentation</em> 上的 Unicode Standard Annex #29 描述了<a target="_blank" rel="noopener" href="http://www.unicode.org/reports/tr29/#Grapheme_Cluster_Boundaries">一种确定字型族边界的算法</a>。如果要完全准确的结果，工作于所有 Unicode scripts 中，就要在 JS 里实现这个算法，然后就能把每个字型族当作单个符号。已经有<a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-intl-segmenter">一个关于这项工作的草案</a>。</p>
+<h2 id="逆转-JS-字符串"><a href="#逆转-JS-字符串" class="headerlink" title="逆转 JS 字符串"></a>逆转 JS 字符串</h2><p>这是个类似问题的例子：在 JS 里逆转一个字符串。这还不简单？飞快写出答案：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// naive solution</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">reverse</span>(<span class="params">string</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> string.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>).<span class="title function_">reverse</span>().<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>大部分情况都工作良好：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; reverse(<span class="string">&#x27;abc&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;cba&#x27;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; reverse(<span class="string">&#x27;mañana&#x27;</span>) // U+00F1</span><br><span class="line"><span class="string">&#x27;anañam&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>直到碰到了包含组合标志和辅助符号的字符串，就完全错误了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; reverse(<span class="string">&#x27;mañana&#x27;</span>) // U+006E + U+0303</span><br><span class="line"><span class="string">&#x27;anãnam&#x27;</span> // note: the `~` is now applied to the `a` instead of the `n`</span><br><span class="line"></span><br><span class="line">&gt;&gt; reverse(<span class="string">&#x27;💩&#x27;</span>) // U+1F4A9</span><br><span class="line"><span class="string">&#x27;��&#x27;</span> // `<span class="string">&#x27;\uDCA9\uD83D&#x27;</span>`, the surrogate pair <span class="keyword">for</span> `💩` <span class="keyword">in</span> the wrong order</span><br></pre></td></tr></table></figure>
+
+<p>为了能在 ES6 中正确地逆转辅助符号，我们要利用 <a target="_blank" rel="noopener" href="https://mths.be/array-from"><code>Array.from</code></a> 使用<a target="_blank" rel="noopener" href="https://mathiasbynens.be/notes/javascript-unicode#iterating-over-symbols">字符串迭代器</a>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// slightly better solution that relies on ES6 StringIterator and `Array.from`</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">reverse</span>(<span class="params">string</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="title class_">Array</span>.<span class="title function_">from</span>(string).<span class="title function_">reverse</span>().<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>虽然辅助符号的代理对问题解决了，但还是不能解决带有组合符号的字符串。</p>
+<p>可幸，有一位叫 Missy Elliot 的杰出计算机科学家提出了一种解决这些问题的<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=cjIvu7e6Wq8&t=33s">算法</a>：</p>
+<blockquote>
+<p>I put my thang down, flip it, and reverse it. I put my thang down, flip it, and reverse it.「我抛开当下，转换姿势。我抛开当下，转换姿势。——歌曲“Work It”的网易云翻译」</p>
+</blockquote>
+<p>事实上：通过将组合标志和被组合的符号进行交换，以及在进一步字符串操作之前逆转代理对，可以<a target="_blank" rel="noopener" href="https://mths.be/esrever">成功避免这些问题</a>。谢谢你，Missy！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// using Esrever (https://mths.be/esrever)</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; esrever.<span class="title function_">reverse</span>(<span class="string">&#x27;mañana&#x27;</span>) <span class="comment">// U+006E + U+0303</span></span><br><span class="line"><span class="string">&#x27;anañam&#x27;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; esrever.<span class="title function_">reverse</span>(<span class="string">&#x27;💩&#x27;</span>) <span class="comment">// U+1F4A9</span></span><br><span class="line"><span class="string">&#x27;💩&#x27;</span> <span class="comment">// U+1F4A9</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="关于字符串方法里的-Unicode-问题"><a href="#关于字符串方法里的-Unicode-问题" class="headerlink" title="关于字符串方法里的 Unicode 问题"></a>关于字符串方法里的 Unicode 问题</h2><p>这种代理对的行为同样影响了其他字符串方法。</p>
+<h3 id="转变码点至符号"><a href="#转变码点至符号" class="headerlink" title="转变码点至符号"></a>转变码点至符号</h3><p><code>String.fromCharCode</code> 允许你通过 Unicode 码点创建字符串。但是这个方法只能正确处理 BMP 中的范围（U+0000 到 U+FFFF）。如果你需要辅助码点，将不符预期。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; String.fromCharCode(0x0041) // U+0041</span><br><span class="line"><span class="string">&#x27;A&#x27;</span> // U+0041</span><br><span class="line"></span><br><span class="line">&gt;&gt; String.fromCharCode(0x1F4A9) // U+1F4A9</span><br><span class="line"><span class="string">&#x27;&#x27;</span> // U+F4A9, not U+1F4A9</span><br></pre></td></tr></table></figure>
+
+<p>唯一的解决办法是自己计算，自己<a target="_blank" rel="noopener" href="https://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae">计算代理对的两部分</a>，分别作为参数传入。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; String.fromCharCode(0xD83D, 0xDCA9)</span><br><span class="line"><span class="string">&#x27;💩&#x27;</span> // U+1F4A9</span><br></pre></td></tr></table></figure>
+
+<p>如果你不想体验计算代理对的糟糕生活，你还得用 <a target="_blank" rel="noopener" href="https://mths.be/punycode">Punycode.js</a> 的工具方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; punycode.ucs2.encode([ 0x1F4A9 ])</span><br><span class="line"><span class="string">&#x27;💩&#x27;</span> // U+1F4A9</span><br></pre></td></tr></table></figure>
+
+<p>可幸，ES6 引入了能正确处理辅助符号的 <code>String.fromCodePoint</code>。它可以被用到所有 Unicode 码点中，范围是 U+000000 到 U+10FFFF 全覆盖。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; String.fromCodePoint(0x1F4A9)</span><br><span class="line"><span class="string">&#x27;💩&#x27;</span> // U+1F4A9</span><br></pre></td></tr></table></figure>
+
+<p>要兼容 ES5 和更老的版本，要使用 <a target="_blank" rel="noopener" href="https://mths.be/fromcodepoint">String.fromCodePoint 的 polyfill</a>。</p>
+<h3 id="从字符串里获取符号字符"><a href="#从字符串里获取符号字符" class="headerlink" title="从字符串里获取符号字符"></a>从字符串里获取符号字符</h3><p>如果你要用 <code>String.prototype.charAt</code> 来获取首字符是便便的字符串的第一个字符，你只会得到半个代理对，而不是整个字符。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="string">&#x27;💩&#x27;</span>.charAt(0) // U+1F4A9</span><br><span class="line"><span class="string">&#x27;\uD83D&#x27;</span> // U+D83D, i.e. the first surrogate half <span class="keyword">for</span> U+1F4A9</span><br></pre></td></tr></table></figure>
+
+<p>ES7 有个引入 <a target="_blank" rel="noopener" href="https://mail.mozilla.org/pipermail/es-discuss/2013-October/034240.html"><code>String.prototype.at</code> 的草案</a>。它会像 charAt 一样但是能获取到完整的字符而不是一半代理对。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="string">&#x27;💩&#x27;</span>.at(0) // U+1F4A9</span><br><span class="line"><span class="string">&#x27;💩&#x27;</span> // U+1F4A9</span><br></pre></td></tr></table></figure>
+
+<p>如果要兼容老环境，请使用 <a target="_blank" rel="noopener" href="https://mths.be/at">polyfill</a>。</p>
+<h3 id="从字符串获取码点"><a href="#从字符串获取码点" class="headerlink" title="从字符串获取码点"></a>从字符串获取码点</h3><p>同样，如果你用 <code>String.prototype.charCodeAt</code> 来获取第一个字符的码点，你会得到半个代理对而不是整个字符。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="string">&#x27;💩&#x27;</span>.charCodeAt(0)</span><br><span class="line">0xD83D</span><br></pre></td></tr></table></figure>
+
+<p>感谢 ES6 又提供了 <code>String.prototype.codePointAt</code>，可以正确的拿到预期的完整字符而不是半个代理对。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="string">&#x27;💩&#x27;</span>.codePointAt(0)</span><br><span class="line">0x1F4A9</span><br></pre></td></tr></table></figure>
+
+<p>兼容问题请用 <a target="_blank" rel="noopener" href="https://mths.be/codepointat">polyfill</a>。</p>
+<h3 id="遍历字符串的所有符号字符"><a href="#遍历字符串的所有符号字符" class="headerlink" title="遍历字符串的所有符号字符"></a>遍历字符串的所有符号字符</h3><p>现在假设你要遍历一个字符串，而且要对每个字符单独处理。</p>
+<p>在 ES5 里你要写大量的模版代码（boilerplate code）来计算代理对：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getSymbols</span>(<span class="params">string</span>) &#123;</span><br><span class="line">	<span class="keyword">var</span> index = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">var</span> length = string.<span class="property">length</span>;</span><br><span class="line">	<span class="keyword">var</span> output = [];</span><br><span class="line">	<span class="keyword">for</span> (; index &lt; length; ++index) &#123;</span><br><span class="line">		<span class="keyword">var</span> charCode = string.<span class="title function_">charCodeAt</span>(index);</span><br><span class="line">		<span class="keyword">if</span> (charCode &gt;= <span class="number">0xD800</span> &amp;&amp; charCode &lt;= <span class="number">0xDBFF</span>) &#123;</span><br><span class="line">			charCode = string.<span class="title function_">charCodeAt</span>(index + <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">if</span> (charCode &gt;= <span class="number">0xDC00</span> &amp;&amp; charCode &lt;= <span class="number">0xDFFF</span>) &#123;</span><br><span class="line">				output.<span class="title function_">push</span>(string.<span class="title function_">slice</span>(index, index + <span class="number">2</span>));</span><br><span class="line">				++index;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		output.<span class="title function_">push</span>(string.<span class="title function_">charAt</span>(index));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> output;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> symbols = <span class="title function_">getSymbols</span>(<span class="string">&#x27;💩&#x27;</span>);</span><br><span class="line">symbols.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">symbol</span>) &#123;</span><br><span class="line">	<span class="title function_">assert</span>(symbol == <span class="string">&#x27;💩&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>或者，你可以利用像 <code>var regexCodePoint = /[^\uD800-\uDFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDFFF]/g;</code> 一样的正则来遍历匹配到的字符。</p>
+<p>现在，在 ES6 你能直接用 <code>for...of</code>。字符串迭代器会处理完整字符而不是代理对。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> symbol <span class="keyword">of</span> <span class="string">&#x27;💩&#x27;</span>) &#123;</span><br><span class="line">	<span class="title function_">assert</span>(symbol == <span class="string">&#x27;💩&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>for...of</code> 不能用 polyfill 了，因为这是语法级别的构造。</p>
+<h3 id="别的问题"><a href="#别的问题" class="headerlink" title="别的问题"></a>别的问题</h3><p>这样的行为影响几乎所有的字符串方法，包括以上没有提及的（诸如 <code>String.prototype.substring</code>、 <code>String.prototype.slice</code> 等等），所以要谨慎使用这些方法。</p>
+<h2 id="正则里的-Unicode-问题"><a href="#正则里的-Unicode-问题" class="headerlink" title="正则里的 Unicode 问题"></a>正则里的 Unicode 问题</h2><h3 id="匹配码点和-Unicode-scalar-值"><a href="#匹配码点和-Unicode-scalar-值" class="headerlink" title="匹配码点和 Unicode scalar 值"></a>匹配码点和 Unicode scalar 值</h3><p>点操作符（<code>.</code>）在正则里只匹配“字符”……但是 JS 暴露了代理对表示单独的“字符”，这就导致点操作符处理不了辅助符号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; /foo.bar/.test(<span class="string">&#x27;foo💩bar&#x27;</span>)</span><br><span class="line"><span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>让我们想一会儿……什么正则能匹配 Unicode 字符？有什么想法？就像前面说的，<code>.</code> 符号不行，因为<a target="_blank" rel="noopener" href="https://ecma-international.org/ecma-262/5.1/#sec-15.10.2.8">它不能匹配换行</a>和完整的辅助符号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; /^.$/.test(<span class="string">&#x27;💩&#x27;</span>)</span><br><span class="line"><span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>为了正确匹配换行符号，我们可以用 <code>[\s\S]</code>，但这还不能匹配辅助符号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; /^[\s\S]$/.test(<span class="string">&#x27;💩&#x27;</span>)</span><br><span class="line"><span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>事实证明，正则匹配 Unicode 字符不容易：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; /[\0-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]/.test(<span class="string">&#x27;💩&#x27;</span>) // wtf</span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>当然，你肯定不想手写匹配这些字符的正则，更别谈调试了。为了生成前面的正则，我用了 <em><a target="_blank" rel="noopener" href="https://mths.be/regenerate">Regenerate</a></em> 这个工具，这是一个根据码点和符号来创建正则的库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; regenerate().addRange(0x0, 0x10FFFF).toString()</span><br><span class="line"><span class="string">&#x27;[\0-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>从左往右表示，匹配 BMP 字符，匹配代理对，匹配只剩下一半的代理对（后文统一称为孤独代理对）。</p>
+<p>虽然孤独代理对在 JS 中技术上是允许出现的，但它们不映射任何字符，应该避免。<a target="_blank" rel="noopener" href="http://www.unicode.org/glossary/#unicode_scalar_value">Unicode scalar 值</a>指的是除代理对用到的码点之外的码点。下面是个用于匹配 Unicode scalar 值的正则：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; regenerate()</span><br><span class="line">     .addRange(0x0, 0x10FFFF)     // all Unicode code points</span><br><span class="line">     .removeRange(0xD800, 0xDBFF) // minus high surrogates</span><br><span class="line">     .removeRange(0xDC00, 0xDFFF) // minus low surrogates</span><br><span class="line">     .toRegExp()</span><br><span class="line">/[\0-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]/</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://mths.be/regenerate">Regenerate</a>意味着可以被用在作为构建脚本的一部分，用来创建复杂的正则，同时可以保持构建脚本的易读性和易维护性。</p>
+<p>ES6 <a target="_blank" rel="noopener" href="http://norbertlindenberg.com/2012/05/ecmascript-supplementary-characters/#RegExp"><del>将有望</del>引入</a>  <code>u</code> 修饰符，这时 <code>.</code> 操作符可以匹配完整的码点，而不是代理对的一半。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; /foo.bar/.test(<span class="string">&#x27;foo💩bar&#x27;</span>)</span><br><span class="line"><span class="literal">false</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; /foo.bar/u.test(<span class="string">&#x27;foo💩bar&#x27;</span>)</span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>注意 <code>.</code> 操作符仍然不能匹配换行符。当设置 <code>u</code> 修饰符时，<code>.</code> 操作符相当于下面的兼容操作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="title function_">regenerate</span>()</span><br><span class="line">     .<span class="title function_">addRange</span>(<span class="number">0x0</span>, <span class="number">0x10FFFF</span>) <span class="comment">// all Unicode code points</span></span><br><span class="line">     .<span class="title function_">remove</span>(  <span class="comment">// minus `LineTerminator`s (https://ecma-international.org/ecma-262/5.1/#sec-7.3):</span></span><br><span class="line">       <span class="number">0x000A</span>, <span class="comment">// Line Feed &lt;LF&gt;</span></span><br><span class="line">       <span class="number">0x000D</span>, <span class="comment">// Carriage Return &lt;CR&gt;</span></span><br><span class="line">       <span class="number">0x2028</span>, <span class="comment">// Line Separator &lt;LS&gt;</span></span><br><span class="line">       <span class="number">0x2029</span>  <span class="comment">// Paragraph Separator &lt;PS&gt;</span></span><br><span class="line">     )</span><br><span class="line">     .<span class="title function_">toString</span>();</span><br><span class="line"><span class="string">&#x27;[\0-\t\x0B\f\x0E-\u2027\u202A-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]&#x27;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="regexp">/foo(?:[\0-\t\x0B\f\x0E-\u2027\u202A-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])bar/u</span>.<span class="title function_">test</span>(<span class="string">&#x27;foo💩bar&#x27;</span>)</span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符集合中的辅助符号"><a href="#字符集合中的辅助符号" class="headerlink" title="字符集合中的辅助符号"></a>字符集合中的辅助符号</h3><p><code>/[a-c]/</code>匹配在 <a target="_blank" rel="noopener" href="https://codepoints.net/U+0061">U+0061 字母 a</a> 到 <a target="_blank" rel="noopener" href="https://codepoints.net/U+0063">U+0063 字母 c</a> 的范围，它让我们想到 <code>/[💩-💫]/</code> 也会匹配从 <a target="_blank" rel="noopener" href="https://codepoints.net/U+1F4A9">U+1F4A9</a> 到 <a target="_blank" rel="noopener" href="https://codepoints.net/U+1F4AB">U+1F4AB</a> 范围的字符，事实并非如此：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; /[💩-💫]/</span><br><span class="line">SyntaxError: Invalid regular expression: Range out of order <span class="keyword">in</span> character class</span><br></pre></td></tr></table></figure>
+
+<p>这是因为上面的正则相当于下面这样：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; /[\uD83D\uDCA9-\uD83D\uDCAB]/</span><br><span class="line">SyntaxError: Invalid regular expression: Range out of order <span class="keyword">in</span> character class</span><br></pre></td></tr></table></figure>
+
+<p>我们想它会匹配 U+1F4A9、U+1F4AA 和 U+1F4AB，但实际上匹配了：</p>
+<ul>
+<li>U+D83D（高位代理），或……</li>
+<li>从 U+DCA9 到 U+D83D 间的范围（这是无效的，因为左边的码点 U+DCA9 小于右边的码点 U+D83D），或……</li>
+<li>U+DCAB（低位代理）。</li>
+</ul>
+<p>再次，又又因为 ES6 提供了 <code>u</code> 修饰符让你能更合理地操作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; /[\uD83D\uDCA9-\uD83D\uDCAB]/u.test(<span class="string">&#x27;\uD83D\uDCA9&#x27;</span>) // match U+1F4A9</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; /[\u&#123;1F4A9&#125;-\u&#123;1F4AB&#125;]/u.test(<span class="string">&#x27;\u&#123;1F4A9&#125;&#x27;</span>) // match U+1F4A9</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; /[💩-💫]/u.test(<span class="string">&#x27;💩&#x27;</span>) // match U+1F4A9</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; /[\uD83D\uDCA9-\uD83D\uDCAB]/u.test(<span class="string">&#x27;\uD83D\uDCAA&#x27;</span>) // match U+1F4AA</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; /[\u&#123;1F4A9&#125;-\u&#123;1F4AB&#125;]/u.test(<span class="string">&#x27;\u&#123;1F4AA&#125;&#x27;</span>) // match U+1F4AA</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; /[💩-💫]/u.test(<span class="string">&#x27;💪&#x27;</span>) // match U+1F4AA</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; /[\uD83D\uDCA9-\uD83D\uDCAB]/u.test(<span class="string">&#x27;\uD83D\uDCAB&#x27;</span>) // match U+1F4AB</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; /[\u&#123;1F4A9&#125;-\u&#123;1F4AB&#125;]/u.test(<span class="string">&#x27;\u&#123;1F4AB&#125;&#x27;</span>) // match U+1F4AB</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; /[💩-💫]/u.test(<span class="string">&#x27;💫&#x27;</span>) // match U+1F4AB</span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>很难过，<code>u</code> 修饰符不兼容老环境。如果需要，可以用 <a target="_blank" rel="noopener" href="https://mths.be/regenerate">Regenerate</a> 来生成兼容的表达式，来匹配辅助平面范围的符号：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; regenerate().addRange(<span class="string">&#x27;💩&#x27;</span>, <span class="string">&#x27;💫&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;\uD83D[\uDCA9-\uDCAB]&#x27;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; /^\uD83D[\uDCA9-\uDCAB]$/.test(<span class="string">&#x27;💩&#x27;</span>) // match U+1F4A9</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; /^\uD83D[\uDCA9-\uDCAB]$/.test(<span class="string">&#x27;💪&#x27;</span>) // match U+1F4AA</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; /^\uD83D[\uDCA9-\uDCAB]$/.test(<span class="string">&#x27;💫&#x27;</span>) // match U+1F4AB</span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>更新：另一个办法是通过包含 <a target="_blank" rel="noopener" href="https://github.com/mathiasbynens/regexpu"><em>regexpu</em></a> 的编译工具编译你的代码。我写了<a target="_blank" rel="noopener" href="https://mathiasbynens.be/notes/es6-unicode-regex">另一片博客，详细介绍了 ES6 支持 Unicode 的正则</a>。</p>
+</blockquote>
+<h2 id="生活中的-bug，以及如何避免"><a href="#生活中的-bug，以及如何避免" class="headerlink" title="生活中的 bug，以及如何避免"></a>生活中的 bug，以及如何避免</h2><p>这样的行为会导致很多问题。推特允许一条推文有 140 个字符，而且它们的服务端不介意符号的类型——辅助符号或其它符号类型。但它们的前端只是读取 length 属性，所以不能够输入超过 70 个字符。（bug 已修复。）</p>
+<p>很多库不能正确处理辅助符号。</p>
+<p>例如 Countable.js 就<a target="_blank" rel="noopener" href="https://github.com/RadLikeWhoa/Countable/issues/9">不能正确处理辅助符号</a>。</p>
+<p><em>Underscore.string</em> 的 <code>reverse</code> 的实现<a target="_blank" rel="noopener" href="https://github.com/epeli/underscore.string/issues/220">不能处理组合标志和辅助符号</a>。（使用 <a target="_blank" rel="noopener" href="https://mths.be/esrever">Missy Elliot</a> 算法代替。）</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/epeli/underscore.string/issues/218">解码 HTML numeric entities 到辅助符号也会发生错误</a>，例如 <code>&amp;#x1F4A9;</code>。许多 HTML entity 转换器<a target="_blank" rel="noopener" href="https://github.com/pierreliefauche/htmlentities.js/issues/4">库</a><a target="_blank" rel="noopener" href="https://github.com/vokidas/html-pe/issues/1">有</a><a target="_blank" rel="noopener" href="https://github.com/substack/node-ent/pull/7">同样的</a><a target="_blank" rel="noopener" href="https://github.com/fb55/node-entities/issues/11">问题</a>。</p>
+<p>这些都是很容易碰到的问题——毕竟 JavaScript 处理 Unicode 的方式很头疼。本文已经展示了如何解决这些问题；那么如何预防呢？</p>
+<h2 id="介绍……The-Pile-of-Poo-Test™"><a href="#介绍……The-Pile-of-Poo-Test™" class="headerlink" title="介绍……The Pile of Poo Test™"></a>介绍……The Pile of Poo Test™</h2><p>当你在编写处理字符串或正则的 JavaScript 代码时，<strong>只需要在单元测试里字符串上加个“💩”</strong>，看看有没有问题。这个方法快速、开心、简单地检查你的代码支不支持辅助平面的字符。一旦有什么问题，用上文提到的技术解决就行了。</p>
+<p>一般测试一个字符串的 Unicode 支持度的好例子如下：<code>Iñtërnâtiônàlizætiøn☃💩</code>。头 20 个字符在 U+0000 到 U+00FF 的范围，后面一个字符在 U+0100 到 U+FFFF 的范围，最后一个字符是辅助符号字符（范围在 U+010000 到 U+10FFFF）。</p>
+<p>TL;DR Go forth and submit pull requests with piles of poo in them. It’s the only way to Unicode the Web Forward®.</p>
+<h2 id="Slides"><a href="#Slides" class="headerlink" title="Slides"></a>Slides</h2><p>……</p>
+<h2 id="Translations"><a href="#Translations" class="headerlink" title="Translations"></a>Translations</h2><ul>
+<li>Korean: <a target="_blank" rel="noopener" href="http://ujinbot.blogspot.com/2013/10/blog-post.html">자바스크립트의 유니코드 문제</a> by Eugene Byun</li>
+</ul>
+<h2 id="Comments"><a href="#Comments" class="headerlink" title="Comments"></a>Comments</h2><p>……</p>
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://www.poinotes.com/">
+        Signal
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
