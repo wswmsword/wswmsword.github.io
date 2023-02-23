@@ -582,7 +582,7 @@ var Item = function Item() {
 /* harmony default export */ const src_Item = (Item);
 ;// CONCATENATED MODULE: ./src/Home.module.css
 // extracted by mini-css-extract-plugin
-/* harmony default export */ const Home_module = ({"appInnerRoot":"src-Home-module__appInnerRoot","top":"src-Home-module__top","bgTitleWrapper":"src-Home-module__bgTitleWrapper","DEMO_MODE":"src-Home-module__DEMO_MODE","bgTitle":"src-Home-module__bgTitle","cardWrapper":"src-Home-module__cardWrapper","titleWrapper":"src-Home-module__titleWrapper","title":"src-Home-module__title","content":"src-Home-module__content"});
+/* harmony default export */ const Home_module = ({"appInnerRoot":"src-Home-module__appInnerRoot","main":"src-Home-module__main","top":"src-Home-module__top","bgTitleWrapper":"src-Home-module__bgTitleWrapper","DEMO_MODE":"src-Home-module__DEMO_MODE","bgTitle":"src-Home-module__bgTitle","cardWrapper":"src-Home-module__cardWrapper","titleWrapper":"src-Home-module__titleWrapper","title":"src-Home-module__title","content":"src-Home-module__content","backToTop":"src-Home-module__backToTop"});
 ;// CONCATENATED MODULE: ./src/Home.jsx
 
 
@@ -601,32 +601,38 @@ var Hello = function Hello() {
       children: t
     }, i);
   });
-  return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+  return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
     className: Home_module.appInnerRoot,
-    children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
-      className: Home_module.top,
-      children: [/*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-        className: Home_module.bgTitleWrapper + ' ' + Home_module.DEMO_MODE,
-        children: /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-          className: Home_module.bgTitle,
-          children: lettersSpan
+    children: /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
+      className: Home_module.main,
+      children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+        className: Home_module.top,
+        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+          className: Home_module.bgTitleWrapper + ' ' + Home_module.DEMO_MODE,
+          children: /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+            className: Home_module.bgTitle,
+            children: lettersSpan
+          })
+        }), /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+          className: Home_module.cardWrapper,
+          children: [/*#__PURE__*/(0,jsx_runtime.jsx)(src_Card, {}), /*#__PURE__*/(0,jsx_runtime.jsx)(src_CardBack, {})]
+        })]
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+        className: Home_module.titleWrapper,
+        children: /*#__PURE__*/(0,jsx_runtime.jsx)("h1", {
+          className: Home_module.title,
+          children: "TAROTCARD"
         })
-      }), /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
-        className: Home_module.cardWrapper,
-        children: [/*#__PURE__*/(0,jsx_runtime.jsx)(src_Card, {}), /*#__PURE__*/(0,jsx_runtime.jsx)(src_CardBack, {})]
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+        className: Home_module.content,
+        children: new Array(12).fill().map(function (_, i) {
+          return /*#__PURE__*/(0,jsx_runtime.jsx)(src_Item, {}, i);
+        })
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)("button", {
+        className: Home_module.backToTop,
+        children: "TOP"
       })]
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-      className: Home_module.titleWrapper,
-      children: /*#__PURE__*/(0,jsx_runtime.jsx)("h1", {
-        className: Home_module.title,
-        children: "TAROTCARD"
-      })
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-      className: Home_module.content,
-      children: new Array(12).fill().map(function (_, i) {
-        return /*#__PURE__*/(0,jsx_runtime.jsx)(src_Item, {}, i);
-      })
-    })]
+    })
   });
 };
 /* harmony default export */ const Home = (Hello);

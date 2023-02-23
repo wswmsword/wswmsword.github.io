@@ -2328,8 +2328,8 @@ function create_fragment(ctx) {
 	return {
 		c() {
 			div1 = internal_element("div");
-			div1.innerHTML = `<div class="content svelte-128d7us"></div>`;
-			attr(div1, "class", "card svelte-128d7us");
+			div1.innerHTML = `<div class="content svelte-yzpc9u"></div>`;
+			attr(div1, "class", "card svelte-yzpc9u");
 		},
 		m(target, anchor) {
 			insert(target, div1, anchor);
@@ -2362,8 +2362,8 @@ function CardBack_svelte_create_fragment(ctx) {
 	return {
 		c() {
 			div1 = internal_element("div");
-			div1.innerHTML = `<div class="content svelte-phm6nq"></div>`;
-			attr(div1, "class", "card-back svelte-phm6nq");
+			div1.innerHTML = `<div class="content svelte-wo5bto"></div>`;
+			attr(div1, "class", "card-back svelte-wo5bto");
 		},
 		m(target, anchor) {
 			insert(target, div1, anchor);
@@ -2397,10 +2397,10 @@ function Item_svelte_create_fragment(ctx) {
 		c() {
 			div2 = internal_element("div");
 
-			div2.innerHTML = `<div class="img svelte-3na96c"></div> 
-  <div class="txt svelte-3na96c"></div>`;
+			div2.innerHTML = `<div class="img svelte-1d9f5cs"></div> 
+  <div class="txt svelte-1d9f5cs"></div>`;
 
-			attr(div2, "class", "wrapper svelte-3na96c");
+			attr(div2, "class", "wrapper svelte-1d9f5cs");
 		},
 		m(target, anchor) {
 			insert(target, div2, anchor);
@@ -2444,7 +2444,7 @@ function get_each_context_1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (14:8) {#each letters as letter, i}
+// (15:10) {#each letters as letter, i}
 function create_each_block_1(ctx) {
 	let span;
 	let t_value = /*letter*/ ctx[5] + "";
@@ -2455,7 +2455,7 @@ function create_each_block_1(ctx) {
 			span = internal_element("span");
 			t = internal_text(t_value);
 			set_style(span, "transform", "rotate(" + /*i*/ ctx[7] * 5 + "deg)");
-			attr(span, "class", "svelte-12gbwfv");
+			attr(span, "class", "svelte-1qzxcsa");
 		},
 		m(target, anchor) {
 			insert(target, span, anchor);
@@ -2468,7 +2468,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (28:2) {#each items as _}
+// (29:6) {#each items as _}
 function create_each_block(ctx) {
 	let item;
 	let current;
@@ -2499,6 +2499,7 @@ function create_each_block(ctx) {
 
 function App_svelte_create_fragment(ctx) {
 	let div6;
+	let main;
 	let div3;
 	let div1;
 	let div0;
@@ -2511,6 +2512,8 @@ function App_svelte_create_fragment(ctx) {
 	let div4;
 	let t4;
 	let div5;
+	let t5;
+	let button;
 	let current;
 	let each_value_1 = /*letters*/ ctx[1];
 	let each_blocks_1 = [];
@@ -2531,6 +2534,7 @@ function App_svelte_create_fragment(ctx) {
 	return {
 		c() {
 			div6 = internal_element("div");
+			main = internal_element("main");
 			div3 = internal_element("div");
 			div1 = internal_element("div");
 			div0 = internal_element("div");
@@ -2546,7 +2550,7 @@ function App_svelte_create_fragment(ctx) {
 			create_component(cardback.$$.fragment);
 			t2 = space();
 			div4 = internal_element("div");
-			div4.innerHTML = `<h1 class="title svelte-12gbwfv">TAROTCARD</h1>`;
+			div4.innerHTML = `<h1 class="title svelte-1qzxcsa">TAROTCARD</h1>`;
 			t4 = space();
 			div5 = internal_element("div");
 
@@ -2554,17 +2558,23 @@ function App_svelte_create_fragment(ctx) {
 				each_blocks[i].c();
 			}
 
-			attr(div0, "class", "bg-title svelte-12gbwfv");
-			attr(div1, "class", "bg-title-wrapper DEMO_MODE svelte-12gbwfv");
-			attr(div2, "class", "card-wrapper svelte-12gbwfv");
-			attr(div3, "class", "top svelte-12gbwfv");
-			attr(div4, "class", "title-wrapper svelte-12gbwfv");
-			attr(div5, "class", "content svelte-12gbwfv");
-			attr(div6, "class", "app-inner-root svelte-12gbwfv");
+			t5 = space();
+			button = internal_element("button");
+			button.textContent = "TOP";
+			attr(div0, "class", "bg-title svelte-1qzxcsa");
+			attr(div1, "class", "bg-title-wrapper DEMO_MODE svelte-1qzxcsa");
+			attr(div2, "class", "card-wrapper svelte-1qzxcsa");
+			attr(div3, "class", "top svelte-1qzxcsa");
+			attr(div4, "class", "title-wrapper svelte-1qzxcsa");
+			attr(div5, "class", "content svelte-1qzxcsa");
+			attr(button, "class", "back-to-top svelte-1qzxcsa");
+			attr(main, "class", "main svelte-1qzxcsa");
+			attr(div6, "class", "app-inner-root svelte-1qzxcsa");
 		},
 		m(target, anchor) {
 			insert(target, div6, anchor);
-			append(div6, div3);
+			append(div6, main);
+			append(main, div3);
 			append(div3, div1);
 			append(div1, div0);
 
@@ -2577,15 +2587,17 @@ function App_svelte_create_fragment(ctx) {
 			mount_component(card, div2, null);
 			append(div2, t1);
 			mount_component(cardback, div2, null);
-			append(div6, t2);
-			append(div6, div4);
-			append(div6, t4);
-			append(div6, div5);
+			append(main, t2);
+			append(main, div4);
+			append(main, t4);
+			append(main, div5);
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				each_blocks[i].m(div5, null);
 			}
 
+			append(main, t5);
+			append(main, button);
 			current = true;
 		},
 		p(ctx, [dirty]) {
