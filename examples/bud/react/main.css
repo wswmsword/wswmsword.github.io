@@ -65,6 +65,26 @@
   color: rgb(48, 48, 48);
   font-size: calc(var(--vW) * 0.013);
 }
+
+.src-Home-module__conerbox {
+  position: absolute;
+  right: calc(var(--vW) * 0.011);
+  top: calc(var(--vH) * 0.02);
+  width: calc(var(--vW) * 0.041);
+  height: calc(var(--vH) * 0.073);
+  border-radius: calc(var(--vW) * 0.006);
+  background-color: rgb(48, 48, 48);
+}
+
+.src-Home-module__conerbox2 {
+  position: absolute;
+  right: calc(var(--vW) * 0.011);
+  bottom: calc(var(--vH) * 0.02);
+  width: calc(var(--vW) * 0.082);
+  height: calc(var(--vH) * 0.146);
+  border-radius: calc(var(--vW) * 0.006);
+  background-color: rgb(48, 48, 48);
+}
 :root {
   --vW: min(calc(100vh * 1.778), 100vw);
   --vH: min(calc(100vw * 0.563), 100vh);
