@@ -1,0 +1,85 @@
+.src-Home-module__appInnerRoot {
+  width: calc(var(--vW) * 1);
+  height: calc(var(--vH) * 1);
+  background: rgb(241, 241, 241);
+  border-radius: calc(var(--vW) * 0.009);
+  border: 2px dashed rgb(228, 228, 228);
+  box-sizing: border-box;
+}
+
+.src-Home-module__list {
+  position: absolute;
+  width: calc(var(--vW) * 0.389);
+  height: calc(var(--vH) * 0.959);
+  border-radius: calc(var(--vW) * 0.006);
+  background-color: white;
+  left: calc(var(--vW) * 0.011);
+  top: calc(var(--vH) * 0.02);
+  padding-top: calc(var(--vW) * 0.094);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.src-Home-module__bud {
+  position: absolute;
+  color: rgb(165, 219, 34);
+  top: calc(var(--vH) * 0.017);
+  left: calc(var(--vW) * -0.043);
+  transform: rotate(-12deg);
+  font-size: calc(var(--vW) * 0.046);
+  margin: 0;
+  filter: blur(calc(var(--vW) * 0.003));
+}
+
+.src-Home-module__card {
+  width: calc(var(--vW) * 0.318);
+  height: calc(var(--vH) * 0.206);
+  background-color: rgb(241, 241, 241);
+  border-radius: calc(var(--vW) * 0.006);
+  margin: 0 auto;
+  margin-bottom: calc(var(--vW) * 0.021);
+}
+
+.src-Home-module__box {
+  position: fixed;
+  left: calc(var(--xE) + var(--vW) * 0.5);
+  top: calc(var(--yE) + var(--vH) * 0.5);
+  transform: translate(-50%, -50%);
+  background-color: rgb(48, 48, 48);
+  border-radius: calc(var(--vW) * 0.006);
+  z-index: 1;
+}
+
+.src-Home-module__boxcode {
+  overflow: auto;
+  width: calc(var(--vW) * 0.306);
+  height: calc(var(--vH) * 0.359);
+  color: rgb(242, 242, 242);
+  font-size: calc(var(--vW) * 0.013);
+}
+
+.src-Home-module__listcode {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: rgb(48, 48, 48);
+  font-size: calc(var(--vW) * 0.013);
+}
+:root {
+  --vW: min(calc(100vh * 1.778), 100vw);
+  --vH: min(calc(100vw * 0.563), 100vh);
+  --yE: calc(50% - var(--vH) / 2);
+  --xE: calc(50% - var(--vW) / 2);
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  position: fixed !important;
+  width: var(--vW) !important;
+  height: var(--vH) !important;}
