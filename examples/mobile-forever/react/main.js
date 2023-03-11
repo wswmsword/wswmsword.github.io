@@ -580,10 +580,34 @@ var Item = function Item() {
   });
 };
 /* harmony default export */ const src_Item = (Item);
+;// CONCATENATED MODULE: ./src/QRCode/index.module.css
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const QRCode_index_module = ({"qrcode":"src-QRCode-index-module__qrcode","text":"src-QRCode-index-module__text","decorate1":"src-QRCode-index-module__decorate1","decorate2":"src-QRCode-index-module__decorate2","decorate3":"src-QRCode-index-module__decorate3"});
+;// CONCATENATED MODULE: ./src/QRCode/index.jsx
+
+
+
+var QRCode = function QRCode() {
+  return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+    className: QRCode_index_module.qrcode,
+    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+      className: QRCode_index_module.decorate1
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+      className: QRCode_index_module.decorate2
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+      className: QRCode_index_module.decorate3
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+      className: QRCode_index_module.text,
+      children: "\u626B\u4E00\u626B"
+    })]
+  });
+};
+/* harmony default export */ const src_QRCode = (QRCode);
 ;// CONCATENATED MODULE: ./src/Home.module.css
 // extracted by mini-css-extract-plugin
-/* harmony default export */ const Home_module = ({"appInnerRoot":"src-Home-module__appInnerRoot","main":"src-Home-module__main","top":"src-Home-module__top","bgTitleWrapper":"src-Home-module__bgTitleWrapper","DEMO_MODE":"src-Home-module__DEMO_MODE","bgTitle":"src-Home-module__bgTitle","cardWrapper":"src-Home-module__cardWrapper","titleWrapper":"src-Home-module__titleWrapper","title":"src-Home-module__title","content":"src-Home-module__content","backToTop":"src-Home-module__backToTop"});
+/* harmony default export */ const Home_module = ({"appInnerRoot":"src-Home-module__appInnerRoot","main":"src-Home-module__main","top":"src-Home-module__top","bgTitleWrapper":"src-Home-module__bgTitleWrapper","DEMO_MODE":"src-Home-module__DEMO_MODE","bgTitle":"src-Home-module__bgTitle","cardWrapper":"src-Home-module__cardWrapper","titleWrapper":"src-Home-module__titleWrapper","title":"src-Home-module__title","content":"src-Home-module__content","backToTop":"src-Home-module__backToTop","footer":"src-Home-module__footer"});
 ;// CONCATENATED MODULE: ./src/Home.jsx
+
 
 
 
@@ -601,9 +625,9 @@ var Hello = function Hello() {
       children: t
     }, i);
   });
-  return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+  return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
     className: Home_module.appInnerRoot,
-    children: /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
+    children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
       className: Home_module.main,
       children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
         className: Home_module.top,
@@ -632,7 +656,10 @@ var Hello = function Hello() {
         className: Home_module.backToTop,
         children: "TOP"
       })]
-    })
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("fotter", {
+      className: Home_module.footer,
+      children: /*#__PURE__*/(0,jsx_runtime.jsx)(src_QRCode, {})
+    })]
   });
 };
 /* harmony default export */ const Home = (Hello);
