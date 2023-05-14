@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>focus-no-jutsu demo</title>
+    <title>Focus-no-Jutsu demo</title>
     <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="missions/dialog.css">
@@ -12,34 +12,60 @@
     <meta name="description" content="A demo of focus-bagel">
   </head>
   <body>
-    <main id="app">
+    <div id="app">
       <header>
-        <h1><code>focus-no-jutsu</code> 范例</h1>
+        <h1><code>Focus-no-Jutsu</code> 范例</h1>
       </header>
 
-      <p><code>focus-no-jutsu</code> 属于 B 级幻术。网页程序里有很多需要焦点控制的场景，例如弹窗、菜单、选项卡面板、抽屉等等，在我们按下键盘的 <kbd>Tab</kbd> ，焦点进入到这些情景里之后，我们希望焦点被施加一个幻术，或者在情景里陷入循环，或者被卡在首尾元素之间的秘密空间，直到我们按下按键 <kbd>Esc</kbd> 或者按钮“返回”解开幻术。</p>
+      <p><code>Focus-no-Jutsu</code>（Focus の術），一个 B 级<a href="https://naruto.fandom.com/wiki/Genjutsu">幻术</a>。</p>
+      
+      <p>网页程序里有很多需要焦点控制的场景，例如弹窗、菜单、选项卡面板、抽屉等等，在我们按下键盘的 <kbd>Tab</kbd> ，焦点进入某个场景，我们希望焦点被施加一个幻术，让焦点陷入一个循环，或者被卡在首尾元素之间的秘密空间，直到我们按下 <kbd>Esc</kbd> 或者点击“返回”，解开幻术。</p>
 
-      <p>下面就来跟着我用 <code>focus-no-jutsu</code> 完成任务！🥷</p>
+      <p>现在开始我们用 <code>Focus-no-Jutsu</code> 完成和焦点控制有关的一系列任务！🥷</p>
+
+      <!-- <hr />
+
+      <div>
+        <button id="b0">E</button>
+        <button id="b1">D</button>
+        <button>C</button>
+
+        <button>B</button>
+        <button id="b2">A</button>
+        <button>S</button>
+      </div>
+
+
+      <hr />
+
+      <button id="t1">第一</button>
+      <ul tabindex="0" id="cover">
+        <li><button id="l1">测试</button></li>
+        <li><button>测试</button></li>
+        <li><button>测试</button></li>
+        <li><button>测试</button></li>
+        <li><div tabindex="0">测试<div tabindex="0">asdf<div tabindex="0">asdf</div></div></li>
+        <li><button id="l9">测试</button></li>
+      </ul>
+      <button>最后</button> -->
+
 
       <h2>对话框</h2>
 
       <p>对话框通常是一个弹窗，当 <kbd>Tab</kbd> 访问到“打开”按钮，焦点聚焦按钮，<kbd>Enter</kbd>（或者 <kbd>Space</kbd> 和鼠标点击）触发“打开”之后，弹出对话框，焦点聚焦对话框的首个可聚焦元素，这时如果继续 <kbd>Tab</kbd>，焦点只能访问对话框内的元素，不能逃出对话框或者回到“打开”按钮，最后，我们按下 <kbd>Esc</kbd> 或者触发“返回”按钮，焦点回到“打开”按钮。</p>
 
-      <button class="button" id="open">打开一包糖</button>
-      <div id="dialog" aria-modal="true" aria-labelledby="modal-title" class="dialog centre closedDialog" role="dialog"
-        tabindex="0">
-        <h3 id="modal-title">吃一颗糖</h3>
-        <ul>
-          <li><a id="firstFocusA" href="#">椰蓉酥心糖</a></li>
-          <li><a href="#">不二家棒棒糖</a></li>
-          <li><a href="#">樱花软糖</a></li>
-          <li><a href="#">大白兔奶糖</a></li>
-          <li><a href="#">夹心巧克力</a></li>
-        </ul>
+      <button class="button" id="open" aria-haspopup="dialog" aria-expanded="false" aria-controls="dialog">打开一包糖</button>
+      <div id="dialog_mask" class="closed_mask"></div>
+      <div id="dialog" aria-modal="true" aria-labelledby="modal-title" class="dialog centre closedDialog" role="dialog">
+        <h3 id="modal-title">吃一颗糖果</h3>
+        <p>爱吃糖果的小可爱，你的糖果已送达，请注意查收。不需冷藏，无需加热，横扫饥饿，一颗提神醒脑，两颗永不疲劳，三颗长生不老～</p>
         <div class="ctrls">
-          <button class="button" id="close">Close</button>
-          <button class="button" id="lastFocusBtn">OK</button>
+          <button class="button" id="firstFocusBtn">巧克力！克力！力！</button>
+          <button class="button" id="confirm">吃吃吃</button>
         </div>
+        <button id="close" aria-label="Close" type="button">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
       </div>
 
       <details>
@@ -48,24 +74,42 @@
         <pre>
           <code>
 const dialog = document.getElementById("dialog");
+const mask = document.getElementById("dialog_mask");
+const entry = document.getElementById("open");
 
-const bagel = focusBagel(dialog, ["#firstFocusA", "#lastFocusBtn"], {
+const bagel = focusBagel(dialog, ["#firstFocusBtn", "#close"], {
   loop: false,
   enter: {
-    node: "#open",
+    node: entry,
     on() {
       dialog.classList.add("openedDialog");
       dialog.classList.remove("closedDialog");
+      dialog_mask.classList.remove("closed_mask");
+      entry.ariaExpanded = true;
     },
   },
   exit: [{
     node: "#close",
-    on() {
-      dialog.classList.remove("openedDialog");
-      dialog.classList.add("closedDialog");
-    },
+    on: closeDialog,
+  }, {
+    node: "#firstFocusBtn",
+    on: closeDialog,
+  }, {
+    node: "#confirm",
+    on: closeDialog,
+  }, {
+    node: "#dialog_mask",
+    on: closeDialog,
   }],
+  onEscape: true,
 });
+
+function closeDialog() {
+  dialog.classList.remove("openedDialog");
+  dialog.classList.add("closedDialog");
+  dialog_mask.classList.add("closed_mask");
+  entry.ariaExpanded = false;
+}
           </code>
         </pre>
       </details>
@@ -76,19 +120,19 @@ const bagel = focusBagel(dialog, ["#firstFocusA", "#lastFocusBtn"], {
 
       <div id="tabs" role="tablist" aria-labelledby="tab-1">
         <div id="tab_list">
-          <button id="tab_1" role="tab" aria-selected="true" aria-controls="tabpanel_1">
+          <button id="tab_1" role="tab" aria-selected="true" aria-controls="tabpanel_1" tabindex="0">
             <span>椰蓉酥心糖</span>
           </button>
-          <button id="tab_2" role="tab" aria-selected="false" aria-controls="tabpanel_2">
+          <button id="tab_2" role="tab" aria-selected="false" aria-controls="tabpanel_2" tabindex="0">
             <span>棉花糖</span>
           </button>
-          <button id="tab_3" role="tab" aria-selected="false" aria-controls="tabpanel_3">
+          <button id="tab_3" role="tab" aria-selected="false" aria-controls="tabpanel_3" tabindex="0">
             <span>绿箭口香糖</span>
           </button>
-          <button id="tab_4" role="tab" aria-selected="false" aria-controls="tabpanel_4">
+          <button id="tab_4" role="tab" aria-selected="false" aria-controls="tabpanel_4" tabindex="0">
             <span>大白兔奶糖</span>
           </button>
-          <button id="tab_5" role="tab" aria-selected="false" aria-controls="tabpanel_5">
+          <button id="tab_5" role="tab" aria-selected="false" aria-controls="tabpanel_5" tabindex="0">
             <span>瑞士糖</span>
           </button>
         </div>
@@ -127,12 +171,13 @@ const tabsBagel = focusBagel(tabs, tabList, {
   enter: [{
     node: "#dialog_code",
     key: e => e.key === "Tab" && !e.shiftKey,
-    disableClick: true,
+    type: "keydown",
   }, {
     node: "#tags_code",
     key: e => e.key === "Tab" && e.shiftKey,
-    disableClick: true,
+    type: "keydown",
   }],
+  removeListenersEachExit: false,
 });
 
 function onFocus({ prev, cur, prevI, curI }) {
@@ -150,7 +195,7 @@ function onFocus({ prev, cur, prevI, curI }) {
 
       <h2>播放列表</h2>
 
-      <p>这个“播放列表”是一个真实例子，是 Spotify 的专辑界面，Spotify 网页有很好的键盘体验。如果有一类元素组成了列表，这类元素的每一个内部又包含很多可聚焦的子元素，这时使用 <kbd>Tab</kbd> 从头到尾的访问体验是崩溃的，因为元素太多花费时间太长了。Spotify 是这样做的，一首专辑有多首单曲，首先 <kbd>Tab</kbd> 会聚焦整个专辑列表，继续 <kbd>Tab</kbd>，焦点进入单曲，继续 <kbd>Tab</kbd>，焦点将退出整个焦点列表，聚焦焦点列表的后一个元素，回过头如果要访问每一首单曲，只要当焦点在专辑列表的时候使用 <kbd>Up Arrow</kbd> 和 <kbd>Down Arrow</kbd> 就可以了。</p>
+      <p>这个“播放列表”是一个真实例子，是 Spotify 的专辑界面，Spotify 网页有很好的键盘体验。如果有一类元素组成了列表，这类元素的每一个内部又包含很多可聚焦的子元素，这时使用 <kbd>Tab</kbd> 从头到尾的访问体验是崩溃的，因为元素太多花费时间太长了。Spotify 是这样做的，一首专辑有多首单曲，首先 <kbd>Tab</kbd> 会聚焦整个专辑列表，继续 <kbd>Tab</kbd>，焦点进入单曲，继续 <kbd>Tab</kbd>，焦点将退出整个专辑列表，聚焦专辑列表的后一个元素，回过头如果要访问每一首单曲，只要当焦点在专辑列表的时候使用 <kbd>Up Arrow</kbd> 和 <kbd>Down Arrow</kbd> 就可以了。</p>
 
       <div class="player">
         <div class="head">
@@ -293,7 +338,7 @@ const focusPlayer = focusBagel("#list_wrapper", songs, {
   enter: [{
     node: "#more_from",
     key: e => e.key === "Tab" && e.shiftKey,
-    disableClick: true,
+    type: "keydown",
   }]
 });
         </code>
@@ -309,4 +354,16 @@ const focusPlayer = focusBagel("#list_wrapper", songs, {
   <script src="missions/dialog.js"></script>
   <script src="missions/tabs.js"></script>
   <script src="missions/player.js"></script>
+
+  <script>
+    // const bg = focusBagel(["#b1", "#b2"], {
+    //   onEscape: true,
+    // });
+
+    // focusBagel(["#l1", "#l9"], {
+    //   cover: true,
+    //   onEscape: true,
+    // })
+
+  </script>
 </html>

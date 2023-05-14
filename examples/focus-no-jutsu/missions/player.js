@@ -5,8 +5,8 @@ const playerBagel = focusBagel("#list_wrapper", songs, {
   cover: {
     enterKey: e => (e.key === "Tab" && !e.shiftKey) || e.key === "ArrowDown" || e.key === "ArrowUp",
   },
-  forward: e => e.key === "ArrowDown",
-  backward: e => e.key === "ArrowUp",
+  next: e => e.key === "ArrowDown",
+  prev: e => e.key === "ArrowUp",
   exit: [{
     key: e => e.key === "Tab" && !e.shiftKey,
     target: "#more_from",
@@ -16,6 +16,7 @@ const playerBagel = focusBagel("#list_wrapper", songs, {
   enter: [{
     node: "#more_from",
     key: e => e.key === "Tab" && e.shiftKey,
-    disableClick: true,
-  }]
+    type: "keydown",
+    target: ({ last }) => last,
+  }],
 });

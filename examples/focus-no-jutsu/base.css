@@ -53,6 +53,7 @@ h2 {
 
 h3 {
   font-size: 24px;
+  margin: 12px 0;
 }
 
 a:focus, button:focus, .dialog:focus {

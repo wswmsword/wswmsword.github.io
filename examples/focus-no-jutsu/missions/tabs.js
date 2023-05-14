@@ -4,11 +4,11 @@ const tabs = document.getElementById("tab_list");
 const tabList = ["#tab_1", "#tab_2", "#tab_3", "#tab_4", "#tab_5"];
 const tabsBagel = focusBagel(tabs, tabList, {
   onClick: onFocus,
-  forward: {
+  next: {
     key: e => e.key === "ArrowRight",
     on: onFocus
   },
-  backward: {
+  prev: {
     key: e => e.key === "ArrowLeft",
     on: onFocus
   },
@@ -22,12 +22,13 @@ const tabsBagel = focusBagel(tabs, tabList, {
   enter: [{
     node: "#dialog_code",
     key: e => e.key === "Tab" && !e.shiftKey,
-    disableClick: true,
+    type: "keydown",
   }, {
     node: "#tags_code",
     key: e => e.key === "Tab" && e.shiftKey,
-    disableClick: true,
+    type: "keydown",
   }],
+  removeListenersEachExit: false,
 });
 
 function onFocus({ prev, cur, prevI, curI }) {
