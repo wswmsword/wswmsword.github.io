@@ -7,19 +7,22 @@ const bagel = focusBagel(dialog, ["#firstFocusBtn", "#close"], {
   loop: false,
   enter: {
     node: entry,
-    on() {
-      dialog.classList.add("openedDialog");
-      dialog.classList.remove("closedDialog");
-      dialog_mask.classList.remove("closed_mask");
-      entry.ariaExpanded = true;
-    },
+    on: openDialog,
   },
   exit: {
-    node: ["#close", "#firstFocusBtn", "#confirm", "#dialog_mask"],
+    node: ["#close", "#firstFocusBtn", "#confirm"],
     on: closeDialog,
+    type: ["click", "outlist"]
   },
   onEscape: true,
 });
+
+function openDialog() {
+  dialog.classList.add("openedDialog");
+  dialog.classList.remove("closedDialog");
+  dialog_mask.classList.remove("closed_mask");
+  entry.ariaExpanded = true;
+}
 
 function closeDialog() {
   dialog.classList.remove("openedDialog");
