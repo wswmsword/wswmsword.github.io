@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkvanilla=self.webpackChunkvanilla||[]).push([[826],{849:()=>{const e=["✨"," "].concat("Vanilla Mobile View".split(""),"🐰"," ","🐱");let t="";e.forEach(((e,a)=>{t+=`<span style="transform: rotate(${5*a}deg)">${e}</span>`})),document.getElementById("bg-title").innerHTML=t}},e=>{e(e.s=849)}]);
