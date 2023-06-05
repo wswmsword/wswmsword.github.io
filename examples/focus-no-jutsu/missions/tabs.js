@@ -19,7 +19,7 @@ const tabsBagel = focusBagel(tabs, tabList, {
     key: e => e.key === "Tab" && e.shiftKey,
     target: "#dialog_code",
   }],
-  enter: [{
+  entry: [{
     node: "#dialog_code",
     key: e => e.key === "Tab" && !e.shiftKey,
     type: "keydown",
@@ -28,6 +28,7 @@ const tabsBagel = focusBagel(tabs, tabList, {
     key: e => e.key === "Tab" && e.shiftKey,
     type: "keydown",
   }],
+  initialActive: 4,
   removeListenersEachExit: false,
 });
 
