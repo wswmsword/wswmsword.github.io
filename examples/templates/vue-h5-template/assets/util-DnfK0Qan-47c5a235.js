@@ -1,0 +1,1 @@
+const t=t=>"function"==typeof t,c=c=>(t=>null!==t&&"object"==typeof t)(c)&&t(c.then)&&t(c.catch),e=(t,c)=>{try{return c.split(".").reduce(((t,c)=>t[c]),t)}catch(e){return""}},a=(t,c,e)=>Math.min(Math.max(t,c),e);export{a as c,e as g,c as i};
