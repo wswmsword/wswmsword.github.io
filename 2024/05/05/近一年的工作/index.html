@@ -106,7 +106,7 @@
 <p>这里面每一项看起来都是日常开发的标配，但是也依赖项目的维护程度，没有定期维护的项目，从零开始，不同的问题会交织堆叠，优化起来需要很多的时间。</p>
 <p>在我优化的官网项目里，SSG 的迁移不仅要替换 <code>getStaticProps</code>，还要做一点副业。原本为了方便 SEO 运营人员能够及时修改和更新每个页面的 <code>title</code>、<code>description</code> 等对 SEO 有利的数据，代码里通过 SSR 在每次请求页面的时候，同步执行接口来获取最新的 SEO 数据。所以，要迁移至 SSG，也要确保 SEO 数据能被及时更新。最后，我添加了页面增量静态生成 ISR 的支持，它会在更新完 SEO 数据后请求一个 API，next 服务接收到请求后，会对需要更新 SEO 数据的页面重新生成最新的静态页面。</p>
 <p>SSG 的迁移给蜗牛搭上了火箭，让页面的速度回到了基线，下一步，是继续缩小产包体积，减少资源下载和程序运行的时间。综合 PSI、开发者工具的 Coverage 面板和产包分析工具 <code>@next/bundle-analyzer</code> 提供的线索，PSI 会提示某个文件执行耗时过长，Coverage 面板会列出未执行代码最多的文件，以及产包分析工具会可视化地辅助查看具体是某个包被引用在某个页面，最终我把优化目标锁定在 <code>_app.js</code> 中。</p>
-<p>接下来，反复地在 <code>_app.js</code> 里进行同级和嵌套的二分操作，注释和解开注释，不断打包检查产包体积变化，最后，把无效依赖删除、并使用全路径导入依赖之后，产包缩小了 700Kb。除了这 700Kb，也找到了一个占用更大产包的组件——1Mb 的登录按钮组件。由于大量桶文件的引入方式，这个组件里盘根错节的依赖蔓延到了项目的每个角落，仿佛摇动一下，其它组件会被拖连着塌陷下去，经过几次失败的优化尝试之后，仍然保留了这个组件的原本结构。</p>
+<p>接下来，反复地在 <code>_app.js</code> 里进行同级和嵌套的二分操作，注释和解开注释，不断打包检查产包体积变化，最后，把无效依赖删除、并使用全路径导入依赖之后，产包缩小了 700Kb。除了这 700Kb，也找到了一个占用更大产包的组件——1Mb 的登录按钮组件。由于大量桶文件的引入方式，这个组件里盘根错节的依赖蔓延到了项目最深的土壤，仿佛摇动一下，其它组件会被拖连着塌陷下去，经过几次失败的优化尝试之后，仍然保留了这个组件的原本结构。</p>
 <h2 id="网站的-SEO-优化"><a href="#网站的-SEO-优化" class="headerlink" title="网站的 SEO 优化"></a>网站的 SEO 优化</h2><p>这是我首次实践 SEO 的优化，和之前的工作不同，内部管理平台、小程序或 Hybrid H5 都不需要关注 SEO，这一次做的是海外官网，需要通过 SEO 提高搜索曝光度。</p>
 <p><img src="search-console.png" alt="Search Analytics Charts in Google Search Console"></p>
 <p>主要做了下面这些事情：</p>
@@ -143,8 +143,10 @@
 </ul>
 <p>这些特性让按钮这个 Web 控件和操作系统的原生按钮有一致或类似的体验，组成了用户体验，可以防止用户对控件产生陌生感。从这些特性看，自制一个按钮是复杂的，这也是推荐使用原生 <code>&lt;button&gt;</code> 标签的原因。</p>
 <p>使用 <code>&lt;button&gt;</code> 标签有可能产生新的顾虑，是因为之所以使用 <code>&lt;div&gt;</code> 按钮，是希望监听一个复杂布局的点击事件，而按钮通常包裹的是简单的短文本，例如“提交”按钮和“删除”按钮。实际上，<code>&lt;button&gt;</code> 标签对子元素的确有一些限制，这些限制却不是布局的限制，而是子元素标签种类的限制，子元素只允许是短语内容（Phrasing content），例如子元素可以是 <code>&lt;span&gt;</code>，不可以是 <code>&lt;div&gt;</code>，因此我们可以按照规范，使用 <code>&lt;span&gt;</code> 结合 CSS 开发复杂布局的按钮。</p>
-<p>复杂的按钮就像下面这样，它能够被点击、能够通过键盘访问、触发后有样式反馈、同时也有复杂的布局，这样的按钮既有好的用户体验，满足了用户预期，因为他有宽大的布局，也能够吸引用户触发，符合了产品的预期，最后，这样的代码也更容易维护，这是因为 <code>&lt;button&gt;</code> 标签是有语义的，看见了它就清楚它一定包含事件函数。</p>
+<p>下面是我使用 <code>&lt;button&gt;</code> 改造监听点击事件的 <code>&lt;div&gt;</code> 的一个例子，改造之后，它能够被点击、能够通过键盘访问、触发后有样式反馈、同时也有复杂的布局，这样的按钮既有好的用户体验，满足了用户预期，因为他有宽大的布局，也能够吸引用户触发，符合了产品的预期，最后，这样的代码也更容易维护，这是因为 <code>&lt;button&gt;</code> 标签是有语义的，看见了它就清楚它一定包含事件函数。</p>
 <p><img src="complex-button.gif" alt="Somewhat complicated buttons"></p>
+<p>除了按钮，很多时候，链接也需要包含复杂的布局，用上面的思路实现一个复杂布局的链接当然也可以，只是需要注意链接的规范和按钮不一样，例如链接 <code>&lt;a&gt;</code> 内可以包含 <code>&lt;div&gt;</code>。如果看到无处不是链接的苹果官网首页，会发现苹果为复杂布局的链接提供了另一个值得借鉴的思路，那就是单独设置一个绝对定位、全宽、全高的 <code>&lt;a&gt;</code>，撑满在复杂布局之下，这样轻而易举地满足了规范，即使看起来使用了不合规范的嵌套链接 <code>&lt;a&gt;</code>，同时基于无障碍的考量，这个绝对定位的链接和复杂布局内的某个链接指向同一个目标，为了不让辅助设备（TalkBack、VoiceOver 等）重复访问，因此又为这个绝对定位的链接加上了 <code>aria-hidden=&quot;true&quot;</code>，库克微微一笑。</p>
+<p><img src="apple-home.png" alt="Apple home full of links"></p>
 <h2 id="网站的创意表达"><a href="#网站的创意表达" class="headerlink" title="网站的创意表达"></a>网站的创意表达</h2><blockquote>
 <p>我在社会中所扮演的角色，或者任何艺术家或诗人的角色，就是尝试将我们感受到的一切表达出来。不是去告诉人们如何感受，不是作为一名传道士，不是作为一名领导者，而是作为对我们所有人的某种反应。</p>
 <p>——《约翰·列侬——在他生命中》，p6</p>
@@ -165,6 +167,7 @@
 <li>ARIA Buttons，自制按钮，<a target="_blank" rel="noopener" href="https://github.com/scottaohara/aria_buttons/tree/main"><em>‌https://github.com/scottaohara/aria_buttons/tree/main</em></a></li>
 <li>基于 Web Vitals 的前端性能优化实践，<a target="_blank" rel="noopener" href="https://keenwon.com/web-vitals/#473-%E6%A0%B8%E5%BF%83%E8%BF%98%E6%98%AF%E9%99%8D%E4%BD%8E-js-%E4%BD%93%E7%A7%AF"><em>https://keenwon.com/web-vitals/#473-%E6%A0%B8%E5%BF%83%E8%BF%98%E6%98%AF%E9%99%8D%E4%BD%8E-js-%E4%BD%93%E7%A7%AF</em></a></li>
 <li>搜索引擎优化 (SEO) 入门指南，<a target="_blank" rel="noopener" href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=zh-cn"><em>https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=zh-cn</em></a></li>
+<li>The W3C Markup Validation Service，HTML 标签规范验证，<a target="_blank" rel="noopener" href="https://validator.w3.org/#validate_by_input">https://validator.w3.org/#validate_by_input</a></li>
 </ul>
 
 
