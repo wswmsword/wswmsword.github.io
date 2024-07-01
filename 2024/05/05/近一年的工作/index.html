@@ -63,9 +63,6 @@
 </time>
 
 
-
-
-
     
     &nbsp;
     <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -73,7 +70,10 @@
       <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
     </svg>
     &nbsp;
-    <a href="/tags/笔记本/">笔记本</a>
+    <a href="/categories/笔记本/">笔记本</a>
+
+
+
 
 
     </div>
@@ -107,6 +107,9 @@
 <p>在我优化的官网项目里，SSG 的迁移不仅要替换 <code>getStaticProps</code>，还要做一点副业。原本为了方便 SEO 运营人员能够及时修改和更新每个页面的 <code>title</code>、<code>description</code> 等对 SEO 有利的数据，代码里通过 SSR 在每次请求页面的时候，同步执行接口来获取最新的 SEO 数据。所以，要迁移至 SSG，也要确保 SEO 数据能被及时更新。最后，我添加了页面增量静态生成 ISR 的支持，它会在更新完 SEO 数据后请求一个 API，next 服务接收到请求后，会对需要更新 SEO 数据的页面重新生成最新的静态页面。</p>
 <p>SSG 的迁移给蜗牛搭上了火箭，让页面的速度回到了基线，下一步，是继续缩小产包体积，减少资源下载和程序运行的时间。综合 PSI、开发者工具的 Coverage 面板和产包分析工具 <code>@next/bundle-analyzer</code> 提供的线索，PSI 会提示某个文件执行耗时过长，Coverage 面板会列出未执行代码最多的文件，以及产包分析工具会可视化地辅助查看具体是某个包被引用在某个页面，最终我把优化目标锁定在 <code>_app.js</code> 中。</p>
 <p>接下来，反复地在 <code>_app.js</code> 里进行同级和嵌套的二分操作，注释和解开注释，不断打包检查产包体积变化，最后，把无效依赖删除、并使用全路径导入依赖之后，产包缩小了 700Kb。除了这 700Kb，也找到了一个占用更大产包的组件——1Mb 的登录按钮组件。由于大量桶文件的引入方式，这个组件里盘根错节的依赖蔓延到了项目最深的土壤，仿佛摇动一下，其它组件会被拖连着塌陷下去，经过几次失败的优化尝试之后，仍然保留了这个组件的原本结构。</p>
+<blockquote>
+<p>更详细的解释，请查看<a href="https://wswmsword.github.io/2024/07/01/23%E5%B9%B48%E6%9C%88%E5%88%B024%E5%B9%B46%E6%9C%88Next-js12%E7%9A%84%E6%80%A7%E8%83%BD%E5%92%8CSEO%E5%AE%9E%E8%B7%B5/#SSG-%E8%BF%81%E7%A7%BB">《23年8月到24年6月Next.js12的性能和SEO实践——SSG 迁移》</a></p>
+</blockquote>
 <h2 id="网站的-SEO-优化"><a href="#网站的-SEO-优化" class="headerlink" title="网站的 SEO 优化"></a>网站的 SEO 优化</h2><p>这是我首次实践 SEO 的优化，和之前的工作不同，内部管理平台、小程序或 Hybrid H5 都不需要关注 SEO，这一次做的是海外官网，需要通过 SEO 提高搜索曝光度。</p>
 <p><img src="search-console.png" alt="Search Analytics Charts in Google Search Console"></p>
 <p>主要做了下面这些事情：</p>
@@ -125,6 +128,9 @@
 <p>关于面包屑组件，在我的实现里，引入这个组件会做两件事情，第一，借助 Nextjs 可以在任意位置放置 <code>&lt;Head&gt;</code> 标签的特性，生成<code>application/ld+json</code> 类型的 <code>&lt;script&gt;</code> 标签结构化路径，第二，负责 UI 层面的面包屑展示。</p>
 <p>关于对旧路径实行 301 跳转。在这个项目里，博客页面来自 Wordpress，首先在 next 服务里请求 Wordpress 页面，获取 Wordpress 页面的 HTML 内容字符串后，再把它返回给客户端，所以，如果 Wordpress 页面执行了 301 中转，只会体现在 next 服务中，而客户端不能识别，客户端的 url 将不会改变。我使用的方法是利用 HTTP 的 HEAD 方法，只获取 301 和目标 url，然后返回客户端，最后客户端会自动跳转到对应的 url。</p>
 <p>在实践上面这些技术上的 SEO 优化时，意外发现了一种规范图片 alt 的好方法——SEO 运营人员向开发者提供的一张 SEO 表格，这张表格包含一个页面所有的 SEO 信息，例如页面的 title 和 description、内容标题的 h1 到 h6，也包括页面里每一张图片对应的 alt 文本。有了这张表格，图片的 alt 被纳入到 SEO 的范围，终于可以从业务出发搞定图片的 alt 属性了（ESLint 何苦强制 alt 为难开发）。</p>
+<blockquote>
+<p>更详细的解释，请查看<a href="https://wswmsword.github.io/2024/07/01/23%E5%B9%B48%E6%9C%88%E5%88%B024%E5%B9%B46%E6%9C%88Next-js12%E7%9A%84%E6%80%A7%E8%83%BD%E5%92%8CSEO%E5%AE%9E%E8%B7%B5/#SEO">《23年8月到24年6月Next.js12的性能和SEO实践——SEO》</a></p>
+</blockquote>
 <h2 id="网站的用户体验"><a href="#网站的用户体验" class="headerlink" title="网站的用户体验"></a>网站的用户体验</h2><p>好的用户体验让产品脱颖而出。MacBook 的磁吸式充电接口不仅让笔记本更便携，也能避免一些拖拽摔落的场景；楼梯两边的平滑坡道方便了携带旅行箱的人们；有抽绳的裤子，绳口之间存在镂空让绳端交叉穿出（下图的黑色裤子），相比没有镂空，能够省去一次打结的功夫。</p>
 <p><img src="drawstring-pants.jpg" alt="Drawstring Pants"></p>
 <p>每一个组件就像一个产品，细节分布在每个组件里，好的用户体验，组成一个让用户体验如蜜的网站。</p>

@@ -1,0 +1,353 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  <meta name="referrer" content="unsafe-url">
+  
+  <title>23年8月到24年6月Next.js12的性能和SEO实践</title>
+  <meta name="author" content="wsWmsword">
+  <meta name="description" content="Pain is temporary Pride is forever">
+  
+  
+  <meta property="og:title" content="23年8月到24年6月Next.js12的性能和SEO实践"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Strawberry Fields"/>
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Strawberry Fields" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <a id="top"></a>
+  <div id="main">
+    <div class="main-ctnr">
+      <div class="behind">
+  <a href="/" class="back black-color">
+    <svg class="i-close" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+        <path d="M2 30 L30 2 M30 30 L2 2"></path>
+    </svg>
+  </a>
+  
+    <div class="description">
+      &nbsp;郁郁青青 长过千寻
+    </div>
+    
+</div>
+
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        23年8月到24年6月Next.js12的性能和SEO实践
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      <time datetime="2024-07-01T00:59:44.000Z" itemprop="datePublished">
+  <svg class="i-calendar" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 6 L2 30 30 30 30 6 Z M2 15 L30 15 M7 3 L7 9 M13 3 L13 9 M19 3 L19 9 M25 3 L25 9"></path>
+  </svg>
+  &nbsp;
+  2024-07-01
+</time>
+
+
+    
+    &nbsp;
+    <svg class="i-tag" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+      <circle cx="24" cy="8" r="2"></circle>
+      <path d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+    </svg>
+    &nbsp;
+    <a href="/categories/笔记本/">笔记本</a>
+
+
+
+
+
+    </div>
+    <hr>
+    
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%83%BD"><span class="toc-text">性能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSG-%E8%BF%81%E7%A7%BB"><span class="toc-text">SSG 迁移</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%90%A5%E9%94%80%E9%A1%B5%E9%9D%A2%E7%9A%84-SSG"><span class="toc-text">营销页面的 SSG</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%9A%84-Wordpress-%E9%A1%B5%E9%9D%A2-SSG"><span class="toc-text">缓存的 Wordpress 页面 SSG</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%95%86%E5%9F%8E%E7%9A%84-SSG"><span class="toc-text">商城的 SSG</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E8%B7%AF%E5%BE%84%E5%AF%BC%E5%85%A5"><span class="toc-text">全路径导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%BA%93%E7%94%A8%E6%B3%95%E4%BC%98%E5%8C%96"><span class="toc-text">组件库用法优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%94%E4%BE%8B%E5%9B%BE%E7%89%87%E7%9A%84%E5%88%9D%E5%A7%8B%E5%9B%BA%E5%AE%9A%E5%AE%BD%E9%AB%98"><span class="toc-text">比例图片的初始固定宽高</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%A9%E5%B0%8F%E5%9B%BE%E7%89%87%E5%B0%BA%E5%AF%B8%EF%BC%8C%E5%8E%8B%E7%BC%A9%E5%9B%BE%E7%89%87%E4%BD%93%E7%A7%AF"><span class="toc-text">缩小图片尺寸，压缩图片体积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="toc-text">资源懒加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E9%99%A4%E9%93%BE%E6%8E%A5%E7%9A%84-prefetch"><span class="toc-text">移除链接的 prefetch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#await-%E8%AF%B7%E6%B1%82"><span class="toc-text">await 请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SEO"><span class="toc-text">SEO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E5%8C%85%E5%B1%91%E7%BB%84%E4%BB%B6%EF%BC%88BreadcrumbList%EF%BC%89"><span class="toc-text">面包屑组件（BreadcrumbList）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SEO-%E6%95%B0%E6%8D%AE%E5%92%8C%E5%A2%9E%E9%87%8F%E9%9D%99%E6%80%81%E7%94%9F%E6%88%90"><span class="toc-text">SEO 数据和增量静态生成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Canonical-link-%E6%A0%87%E7%AD%BE"><span class="toc-text">Canonical link 标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sitemap-%E7%AB%99%E7%82%B9%E5%9C%B0%E5%9B%BE"><span class="toc-text">Sitemap 站点地图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#alternate-link-%E6%A0%87%E7%AD%BE"><span class="toc-text">alternate link 标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#noindex-%E9%A1%B5%E9%9D%A2"><span class="toc-text">noindex 页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#301-%E8%B7%B3%E8%BD%AC"><span class="toc-text">301 跳转</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE-redirects"><span class="toc-text">配置文件配置 redirects</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E-301-%E5%93%8D%E5%BA%94%E4%BB%A3%E7%A0%81"><span class="toc-text">返回 301 响应代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5%E7%9A%84-lt-Link-gt-%EF%BC%88-lt-a-gt-%EF%BC%89%E6%A0%87%E7%AD%BE"><span class="toc-text">链接的 &lt;Link&gt;（&lt;a&gt;）标签</span></a></li></ol></li></ol>
+    
+    <div class="picture-container">
+      
+    </div>
+    <blockquote>
+<p>这是一份结合工作项目的文档，于在职的最后一周完成编写，留给组员，作为熟悉项目的资料和疑问的解答，其中主要围绕性能和 SEO，包含了我这段时间的实践和实践时的思考过程，以及未来优化方向的参考建议。</p>
+</blockquote>
+<p>后面的内容会涉及到项目里页面的类型，下面是这些类型的一个概览。细分下来，<code>unionfab.com</code> 有下面 6 种类型的页面：</p>
+<ol>
+<li>内部自己的页面，如首页、why-unionfab；</li>
+<li>兼容 Next.js 的静态缓存（<code>static-cache</code> 文件夹下）的页面，使用 innerHTML 和 appendChild 兼容（<code>&lt;DangerouslySetInnerHTML&gt;</code> 组件），这些页面的导航栏可以使用 Next.js 的路由，无感跳转，但是内容没有翻译；</li>
+<li>拼接的页面（使用 site-header-footer 拼接头尾导航栏），拼接的页面不能使用 Next.js 的路由无感跳转：<ul>
+<li>存在项目本地的，在 <code>static-cache</code> 文件夹下的静态缓存的页面；<ul>
+<li><img src="image1-31.png" alt="static-cache files"></li>
+</ul>
+</li>
+<li>实时拉取 Wordpress 的博客页面；<ul>
+<li><img src="image2-33.png" alt="wordpress page"></li>
+</ul>
+</li>
+<li>商城。<ul>
+<li><img src="image3-35.png" alt="shop page"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>非 Wordpress 的博客页面，这些页面由 Cao 用 Vue 写的 CMS 管理，基本可以从导航栏的“Resources”面板下访问，目前暂时是 SSR，速度稍慢。<ul>
+<li><img src="image4-37.png" alt="resources blog page"></li>
+</ul>
+</li>
+</ol>
+<p>以下是基于 Next.js 12 的营销页做的实践，Next.js 14 或之后的版本可作参考。</p>
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><ul>
+<li>渲染方式从 SSR 向 SSG 迁移；</li>
+<li>全路径导入依赖，缩小产包，避免 <code>export *</code>（桶文件）导致的摇树失效；</li>
+<li>延迟统计、日志脚本的加载，延迟加载 IM iframe；</li>
+<li>组件库的用法优化；</li>
+<li>固定图片的宽高，固定图片的比例，避免布局抖动；</li>
+<li>将图片的尺寸缩放成适当大小，并且缩小图片体积；</li>
+<li>图片、视频等资源的懒加载；</li>
+<li>移除导航栏大量链接的 prefetch；</li>
+<li>同步线性的多个请求修改为异步的 allSettled 请求；</li>
+<li>移除未使用的依赖。</li>
+</ul>
+<h3 id="SSG-迁移"><a href="#SSG-迁移" class="headerlink" title="SSG 迁移"></a>SSG 迁移</h3><h4 id="营销页面的-SSG"><a href="#营销页面的-SSG" class="headerlink" title="营销页面的 SSG"></a>营销页面的 SSG</h4><p>营销页中，几乎所有页面只需要动态获取 SEO 数据，原来的 SSR 在每次请求后，next 服务再向存储 SEO 的 Supabase 数据库请求 SEO 数据，会有长时间白屏问题，除了请求 SEO 数据外没有其他接口请求需要，所以替换为 SSG，将请求 SEO 的时间转移到编译期间。</p>
+<p>Supabase 中的 SEO 数据可以由运营人员动态改动，为了避免每次改动需要开发重新打包部署，使用了增量静态生成（isr）的按需重生成，它会在更新 SEO 之后向 next 服务发送一个接口，服务器上的 next 服务会在后台生成对应最新的静态页面，而无需重新打包部署。</p>
+<p><img src="image5-39.png" alt="SEO meta data editor dialog"></p>
+<p>isr 按需重生成的坑：营销页有 3 个节点，法兰克福、硅谷和阿里云上部署的，isr 按需重生成只会更新一个节点，比如我在中国打开营销页，做 SEO 的更新，更新之后可能只会更新阿里云上部署的营销页的页面，另外两个节点的页面还是老页面。</p>
+<p>isr 按需重生成的填坑方法参考：</p>
+<ul>
+<li>找到一种方法，为不同的节点生成不同的 isr 按需重生成接口，在运营人员改动后，调用每个 isr 按需重生成接口；</li>
+<li>不使用 isr 的按需重生成，就用传统的，isr 提供了定时的选项，超过了定时期，next 服务接收到了定时期之后的第一个人的访问，就重新 SSG 更新最新的页面；</li>
+<li>维护一个版本数据库，客户访问到页面后检测到版本过旧，给用户提供更新按钮，点击之后做 isr 的按需重生成（这种方法比较适合商城的 SSG）；</li>
+<li>SEO 不是常更新数据，彻底删除编辑 SEO 信息的功能。</li>
+</ul>
+<p>相关链接：<br><a target="_blank" rel="noopener" href="https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration">Data Fetching: Incremental Static Regeneration (ISR) | Next.js</a></p>
+<h4 id="缓存的-Wordpress-页面-SSG"><a href="#缓存的-Wordpress-页面-SSG" class="headerlink" title="缓存的 Wordpress 页面 SSG"></a>缓存的 Wordpress 页面 SSG</h4><p>缓存的 Wordpress 页面存放在 <code>static-cache</code> 文件夹中。</p>
+<p><img src="image6-41.png" alt="static-cache files"></p>
+<p>目前 <code>static-cache</code> 里有一部分页面通过 SSR，在每次请求的时候读取这些页面，做页面的裁剪拼接，下面是几点这种方法的问题：</p>
+<ul>
+<li>兼容代码会破坏原项目的架构和自然逻辑，变得难维护；</li>
+<li>通过裁剪兼容后的页面功能不全，不能使用 Next.js 的平滑路由跳转；</li>
+<li>页面出现后，再等待一会后才出现导航，加载慢，为了提速，需要自己在 next 服务里维护一套额外缓存逻辑；</li>
+<li>复杂的兼容代码，很容易导致忘记移除老代码、检查是否有重复的新代码，会出现越来越多的重复执行或重复导入资源。<img src="image7-43.png"></li>
+</ul>
+<p>拼接的是页面的头部导航栏和尾部导航栏，这两块来自 <code>pages/partials/site-header-footer.tsx</code>。</p>
+<p>目前 <code>static-cache</code> 里有另一部分使用 SSG，通过 <code>innerHTML</code> 和 <code>appendChild</code> 来兼容这些缓存页面，具体可以查看 <code>&lt;DangerouslySetInnerHTML&gt;</code> 组件和它的使用方式，下面有一些点要注意：</p>
+<ul>
+<li>平滑路由会在一个浏览器窗口执行每一个访问到的 Wordpress 页面，里面的脚本也会重复执行，要考虑这些代码是否会增加窗口的内存占用，例如重复监听事件；</li>
+<li>不能直接使用 React 的 <code>dangerouslySetInnerHTML</code> 兼容，是因为这个属性不会执行字符串里的 <code>&lt;script&gt;</code> 标签里的脚本；</li>
+<li><code>&lt;head&gt;</code> 标签里的内容是通过 useEffect 加载到页面中的，其中包括的 <code>&lt;title&gt;</code> 和其他 meta 标签的加载可能会影响到 SEO。</li>
+</ul>
+<p>非静态缓存到本地的 Wordpress 博客页面，线上的，不做 SSG 迁移，因为可能有更新，做了 SSG 意味着只会在打包时更新页面内容。</p>
+<h4 id="商城的-SSG"><a href="#商城的-SSG" class="headerlink" title="商城的 SSG"></a>商城的 SSG</h4><p>经过尝试，商城也可以通过上一节提到的 <code>&lt;DangerouslySetInnerHTML&gt;</code>，加入 SSG 的渲染方式。</p>
+<p>商城本身被单独部署在另一个域名（<code>service.unionfab.com</code>）下，营销页会进行拼接整合，如果商城发布，营销页用 SSG 整合，同时就要也重新发布营销页。这样会复杂化发布流程，如果确实需要 SSG，可以考虑这个方法：维护一个版本数据库，客户访问到页面后检测到版本过旧，给用户提供更新按钮，点击之后做 isr 的按需重生成。</p>
+<p>目前商城仍然是通过 SSR 拼接裁剪页面的方式，兼容到 <code>unionfab.com</code> 这个域名下的，用户访问商城，首先向 <code>unionfab.com</code> 的 next 服务请求，next 服务再向部署商城的页面请求，返回 html 给 next 服务后，再请求 <code>site-header-footer</code> 页面，进行页面的头尾导航栏拼贴。</p>
+<h3 id="全路径导入"><a href="#全路径导入" class="headerlink" title="全路径导入"></a>全路径导入</h3><p><code>_app.js</code> 文件做了全路径导入的优化，把形如 <code>@/components</code> 之类的引入桶文件中的依赖，优化成类似 <code>../../components/xxx/index</code>，优化之后缩小了 700Kb。</p>
+<p>登录按钮组件占用产包 1Mb，优化或重构之后可以缩小大量产包体。</p>
+<p><img src="image8-45.png" alt="login btn in navigation bar"></p>
+<h3 id="组件库用法优化"><a href="#组件库用法优化" class="headerlink" title="组件库用法优化"></a>组件库用法优化</h3><p>antd 的走马灯（轮播图）组件，切换效果从滚动改为了渐隐（effect=”fade”），提升了 cls 指标。要注意，组件某些属性不同的实现方式会导致一些性能指标问题。</p>
+<details>
+<summary>展开查看轮播图渐隐效果的 GIF 图片。</summary>
+
+<p><img src="image9-47.gif" alt="fade effect carousel"></p>
+</details>
+
+<h3 id="比例图片的初始固定宽高"><a href="#比例图片的初始固定宽高" class="headerlink" title="比例图片的初始固定宽高"></a>比例图片的初始固定宽高</h3><p>设置固定的比例宽高，避免 cls 问题，可以通过 <code>padding</code> 和 <code>aspect-ratio</code> 这两个属性设置，例如设置 1:0.75 的宽高，可以设置 <code>padding-bottom: 75%</code>，<code>padding</code> 的百分比是基于元素自身的宽度的。</p>
+<details>
+<summary>展开查看比例图片在拖动浏览器窗口时变化的 GIF 图片。</summary>
+
+<p><img src="image10-50.gif" alt="ratio images in different displays"></p>
+</details>
+
+<h3 id="缩小图片尺寸，压缩图片体积"><a href="#缩小图片尺寸，压缩图片体积" class="headerlink" title="缩小图片尺寸，压缩图片体积"></a>缩小图片尺寸，压缩图片体积</h3><p>在合适的屏幕上展示合适尺寸的图片，不能在 1980 宽的屏幕上展示原始宽度 5000 像素的图片，否则浏览器会阻塞做做图片的缩小导致局部白屏。如果只提供了一张图片，图片的尺寸不能大于最大版心宽度。其他还需考虑设备的分辨率，例如 1500px 的渲染宽度，在苹果设备上会需要 3000 实际像素的图片。</p>
+<p>尺寸修改之后，使用类似“<a target="_blank" rel="noopener" href="https://tinypng.com/">https://tinypng.com/</a>”的工具进行体积压缩。</p>
+<p><img src="image11-53.png" alt="detect size of image in devtools"></p>
+<p>如果能提供一张图片在不同屏幕上的不同版本，可以使用 <code>&lt;picture&gt;</code> 元素结合 <code>&lt;source&gt;</code> 元素，定义 <code>&lt;source&gt;</code> 元素的 <code>media</code> 属性，这样浏览器会在不同屏幕上按需适配展示不同的屏幕。这种 HTML 元素的方式相比通过 CSS 媒体查询和 JS 监控屏幕宽度有几点好处：</p>
+<ul>
+<li>JS 监控很慢，要等待脚本加载；</li>
+<li>CSS 媒体查询需要配合 <code>&lt;img&gt;</code> 的 <code>loading=&quot;lazy&quot;</code> 才能实现懒加载，否则依然一次性全部图片加载，<code>loading=&quot;lazy&quot;</code> 有兼容性问题；</li>
+<li>HTML 元素的方式最快，如果样式表和脚本加载失败，图片依然能按要求展示。</li>
+</ul>
+<p>可以查看 InstaMach 站点的首页轮播图的实现方式，其中的每张图片需要提供两个版本，宽屏和窄屏的版本，并且利用了 <code>&lt;picture&gt;</code> 和 <code>&lt;source&gt;</code> 来实现。</p>
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images">响应式图片 - 学习 Web 开发 | MDN</a></li>
+<li><a target="_blank" rel="noopener" href="https://nextjs.org/docs/pages/api-reference/next-config-js/images">next.config.js Options: images | Next.js</a></li>
+</ul>
+<h3 id="资源懒加载"><a href="#资源懒加载" class="headerlink" title="资源懒加载"></a>资源懒加载</h3><p>资源需要懒加载，例如图片可以在滚动到指定位置之后懒加载，视频在点击播放之后再加载。图片使用 Next.js 的 <code>&lt;Image&gt;</code> 组件即可懒加载。</p>
+<p><code>services/3d-printing</code> 页面在没有进行视频懒加载之前，进入这个页面至少要支付 1GB 的流量。</p>
+<p><img src="image12-55.png" alt="video page"></p>
+<h3 id="移除链接的-prefetch"><a href="#移除链接的-prefetch" class="headerlink" title="移除链接的 prefetch"></a>移除链接的 prefetch</h3><p>使用 Next.js 的 <code>&lt;Link&gt;</code> 组件，对于 SSG 页面，默认会打开 <code>prefetch</code> 预请求页面。<br>导航栏有上百个链接，可能影响性能，所以关闭了大部分链接的预加载（prefetch）选项。</p>
+<p><img src="image13-57.png" alt="much links in navigation menu slate"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Link</span> <span class="attr">href</span>=<span class="string">&quot;/ok&quot;</span> <span class="attr">prefetch</span>=<span class="string">&#123;false&#125;</span>&gt;</span>ok<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>相关链接：<a target="_blank" rel="noopener" href="https://nextjs.org/docs/app/api-reference/components/link#prefetch">&lt;Link&gt;——prefetch</a></p>
+<h3 id="await-请求"><a href="#await-请求" class="headerlink" title="await 请求"></a>await 请求</h3><p>SSR 中，不使用多个同步的 await 代码，应该用 <code>Promise.allSettled</code> 或者 <code>Promise.all</code> 包裹起来，避免白屏阻塞。在 js 业务代码中，同样要避免多个线性同步的 await 代码。</p>
+<h2 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h2><ul>
+<li>生成结构化路径，展示面包屑组件；</li>
+<li>由接口管理的 title 和 description 配合 SSG 做增量静态生成；</li>
+<li>使用 canonical <code>&lt;link&gt;</code> 标签规范网址，避免用于统计的 query string 被单独收录，例如避免 <code>https://official.com?code=abc</code> 被收录；</li>
+<li>规范并生成多语言的 sitemap，为 sitemap 排除 noindex、301 页面；</li>
+<li>为每个页面的多语言添加 alternate <code>&lt;link&gt;</code> 标签；</li>
+<li>对禁止抓取的网址添加 noindex <code>&lt;meta&gt;</code> 标签或响应 noindex 头；</li>
+<li>为图片添加 <code>alt</code> 属性、规范页面标题结构；</li>
+<li>规范页面路径，启用硬 404，对旧路径实行 301 跳转；</li>
+<li>点击事件跳转页面替换为 <code>&lt;a&gt;</code> 标签，增加内链数量；</li>
+<li>性能优化。</li>
+</ul>
+<h3 id="面包屑组件（BreadcrumbList）"><a href="#面包屑组件（BreadcrumbList）" class="headerlink" title="面包屑组件（BreadcrumbList）"></a>面包屑组件（BreadcrumbList）</h3><p>组件在它的文件夹下提供了详细的文档（packages/component/src/layout/BreadcrumbList/README.md）：</p>
+<p><img src="image14-59.png" alt="component README document"></p>
+<p>面包屑组件会做两件事情：</p>
+<ol>
+<li>渲染用于展示给用户的面包屑的 UI；</li>
+<li>生成用于 SEO 的结构化数据。</li>
+</ol>
+<p>下面的图片，左边框选的蓝色部分是 UI，右边框选的数据是用于 SEO 的结构化数据，这两者会通过组件生成：</p>
+<p><img src="image15-61.png" alt="breadcrumb list ui in left, structured data in right"></p>
+<p>这两个功能总是同时出现在一个页面中，并且只会出现一次，因此封装到了一个组件中。后续，可以继续优化该组件，例如添加属性，只生成 UI，添加另一个属性，只生成结构化数据，这样更灵活。</p>
+<p>面包屑提供了两种用法，分别是配置式和行内式：</p>
+<ul>
+<li>配置式就是在使用面包屑组件前，要先在配置文件中进行面包屑数据的配置编写，这个文件和面包屑组件在同一文件夹内，名称为 <code>data.ts</code>，<code>data.ts</code> 的具体用法请查看面包屑组件的 <code>README.md</code>；</li>
+<li>行内式，即无需考虑上面的配置文件夹，直接将面包屑数据作为属性传递给组件即可，使用起来很方便。</li>
+</ul>
+<p>两种方法，按需考虑，未来如果行内式更方便可删除配置式，如果配置式更利于管理也可移除行内式。</p>
+<p>结构化数据会体现在 Google Search Console 的路径面板，搜索引擎中，会展示在每个搜索结果的标题下面：</p>
+<p><img src="image16-63.png" alt="structured data under title of website in google searching result page"></p>
+<p>相关链接：<a target="_blank" rel="noopener" href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data?hl=zh-cn">Google 搜索中的结构化数据标记简介</a></p>
+<h3 id="SEO-数据和增量静态生成"><a href="#SEO-数据和增量静态生成" class="headerlink" title="SEO 数据和增量静态生成"></a>SEO 数据和增量静态生成</h3><p>SEO 数据通过接口获取，在保证页面 SSG 的前提，也要动态更新页面，所以使用了增量静态生成，但由于站点部署到了 3 个站点，增量静态生成不能同时更新这 3 个站点。具体的问题请查看上面“性能”一节的“营销页面的 SSG”，对问题做了详细解释。</p>
+<h3 id="Canonical-link-标签"><a href="#Canonical-link-标签" class="headerlink" title="Canonical link 标签"></a>Canonical link 标签</h3><p>链接携带 query-string 不应该被收录，例如 <code>www.unionfab.com?origin=xyz</code>，这里需要为页面添加 canonical 标签设置一个页面的权威链接来排除这个问题。</p>
+<p>通过谷歌 search console 找到哪些 query-string 链接被收录，进入“已编入索引的网页数量”页面，<code>Ctrl/Cmd + F</code> 搜索“?”即可：</p>
+<table>
+<thead>
+<tr>
+<th align="left">第一步</th>
+<th align="left">第二步</th>
+<th align="left">第三步</th>
+<th align="left">第四步</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><img src="image18-67.png" alt="step 1: google search console -&gt; breadcrumbs -&gt; view data about valid items"></td>
+<td align="left"><img src="image19-69.png" alt="scroll to bottom of current page"></td>
+<td align="left"><img src="image20-71.png" alt="select rows per page"></td>
+<td align="left"><img src="image21-73.png" alt="tap cmd/ctrl-f to find &#39;?&#39; of link items"></td>
+</tr>
+</tbody></table>
+<p>除了上面按需逐个页面添加 canonical 的方法，也可以提前在所有页面添加，在 <code>_app.js</code> 中添加。</p>
+<p>可以参考 Apple 的官网，任意打开页面，切换不同的语言，打开开发者工具，在源码中搜索“canonical”。</p>
+<h3 id="Sitemap-站点地图"><a href="#Sitemap-站点地图" class="headerlink" title="Sitemap 站点地图"></a>Sitemap 站点地图</h3><p>官网的 sitemap 可以从 <code>packages/next/public/sitemap.xml</code> 中看到：</p>
+<p><img src="image22-75.png" alt="sitemap xml file in project"></p>
+<p>其中的 <code>https://www.unionfab.com/next-sitemap/sitemap-0.xml</code> 是由脚本生成的，脚本的路径是 <code>packages/next/next-sitemap.js</code>，生成的站点地图包含营销页的所有页面。</p>
+<p><img src="image23-77.png" alt="sitemap config script file in project"></p>
+<p>脚本里维护了一些东西，当新增或删减某个语言的时候做一些更改，例如下面图片里框选的 <code>locales</code> 数组：</p>
+<p><img src="image24-79.png" alt="locales array in script file"></p>
+<p>脚本里面，下面图片框选的函数，主要作用是避免生成错误的多语言路径，另一个作用是单独适配俄语的路径，因为俄语的域名不一样：</p>
+<p><img src="image25-81.png" alt="code snippets for transforming sitemap result"></p>
+<p>由于俄语的域名不同，导致站点地图在 Google Search Console 的解析出现错误：</p>
+<p><img src="image26-83.png" alt="sitemap error in search console"></p>
+<p>实际的站点地图会在打包之后生成，生成之后可以查看，或者也可以通过下面图片里的这个命令直接生成（<code>npm run postbuild</code>），可能有时会失败：</p>
+<p><img src="image27-85.png" alt="script of generating sitemap"></p>
+<p>相关链接：<a target="_blank" rel="noopener" href="https://developers.google.com/search/docs/specialty/international/localized-versions?hl=zh-cn#html">将网页的本地化版本告知 Google——HTML 标记</a></p>
+<h3 id="alternate-link-标签"><a href="#alternate-link-标签" class="headerlink" title="alternate link 标签"></a>alternate link 标签</h3><p>alternate 有三种设置，分别是 <code>&lt;link&gt;</code> 标签、http 请求头和站点地图，这 3 种方法取一种即可，目前营销页通过站点地图设置 alternate，站点地图的 altenate 在 sitemap 脚本里自定义设置：</p>
+<p><img src="image28-87.png" alt="code snippets of alternate settings in sitemap script file"></p>
+<p>相关链接：<a target="_blank" rel="noopener" href="https://developers.google.com/search/docs/specialty/international/localized-versions?hl=zh-cn">将网页的本地化版本告知 Google</a></p>
+<h3 id="noindex-页面"><a href="#noindex-页面" class="headerlink" title="noindex 页面"></a>noindex 页面</h3><p>添加 noindex meta 标签表示不希望搜索引擎收录，目前代码里有两种 noindex 方式，一种添加 noindex meta 标签，另一种在响应头中加 <code>&#39;X-Robots-Tag&#39;: &#39;noindex&#39;</code>。</p>
+<p><img src="image30-91.png" alt="code snippets of noindex"></p>
+<p>相关 commit hash：758099b2ab3c14e06a</p>
+<p>使用 noindex 的页面不多，例如登录页、下单页，这些都可以从 SEO 一节开头的表格链接里找到。</p>
+<p>有的页面单独维护响应头的 <code>&#39;X-Robots-Tag&#39;: &#39;noindex&#39;</code>，是因为这些页面不走 Next.js 的 SSR 或 SSG，是自己生成的 HTML 字符串内容返回给客户端。</p>
+<p>相关链接：<a target="_blank" rel="noopener" href="https://developers.google.com/search/docs/crawling-indexing/block-indexing?hl=zh-cn">使用 noindex 阻止搜索引擎编入索引</a></p>
+<h3 id="301-跳转"><a href="#301-跳转" class="headerlink" title="301 跳转"></a>301 跳转</h3><p>项目里用了两种方式实现 301 跳转，一种在 Next.js 配置文件配置 <code>redirects</code>，另一种向客户端返回 301 相应代码。</p>
+<h4 id="配置文件配置-redirects"><a href="#配置文件配置-redirects" class="headerlink" title="配置文件配置 redirects"></a>配置文件配置 <code>redirects</code></h4><p>配置文件路径：<code>packages/next/next.config.prod.js</code><br>配置是一个对象，对象里有一个属性 <code>redirects</code>，这个属性的值是一个函数，返回需要重定向的页面。</p>
+<p><img src="image31-93.png" alt="code snippets for 301 redirect"></p>
+<p>需要注意，不应该出现连续重定向或者经常改动重定向的情况，经常重定向可能不利于收录。</p>
+<p>在这个配置文件里有一个辅助函数 <code>gen301Config</code>，可以用来生成 <code>redirects</code> 需要的结构，简化流程。</p>
+<h4 id="返回-301-响应代码"><a href="#返回-301-响应代码" class="headerlink" title="返回 301 响应代码"></a>返回 301 响应代码</h4><p>用在 Wordpress 博客页面（这些页面不是缓存到本地的，是线上的），<code>unionfab.com</code> 在访问博客页面的时候，会在 next 服务中拉取 Wordpress 的页面，获取到页面的字符串后，再和 <code>unionfab.com</code> 自己的头部、底部导航栏做拼接，最后返回给客户端。</p>
+<p>由于 Wordpress 内容是在 next 服务里获取的，如果请求的 Wordpress 页面在 Wordpress 管理平台设置了重定向，用户在浏览器客户端是不能感知到的，因为用户拿到的是已经在 next 服务里重定向后的结果。</p>
+<p>目前项目针对 Wordpress 页面的重定向要反映在浏览器重定向的需求，做了处理，会在 next 服务中，请求 Wordpress 页面时首先做 Head 请求，而不是获取完整的内容，如果获取的状态码是 301 重定向，则把这个 301 状态码的响应头直接返回给浏览器客户端，让浏览器继续重定向的操作。</p>
+<p>下面的图片展示了代码在项目里大概的位置：</p>
+<p><img src="image32-95.png" alt="code snippets for 301 redirect of wordpress page"></p>
+<p>相关链接：<a target="_blank" rel="noopener" href="https://nextjs.org/docs/pages/api-reference/next-config-js/redirects">next.config.js Options: redirects | Next.js</a></p>
+<h3 id="链接的-lt-Link-gt-（-lt-a-gt-）标签"><a href="#链接的-lt-Link-gt-（-lt-a-gt-）标签" class="headerlink" title="链接的 &lt;Link&gt;（&lt;a&gt;）标签"></a>链接的 &lt;Link&gt;（&lt;a&gt;）标签</h3><p><strong>纯链接</strong>应该使用 <code>&lt;Link&gt;</code> 标签，<strong>不能使用点击事件进行跳转</strong>，纯链接有利于 SEO 内链。</p>
+<p>Next.js 提供的 <code>&lt;Link&gt;</code> 组件，会在多语言的时候，自动插入多语言前缀，例如默认语言的路径是“/why-unionfab”，切换日语后，语言的路径会变成“/jp/why-unionfab”；第二，<code>&lt;Link&gt;</code> 组件支持平滑切换路由，无需刷新浏览器标签页；第三，默认进行页面的预加载。<br>这些特性，单独使用 <code>&lt;a&gt;</code> 不支持。</p>
+<p>Next.js 12，在设置样式、或是设置 <code>target</code> 属性的时候，需要额外在 <code>&lt;Link&gt;</code> 组件内套一层原生的 <code>&lt;a&gt;</code> 标签，Next.js 12 以上的新版本不需要添加 <code>&lt;a&gt;</code> 标签。</p>
+<p>导航栏有上百个链接，可能影响性能，所以关闭了大部分链接的预加载（prefetch）选项。</p>
+<p><img src="image13-57.png" alt="much links in navigation menu slate"></p>
+<p>相关链接：<br><a target="_blank" rel="noopener" href="https://nextjs.org/docs/pages/api-reference/components/link">Components: &lt;Link&gt; | Next.js</a></p>
+
+
+  </article>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+    
+
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <svg class="i-caret-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M10 30 L26 16 10 2 Z"></path>
+        </svg>
+        </a>
+        © chen 2016-2021
+    </div>
+    <div class="secondrow">
+        <a target="_blank" rel="noopener" href="https://www.poinotes.com/">
+        Signal
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.min.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
