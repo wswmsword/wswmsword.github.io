@@ -1,0 +1,1 @@
+import{a4 as s,a5 as a,a6 as t,a7 as o}from"./index-416b8afd.js";const n={},r={class:"message top-page"};function c(_,e){return a(),t("div",r,e[0]||(e[0]=[o("h2",null,"message",-1)]))}const m=s(n,[["render",c]]);export{m as default};

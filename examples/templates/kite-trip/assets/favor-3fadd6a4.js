@@ -1,0 +1,1 @@
+import{a4 as o,a5 as s,a6 as _,a7 as e}from"./index-416b8afd.js";const r={},t={class:"favor"};function n(c,a){return s(),_("div",t,a[0]||(a[0]=[e("h2",null,"favor",-1),e("h2",null,"favor",-1),e("h2",null,"favor",-1)]))}const l=o(r,[["render",n],["__scopeId","data-v-e12fac39"]]);export{l as default};

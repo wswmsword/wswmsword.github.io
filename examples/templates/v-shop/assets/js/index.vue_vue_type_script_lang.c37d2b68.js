@@ -1,0 +1,1 @@
+import{e as o,g as t,E as p,r as d}from"./vendor.1aafb642.js";const r=o({name:"SpainList",props:{loading:{type:Boolean,default:!1}},setup(n,{slots:e}){return()=>{var a;return n.loading?t(d("van-loading"),{size:"24px",align:"center",style:{padding:"15px 0"}},{default:()=>[p("加载中...")]}):(a=e.default)==null?void 0:a.call(e)}}});export{r as _};

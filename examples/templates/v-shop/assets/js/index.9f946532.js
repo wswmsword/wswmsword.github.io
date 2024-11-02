@@ -1,0 +1,1 @@
+import{e as t,o as _,a as s,b as o,D as n}from"./vendor.1aafb642.js";import{_ as a}from"./index.ce6ac14e.js";const c={class:"plate"},i={class:"plate-title"},p=t({__name:"index",props:{title:String},setup(e){return(r,d)=>(_(),s("div",c,[o("div",i,n(e.title),1)]))}});const u=a(p,[["__scopeId","data-v-65e9272d"]]);export{u as _};
