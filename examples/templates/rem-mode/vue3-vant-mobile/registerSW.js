@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/examples/templates/rem-mode/vue3-vant-mobile/sw.js', { scope: '/examples/templates/rem-mode/vue3-vant-mobile/' })})}
