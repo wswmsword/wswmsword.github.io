@@ -1,1 +1,0 @@
-import{d as t,U as n,ax as l,ay as o,R as d}from"./index-BPvPw3R2.js";const p=t({__name:"Container",props:{paddingX:{type:Number,default:16}},setup(e){return(a,r)=>(d(),n("main",{class:"absolute left-0 h-full w-full overflow-y-auto pt-46",style:o("padding-left: ".concat(e.paddingX,"px; padding-right: ").concat(e.paddingX,"px"))},[l(a.$slots,"default")],4))}});export{p as _};
