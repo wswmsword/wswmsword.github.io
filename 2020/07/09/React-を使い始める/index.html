@@ -260,7 +260,7 @@
 
 <p>合成事件机制的优点：更好的兼容性与跨平台；挂载在 document，减少内存消耗，避免频繁解绑；方便事件的统一管理（如事件机制）。</p>
 <p>合成事件的过程：DOM 触发事件，冒泡至顶层 document → 合成事件层，SyntheticEvent 派发事件 → 事件处理函数。</p>
-<p>batchUpdate：setState 命中该机制时会执行“保存组件于 dirtyComponents 中”，相反则“遍历所有 dirtyComponents，调用 updateComponent，更新 pending state or props”，体现在 setState 上就是同步；如何判断是否将命中该机制可以理解成，执行函数的机制是函数内有个布尔变量（isBatchingUpdates），在函数首尾分别赋值为开和关，setState 时查看该变量，值为关<strong>反映的现象</strong>则是同步；能命中该机制的情况，如生命周期（和调用它的函数）、React 中注册的事件（和它调用的函数）、React 可以“管理”的入口。</p>
+<p>batchUpdate：setState 命中该机制时会执行“保存组件于 dirtyComponents 中”，相反则“遍历所有 dirtyComponents，调用 updateComponent，更新 pending state or props”，体现在 setState 上就是同步；如何判断是否将命中该机制可以理解成，执行函数的机制是函数内有个布尔变量（isBatchingUpdates），在函数首尾分别赋值为开和关，setState 时查看该变量，值为关<strong>反映的现象</strong>则是同步；能命中该机制的情况，如生命周期（和调用它的函数）、React 中注册的事件（和它调用的函数）、React 可以“管理”的入口。j j</p>
 <p>组件的渲染和更新：props state → render() 生成 vnode → patch(elem, vnode)；setState(newState) –&gt; dirtyComponents → render() 生成 newVnode → patch(vnode, newVnode)。</p>
 <p>React 官方对自己的总结是：声明式；组件化；一次学习，随处编写。这里解释怎么做到声明式。“函数式编程就是一种声明式，能够避免代码副作用，同时它推崇数据不可变，以便更易维护与考量代码”，下面是 React 里普遍使用的一些这样的概念：</p>
 <ul>
